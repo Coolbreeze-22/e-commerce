@@ -1,16 +1,18 @@
-import Home from "./components/Home/Home"
-function App() {
+import About from "./components/About/About";
+import Home from "./components/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
 
+function App() {
   return (
     <main>
       <div>
-      <Home />
+        <Navbar />
       </div>
       <div>
-        Hello world
+        <Home />
       </div>
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
