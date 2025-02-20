@@ -1,39 +1,86 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import {Search} from "@mui/icons-material";
+import {
+  Search,
+  FavoriteBorder,
+  ShoppingCartOutlined,
+  PersonOutlined,
+  LocalMallOutlined,
+  CancelOutlined,
+  StarBorderOutlined,
+  LogoutOutlined,
+} from "@mui/icons-material";
 
-interface NavProps {
+interface NavChildrenType {
   children: React.ReactElement;
 }
 
-const Navbar = ({ children }: NavProps) => {
-  const [searchItems, setSearchItems] = useState<string | number>("");
+const Navbar = ({ children }: NavChildrenType) => {
+  const [searchItems, setSearchItems] = useState<string>("");
+  const [language, setLanguage] = useState<string>("");
+  const [dropdown, setDropdown] = useState<boolean>(false);
+  const [account, setAccount] = useState<boolean>(false);
+  const [order, setOrder] = useState<boolean>(false);
+  const [cancellations, setCancellations] = useState<boolean>(false);
+  const [reviews, setReviews] = useState<boolean>(false);
+  const [logout, setLogout] = useState<boolean>(false);
+
+  const handleSearch = () => {
+    setSearchItems("");
+  };
+  const handleLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLanguage(e.target.value);
+  };
+
+  function handleDropdown() {
+    if (account) {
+      setAccount(false);
+    } else if (order) {
+      setOrder(false);
+    } else if (cancellations) {
+      setCancellations(false);
+    } else if (reviews) {
+      setReviews(false);
+    } else if (logout) {
+      setLogout(false);
+    }
+  }
 
   return (
-    <main className="nav-container">
-      <nav className="nav-wrapper">
-        <section className="nav-description">
+    <nav className="nav-container">
+      <section className="nav-description">
+        <div>
+          Summer Sale For All suits And Free Express Delivery - OFF 50%!
+          <a href="" className="nav-shop-link">
+            ShopNow
+          </a>
+        </div>
+        <select
+          value={language}
+          onChange={handleLanguage}
+          className="nav-language"
+        >
+          <option value="english">English</option>
+          <option value="option2">French</option>
+        </select>
+      </section>
+      <section className="nav-children-container">
+        <section className="nav-navigation-section">
+          <header className="nav-header">Exclusive</header>
           <div>
-            Summer Sale For All suits And Free Express Delivery - OFF 50%!
-            <a href="" className="nav-shop-link">
-              ShopNow
-            </a>
+            <a href="/home">Home</a>
           </div>
-          <div className="nav-language">English</div>
-        </section>
-        <section className="nav-navigation">
-          <h2>Exclusive</h2>
           <div>
-            <a href="">Home</a>
+            <a href="/contact">Contact</a>
           </div>
           <div>
-            <a href="">Contact</a>
+            <a href="/about">About</a>
           </div>
           <div>
-            <a href="">About</a>
+            <a href="/admin">Admin</a>
           </div>
           <div>
-            <a href="">Sign Up</a>
+            <a href="/auth">Sign Up</a>
           </div>
           <div className="nav-search">
             <input
@@ -44,12 +91,75 @@ const Navbar = ({ children }: NavProps) => {
               value={searchItems}
               onChange={(e) => setSearchItems(e.target.value)}
             />
-            <Search className="nav-search-icon" />
+            <span onClick={handleSearch}>
+              <Search className="nav-search-icon" />
+            </span>
+          </div>
+          <div className="nav-icons-wrapper">
+            <FavoriteBorder />
+            <span className="nav-icons">
+              <ShoppingCartOutlined />
+            </span>
+            <span onClick={() => setDropdown(!dropdown)}>
+              <PersonOutlined className="nav-person-icon" />
+            </span>
           </div>
         </section>
-      </nav>
-      <div className="nav-children">{children}</div>
-    </main>
+        {dropdown ? 
+        <section className="nav-dropdown">
+          <div className="nav-dropdown-wrapper">
+            <div onClick={() => { setAccount(true); handleDropdown()}}>
+              <span>
+                <PersonOutlined />
+              </span>
+              <span>Manage My Account</span>
+            </div>
+            <div onClick={() => {setOrder(true);handleDropdown()}}>
+              <span>
+                <LocalMallOutlined />
+              </span>
+              <span> My Order</span>
+            </div>
+            <div
+              onClick={() => {
+                setCancellations(true);
+                handleDropdown();
+              }}
+            >
+              <span>
+                <CancelOutlined />
+              </span>
+              <span> My Cancellations</span>
+            </div>
+            <div
+              onClick={() => {
+                setReviews(true);
+                handleDropdown();
+              }}
+            >
+              <span>
+                <StarBorderOutlined />
+              </span>
+              <span> My Reviews</span>
+            </div>
+            <div
+              onClick={() => {
+                setLogout(true);
+                handleDropdown();
+              }}
+            >
+              <span>
+                <LogoutOutlined />
+              </span>
+              <span> Logout</span>
+            </div>
+          </div>
+        </section>
+        : null}
+        <hr className="nav-horizontal" />
+        <section className="nav-children">{children}</section>
+      </section>
+    </nav>
   );
 };
 
