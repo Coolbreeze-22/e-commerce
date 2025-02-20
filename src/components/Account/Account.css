@@ -1,0 +1,13 @@
+.account-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.account-path{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.account-username{
+    color: red;
+}
