@@ -1,62 +1,65 @@
-import { auth, createUserWithEmailAndPassword } from "../config/firebase";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { auth, createUserWithEmailAndPassword } from "../config/firebase";
+// import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 
 
-interface formType {
-  email: string,
-  password: string,
-  name: string,
-  lastname: string,
-}
+// interface userType {
+//   email: string,
+//   password: string,
+//   name?: string,
+//   lastname?: string,
+//   uid?: string,
+//   createdAt?: string;
+//   updatedAt?: string;
+// }
 
-export const signUp = async() => {
-    try {
+// export const signUp = async() => {
+//     try {
      
-    } catch (error) {
+//     } catch (error) {
       
-  };
-};
-export const signIn = async() => {
-    try {
+//   };
+// };
+// export const signIn = async() => {
+//     try {
      
-    } catch (error) {
+//     } catch (error) {
       
-  };
-};
-export const getUsers = async() => {
-    try {
+//   };
+// };
+// export const getUsers = async() => {
+//     try {
      
-    } catch (error) {
+//     } catch (error) {
       
-  };
-};
-export const getUserById = async() => {
-    try {
+//   };
+// };
+// export const getUserById = async() => {
+//     try {
      
-    } catch (error) {
+//     } catch (error) {
       
-  };
-};
-export const deleteUser = async() => {
-    try {
+//   };
+// };
+// export const deleteUser = async() => {
+//     try {
      
-    } catch (error) {
+//     } catch (error) {
       
-  };
-};
-export const makeAdmin = async() => {
-    try {
+//   };
+// };
+// export const makeAdmin = async() => {
+//     try {
      
-    } catch (error) {
+//     } catch (error) {
       
-  };
-};
-export const removeAdmin = async() => {
-    try {
+//   };
+// };
+// export const removeAdmin = async() => {
+//     try {
      
-    } catch (error) {
+//     } catch (error) {
       
-  };
-};
+//   };
+// };
 
