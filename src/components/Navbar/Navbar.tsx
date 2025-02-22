@@ -9,157 +9,337 @@ import {
   CancelOutlined,
   StarBorderOutlined,
   LogoutOutlined,
+  LoginOutlined,
+  Close,
+  Menu,
+  HomeOutlined,
+  ContactPageOutlined,
+  InfoOutlined,
+  AdminPanelSettingsOutlined,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 interface NavChildrenType {
   children: React.ReactElement;
 }
 
 const Navbar = ({ children }: NavChildrenType) => {
+  const [user, setUser] = useState<boolean>(false);
+  const [admin, setAdmin] = useState<boolean>(false);
+  const [isSidebar, setIsSidebar] = useState<boolean>(false);
   const [searchItems, setSearchItems] = useState<string>("");
   const [language, setLanguage] = useState<string>("");
   const [dropdown, setDropdown] = useState<boolean>(false);
-  const [account, setAccount] = useState<boolean>(false);
-  const [order, setOrder] = useState<boolean>(false);
-  const [cancellations, setCancellations] = useState<boolean>(false);
-  const [reviews, setReviews] = useState<boolean>(false);
-  const [logout, setLogout] = useState<boolean>(false);
 
-  const handleSearch = () => {
-    setSearchItems("");
+  const navigate = useNavigate();
+
+  const handleSidebar = () => {
+    setIsSidebar(!isSidebar);
   };
+
+  const handleLogout = () => {};
   const handleLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLanguage(e.target.value);
   };
-
-  function handleDropdown() {
-    if (account) {
-      setAccount(false);
-    } else if (order) {
-      setOrder(false);
-    } else if (cancellations) {
-      setCancellations(false);
-    } else if (reviews) {
-      setReviews(false);
-    } else if (logout) {
-      setLogout(false);
-    }
-  }
+  const handleSearch = () => {
+    setSearchItems("");
+  };
 
   return (
-    <nav className="nav-container">
-      <section className="nav-description">
-        <div>
-          Summer Sale For All suits And Free Express Delivery - OFF 50%!
-          <a href="" className="nav-shop-link">
-            ShopNow
-          </a>
-        </div>
-        <select
-          value={language}
-          onChange={handleLanguage}
-          className="nav-language"
-        >
-          <option value="english">English</option>
-          <option value="option2">French</option>
-        </select>
-      </section>
-      <section className="nav-children-container">
-        <section className="nav-navigation-section">
-          <header className="nav-header">Exclusive</header>
+    <main>
+      <nav className="nav-container">
+        <section className="nav-description">
           <div>
-            <a href="/home">Home</a>
+            Summer Sale For All suits And Free Express Delivery - OFF 50%!
+            <a href="" className="nav-shop-link">
+              ShopNow
+            </a>
+            <select
+            value={language}
+            onChange={handleLanguage}
+            className="nav-language-sm-device"
+          >
+            <option value="english">English</option>
+            <option value="option2">French</option>
+          </select>
           </div>
-          <div>
-            <a href="/contact">Contact</a>
-          </div>
-          <div>
-            <a href="/about">About</a>
-          </div>
-          <div>
-            <a href="/admin">Admin</a>
-          </div>
-          <div>
-            <a href="/auth">Sign Up</a>
-          </div>
-          <div className="nav-search">
-            <input
-              className="nav-search-field"
-              type="text"
-              name="search"
-              placeholder="What are you looking for?"
-              value={searchItems}
-              onChange={(e) => setSearchItems(e.target.value)}
-            />
-            <span onClick={handleSearch}>
-              <Search className="nav-search-icon" />
-            </span>
-          </div>
-          <div className="nav-icons-wrapper">
-            <FavoriteBorder />
-            <span className="nav-icons">
-              <ShoppingCartOutlined />
-            </span>
-            <span onClick={() => setDropdown(!dropdown)}>
-              <PersonOutlined className="nav-person-icon" />
-            </span>
-          </div>
+          <select
+            value={language}
+            onChange={handleLanguage}
+            className="nav-language"
+          >
+            <option value="english">English</option>
+            <option value="option2">French</option>
+          </select>
         </section>
-        {dropdown ? 
-        <section className="nav-dropdown">
-          <div className="nav-dropdown-wrapper">
-            <div onClick={() => { setAccount(true); handleDropdown()}}>
-              <span>
-                <PersonOutlined />
-              </span>
-              <span>Manage My Account</span>
+
+        <section className="nav-small-device">
+          <div className="nav-events">
+            <div onClick={handleSidebar}>
+              <Menu />
             </div>
-            <div onClick={() => {setOrder(true);handleDropdown()}}>
-              <span>
-                <LocalMallOutlined />
+            <div className="nav-search">
+              <input
+                className="nav-search-field"
+                type="text"
+                name="search"
+                placeholder="Search?"
+                value={searchItems}
+                onChange={(e) => setSearchItems(e.target.value)}
+              />
+              <span onClick={handleSearch}>
+                <Search className="nav-search-icon" />
               </span>
-              <span> My Order</span>
             </div>
-            <div
-              onClick={() => {
-                setCancellations(true);
-                handleDropdown();
-              }}
-            >
-              <span>
-                <CancelOutlined />
+            <div className="nav-icons-wrapper">
+              <FavoriteBorder />
+              <span className="nav-icons">
+                <ShoppingCartOutlined />
               </span>
-              <span> My Cancellations</span>
-            </div>
-            <div
-              onClick={() => {
-                setReviews(true);
-                handleDropdown();
-              }}
-            >
-              <span>
-                <StarBorderOutlined />
-              </span>
-              <span> My Reviews</span>
-            </div>
-            <div
-              onClick={() => {
-                setLogout(true);
-                handleDropdown();
-              }}
-            >
-              <span>
-                <LogoutOutlined />
-              </span>
-              <span> Logout</span>
+              {user && 
+              <span onClick={() => setDropdown(!dropdown)}>
+                <PersonOutlined className="nav-person-icon" />
+              </span>}
             </div>
           </div>
+
+          {isSidebar ? (
+            <section className="nav-navigation-section">
+              <header>
+                <span onClick={handleSidebar}>
+                  <Close />
+                </span>
+                <span className="nav-header">Exclusive</span>
+              </header>
+
+              {admin && (
+                <div
+                  onClick={() => {
+                    navigate("/admin");
+                    setIsSidebar(false);
+                  }}
+                >
+                  <span>
+                    <AdminPanelSettingsOutlined />
+                  </span>
+                  <span>Admin</span>
+                </div>
+              )}
+              <div
+                onClick={() => {
+                  navigate("/home");
+                  setIsSidebar(false);
+                }}
+              >
+                <span>
+                  <HomeOutlined />
+                </span>
+                <span>Home</span>
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/account");
+                  setIsSidebar(false);
+                }}
+              >
+                <span>
+                  <PersonOutlined />
+                </span>
+                <span>Manage My Account</span>
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/contact");
+                  setIsSidebar(false);
+                }}
+              >
+                <span>
+                  <ContactPageOutlined />
+                </span>
+                <span>Contact</span>
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/about");
+                  setIsSidebar(false);
+                }}
+              >
+                <span>
+                  <InfoOutlined />
+                </span>
+                <span>About</span>
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/account");
+                  setIsSidebar(false);
+                }}
+              >
+                <span>
+                  <LocalMallOutlined />
+                </span>
+                <span>My Order</span>
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/account");
+                  setIsSidebar(false);
+                }}
+              >
+                <span>
+                  <CancelOutlined />
+                </span>
+                <span>My Cancellations</span>
+              </div>
+              <div
+                onClick={() => {
+                  navigate("/account");
+                  setIsSidebar(false);
+                }}
+              >
+                <span>
+                  <StarBorderOutlined />
+                </span>
+                <span>My Reviews</span>
+              </div>
+              {user ? (
+                <div
+                  onClick={() => {
+                    handleLogout();
+                    setIsSidebar(false);
+                  }}
+                >
+                  <span>
+                    <LogoutOutlined />
+                  </span>
+                  <span>Logout</span>
+                </div>
+              ) : (
+                <div
+                  onClick={() => {
+                    navigate("/auth");
+                    setIsSidebar(false);
+                  }}
+                >
+                  <span>
+                    <LoginOutlined />
+                  </span>
+                  <span> Login</span>
+                </div>
+              )}
+            </section>
+          ) : null}
         </section>
-        : null}
+
+        <section className="nav-routes">
+          <section className="nav-navigation-section">
+            <header className="nav-header">Exclusive</header>
+            <div>
+              <a href="/home">Home</a>
+            </div>
+            <div>
+              <a href="/contact">Contact</a>
+            </div>
+            <div>
+              <a href="/about">About</a>
+            </div>
+            {admin && (
+              <div>
+                <a href="/admin">Admin</a>
+              </div>
+            )}
+            {user ? (
+              <div>
+                <a href="/auth">Sign out</a>
+              </div>
+            ) : (
+              <a href="/auth">Sign up</a>
+            )}
+            <div className="nav-search">
+              <input
+                className="nav-search-field"
+                type="text"
+                name="search"
+                placeholder="What are you looking for?"
+                value={searchItems}
+                onChange={(e) => setSearchItems(e.target.value)}
+              />
+              <span onClick={handleSearch}>
+                <Search className="nav-search-icon" />
+              </span>
+            </div>
+            <div className="nav-icons-wrapper">
+              <FavoriteBorder />
+              <span className="nav-icons">
+                <ShoppingCartOutlined />
+              </span>
+              {user && 
+              <span onClick={() => setDropdown(!dropdown)}>
+                <PersonOutlined className="nav-person-icon" />
+              </span>}
+            </div>
+          </section>
+          {dropdown ? (
+            <section className="nav-dropdown">
+              <div className="nav-dropdown-wrapper">
+                <div
+                  onClick={() => {
+                    navigate("/account");
+                    setDropdown(false);
+                  }}
+                >
+                  <span>
+                    <PersonOutlined />
+                  </span>
+                  <span>Manage My Account</span>
+                </div>
+                <div
+                  onClick={() => {
+                    navigate("/account");
+                    setDropdown(false);
+                  }}
+                >
+                  <span>
+                    <LocalMallOutlined />
+                  </span>
+                  <span> My Order</span>
+                </div>
+                <div
+                  onClick={() => {
+                    navigate("/account");
+                    setDropdown(false);
+                  }}
+                >
+                  <span>
+                    <CancelOutlined />
+                  </span>
+                  <span> My Cancellations</span>
+                </div>
+                <div
+                  onClick={() => {
+                    navigate("/account");
+                    setDropdown(false);
+                  }}
+                >
+                  <span>
+                    <StarBorderOutlined />
+                  </span>
+                  <span> My Reviews</span>
+                </div>
+                <div onClick={handleLogout}>
+                  <span>
+                    <LogoutOutlined />
+                  </span>
+                  <span> Logout</span>
+                </div>
+              </div>
+            </section>
+          ) : null}
+        </section>
         <hr className="nav-horizontal" />
-        <section className="nav-children">{children}</section>
-      </section>
-    </nav>
+      </nav>
+      <section className="nav-children">{children}</section>
+    </main>
   );
 };
 
