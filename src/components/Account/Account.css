@@ -1,13 +1,283 @@
-.account-wrapper{
+.acct-wrapper{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
-.account-path{
+.acct-path{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 40px;
 }
-.account-username{
+.acct-username{
     color: red;
 }
+
+
+
+.acct-form-header{
+    color: #DB4444;
+    size: 20px;
+    padding-bottom: 10px;
+}
+ 
+ 
+ 
+ @media (max-width: 600px) {
+    .acct-path-title1{
+        font-weight:400;
+        opacity: 50%;
+        padding-right: 5px;
+    }
+    .acct-path-title2{
+        font-weight:500;
+        opacity: 90%;
+        padding-left: 5px;
+    }
+    .acct-details{
+        display: flex;
+        flex-direction: column;
+    }
+    .acct-info{
+        padding-bottom: 40px;
+        border-top: 1px solid #0000001a;
+        border-bottom: 1px solid #0000001a;
+    }
+
+    .acct-info-header{
+        font-weight: 500;
+        font-size: 15px;
+    }
+    .acct-profile-link{
+        color: #DB4444;
+    }
+    .acct-info aside{
+        padding: 5px 0 5px 20px;
+        opacity: 70%;
+    }
+    .acct-edit{
+        box-shadow: 0 0 6px 1px #8080801a;
+        border-radius: 4px;
+        padding: 20px;
+    }
+    .acct-form{
+        display: grid;
+        grid-template-columns: auto;
+        column-gap: 50px;
+        row-gap: 10px;
+    }
+    .acct-input-name, .acct-input-password{
+        grid-column: 1/3;
+    }
+    .acct-input-name > label > input, .acct-input-password > label> input{
+        background-color: #F5F5F5;
+        width: 94%;
+        border-width: 0;
+        padding: 10px;
+    }
+    .acct-input-name > label > input:focus, .acct-input-password > label> input:focus{
+        outline: 1px solid #00000033;
+    }
+    
+    .acct-btn-wrapper{
+        grid-column: 1/3;
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+    }
+    .acct-form-cancel-btn{
+        width: 57px;
+        padding: 8px;
+        border-radius: 4px;
+        border-width: 0px;
+        margin-right: 10px;
+    }
+    .acct-form-submit-btn{
+        width: 120px;
+        padding: 8px;
+        font-weight: 500;
+        background-color: #DB4444;
+        color: #FAFAFA;
+        border-radius: 4px;
+        border-width: 0px;
+    }
+    }
+
+ @media (min-width: 601px) and (max-width: 768px) {
+    .acct-path-title1{
+        font-weight:400;
+        font-size: 14px;
+        opacity: 50%;
+        padding-right: 12px;
+    }
+    .acct-path-title2{
+        font-weight:500;
+        font-size: 14px;
+        opacity: 90%;
+        padding-left: 12px;
+    }
+    .acct-details{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight:500;
+    }
+    .acct-info{
+        flex-basis: 30%;
+    }
+    .acct-info-header{
+        font-size: 16px;
+    }
+    .acct-profile-link{
+        color: #DB4444;
+    }
+    .acct-info aside{
+        padding-left: 30px;
+        opacity: 65%;
+    }
+    .acct-edit{
+        flex-basis: 65%;
+        box-shadow: 0 0 6px 1px #8080801a;
+        border-radius: 4px;
+        padding: 50px;
+    }
+    .acct-form{
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 50px;
+        row-gap: 10px;
+    }
+    .acct-input-password{
+        grid-column: 1/3;
+    }
+    .acct-input-name > label > input{
+        background-color: #F5F5F5;
+        width: 94%;
+        border-width: 0;
+        padding: 10px;
+    }
+    
+    .acct-input-password > label> input{
+        background-color: #F5F5F5;
+        width: 97%;
+        border-width: 0;
+        padding: 10px;
+    }
+    .acct-input-name > label > input:focus, .acct-input-password > label> input:focus{
+        outline: 1px solid #00000033;
+    }
+    .acct-btn-wrapper{
+        grid-column: 1/3;
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-end;
+    }
+    .acct-form-cancel-btn{
+        width: 70px;
+        padding: 8px;
+        border-radius: 4px;
+        border-width: 0px;
+        margin-right: 10px;
+    }
+    .acct-form-submit-btn{
+        width: 130px;
+        padding: 8px;
+        font-weight: 500;
+        background-color: #DB4444;
+        color: #FAFAFA;
+        border-radius: 4px;
+        border-width: 0px;
+    }
+    }
+
+
+ @media (min-width: 769px) {
+    .acct-path-title1{
+        font-weight:400;
+        font-size: 14px;
+        opacity: 50%;
+        padding-right: 12px;
+    }
+    .acct-path-title2{
+        font-weight:500;
+        font-size: 14px;
+        opacity: 90%;
+        padding-left: 12px;
+    }
+    .acct-details{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight:500;
+    }
+    .acct-info{
+        flex-basis: 25%;
+    }
+    .acct-info-header{
+        font-size: 16px;
+    }
+    .acct-profile-link{
+        color: #DB4444;
+    }
+    .acct-info aside{
+        padding-left: 30px;
+        opacity: 70%;
+    }
+    .acct-edit{
+        flex-basis: 70%;
+        box-shadow: 0 0 6px 1px #8080801a;
+        border-radius: 4px;
+        padding: 50px;
+    }
+    .acct-form{
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 50px;
+        row-gap: 10px;
+    }
+    .acct-input-password{
+        grid-column: 1/3;
+    }
+    .acct-input-name > label > input{
+        background-color: #F5F5F5;
+        width: 94%;
+        border-width: 0;
+        padding: 10px;
+    }
+    
+    .acct-input-password > label> input{
+        background-color: #F5F5F5;
+        width: 97%;
+        border-width: 0;
+        padding: 10px;
+    }
+    .acct-input-name > label > input:focus, .acct-input-password > label> input:focus{
+        outline: 1px solid #00000033;
+    }
+    .acct-btn-wrapper{
+        grid-column: 1/3;
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-end;
+    }
+    .acct-form-cancel-btn{
+        width: 70px;
+        padding: 8px;
+        border-radius: 4px;
+        border-width: 0px;
+        margin-right: 10px;
+    }
+    .acct-form-submit-btn{
+        width: 130px;
+        padding: 8px;
+        font-weight: 500;
+        background-color: #DB4444;
+        color: #FAFAFA;
+        border-radius: 4px;
+        border-width: 0px;
+    }
+    }
+
+
+
