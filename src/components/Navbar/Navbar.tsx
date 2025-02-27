@@ -9,21 +9,17 @@ import {
   CancelOutlined,
   StarBorderOutlined,
   LogoutOutlined,
-  LoginOutlined,
-  Close,
   Menu,
-  HomeOutlined,
-  ContactPageOutlined,
-  InfoOutlined,
-  AdminPanelSettingsOutlined,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "./Sidebar/Sidebar";
+import Footer from "../Footer/Footer";
 
-interface NavChildrenType {
+interface NavPropType {
   children: React.ReactElement;
 }
 
-const Navbar = ({ children }: NavChildrenType) => {
+const Navbar = ({ children }: NavPropType) => {
   const [user, setUser] = useState<boolean>(false);
   const [admin, setAdmin] = useState<boolean>(false);
   const [isSidebar, setIsSidebar] = useState<boolean>(false);
@@ -34,7 +30,7 @@ const Navbar = ({ children }: NavChildrenType) => {
   const navigate = useNavigate();
 
   const handleSidebar = () => {
-    setIsSidebar(!isSidebar);
+    setIsSidebar((prev) => !prev);
   };
 
   const handleLogout = () => {};
@@ -55,13 +51,13 @@ const Navbar = ({ children }: NavChildrenType) => {
               ShopNow
             </a>
             <select
-            value={language}
-            onChange={handleLanguage}
-            className="nav-language-sm-device"
-          >
-            <option value="english">English</option>
-            <option value="option2">French</option>
-          </select>
+              value={language}
+              onChange={handleLanguage}
+              className="nav-language-sm-device"
+            >
+              <option value="english">English</option>
+              <option value="option2">French</option>
+            </select>
           </div>
           <select
             value={language}
@@ -71,164 +67,6 @@ const Navbar = ({ children }: NavChildrenType) => {
             <option value="english">English</option>
             <option value="option2">French</option>
           </select>
-        </section>
-
-        <section className="nav-small-device">
-          <div className="nav-events">
-            <div onClick={handleSidebar}>
-              <Menu />
-            </div>
-            <div className="nav-search">
-              <input
-                className="nav-search-field"
-                type="text"
-                name="search"
-                placeholder="Search?"
-                value={searchItems}
-                onChange={(e) => setSearchItems(e.target.value)}
-              />
-              <span onClick={handleSearch}>
-                <Search className="nav-search-icon" />
-              </span>
-            </div>
-            <div className="nav-icons-wrapper">
-              <FavoriteBorder />
-              <span className="nav-icons">
-                <ShoppingCartOutlined />
-              </span>
-              {user && 
-              <span onClick={() => setDropdown(!dropdown)}>
-                <PersonOutlined className="nav-person-icon" />
-              </span>}
-            </div>
-          </div>
-
-          {isSidebar ? (
-            <section className="nav-navigation-section">
-              <header>
-                <span onClick={handleSidebar}>
-                  <Close />
-                </span>
-                <span className="nav-header">Exclusive</span>
-              </header>
-
-              {admin && (
-                <div
-                  onClick={() => {
-                    navigate("/admin");
-                    setIsSidebar(false);
-                  }}
-                >
-                  <span>
-                    <AdminPanelSettingsOutlined />
-                  </span>
-                  <span>Admin</span>
-                </div>
-              )}
-              <div
-                onClick={() => {
-                  navigate("/home");
-                  setIsSidebar(false);
-                }}
-              >
-                <span>
-                  <HomeOutlined />
-                </span>
-                <span>Home</span>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/account");
-                  setIsSidebar(false);
-                }}
-              >
-                <span>
-                  <PersonOutlined />
-                </span>
-                <span>Manage My Account</span>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/contact");
-                  setIsSidebar(false);
-                }}
-              >
-                <span>
-                  <ContactPageOutlined />
-                </span>
-                <span>Contact</span>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/about");
-                  setIsSidebar(false);
-                }}
-              >
-                <span>
-                  <InfoOutlined />
-                </span>
-                <span>About</span>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/account");
-                  setIsSidebar(false);
-                }}
-              >
-                <span>
-                  <LocalMallOutlined />
-                </span>
-                <span>My Order</span>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/account");
-                  setIsSidebar(false);
-                }}
-              >
-                <span>
-                  <CancelOutlined />
-                </span>
-                <span>My Cancellations</span>
-              </div>
-              <div
-                onClick={() => {
-                  navigate("/account");
-                  setIsSidebar(false);
-                }}
-              >
-                <span>
-                  <StarBorderOutlined />
-                </span>
-                <span>My Reviews</span>
-              </div>
-              {user ? (
-                <div
-                  onClick={() => {
-                    handleLogout();
-                    setIsSidebar(false);
-                  }}
-                >
-                  <span>
-                    <LogoutOutlined />
-                  </span>
-                  <span>Logout</span>
-                </div>
-              ) : (
-                <div
-                  onClick={() => {
-                    navigate("/auth");
-                    setIsSidebar(false);
-                  }}
-                >
-                  <span>
-                    <LoginOutlined />
-                  </span>
-                  <span> Login</span>
-                </div>
-              )}
-            </section>
-          ) : null}
         </section>
 
         <section className="nav-routes">
@@ -253,7 +91,9 @@ const Navbar = ({ children }: NavChildrenType) => {
                 <a href="/auth">Sign out</a>
               </div>
             ) : (
-              <a href="/auth">Sign up</a>
+              <div>
+                <a href="/auth">Sign up</a>
+              </div>
             )}
             <div className="nav-search">
               <input
@@ -273,10 +113,11 @@ const Navbar = ({ children }: NavChildrenType) => {
               <span className="nav-icons">
                 <ShoppingCartOutlined />
               </span>
-              {user && 
-              <span onClick={() => setDropdown(!dropdown)}>
-                <PersonOutlined className="nav-person-icon" />
-              </span>}
+              {user && (
+                <span onClick={() => setDropdown(!dropdown)}>
+                  <PersonOutlined className="nav-person-icon" />
+                </span>
+              )}
             </div>
           </section>
           {dropdown ? (
@@ -336,9 +177,58 @@ const Navbar = ({ children }: NavChildrenType) => {
             </section>
           ) : null}
         </section>
+
+        <section className="nav-small-device">
+          <div className="nav-events">
+            <div onClick={handleSidebar}>
+              <Menu />
+            </div>
+            <div className="nav-search">
+              <input
+                className="nav-search-field"
+                type="text"
+                name="search"
+                placeholder="Search?"
+                value={searchItems}
+                onChange={(e) => setSearchItems(e.target.value)}
+              />
+              <span onClick={handleSearch}>
+                <Search className="nav-search-icon" />
+              </span>
+            </div>
+            <div className="nav-icons-wrapper">
+              <FavoriteBorder />
+              <span className="nav-icons">
+                <ShoppingCartOutlined />
+              </span>
+              {user && (
+                <span onClick={() => setDropdown(!dropdown)}>
+                  <PersonOutlined className="nav-person-icon" />
+                </span>
+              )}
+            </div>
+          </div>
+          {isSidebar && (
+            <div className="nav-sidebar">
+              <Sidebar
+                setIsSidebar={setIsSidebar}
+                user={user}
+                admin={admin}
+                handleSidebar={handleSidebar}
+                handleLogout={handleLogout}
+              />
+            </div>
+          )}
+        </section>
+
         <hr className="nav-horizontal" />
       </nav>
-      <section className="nav-children">{children}</section>
+      <div className="nav-children-container">
+        <section className="nav-children">{children}</section>
+        <section className="nav-footer">
+          <Footer />
+        </section>
+      </div>
     </main>
   );
 };

@@ -1,0 +1,30 @@
+.sidebar-container {
+    position: fixed;
+    top: 0px;
+    width: 40%;
+    height: 80%;
+    padding: 10px ;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #00000033;
+    border-radius: 0px 20px 20px 0;
+  }
+  .side-header {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  .sidebar-container>div{
+    display: flex;
+    padding-top: 5px;
+    border-bottom: 1px solid #00000033;
+
+  }
+  .sidebar-container>header{
+    display: flex;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #00000033;
+  }
+  .sidebar-container>div>span, .sidebar-container>header>span{
+    padding-right: 10px;
+  }

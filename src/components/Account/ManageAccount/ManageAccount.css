@@ -1,0 +1,141 @@
+.manage-container {
+  line-height: 24px;
+  opacity: 85%;
+}
+.manage-container header {
+  font-weight: 700;
+  font-size: 16px;
+}
+.manage-container div {
+  margin-left: 30px;
+  opacity: 70%;
+  font-weight: 500;
+  font-size: 16px;
+}
+.manage-acc {
+  width: 166px;
+  height: 34px;
+}
+.manage-pro {
+  color: #db4444;
+  width: 76px;
+  height: 34px;
+}
+.manage-add {
+  width: 165px;
+  height: 34px;
+}
+.manage-pay {
+  width: 165px;
+  height: 34px;
+}
+.manage-ord {
+  width: 82px;
+  height: 34px;
+}
+.manage-rtns {
+  width: 88px;
+  height: 34px;
+}
+.manage-can {
+  width: 138px;
+  height: 34px;
+}
+.manage-wish {
+  width: 93px;
+  height: 34px;
+}
+
+@media (max-width: 600px) {
+  .manage-container header {
+    font-weight: 500;
+    font-size: 16px;
+
+  }
+  .manage-container div {
+    margin-left: 20px;
+    opacity: 90%;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .manage-acc {
+    width: 166px;
+    height: 28px;
+  }
+  .manage-pro {
+    color: #db4444;
+    width: 76px;
+    height: 28px;
+  }
+  .manage-add {
+    width: 165px;
+    height: 28px;
+  }
+  .manage-pay {
+    width: 165px;
+    height: 28px;
+  }
+  .manage-ord {
+    width: 82px;
+    height: 28px;
+  }
+  .manage-rtns {
+    width: 88px;
+    height: 28px;
+  }
+  .manage-can {
+    width: 138px;
+    height: 28px;
+  }
+  .manage-wish {
+    width: 93px;
+    height: 28px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .manage-container header {
+    font-weight: 500;
+    font-size: 16px;
+
+  }
+  .manage-container div {
+    margin-left: 20px;
+    opacity: 70%;
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .manage-acc {
+    width: 166px;
+    height: 28px;
+  }
+  .manage-pro {
+    color: #db4444;
+    width: 76px;
+    height: 28px;
+  }
+  .manage-add {
+    width: 165px;
+    height: 28px;
+  }
+  .manage-pay {
+    width: 165px;
+    height: 28px;
+  }
+  .manage-ord {
+    width: 82px;
+    height: 28px;
+  }
+  .manage-rtns {
+    width: 88px;
+    height: 28px;
+  }
+  .manage-can {
+    width: 138px;
+    height: 28px;
+  }
+  .manage-wish {
+    width: 93px;
+    height: 28px;
+  }
+}

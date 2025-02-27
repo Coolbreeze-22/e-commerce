@@ -1,0 +1,52 @@
+.btn {
+  width: 214px;
+  height: 56px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #db4444;
+  color: #fafafa;
+  border-radius: 4px;
+  border-width: 0px;
+}
+.prof-btn-save {
+  width: 214px;
+  height: 56px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #db4444;
+  color: #fafafa;
+  border-radius: 4px;
+  border-width: 0px;
+}
+.prof-btn-cancel {
+  width: 114px;
+  height: 46px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 4px;
+  border-width: 0px;
+  margin-right: 10px;
+  background-color: #fafafa;
+}
+@media (max-width: 600px) {
+  .btn {
+    width: 140px;
+    height: 36px;
+    font-size: 14px;
+  }
+  .prof-btn-save {
+    width: 140px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+@media (min-width: 601px) and (max-width: 768px) {
+  .btn {
+    width: 180px;
+    height: 46px;
+  }
+  .prof-btn-save {
+    width: 180px;
+    height: 46px;
+  }
+}

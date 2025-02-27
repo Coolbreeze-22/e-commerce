@@ -2,7 +2,10 @@ import React from 'react'
 
 const Auth = () => {
   return (
-    <div>Auth</div>
+    <main className='auth-container'>
+      <section>image</section>
+      <section>form</section>
+    </main>
   )
 }
 
