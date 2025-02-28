@@ -25,9 +25,8 @@ const CustomInput = ({
     name={name}
     placeholder={placeholder}
     value={value}
-    className={className ? className : "input"}
+    className={className ? className : "custom-Input"}
     onChange={onChange}
   />
 );
-
 export default CustomInput;

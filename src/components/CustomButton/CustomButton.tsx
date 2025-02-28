@@ -2,15 +2,16 @@ import React from "react";
 import "./CustomButton.css";
 
 interface ButtonPropsType {
+  type?: "submit" | "reset" | "button";
   text?: string;
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const CustomButton = ({ text, className, onClick }: ButtonPropsType) => {
+const CustomButton = ({ type, text, className, onClick }: ButtonPropsType) => {
   return (
     <main>
-      <button onClick={onClick} className={className ? className : "btn"}>
+      <button type={type} onClick={onClick} className={className ? className : "custom-btn"}>
         {text}
       </button>
     </main>

@@ -1,4 +1,4 @@
-.btn {
+.custom-btn {
   width: 214px;
   height: 56px;
   font-weight: 500;
@@ -8,45 +8,37 @@
   border-radius: 4px;
   border-width: 0px;
 }
-.prof-btn-save {
-  width: 214px;
-  height: 56px;
-  font-weight: 500;
-  font-size: 16px;
-  background-color: #db4444;
-  color: #fafafa;
-  border-radius: 4px;
-  border-width: 0px;
+.auth-btn-login{
+  width: 143px;
 }
-.prof-btn-cancel {
-  width: 114px;
-  height: 46px;
-  font-weight: 500;
-  font-size: 16px;
-  border-radius: 4px;
-  border-width: 0px;
-  margin-right: 10px;
-  background-color: #fafafa;
+.auth-btn-create{
+  width: 100%;
 }
 @media (max-width: 600px) {
-  .btn {
-    width: 140px;
-    height: 36px;
+  .custom-btn {
+    width: 150px;
+    height: 40px;
     font-size: 14px;
   }
-  .prof-btn-save {
-    width: 140px;
-    height: 36px;
-    font-size: 14px;
+  .auth-btn-login{
+    width: 143px;
+  }
+  .auth-btn-create{
+    width: 100%;
   }
 }
 @media (min-width: 601px) and (max-width: 768px) {
-  .btn {
+  .custom-btn {
     width: 180px;
     height: 46px;
   }
-  .prof-btn-save {
-    width: 180px;
-    height: 46px;
+  .auth-btn-login{
+    width: 140px;
+  }
+  .auth-btn-create{
+    width: 100%;
+  }
+  .auth-btn-google{
+    width: 100%;
   }
 }
