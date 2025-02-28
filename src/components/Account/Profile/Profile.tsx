@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import CustomInput from "../../CustomInput/CustomInput";
 import CustomButton from "../../CustomButton/CustomButton";
@@ -27,12 +27,14 @@ const Profile = () => {
   const [formData, setFormData] = useState<formType>(initialState);
   console.log(formData);
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setFormData(initialState);
   };
-  const handleClear = () => {
+  const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     setFormData(initialState);
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +45,7 @@ const Profile = () => {
   return (
     <main className="prof-container">
       <header className="prof-form-header">Edit Your Profile</header>
-      <form className="prof-form">
+      <form onSubmit={(event) => handleSubmit(event)} className="prof-form">
         <div className="prof-form-text">
           <label className="prof-label">First Name</label>
           <br />
@@ -52,7 +54,7 @@ const Profile = () => {
             type="text"
             name="firstName"
             placeholder="Md"
-            className="prof-input-1"
+            className="custom-input prof-input-1"
             value={formData.firstName}
             onChange={handleChange}
           />
@@ -65,7 +67,7 @@ const Profile = () => {
             name="lastName"
             placeholder="Rimel"
             value={formData.lastName}
-            className="prof-input-1"
+            className="custom-input prof-input-1"
             onChange={handleChange}
           />
         </div>
@@ -76,7 +78,7 @@ const Profile = () => {
             type="email"
             name="email"
             placeholder="rimel1111@gmail.com"
-            className="prof-input-1"
+            className="custom-input prof-input-1"
             value={formData.email}
             onChange={handleChange}
           />
@@ -88,7 +90,7 @@ const Profile = () => {
             type="name"
             name="address"
             placeholder="Kingston, 5236, United State"
-            className="prof-input-1"
+            className="custom-input prof-input-1"
             value={formData.address}
             onChange={handleChange}
           />
@@ -100,7 +102,7 @@ const Profile = () => {
             type="password"
             name="password"
             placeholder="Current Password"
-            className="prof-input-2"
+            className="custom-input prof-input-2"
             value={formData.password}
             onChange={handleChange}
           />
@@ -110,7 +112,7 @@ const Profile = () => {
             type="password"
             name="newPassword"
             placeholder="New Password"
-            className="prof-input-2"
+            className="custom-input prof-input-2"
             value={formData.newPassword}
             onChange={handleChange}
           />
@@ -120,21 +122,21 @@ const Profile = () => {
             type="password"
             name="comfirmPassword"
             placeholder="Comfirm New Password"
-            className="prof-input-2"
+            className="custom-input prof-input-2"
             value={formData.comfirmPassword}
             onChange={handleChange}
           />
         </div>
         <div className="prof-btn-wrapper">
           <CustomButton
-            onClick={() => handleClear()}
+            onClick={(event) => handleClear(event)}
             text="Cancel"
-            className="prof-btn-cancel"
+            className="custom-btn prof-btn-cancel"
           />
           <CustomButton
-            onClick={(event) => handleSubmit(event)}
+            type="submit"
             text="Save Changes"
-            className="prof-btn-save"
+            className="custom-btn prof-btn-save"
           />
         </div>
       </form>
