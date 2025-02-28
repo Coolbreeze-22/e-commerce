@@ -108,17 +108,17 @@ const Navbar = ({ children }: NavPropType) => {
                 <Search className="nav-search-icon" />
               </span>
             </div>
-            <div className="nav-icons-wrapper">
-              <FavoriteBorder />
-              <span className="nav-icons">
-                <ShoppingCartOutlined />
-              </span>
-              {user && (
+            {user && (
+              <div className="nav-icons-wrapper">
+                <FavoriteBorder />
+                <span className="nav-icons">
+                  <ShoppingCartOutlined />
+                </span>
                 <span onClick={() => setDropdown(!dropdown)}>
                   <PersonOutlined className="nav-person-icon" />
                 </span>
-              )}
-            </div>
+              </div>
+            )}
           </section>
           {dropdown ? (
             <section className="nav-dropdown">
@@ -196,17 +196,18 @@ const Navbar = ({ children }: NavPropType) => {
                 <Search className="nav-search-icon" />
               </span>
             </div>
-            <div className="nav-icons-wrapper">
-              <FavoriteBorder />
-              <span className="nav-icons">
-                <ShoppingCartOutlined />
-              </span>
-              {user && (
+            {user && (
+              <div className="nav-icons-wrapper">
+                <FavoriteBorder />
+                <span className="nav-icons">
+                  <ShoppingCartOutlined />
+                </span>
+
                 <span onClick={() => setDropdown(!dropdown)}>
                   <PersonOutlined className="nav-person-icon" />
                 </span>
-              )}
-            </div>
+              </div>
+            )}
           </div>
           {isSidebar && (
             <div className="nav-sidebar">
