@@ -1,7 +1,6 @@
 .acct-wrapper {
   display: flex;
   flex-direction: column;
-  margin-bottom: 120px;
 }
 .acct-path {
   display: flex;
@@ -26,7 +25,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  }
+}
 .acct-manage {
   flex-basis: 25%;
 }
@@ -38,9 +37,6 @@
 }
 
 @media (max-width: 600px) {
-  .acct-wrapper {
-    margin-bottom: 50px;
-  }
   .acct-path {
     font-weight: 400;
     font-size: 14px;
@@ -70,9 +66,6 @@
 }
 
 @media (min-width: 601px) and (max-width: 768px) {
-  .acct-wrapper {
-    margin-bottom: 70px;
-  }
   .acct-path {
     margin-bottom: 40px;
   }
