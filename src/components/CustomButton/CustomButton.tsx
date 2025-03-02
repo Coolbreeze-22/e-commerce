@@ -11,7 +11,7 @@ interface ButtonPropsType {
 const CustomButton = ({ type, text, className, onClick }: ButtonPropsType) => {
   return (
     <main>
-      <button type={type} onClick={onClick} className={className ? className : "custom-btn"}>
+      <button type={type} onClick={onClick} className={className}>
         {text}
       </button>
     </main>

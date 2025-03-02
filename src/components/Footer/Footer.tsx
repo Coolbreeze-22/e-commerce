@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import "./Footer.css";
-import { qrCode, playStore, appStore } from "../../assets/images";
-import {
-  Facebook,
-  Instagram,
-  LinkedIn,
-  Twitter,
-  SendOutlined,
-} from "@mui/icons-material";
 import CustomInput from "../CustomInput/CustomInput";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FiTwitter } from "react-icons/fi";
+import { AiOutlineSend } from "react-icons/ai";
+import footerQrcode from "../../assets/footerQrcode.png";
+import footerPlaystore from "../../assets/footerPlaystore.png";
+import footerAppstore from "../../assets/footerAppstore.png";
 
 const Footer = () => {
   const [email, setEmail] = useState<string>("");
@@ -30,12 +28,12 @@ const Footer = () => {
               type="email"
               name="email"
               placeholder="Enter your email"
-              className="foot-search-field"
+              className="foot-input"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
             <div onClick={(event) => handleSubmit(event)}>
-              <SendOutlined className="foot-search-icon" />
+              <AiOutlineSend className="foot-search-icon" />
             </div>
           </div>
         </section>
@@ -68,19 +66,19 @@ const Footer = () => {
           <p>Save $3 with App New User Only</p>
           <section className="foot-img">
             <div>
-              <img src={qrCode} alt="Qr-code" className="foot-img-qrcode" />
+              <img src={footerQrcode} alt="Qr-code" className="foot-img-qrcode" />
             </div>
             <div className="foot-img-btn">
               <div>
                 <img
-                  src={playStore}
+                  src={footerPlaystore}
                   alt="Play Store"
                   className="foot-img-playstore"
                 />
               </div>
               <div>
                 <img
-                  src={appStore}
+                  src={footerAppstore}
                   alt="App Store"
                   className="foot-img-appstore"
                 />
@@ -89,16 +87,16 @@ const Footer = () => {
           </section>
           <section className="foot-sect5-links">
             <span>
-              <Facebook />
+              <FaFacebookF />
             </span>
             <span>
-              <Twitter />
+              <FiTwitter />
             </span>
             <span>
-              <Instagram />
+              <FaInstagram />
             </span>
             <span>
-              <LinkedIn />
+              <FaLinkedinIn />
             </span>
           </section>
         </section>

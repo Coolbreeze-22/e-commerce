@@ -34,13 +34,7 @@
     justify-content:flex-end;
     padding-top: 5px;
 }
-.prof-btn-cancel{
-  width: 100px;
-  height: 40px;
-  background-color: whitesmoke;
-  color: black;
-  margin-right: 20px;
-}
+
 
 @media (max-width: 600px) {
   .prof-container{

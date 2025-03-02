@@ -8,7 +8,7 @@ const Account = () => {
   const [name, setName] = useState<string>("Coolbreeze");
 
   return (
-    <main>
+    <main className="acct-container">
       <div className="acct-wrapper">
         <section className="acct-path">
           <div>

@@ -146,7 +146,7 @@ const Sidebar = ({
           ) : (
             <div
               onClick={() => {
-                navigate("/auth");
+                navigate("/login");
                 setIsSidebar(false);
               }}
             >

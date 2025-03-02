@@ -33,7 +33,9 @@ const Navbar = ({ children }: NavPropType) => {
     setIsSidebar((prev) => !prev);
   };
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    navigate('/home')
+  };
   const handleLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLanguage(e.target.value);
   };
@@ -88,11 +90,11 @@ const Navbar = ({ children }: NavPropType) => {
             )}
             {user ? (
               <div>
-                <a href="/auth">Sign out</a>
+                <a href="/home">Sign out</a>
               </div>
             ) : (
               <div>
-                <a href="/auth">Sign up</a>
+                <a href="/register">Sign up</a>
               </div>
             )}
             <div className="nav-search">

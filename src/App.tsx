@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
-import Auth from "./components/Auth/Auth";
 import Account from "./components/Account/Account";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Admin from "./components/Admin/Admin";
+import Login from "./components/Authentication/Login/Login";
+import Register from "./components/Authentication/Register/Register";
 
 function App() {
   return (
@@ -30,10 +31,18 @@ function App() {
             }
           />
           <Route
-            path="/auth"
+            path="/login"
             element={
               <Navbar>
-                <Auth />
+                <Login />
+              </Navbar>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <Navbar>
+                <Register />
               </Navbar>
             }
           />
