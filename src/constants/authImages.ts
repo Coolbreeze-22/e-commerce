@@ -1,0 +1,2 @@
+export const phoneCart: string =
+  "https://s3-alpha-sig.figma.com/img/75f3/94c0/a1c7dc5b68a42239311e510f54d8cd59?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ILodJf9GDIvfSKi~Akk~BTl2zR4LcYWRcFM51zRnwZvFSr5G-tfY1NygxqieTJVCraOi8inftU2A0AfXnQs6yqVKQ63jZIvCV5cxa2bd91-hzY6YpEMix~TQ9iNRQb3ZCkrD6-UXrOVsV-Skdiyl7cRpGKwxpiM78vVaCrkfmup36o3GRsczphR6OESgvEsPb9B6FfWj~EYbap20pOpqE2cD44ChesUtshUxBfrpI0AXsu256NeZWQaIOvulPjJY7b4I6zFUqJ1eayhAzflB7WhET0nkijAHX0JafR0o-2wq6-cX7kibJgBU7Ubc25Z3VBeqYzu2W4Lxg67aDDxqLA__";

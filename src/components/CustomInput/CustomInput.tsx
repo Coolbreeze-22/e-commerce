@@ -25,7 +25,7 @@ const CustomInput = ({
     name={name}
     placeholder={placeholder}
     value={value}
-    className={className ? className : "custom-Input"}
+    className={className}
     onChange={onChange}
   />
 );

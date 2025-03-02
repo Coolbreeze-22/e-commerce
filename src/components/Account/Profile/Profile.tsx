@@ -54,7 +54,7 @@ const Profile = () => {
             type="text"
             name="firstName"
             placeholder="Md"
-            className="custom-input prof-input-1"
+            className="prof-input-1"
             value={formData.firstName}
             onChange={handleChange}
           />
@@ -67,7 +67,7 @@ const Profile = () => {
             name="lastName"
             placeholder="Rimel"
             value={formData.lastName}
-            className="custom-input prof-input-1"
+            className="prof-input-1"
             onChange={handleChange}
           />
         </div>
@@ -78,7 +78,7 @@ const Profile = () => {
             type="email"
             name="email"
             placeholder="rimel1111@gmail.com"
-            className="custom-input prof-input-1"
+            className="prof-input-1"
             value={formData.email}
             onChange={handleChange}
           />
@@ -90,7 +90,7 @@ const Profile = () => {
             type="name"
             name="address"
             placeholder="Kingston, 5236, United State"
-            className="custom-input prof-input-1"
+            className="prof-input-1"
             value={formData.address}
             onChange={handleChange}
           />
@@ -102,7 +102,7 @@ const Profile = () => {
             type="password"
             name="password"
             placeholder="Current Password"
-            className="custom-input prof-input-2"
+            className="prof-input-2"
             value={formData.password}
             onChange={handleChange}
           />
@@ -112,7 +112,7 @@ const Profile = () => {
             type="password"
             name="newPassword"
             placeholder="New Password"
-            className="custom-input prof-input-2"
+            className="prof-input-2"
             value={formData.newPassword}
             onChange={handleChange}
           />
@@ -122,7 +122,7 @@ const Profile = () => {
             type="password"
             name="comfirmPassword"
             placeholder="Comfirm New Password"
-            className="custom-input prof-input-2"
+            className="prof-input-2"
             value={formData.comfirmPassword}
             onChange={handleChange}
           />
@@ -131,12 +131,12 @@ const Profile = () => {
           <CustomButton
             onClick={(event) => handleClear(event)}
             text="Cancel"
-            className="custom-btn prof-btn-cancel"
+            className="prof-cancel-btn"
           />
           <CustomButton
             type="submit"
             text="Save Changes"
-            className="custom-btn prof-btn-save"
+            className="prof-save-btn"
           />
         </div>
       </form>

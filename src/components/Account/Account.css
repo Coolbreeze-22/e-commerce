@@ -1,3 +1,9 @@
+.acct-container {
+  position: relative;
+  top: 200px;
+  margin-left: 125px;
+  margin-right: 125px;
+}
 .acct-wrapper {
   display: flex;
   flex-direction: column;
@@ -37,6 +43,12 @@
 }
 
 @media (max-width: 600px) {
+  .acct-container {
+    position: relative;
+    top: 120px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
   .acct-path {
     font-weight: 400;
     font-size: 14px;
@@ -66,6 +78,12 @@
 }
 
 @media (min-width: 601px) and (max-width: 768px) {
+  .acct-container {
+    position: relative;
+    top: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
   .acct-path {
     margin-bottom: 40px;
   }
