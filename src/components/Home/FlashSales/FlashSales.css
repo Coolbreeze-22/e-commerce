@@ -1,0 +1,199 @@
+.flashSales-container {
+  margin-top: 140px;
+  margin-left: 125px;
+}
+.flash-text-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.flash-red{
+  width: 20px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #DB4444;
+}
+.flash-today{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #DB4444;
+  margin-left: 15px;
+}
+.flash-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.flash-header > div{
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 48px;
+  letter-spacing: 40%;
+}
+.flash-header > time{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+  letter-spacing: 4px;
+  margin-left: 70px;
+}
+.flash-header > time > div>  span{
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0px;
+}
+.flash-colon {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 18px;
+  color: #E07575;
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.flashSales-carousel {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  column-gap: 27px;
+}
+.flashSales-carousel > div {
+  position: relative;
+  flex-shrink: 0;
+  width: 260px;
+  scroll-snap-align: start;
+  scroll-behavior: smooth;
+}
+.flash-image-sect {
+  background-color: #f5f5f5;
+  width: 240px;
+  height: 220px;
+  padding: 10px;
+  text-align: center;
+}
+.flash-discount {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0;
+  width: 55px;
+  height: 23px;
+  border-radius: 4px;
+  text-align: center;
+  padding-top: 3px;
+  background-color: #db4444;
+  color: #ffffff;
+}
+.flash-heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 5px 7px 0 7px;
+}
+.flash-eye-icon {
+  position: absolute;
+  top: 50px;
+  right: 15px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 5px 7px 0 7px;
+}
+.flash-image{
+    max-width: 190px;
+    max-height: 160px;
+    margin-top: 15px;
+}
+.flash-item-name,
+.flash-new-price {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+.flash-new-price {
+  color: #db4444;
+}
+.flash-old-price {
+  color: #000000;
+  opacity: 0.5;
+  margin-left: 8px;
+}
+.flash-star-rating-wrapper{
+    display: flex;
+}
+.flash-star-img{
+    height: 20px;
+}
+.flash-rating {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 0.5;
+  margin-left: 8px;
+}
+.flash-btn-wrapper{
+  margin-top: 40px;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .flashSales-container {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flash-info{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .flash-today{
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .flash-header{
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .flash-header > div{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 2px;
+  }
+  .flash-header > time{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 2px;
+    margin-left: 0px;
+  }
+  .flash-colon {
+    font-weight: 500;
+    font-size: 24px;
+    margin-top: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
+@media (min-width: 601px) and (max-width: 768px) {
+  .flashSales-container {
+    margin-top: 40px;
+    margin-left: 25px;
+  }
+}
