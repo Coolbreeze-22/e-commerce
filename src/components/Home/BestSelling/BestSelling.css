@@ -1,0 +1,154 @@
+.best-container {
+  margin-left: 125px;
+  margin-right: 125px;
+}
+.best-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.best-red {
+  width: 20px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #db4444;
+}
+.best-month {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #db4444;
+  margin-left: 15px;
+}
+.best-header {
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 48px;
+  letter-spacing: 4px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+.best-carousel {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  column-gap: 27px;
+}
+.best-carousel > div {
+  position: relative;
+  flex-shrink: 0;
+  width: 255px;
+  scroll-snap-align: start;
+  scroll-behavior: smooth;
+}
+.best-image-sect {
+  background-color: #f5f5f5;
+  width: 235px;
+  height: 220px;
+  padding: 10px;
+  text-align: center;
+
+}
+.best-heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 5px 7px 0 7px;
+}
+.best-eye-icon {
+  position: absolute;
+  top: 50px;
+  right: 15px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 5px 7px 0 7px;
+}
+.best-image {
+  max-width: 190px;
+  height: 160px;
+  margin-top: 25px;
+}
+.best-item-name,
+.best-new-price {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+.best-new-price {
+  color: #db4444;
+}
+.best-old-price {
+  color: #000000;
+  opacity: 0.5;
+  margin-left: 8px;
+}
+.best-star-rating-wrapper {
+  display: flex;
+}
+.best-star-img {
+  height: 20px;
+}
+.best-rating {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 0.5;
+  margin-left: 8px;
+}
+
+@media (max-width: 600px) {
+  .best-container {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .best-info {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .best-month {
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .best-header {
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .best-header > div {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 2px;
+  }
+  .best-header > time {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 2px;
+    margin-left: 0px;
+  }
+  .best-colon {
+    font-weight: 500;
+    font-size: 24px;
+    margin-top: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
+@media (min-width: 601px) and (max-width: 768px) {
+  .best-container {
+    margin-top: 40px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+}
