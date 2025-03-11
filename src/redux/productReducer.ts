@@ -1,37 +1,57 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-type productType = {
-  uid?: string;
+type ProductType = {
+  id?: string;
   name: string;
-  brand: string;
+  brand?: string;
   category: string;
   subCategory: string;
+  photo: string;
   price: string;
   discountedPrice?: string;
+  discountedPercent?: () => number;
   rating?: string;
+  star?: string[];
   reviews?: string;
   quantity?: string;
+  likes?: string[];
+  views?: string[];
   newArrival?: boolean;
   flashSales?: boolean;
-  bestSellingProducts?: boolean;
+  explore?: boolean;
+  bestSelling?: boolean;
   createdAt?: string;
   updatedAt?: string;
 };
 
-const initialState: productType = {
-  uid: "",
+const initialState: ProductType = {
+  id: "",
   name: "",
   brand: "",
   category: "",
   subCategory: "",
+  photo: "",
   price: "",
   discountedPrice: "",
+  discountedPercent: function () {
+    if (this.price && this.discountedPrice) {
+      return (
+        (parseFloat(this.discountedPrice) / parseFloat(this.price) - 1) * 100
+      );
+    } else {
+      return 0;
+    }
+  },
   rating: "",
+  star: [],
   reviews: "",
   quantity: "",
+  likes: [],
+  views: [],
   newArrival: false,
   flashSales: false,
-  bestSellingProducts: false,
+  explore: false,
+  bestSelling: false,
   createdAt: "",
   updatedAt: "",
 };

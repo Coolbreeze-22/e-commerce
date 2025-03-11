@@ -23,54 +23,68 @@
   margin-left: 15px;
 }
 .explore-header {
-  font-weight: 700;
-  font-size: 34px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 36px;
   line-height: 48px;
-  letter-spacing: 4px;
+  letter-spacing: 1.44px;
   margin-top: 10px;
   margin-bottom: 60px;
 }
-.explore-grid {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  column-gap: 27px;
-  row-gap: 60px;
+.explore-swiper-arrow{
+  display: flex ;
 }
-.explore-grid > div {
-  position: relative;
-  flex-shrink: 0;
-  width: 255px;
+.explore-button-prev, .explore-button-next{
+margin-left: 10px;
+background-color: #f5f5f5;
+width: 40px;
+height: 40px;
+border-radius: 20px;
+text-align: center;
+font-size: 38px;
+}
+.explore-swiper-slide{
+  margin-bottom: 30px;
+}
+.explore-swiper-slide-div{
+  width: 100%;
 }
 .explore-image-sect {
+  box-sizing: border-box;
+  padding-top: 35px;
+  position: relative;
   background-color: #f5f5f5;
-  width: 235px;
-  height: 220px;
-  padding: 10px;
-  text-align: center;
-}
-.explore-heart-icon {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background-color: #ffffff;
-  border-radius: 20px;
-  padding: 5px 7px 0 7px;
-}
-.explore-eye-icon {
-  position: absolute;
-  top: 50px;
-  right: 15px;
-  background-color: #ffffff;
-  border-radius: 20px;
-  padding: 5px 7px 0 7px;
+  /* width: 270px; */
+  width: 100%;
+  height: 240px;
+  justify-items: center;
 }
 .explore-image {
-  max-width: 190px;
-  height: 160px;
-  margin-top: 25px;
+ /* max-width: 190px; */
+ max-width: 100%;
+ max-height: 200px;
+}
+.explore-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.explore-eye {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+}
+.explore-icon{
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 20px;
 }
 .explore-item-name,
-.explore-new-price {
+.explore-new-price, .explore-old-price {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -83,12 +97,10 @@
   color: #000000;
   opacity: 0.5;
   margin-left: 8px;
+  text-decoration: line-through;
 }
 .explore-star-rating-wrapper {
   display: flex;
-}
-.explore-star-img {
-  height: 20px;
 }
 .explore-rating {
   font-weight: 600;
@@ -125,7 +137,7 @@
     border-radius: 50%;
 }
 .explore-btn-wrapper{
-    margin-top: 60px;
+    margin-top: 30px;
     text-align: center;
   }
 @media (max-width: 600px) {
@@ -138,30 +150,54 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-  .explore-month {
+  .explore-product {
     font-weight: 500;
-    font-size: 15px;
+    font-size: 18px;
   }
   .explore-header {
-    display: flex;
-    flex-direction: column;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
     align-items: normal;
     margin-top: 10px;
     margin-bottom: 20px;
   }
-  .explore-grid {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    margin-top: 0px;
+  .explore-image-sect {
+    padding-top: 25px;
+    height: 150px;
+    border-radius: 10px;
+    justify-items: center;
   }
-  .explore-grid > div {
-    scroll-snap-align: start;
-    scroll-behavior: smooth;
-    margin-left: 13px;
-    margin-right: 13px;
+  .explore-image {
+    box-sizing: border-box;
+    padding: 10px;
+    max-height: 120px;
   }
+  .explore-heart {
+    top: 5px;
+    right: 5px;
+  }
+  .explore-eye {
+    top: 5px;
+    left: 5px;
+  }
+  .explore-icon {
+    width: 15px;
+    height: 15px;
+  }
+  .explore-item-name,
+  .explore-new-price, .flash-old-price {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+  }
+  .explore-rating {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    margin-left: 0px;
+  }
+  
 }
 @media (min-width: 601px) and (max-width: 768px) {
   .explore-container {
@@ -169,16 +205,12 @@
     margin-left: 25px;
     margin-right: 25px;
   }
-  .explore-grid {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    margin-top: 0px;
+  .explore-heart {
+    top: 5px;
+    right: 5px;
   }
-  .explore-grid > div {
-    scroll-snap-align: start;
-    scroll-behavior: smooth;
-    row-gap: 0px;
+  .explore-eye {
+    top: 5px;
+    left: 5px;
   }
 }
