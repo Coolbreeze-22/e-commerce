@@ -51,7 +51,7 @@
   margin-right: 125px;
 }
 .home-jbl-img{
-  width: 100%;
+  width: 1100px;
   height: 470px;
 }
 @media (max-width: 600px) {
@@ -132,7 +132,7 @@
     margin-right: 25px;
   }
   .home-jbl-img{
-    width: 100%;
+    width: 710px;
     height: 350px;
   }
 }

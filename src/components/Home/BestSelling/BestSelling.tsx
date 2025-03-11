@@ -1,21 +1,35 @@
+import React from "react";
 import "./BestSelling.css";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import homeCoatImg from "../../../assets/homeCoatImg.png";
-import homeBagImg from "../../../assets/homeBagImg.png";
-import homeCoolerImg from "../../../assets/homeCoolerImg.png";
-import homeShelfImg from "../../../assets/homeShelfImg.png";
-import zeroStar from "../../../assets/zeroStar.png";
-// import halfStar from "../../../assets/halfStar.png";
-import oneStar from "../../../assets/oneStar.png";
-import twoStar from "../../../assets/twoStar.png";
-// import threeStar from "../../../assets/threeStar.png";
-import fourStar from "../../../assets/fourStar.png";
-import fourhalfStar from "../../../assets/fourhalfStar.png";
-import fiveStar from "../../../assets/fiveStar.png";
+import { products } from "../../../dummy/dummyProducts";
+import type { ProductType } from "../../../dummy/dummyProducts";
+import { Rating } from "@mui/material";
 // import { useNavigate } from "react-router-dom";
 
 export const BestSelling = () => {
+    const [storeUniqueProducts, setStoreUniquProduct] = React.useState<ProductType[]>([]);
+  
+  const bestProducts = products.filter((product) => product.bestSelling === true)
+  
+    const length = bestProducts.length;
+    
+      React.useEffect(() => {
+        const handleBestSelling = () => {
+          let uniqueCategories: Set<string> = new Set();
+          const uniqueProducts: ProductType[] = [];
+          for (let i = 0; i < length; i++) {
+            const product = bestProducts[i];
+            if (!uniqueCategories.has(product.category)) {
+              uniqueCategories.add(product.category);
+              uniqueProducts.push(product);
+            }
+          }
+          setStoreUniquProduct(uniqueProducts);
+        };
+    
+        handleBestSelling();
+      }, [length]);
   //   const navigate = useNavigate();
 
   //   const viewProduct = () => {
@@ -35,155 +49,45 @@ export const BestSelling = () => {
       </section>
 
       <section className="best-carousel">
-        <div>
-          <section className="best-image-sect">
-            <div className="best-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="best-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeCoatImg} alt="coat" className="best-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="best-item-name">The north coat</p>
-              <p className="best-new-price">
-                $260 <span className="best-old-price">$360</span>
-              </p>
-              <div className="best-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="best-star-img" />{" "}
-                <span className="best-rating">(65)</span>
+        {storeUniqueProducts.map((product, index) => (
+          <div key={index}>
+            <section className="best-image-sect">
+              <div className="best-heart">
+                <FaRegHeart className="best-icon"/>
               </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="best-image-sect">
-            <div className="best-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="best-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeBagImg} alt="bag" className="best-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="best-item-name">Gucci duffle bag</p>
-              <p className="best-new-price">
-                $960 <span className="best-old-price">$1160</span>
-              </p>
-              <div className="best-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="best-star-img" />{" "}
-                <span className="best-rating">(88)</span>
+              <div className="best-eye">
+                <MdOutlineRemoveRedEye className="best-icon"/>
               </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="best-image-sect">
-            <div className="best-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="best-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeCoolerImg} alt="cooler" className="best-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="best-item-name">RGB liquid CPU Cooler</p>
-              <p className="best-new-price">
-                $160 <span className="best-old-price">$170</span>
-              </p>
-              <div className="best-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="best-star-img" />{" "}
-                <span className="best-rating">(88)</span>
+              <div>
+                <img src={product.photo} alt="coat" className="best-image" />
               </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="best-image-sect">
-            <div className="best-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="best-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="best-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="best-item-name">Small BookSelf</p>
-              <p className="best-new-price">$360</p>
-              <div className="best-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="best-star-img" />{" "}
-                <span className="best-rating">(88)</span>
+            </section>
+            <section>
+              <div>
+                <p className="best-item-name">{product.name}</p>
+                {product.discountedPrice && (
+                  <span className="best-new-price">
+                    ${product.discountedPrice}{" "}
+                  </span>
+                )}
+                <span
+                  className={
+                    product.discountedPrice
+                      ? "best-old-price"
+                      : "best-new-price"
+                  }
+                >
+                  ${product.price}
+                </span>
+                <div className="best-star-rating-wrapper">
+                  <Rating name="read-only" value={product.rating} readOnly precision={0.5} size="small"
+                  />
+                  <span className="best-rating">(65)</span>
+                </div>
               </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="best-image-sect">
-            <div className="best-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="best-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="best-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="best-item-name">Small BookSelf</p>
-              <p className="best-new-price">$360</p>
-              <div className="best-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="best-star-img" />{" "}
-                <span className="best-rating">(88)</span>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="best-image-sect">
-            <div className="best-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="best-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="best-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="best-item-name">Small BookSelf</p>
-              <p className="best-new-price">$360</p>
-              <div className="best-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="best-star-img" />{" "}
-                <span className="best-rating">(88)</span>
-              </div>
-            </div>
-          </section>
-        </div>
+            </section>
+          </div>
+        ))}
       </section>
     </main>
   );

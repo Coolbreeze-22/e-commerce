@@ -1,24 +1,48 @@
+import React from "react";
 import "./Explore.css";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import homeCoatImg from "../../../assets/homeCoatImg.png";
-import homeBagImg from "../../../assets/homeBagImg.png";
-import homeCoolerImg from "../../../assets/homeCoolerImg.png";
-import homeShelfImg from "../../../assets/homeShelfImg.png";
-import zeroStar from "../../../assets/zeroStar.png";
-// import halfStar from "../../../assets/halfStar.png";
-import oneStar from "../../../assets/oneStar.png";
-import twoStar from "../../../assets/twoStar.png";
-// import threeStar from "../../../assets/threeStar.png";
-import fourStar from "../../../assets/fourStar.png";
-import fourhalfStar from "../../../assets/fourhalfStar.png";
-import fiveStar from "../../../assets/fiveStar.png";
 import CustomButton from "../../CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
+import { products } from "../../../dummy/dummyProducts";
+import type { ProductType } from "../../../dummy/dummyProducts";
+import { Rating } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 export const Explore = () => {
+  const [storeUniqueProducts, setStoreUniquProduct] = React.useState<
+    ProductType[]
+  >([]);
   const navigate = useNavigate();
 
+  const exploreProducts = products.filter(
+    (product) => product.explore === true
+  );
+
+  const length = exploreProducts.length;
+
+  React.useEffect(() => {
+    const handleBestSelling = () => {
+      let uniqueCategories: Set<string> = new Set();
+      const uniqueProducts: ProductType[] = [];
+      for (let i = 0; i < length; i++) {
+        const product = exploreProducts[i];
+        if (!uniqueCategories.has(product.category)) {
+          uniqueCategories.add(product.category);
+          uniqueProducts.push(product);
+        }
+      }
+      setStoreUniquProduct(uniqueProducts);
+    };
+
+    handleBestSelling();
+  }, [length]);
   //   const viewProduct = () => {
   //     navigate("./");
   //   };
@@ -36,255 +60,93 @@ export const Explore = () => {
         </div>
         <header className="explore-header">
           <div>Explore Our Products</div>
+          <section className="explore-swiper-arrow">
+            <div className="explore-button-prev">
+              <IoIosArrowRoundBack />
+            </div>
+            <div className="explore-button-next">
+              <IoIosArrowRoundForward />
+            </div>
+          </section>
         </header>
       </section>
 
-      <section className="explore-grid">
-        <div className="explore-grid1">
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeCoatImg} alt="coat" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">The north coat</p>
-              <p className="explore-new-price">
-                $260 <span className="explore-old-price">$360</span>
-              </p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(65)</span>
-              </div>
-            </div>
-          </section>
-        </div>
+      <section className="explore-swiper">
+        <Swiper
+          modules={[Pagination, Navigation]}
+          spaceBetween={20}
+          slidesPerView={4.2}
+          slidesPerGroup={1}
+          pagination={{ clickable: true }}
+          navigation={{
+            nextEl: ".explore-button-next",
+            prevEl: ".explore-button-prev",
+          }}
+        >
+          {storeUniqueProducts.map((product, index) => (
+            <SwiperSlide key={index} className="explore-swiper-slide">
+              <div className="explore-swiper-slide-div">
+                <section className="explore-image-sect">
+                  <div className="explore-heart">
+                    <FaRegHeart className="explore-icon" />
+                  </div>
+                  <div className="explore-eye">
+                    <MdOutlineRemoveRedEye className="explore-icon" />
+                  </div>
+                  <div>
+                    <img
+                      src={product.photo}
+                      alt="coat"
+                      className="explore-image"
+                    />
+                  </div>
+                </section>
+                <section>
+                  <div>
+                    <p className="explore-item-name">{product.name}</p>
+                    {product.discountedPrice && (
+                      <span className="explore-new-price">
+                        ${product.discountedPrice}{" "}
+                      </span>
+                    )}
+                    <span
+                      className={
+                        product.discountedPrice
+                          ? "explore-old-price"
+                          : "explore-new-price"
+                      }
+                    >
+                      ${product.price}
+                    </span>
+                    <div className="explore-star-rating-wrapper">
+                      <Rating
+                        name="read-only"
+                        value={product.rating}
+                        readOnly
+                        precision={0.5}
+                        size="small"
+                      />
+                      <span className="explore-rating">(65)</span>
+                    </div>
+                  </div>
 
-        <div>
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeBagImg} alt="bag" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">Gucci duffle bag</p>
-              <p className="explore-new-price">
-                $960 <span className="explore-old-price">$1160</span>
-              </p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(88)</span>
+                  <div className="explore-color-wrapper">
+                    <span className="explore-clicked-color">
+                      <span
+                        className="explore-prod-color1"
+                        style={{ backgroundColor: "#184A48" }}
+                      ></span>
+                    </span>
+                    <span
+                      className="explore-prod-color2"
+                      style={{ backgroundColor: "#DB4444" }}
+                    ></span>
+                  </div>
+                </section>
               </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeCoolerImg} alt="cooler" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">RGB liquid CPU Cooler</p>
-              <p className="explore-new-price">
-                $160 <span className="explore-old-price">$170</span>
-              </p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(88)</span>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">Small BookSelf</p>
-              <p className="explore-new-price">$360</p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(88)</span>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">Small BookSelf</p>
-              <p className="explore-new-price">$360</p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(88)</span>
-              </div>
-            </div>
-            <div className="explore-color-wrapper">
-                <span className="explore-clicked-color">
-                  <span
-                    className="explore-prod-color1"
-                    style={{ backgroundColor: "#FB1314" }}
-                  ></span>
-                </span>
-                <span
-                  className="explore-prod-color2"
-                  style={{ backgroundColor: "#DB4444" }}
-                ></span>
-              </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">Small BookSelf</p>
-              <p className="explore-new-price">$360</p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(88)</span>
-              </div>
-            </div>
-            <div className="explore-color-wrapper">
-                <span className="explore-clicked-color">
-                  <span
-                    className="explore-prod-color1"
-                    style={{ backgroundColor: "#EEFF61" }}
-                  ></span>
-                </span>
-                <span
-                  className="explore-prod-color2"
-                  style={{ backgroundColor: "#DB4444" }}
-                ></span>
-              </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">Small BookSelf</p>
-              <p className="explore-new-price">$360</p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(88)</span>
-              </div>
-            </div>
-            <div className="explore-color-wrapper">
-                <span className="explore-clicked-color">
-                  <span
-                    className="explore-prod-color1"
-                    style={{ backgroundColor: "#000000" }}
-                  ></span>
-                </span>
-                <span
-                  className="explore-prod-color2"
-                  style={{ backgroundColor: "#DB4444" }}
-                ></span>
-              </div>
-          </section>
-        </div>
-
-        <div>
-          <section className="explore-image-sect">
-            <div className="explore-heart-icon">
-              <FaRegHeart />
-            </div>
-            <div className="explore-eye-icon">
-              <MdOutlineRemoveRedEye />
-            </div>
-            <div>
-              <img src={homeShelfImg} alt="shelf" className="explore-image" />
-            </div>
-          </section>
-          <section>
-            <div>
-              <p className="explore-item-name">Small BookSelf</p>
-              <p className="explore-new-price">$360</p>
-              <div className="explore-star-rating-wrapper">
-                <img src={fiveStar} alt="star" className="explore-star-img" />{" "}
-                <span className="explore-rating">(88)</span>
-              </div>
-              <div className="explore-color-wrapper">
-                <span className="explore-clicked-color">
-                  <span
-                    className="explore-prod-color1"
-                    style={{ backgroundColor: "#184A48" }}
-                  ></span>
-                </span>
-                <span
-                  className="explore-prod-color2"
-                  style={{ backgroundColor: "#DB4444" }}
-                ></span>
-              </div>
-            </div>
-          </section>
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
 
       <section>
