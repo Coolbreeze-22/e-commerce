@@ -7,8 +7,17 @@ import Contact from "./components/Contact/Contact";
 import Admin from "./components/Admin/Admin";
 import Login from "./components/Authentication/Login/Login";
 import Register from "./components/Authentication/Register/Register";
+import { useEffect } from "react";
+import { fetchProducts } from "./controller/productController";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchProducts(dispatch);
+  }, []);
+
   return (
     <BrowserRouter>
       <main>

@@ -1,4 +1,3 @@
-
 import flashsaleGamePad from "../assets/flashsaleGamePad.png";
 import flashsaleKeyboard from "../assets/flashsaleKeyboard.png";
 import flashsaleTv from "../assets/flashsaleTv.png";
@@ -14,30 +13,7 @@ import homeKidsCar from "../assets/homeKidsCar.png";
 import homeSoccerBoot from "../assets/homeSoccerBoot.png";
 import homeUsbGamePad from "../assets/homeUsbGamePad.png";
 import homeJacket from "../assets/homeJacket.png";
-
-
-export type ProductType = {
-  id?: string;
-  name: string;
-  brand?: string;
-  category: string;
-  subCategory: string;
-  photo?: string;
-  price: string;
-  discountedPrice: string;
-  rating?: number;
-  reviews?:  Array<string>;
-  quantity?: string;
-  likes?: Array<string>;
-  views?: Array<string>;
-  newArrival?: boolean;
-  flashSales?: boolean;
-  explore?: boolean;
-  bestSelling?: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
+import { ProductType } from "../states/redux/reducerTypes";
 
 export const products: ProductType[] = [
   {
@@ -54,12 +30,11 @@ export const products: ProductType[] = [
     quantity: "6",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: false,
-    bestSelling: false,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: false,
+    isBestSelling: false,
+    timeStamp: "",
   },
   {
     id: "101",
@@ -75,12 +50,11 @@ export const products: ProductType[] = [
     quantity: "6",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: false,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: false,
+    timeStamp: "",
   },
   {
     id: "2",
@@ -96,12 +70,11 @@ export const products: ProductType[] = [
     quantity: "5",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "102",
@@ -117,12 +90,11 @@ export const products: ProductType[] = [
     quantity: "5",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "3",
@@ -138,12 +110,11 @@ export const products: ProductType[] = [
     quantity: "7",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "4",
@@ -159,12 +130,11 @@ export const products: ProductType[] = [
     quantity: "6",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: false,
-    bestSelling: false,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: false,
+    isBestSelling: false,
+    timeStamp: "",
   },
   {
     id: "5",
@@ -180,18 +150,17 @@ export const products: ProductType[] = [
     quantity: "17",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: false,
-    explore: false,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: false,
+    isExplore: false,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "6",
     name: "Gucci duffle bag",
     brand: "",
-    category: " ClothingAccessories",
+    category: "ClothingAccessories",
     subCategory: "Bags",
     photo: homeBagImg,
     price: "1160",
@@ -201,12 +170,11 @@ export const products: ProductType[] = [
     quantity: "6",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: false,
-    explore: false,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: false,
+    isExplore: false,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "7",
@@ -222,12 +190,11 @@ export const products: ProductType[] = [
     quantity: "6",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "8",
@@ -243,12 +210,11 @@ export const products: ProductType[] = [
     quantity: "6",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "9",
@@ -264,12 +230,11 @@ export const products: ProductType[] = [
     quantity: "60",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: false,
-    explore: true,
-    bestSelling: false,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: false,
+    isExplore: true,
+    isBestSelling: false,
+    timeStamp: "",
   },
   {
     id: "10",
@@ -285,12 +250,11 @@ export const products: ProductType[] = [
     quantity: "15",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: false,
-    explore: true,
-    bestSelling: false,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: false,
+    isExplore: true,
+    isBestSelling: false,
+    timeStamp: "",
   },
   {
     id: "11",
@@ -306,12 +270,11 @@ export const products: ProductType[] = [
     quantity: "9",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: false,
-    explore: true,
-    bestSelling: false,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: false,
+    isExplore: true,
+    isBestSelling: false,
+    timeStamp: "",
   },
   {
     id: "12",
@@ -327,12 +290,11 @@ export const products: ProductType[] = [
     quantity: "18",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "13",
@@ -348,12 +310,11 @@ export const products: ProductType[] = [
     quantity: "44",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: false,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "14",
@@ -369,12 +330,11 @@ export const products: ProductType[] = [
     quantity: "10",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
   {
     id: "15",
@@ -390,11 +350,10 @@ export const products: ProductType[] = [
     quantity: "71",
     likes: ["a", " b", "c"],
     views: ["a", "b", "c", "d"],
-    newArrival: false,
-    flashSales: true,
-    explore: true,
-    bestSelling: true,
-    createdAt: "",
-    updatedAt: "",
+    isNewArrival: false,
+    isFlashSales: true,
+    isExplore: true,
+    isBestSelling: true,
+    timeStamp: "",
   },
 ];
