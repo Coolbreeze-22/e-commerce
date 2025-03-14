@@ -5,4 +5,8 @@ import productReducer from "./productReducer";
 // import chatReducer from "./chatReducer";
 // import userReducer from "./userReducer";
 
-export default configureStore({ reducer: { products: productReducer } });
+const store = configureStore({ reducer: { products: productReducer } });
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export default store;
