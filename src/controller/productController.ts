@@ -8,14 +8,18 @@ import {
 import { ProductType } from "../states/redux/reducerTypes";
 
 const initialData: InitialStateProps = { ...initialState, products };
-const uniqueCategories: Set<string> = new Set();
+console.log(initialData);
 
-type ItemType = {
+const uniqueCategory: Set<string> = new Set();
+const uniqueSubCategory: Set<string> = new Set();
+
+type ItemType1 = {
   category: string;
   label: string;
   product: ProductType;
   uniqueLabel: string;
 };
+type ItemType2 = Pick<ItemType1, "label"> & { group: string };
 
 export const fetchProducts = async (dispatch: AppDispatch) => {
   try {
@@ -52,10 +56,11 @@ export const fetchProducts = async (dispatch: AppDispatch) => {
           uniqueLabel: "uniqueNewArrival",
         });
       }
-
-      if (!uniqueCategories.has(product.category)) {
-        initialData.category = [...initialData.category, product.category];
-        uniqueCategories.add(product.category);
+      if (!uniqueCategory.has(product.category.trim())) {
+        groupCategories({ label: "category", group: product.category });
+      }
+      if (!uniqueSubCategory.has(product.subCategory.trim())) {
+        groupCategories({ label: "subCategory", group: product.subCategory });
       }
     }
 
@@ -65,19 +70,28 @@ export const fetchProducts = async (dispatch: AppDispatch) => {
   }
 };
 
-
-
-const groupProducts = (item: ItemType) => {
+const groupProducts = (item: ItemType1) => {
   const { product, label, category, uniqueLabel } = item;
-  const labelAndCategory = `${label}-${category}`;
+  const labelAndCategory = `${label}-${category.trim()}`;
 
   initialData[label] = [...initialData[label], product];
-  if (!uniqueCategories.has(`${label}-${category}`)) {
+  if (!uniqueCategory.has(labelAndCategory)) {
     initialData[uniqueLabel] = [...initialData[uniqueLabel], product];
-    uniqueCategories.add(labelAndCategory);
-    return true;
+    uniqueCategory.add(labelAndCategory);
   }
-  return false;
+};
+
+const groupCategories = (item: ItemType2) => {
+  const { label, group } = item;
+  const currentCategory = group.trim();
+
+  initialData[label] = [...initialData[label], currentCategory];
+
+  if (label === "category") {
+    uniqueCategory.add(currentCategory);
+  } else {
+    uniqueSubCategory.add(currentCategory);
+  }
 };
 
 function dispatchData(dispatch: AppDispatch) {
@@ -92,5 +106,6 @@ function dispatchData(dispatch: AppDispatch) {
   dispatch(reducer.getUniqueExplore(initialData.uniqueExplore));
   dispatch(reducer.getUniqueNewArrival(initialData.uniqueNewArrival));
   dispatch(reducer.getCategory(initialData.category));
+  dispatch(reducer.getSubCategory(initialData.subCategory));
   dispatch(reducer.productLoading(false));
 }

@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 import "./Home.css";
 import homeIphoneImg from "../../assets/homeIphoneImg.png";
 import FlashSales from "./FlashSales/FlashSales";
@@ -6,17 +6,19 @@ import Categories from "./Categories/Categories";
 import { BestSelling } from "./BestSelling/BestSelling";
 import Explore from "./Explore/Explore";
 import homeJblImg from "../../assets/homeJblImg.png";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Home = () => {
+
   return (
     <main className="home-container">
       <section className="home-sect1">
         <div className="home-categories">
           <div>
-            Women's Fashion <span className="home-category-arrow">{">"}</span>
+            Women's Fashion <span className="home-category-arrow">< IoIosArrowForward className='test'/></span>
           </div>
           <div>
-            Men's Fashion <span className="home-category-arrow">{">"}</span>
+            Men's Fashion <span className="home-category-arrow">< IoIosArrowForward /></span>
           </div>
           <div>Electronics</div>
           <div>Home & Lifestyle</div>
