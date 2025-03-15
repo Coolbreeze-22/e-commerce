@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./FlashSales.css";
 import { useNavigate } from "react-router-dom";
-import { products } from "../../../dummy/dummyProducts";
-import type { ProductType } from "../../../dummy/dummyProducts";
+import { ProductType } from "../../../states/redux/reducerTypes";
 import { Rating } from "@mui/material";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -12,35 +11,15 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CustomButton from "../../CustomButton/CustomButton";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../states/redux/store";
 
 const FlashSales = () => {
-  const [storeUniqueProducts, setStoreUniquProduct] = useState<ProductType[]>(
-    []
+  const uniqueFlashProducts: Array<ProductType> = useSelector(
+    (state: RootState) => state.products.uniqueFlashSales
   );
+
   const navigate = useNavigate();
-
-  const flashProducts = products.filter(
-    (product) => product.flashSales === true
-  );
-
-  const length = flashProducts.length;
-
-  useEffect(() => {
-    const handleFlashSales = () => {
-      let uniqueCategories: Set<string> = new Set();
-      const uniqueProducts: ProductType[] = [];
-      for (let i = 0; i < length; i++) {
-        const product = flashProducts[i];
-        if (!uniqueCategories.has(product.category)) {
-          uniqueCategories.add(product.category);
-          uniqueProducts.push(product);
-        }
-      }
-      setStoreUniquProduct(uniqueProducts);
-    };
-
-    handleFlashSales();
-  }, [length]);
 
   // const viewProduct = () => {
   //   navigate('./');
@@ -104,9 +83,8 @@ const FlashSales = () => {
           navigation={{
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-          }}
-        >
-          {storeUniqueProducts.map((product, index) => (
+          }}>
+          {uniqueFlashProducts.map((product, index) => (
             <SwiperSlide key={index} className="flash-swiper-slide">
               <div className="flash-swiper-slide-div">
                 <section className="flash-image-sect">
@@ -114,7 +92,7 @@ const FlashSales = () => {
                     <div className="flash-discount">
                       {checkDiscountPercent(
                         product.discountedPrice,
-                        product.price
+                        product?.price
                       )}
                       %
                     </div>
@@ -146,8 +124,7 @@ const FlashSales = () => {
                         product.discountedPrice
                           ? "flash-old-price"
                           : "flash-new-price"
-                      }
-                    >
+                      }>
                       ${product.price}
                     </span>
                     <div className="flash-star-rating-wrapper">

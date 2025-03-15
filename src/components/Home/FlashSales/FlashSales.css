@@ -1,5 +1,6 @@
 .flashSales-container {
   margin-top: 100px;
+  margin-bottom: 50px;
   margin-left: 125px;
   position: relative;
 }
@@ -178,6 +179,7 @@
 @media (max-width: 600px) {
   .flashSales-container {
     margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: 0;
     margin-right: 0;
   }

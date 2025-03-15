@@ -13,6 +13,7 @@ export type InitialStateProps = {
   uniqueExplore: Array<ProductType>;
   uniqueNewArrival: Array<ProductType>;
   category: Array<string>;
+  subCategory: Array<string>;
   isLoading: boolean;
   error: string;
   [key: string]: any;
@@ -29,6 +30,7 @@ export const initialState: InitialStateProps = {
   uniqueExplore: [],
   uniqueNewArrival: [],
   category: [],
+  subCategory: [],
   isLoading: false,
   error: "",
 };
@@ -68,6 +70,9 @@ const productSlice = createSlice({
     getCategory(state, action: PayloadAction<Array<string>>) {
       state.category = action.payload;
     },
+    getSubCategory(state, action: PayloadAction<Array<string>>) {
+      state.subCategory = action.payload;
+    },
     // addProduct(state, action: PayloadAction<ProductType>) {
     // },
     // deleteProduct(state, action: PayloadAction<any>) {
@@ -94,6 +99,7 @@ export const {
   getUniqueExplore,
   getUniqueNewArrival,
   getCategory,
+  getSubCategory,
   productLoading,
   productError,
 } = productSlice.actions;

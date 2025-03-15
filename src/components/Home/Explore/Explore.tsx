@@ -4,8 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import CustomButton from "../../CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
-import { products } from "../../../dummy/dummyProducts";
-import type { ProductType } from "../../../dummy/dummyProducts";
+import { ProductType } from "../../../states/redux/reducerTypes";
 import { Rating } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -14,38 +13,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../states/redux/store";
 
 export const Explore = () => {
-  const [storeUniqueProducts, setStoreUniquProduct] = React.useState<
-    ProductType[]
-  >([]);
-  const navigate = useNavigate();
-
-  const exploreProducts = products.filter(
-    (product) => product.explore === true
+  const uniqueExploreProducts: Array<ProductType> = useSelector(
+    (state: RootState) => state.products.uniqueExplore
   );
-
-  const length = exploreProducts.length;
-
-  React.useEffect(() => {
-    const handleBestSelling = () => {
-      let uniqueCategories: Set<string> = new Set();
-      const uniqueProducts: ProductType[] = [];
-      for (let i = 0; i < length; i++) {
-        const product = exploreProducts[i];
-        if (!uniqueCategories.has(product.category)) {
-          uniqueCategories.add(product.category);
-          uniqueProducts.push(product);
-        }
-      }
-      setStoreUniquProduct(uniqueProducts);
-    };
-
-    handleBestSelling();
-  }, [length]);
-  //   const viewProduct = () => {
-  //     navigate("./");
-  //   };
+  const navigate = useNavigate();
 
   const handleProduct = () => {
     navigate("./");
@@ -83,7 +58,7 @@ export const Explore = () => {
             prevEl: ".explore-button-prev",
           }}
         >
-          {storeUniqueProducts.map((product, index) => (
+          {uniqueExploreProducts.map((product, index) => (
             <SwiperSlide key={index} className="explore-swiper-slide">
               <div className="explore-swiper-slide-div">
                 <section className="explore-image-sect">

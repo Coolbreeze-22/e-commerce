@@ -3,7 +3,7 @@ export type ProductType = {
   name: string;
   brand: string;
   category: string;
-  subCategory?: string;
+  subCategory: string;
   photo: string;
   price: string;
   discountedPrice: string;
@@ -12,6 +12,8 @@ export type ProductType = {
   quantity: string;
   likes: Array<string>;
   views: Array<string>;
+  color: Array<string>
+  size: Array<string>
   isNewArrival: boolean;
   isFlashSales: boolean;
   isExplore: boolean;
