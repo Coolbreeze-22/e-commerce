@@ -1,49 +1,42 @@
-.best-container {
+.all-container {
+  position: relative;
+  top: 150px;
   margin-left: 125px;
   margin-right: 125px;
-  margin-top: 60px;
 }
-.best-text {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.best-red {
-  width: 20px;
-  height: 40px;
-  border-radius: 4px;
-  background-color: #db4444;
-}
-.best-month {
+.all-path1 {
+  opacity: 50%;
+  margin-right: 12px;
   font-weight: 600;
   font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0;
-  color: #db4444;
-  margin-left: 15px;
 }
-.best-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.all-path2 {
+  margin-left: 12px;
+  opacity: 80%;
+  font-weight: 600;
+  font-size: 16px;
+}
+.all-header {
   font-weight: 600;
   font-size: 36px;
   line-height: 48px;
   letter-spacing: 1.44px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 50px;
 }
-.best-carousel {
+.all-grid {
   display: grid;
   grid-template-columns: auto auto auto auto;
   column-gap: 27px;
   row-gap: 10px;
   justify-content: space-evenly;
 }
-.best-carousel > div {
+.all-grid > div {
+  position: relative;
   width: 260px;
+  border: 1px solid #ebebeb;
 }
-.best-image-sect {
+.all-image-sect {
   box-sizing: border-box;
   padding-top: 35px;
   position: relative;
@@ -52,49 +45,66 @@
   height: 240px;
   justify-items: center;
 }
-.best-heart {
+.all-discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0;
+    width: 55px;
+    height: 23px;
+    border-radius: 4px;
+    text-align: center;
+    padding-top: 3px;
+    background-color: #db4444;
+    color: #ffffff;
+}
+.all-heart {
   position: absolute;
   top: 10px;
   right: 10px;
 }
-.best-eye {
+.all-eye {
   position: absolute;
   top: 50px;
   right: 10px;
 }
-.best-icon {
+.all-icon {
   width: 20px;
   height: 20px;
   padding: 5px;
   background-color: #ffffff;
   border-radius: 20px;
 }
-.best-image {
+.all-image {
   max-width: 190px;
   max-height: 160px;
   margin-top: 25px;
 }
-.best-item-name,
-.best-new-price {
+.all-item-name,
+.all-new-price {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
+  margin-left: 3px;
 }
-.best-new-price {
+.all-new-price {
   color: #db4444;
 }
-.best-old-price {
+.all-old-price {
   color: #000000;
   opacity: 0.5;
   margin-left: 8px;
   text-decoration: line-through;
 }
-.best-star-rating-wrapper {
+.all-star-rating-wrapper {
   display: flex;
   margin-top: 5px;
 }
-.best-rating {
+.all-rating {
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
@@ -105,69 +115,66 @@
 }
 
 @media (max-width: 600px) {
-  .best-container {
-    margin-top: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
+  .all-container {
+    top: 120px;
+    margin-left: 0;
+    margin-right: 0;
   }
-  .best-info {
-    margin-left: 10px;
-    margin-right: 10px;
+  .all-info{
+    margin-left: 20px;
   }
-  .best-month {
+  .all-header {
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
     letter-spacing: 1px;
-  }
-  .best-header {
-    align-items: normal;
-    margin-top: 10px;
     margin-bottom: 20px;
   }
-  .best-header > div {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 1px;
-  }
-  .best-carousel {
+  .all-grid {
     grid-template-columns: auto auto;
     column-gap: 10px;
     row-gap: 10px;
   }
-  .best-carousel > div {
+  .all-grid > div {
     width: 150px;
   }
-  .best-image-sect {
+  .all-image-sect {
     width: 100%;
     height: 150px;
-    border-radius: 20px;
+    border-radius: 4px;
   }
-  .best-image {
+  .all-image {
     max-width: 95%;
     max-height: 100px;
     margin-top: 0px;
   }
-  .best-heart {
+  .all-discount{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  height: 20px;
+  padding-top: 0px;
+  }
+  .all-heart {
     top: 5px;
     right: 5px;
   }
-  .best-eye {
+  .all-eye {
     top: 5px;
-    left: 5px;
+    right: 50px;
   }
-  .best-icon {
+  .all-icon {
     width: 15px;
     height: 15px;
   }
-  .best-item-name,
-  .best-new-price {
+  .all-item-name,
+  .all-new-price {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
   }
-  .best-rating {
+  .all-rating {
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
@@ -175,54 +182,60 @@
   }
 }
 @media (min-width: 601px) and (max-width: 768px) {
-  .best-container {
-    margin-top: 40px;
+  .all-container {
     margin-left: 25px;
     margin-right: 25px;
   }
-  .best-header > div {
+  .all-header {
     font-weight: 600;
     font-size: 25px;
     line-height: 30px;
-    letter-spacing: 1px;
   }
-  .best-carousel {
+  .all-grid {
     grid-template-columns: auto auto auto auto;
     column-gap: 10px;
     row-gap: 20px;
   }
-  .best-carousel > div {
+  .all-grid > div {
     width: 150px;
   }
-  .best-image-sect {
+  .all-image-sect {
     width: 100%;
     height: 150px;
     border-radius: 20px;
   }
-  .best-image {
+  .all-image {
     max-width: 95%;
     max-height: 100px;
     margin-top: 0px;
   }
-  .best-heart {
-    top: 5px;
-    right: 5px;
-  }
-  .best-eye {
+  .all-discount{
+    position: absolute;
     top: 5px;
     left: 5px;
-  }
-  .best-icon {
+    width: 50px;
+    height: 20px;
+    padding-top: 0px;
+    }
+    .all-heart {
+      top: 5px;
+      right: 5px;
+    }
+    .all-eye {
+      top: 5px;
+      right: 50px;
+    }
+  .all-icon {
     width: 15px;
     height: 15px;
   }
-  .best-item-name,
-  .best-new-price {
+  .all-item-name,
+  .all-new-price {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
   }
-  .best-rating {
+  .all-rating {
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import "./Home.css";
 import homeIphoneImg from "../../assets/homeIphoneImg.png";
 import FlashSales from "./FlashSales/FlashSales";
@@ -9,16 +9,21 @@ import homeJblImg from "../../assets/homeJblImg.png";
 import { IoIosArrowForward } from "react-icons/io";
 
 const Home = () => {
-
   return (
     <main className="home-container">
       <section className="home-sect1">
         <div className="home-categories">
           <div>
-            Women's Fashion <span className="home-category-arrow">< IoIosArrowForward className='test'/></span>
+            Women's Fashion{" "}
+            <span className="home-category-arrow">
+              <IoIosArrowForward />
+            </span>
           </div>
           <div>
-            Men's Fashion <span className="home-category-arrow">< IoIosArrowForward /></span>
+            Men's Fashion{" "}
+            <span className="home-category-arrow">
+              <IoIosArrowForward />
+            </span>
           </div>
           <div>Electronics</div>
           <div>Home & Lifestyle</div>
@@ -37,23 +42,15 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="home-sect2">
-        <FlashSales />
-      </section>
+      <FlashSales />
       <hr className="home-horizontal" />
-      <section className="home-sect3">
-        <Categories />
-      </section>
+      <Categories />
       <hr className="home-horizontal" />
-      <section className="home-sect4">
-        <BestSelling />
-      </section>
+      <BestSelling />
       <section className="home-sect5">
-        <img src={homeJblImg} alt="JblImg" className="home-jbl-img"/>
+        <img src={homeJblImg} alt="JblImg" className="home-jbl-img" />
       </section>
-      <section className="home-sect6">
-        <Explore />
-      </section>
+      <Explore />
     </main>
   );
 };

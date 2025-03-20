@@ -205,6 +205,12 @@ font-size: 38px;
     margin-left: 25px;
     margin-right: 25px;
   }
+  .explore-header{
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 1px;
+  }
   .explore-heart {
     top: 5px;
     right: 5px;

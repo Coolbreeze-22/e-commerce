@@ -10,6 +10,9 @@ import Register from "./components/Authentication/Register/Register";
 import { useEffect } from "react";
 import { fetchProducts } from "./controller/productController";
 import { useDispatch } from "react-redux";
+import AllProducts from "./components/Home/AllProducts/AllProducts";
+import ProductDetails from "./components/Home/AllProducts/ProductDetails/ProductDetails";
+import ScrollRestoration from "./components/ScrollRestoration/ScrollRestoration";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +23,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollRestoration />
       <main>
         <Routes>
           <Route path="*" element={<Navigate replace to="/home" />} />
@@ -28,6 +32,22 @@ function App() {
             element={
               <Navbar>
                 <Home />
+              </Navbar>
+            }
+          />
+          <Route
+            path="/home/products"
+            element={
+              <Navbar>
+                <AllProducts />
+              </Navbar>
+            }
+          />
+          <Route
+            path="/account/product-details/:id"
+            element={
+              <Navbar>
+                <ProductDetails />
               </Navbar>
             }
           />
