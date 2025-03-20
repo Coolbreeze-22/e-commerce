@@ -10,8 +10,8 @@ import Register from "./components/Authentication/Register/Register";
 import { useEffect } from "react";
 import { fetchProducts } from "./controller/productController";
 import { useDispatch } from "react-redux";
-import AllProducts from "./components/Home/AllProducts/AllProducts";
-import ProductDetails from "./components/Home/AllProducts/ProductDetails/ProductDetails";
+import AllProducts from "./components/AllProducts/AllProducts";
+import ProductDetails from "./components/AllProducts/ProductDetails/ProductDetails";
 import ScrollRestoration from "./components/ScrollRestoration/ScrollRestoration";
 
 function App() {
