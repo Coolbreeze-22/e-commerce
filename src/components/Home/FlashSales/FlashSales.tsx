@@ -18,15 +18,27 @@ const FlashSales = () => {
   const uniqueFlashProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.products.uniqueFlashSales
   );
-
   const navigate = useNavigate();
 
-  // const viewProduct = () => {
-  //   navigate('./');
-  //   };
+  const viewProduct = (product: ProductType) => {
+    navigate(`/account/product-details/${product.id}`);
+  };
 
-  const handleProduct = () => {
-    navigate("./");
+  const viewAllProducts = () => {
+    navigate("/home/products");
+  };
+
+  const checkRating = (rating: Array<string>, label: string) => {
+    const sum = rating.reduce((acc, value) => acc + Number(value), 0);
+    const result = sum / rating.length;
+
+    const ratingStar = Number(result.toFixed(1));
+    const ratingPercent = Math.round(result * 20);
+    if (label === "percent") {
+      return ratingPercent;
+    } else {
+      return ratingStar;
+    }
   };
 
   const checkDiscountPercent = (discountedPrice: string, price: string) => {
@@ -83,10 +95,14 @@ const FlashSales = () => {
           navigation={{
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-          }}>
+          }}
+        >
           {uniqueFlashProducts.map((product, index) => (
             <SwiperSlide key={index} className="flash-swiper-slide">
-              <div className="flash-swiper-slide-div">
+              <div
+                className="flash-swiper-slide-div"
+                onClick={() => viewProduct(product)}
+              >
                 <section className="flash-image-sect">
                   {product.discountedPrice && (
                     <div className="flash-discount">
@@ -105,7 +121,7 @@ const FlashSales = () => {
                   </div>
                   <div>
                     <img
-                      src={product.photo}
+                      src={product.photo[0]}
                       alt="gamepad"
                       className="flash-image"
                     />
@@ -124,18 +140,21 @@ const FlashSales = () => {
                         product.discountedPrice
                           ? "flash-old-price"
                           : "flash-new-price"
-                      }>
+                      }
+                    >
                       ${product.price}
                     </span>
                     <div className="flash-star-rating-wrapper">
                       <Rating
                         name="read-only"
-                        value={product.rating}
+                        value={checkRating(product.rating, "star")}
                         readOnly
                         precision={0.5}
                         size="small"
                       />
-                      <span className="flash-rating">(88)</span>
+                      <span className="flash-rating">
+                        ({checkRating(product.rating, "percent")})
+                      </span>
                     </div>
                   </div>
                 </section>
@@ -150,7 +169,7 @@ const FlashSales = () => {
           <CustomButton
             text="View All Products"
             className="flash-btn"
-            onClick={handleProduct}
+            onClick={viewAllProducts}
           />
         </div>
       </section>

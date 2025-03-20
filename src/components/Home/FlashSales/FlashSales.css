@@ -279,7 +279,17 @@
     margin-top: 40px;
     margin-left: 25px;
   }
+  .flash-header{
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 1px;
+  }
   .flash-countdown {
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 1px;
     margin-left: 30px;
     column-gap: 8px;
   }

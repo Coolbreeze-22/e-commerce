@@ -14,13 +14,27 @@ export const BestSelling = () => {
   const uniqueBestProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.products.uniqueBestSelling
   );
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  //   const viewProduct = () => {
-  //     navigate("./");
-  //   };
-  const viewAllProduct = () => {
-    navigate("./");
+  const viewProduct = (product: ProductType) => {
+    navigate(`/account/product-details/${product.id}`);
+  };
+
+  const viewAllProducts = () => {
+    navigate("/home/products");
+  };
+
+  const checkRating = (rating: Array<string>, label: string) => {
+    const sum = rating.reduce((acc, value) => acc + Number(value), 0);
+    const result = sum / rating.length;
+
+    const ratingStar = Number(result.toFixed(1));
+    const ratingPercent = Math.round(result * 20);
+    if (label === "percent") {
+      return ratingPercent;
+    } else {
+      return ratingStar;
+    }
   };
 
   return (
@@ -33,18 +47,18 @@ export const BestSelling = () => {
         <header className="best-header">
           <div>Best Selling Products</div>
           <div className="best-btn-wrapper">
-          <CustomButton
-            text="View All Products"
-            className="best-btn"
-            onClick={viewAllProduct}
-          />
-        </div>
+            <CustomButton
+              text="View All Products"
+              className="best-btn"
+              onClick={viewAllProducts}
+            />
+          </div>
         </header>
       </section>
 
       <section className="best-carousel">
         {uniqueBestProducts.map((product, index) => (
-          <div key={index}>
+          <div key={index} onClick={() => viewProduct(product)}>
             <section className="best-image-sect">
               <div className="best-heart">
                 <FaRegHeart className="best-icon" />
@@ -53,7 +67,7 @@ export const BestSelling = () => {
                 <MdOutlineRemoveRedEye className="best-icon" />
               </div>
               <div>
-                <img src={product.photo} alt="coat" className="best-image" />
+                <img src={product.photo[0]} alt="coat" className="best-image" />
               </div>
             </section>
             <section>
@@ -69,18 +83,21 @@ export const BestSelling = () => {
                     product.discountedPrice
                       ? "best-old-price"
                       : "best-new-price"
-                  }>
+                  }
+                >
                   ${product.price}
                 </span>
                 <div className="best-star-rating-wrapper">
                   <Rating
                     name="read-only"
-                    value={product.rating}
+                    value={checkRating(product.rating, "star")}
                     readOnly
                     precision={0.5}
                     size="small"
                   />
-                  <span className="best-rating">(65)</span>
+                  <span className="best-rating">
+                    ({checkRating(product.rating, "percent")})
+                  </span>
                 </div>
               </div>
             </section>

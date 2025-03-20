@@ -22,8 +22,25 @@ export const Explore = () => {
   );
   const navigate = useNavigate();
 
-  const handleProduct = () => {
-    navigate("./");
+  const viewProduct = (product: ProductType) => {
+    navigate(`/account/product-details/${product.id}`);
+  };
+
+  const viewAllProducts = () => {
+    navigate("/home/products");
+  };
+
+  const checkRating = (rating: Array<string>, label: string) => {
+    const sum = rating.reduce((acc, value) => acc + Number(value), 0);
+    const result = sum / rating.length;
+
+    const ratingStar = Number(result.toFixed(1));
+    const ratingPercent = Math.round(result * 20);
+    if (label === "percent") {
+      return ratingPercent;
+    } else {
+      return ratingStar;
+    }
   };
 
   return (
@@ -60,7 +77,10 @@ export const Explore = () => {
         >
           {uniqueExploreProducts.map((product, index) => (
             <SwiperSlide key={index} className="explore-swiper-slide">
-              <div className="explore-swiper-slide-div">
+              <div
+                className="explore-swiper-slide-div"
+                onClick={() => viewProduct(product)}
+              >
                 <section className="explore-image-sect">
                   <div className="explore-heart">
                     <FaRegHeart className="explore-icon" />
@@ -70,7 +90,7 @@ export const Explore = () => {
                   </div>
                   <div>
                     <img
-                      src={product.photo}
+                      src={product.photo[0]}
                       alt="coat"
                       className="explore-image"
                     />
@@ -96,12 +116,14 @@ export const Explore = () => {
                     <div className="explore-star-rating-wrapper">
                       <Rating
                         name="read-only"
-                        value={product.rating}
+                        value={checkRating(product.rating, "star")}
                         readOnly
                         precision={0.5}
                         size="small"
                       />
-                      <span className="explore-rating">(65)</span>
+                      <span className="explore-rating">
+                        ({checkRating(product.rating, "percent")})
+                      </span>
                     </div>
                   </div>
 
@@ -129,7 +151,7 @@ export const Explore = () => {
           <CustomButton
             text="View All Products"
             className="explore-btn"
-            onClick={handleProduct}
+            onClick={viewAllProducts}
           />
         </div>
       </section>
