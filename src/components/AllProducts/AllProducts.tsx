@@ -2,16 +2,26 @@ import React from "react";
 import "./AllProducts.css";
 import { Rating } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../states/redux/store";
-import { ProductType } from "../../../states/redux/reducerTypes";
+import { RootState } from "../../states/redux/store";
+import { ProductType } from "../../states/redux/reducerTypes";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import MyIntersectionObserver from "../utils/IntersectionObserver";
 
 const AllProducts = () => {
   const allProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.products.products
   );
+
+  const imageRefs = React.useRef<HTMLImageElement[]>([]);
+
+  React.useEffect(() => {
+    const cleanUp = MyIntersectionObserver(imageRefs);
+    return cleanUp
+  }, [allProducts]);
+  
+
   const navigate = useNavigate();
 
   const viewProduct = (product: ProductType) => {
@@ -29,17 +39,16 @@ const AllProducts = () => {
   };
   const checkRating = (rating: Array<string>, label: string) => {
     const sum = rating.reduce((acc, value) => acc + Number(value), 0);
-    const result = (sum / rating.length);
+    const result = sum / rating.length;
 
-    const ratingStar = Number(result.toFixed(1))
-    const ratingPercent = Math.round(result *20);
+    const ratingStar = Number(result.toFixed(1));
+    const ratingPercent = Math.round(result * 20);
     if (label === "percent") {
-    return ratingPercent;
+      return ratingPercent;
     } else {
       return ratingStar;
     }
   };
-  
 
   return (
     <main className="all-container">
@@ -67,8 +76,15 @@ const AllProducts = () => {
               <div className="all-eye">
                 <MdOutlineRemoveRedEye className="all-icon" />
               </div>
-              <div>
-                <img src={product.photo[0]} alt="coat" className="all-image" />
+              <div className="all-image-wrapper">
+                <img loading="lazy"
+                  ref={(element) => {
+                    imageRefs.current[index] = element as HTMLImageElement;
+                  }}
+                  data-src={product.photo[0]}
+                  alt="img"
+                  className="all-image"
+                />
               </div>
             </section>
             <section>
@@ -76,7 +92,7 @@ const AllProducts = () => {
                 <p className="all-item-name">{product.name}</p>
                 {product.discountedPrice && (
                   <span className="all-new-price">
-                    ${product.discountedPrice}{" "}
+                    ₦{product.discountedPrice}{" "}
                   </span>
                 )}
                 <span
@@ -84,7 +100,7 @@ const AllProducts = () => {
                     product.discountedPrice ? "all-old-price" : "all-new-price"
                   }
                 >
-                  ${product.price}
+                  ₦{product.price}
                 </span>
                 <div className="all-star-rating-wrapper">
                   <Rating
@@ -94,7 +110,9 @@ const AllProducts = () => {
                     precision={0.5}
                     size="small"
                   />
-                  <span className="all-rating">({checkRating(product.rating, "percent")})</span>
+                  <span className="all-rating">
+                    ({checkRating(product.rating, "percent")})
+                  </span>
                 </div>
                 <p>{product.price}</p>
               </div>
