@@ -10,7 +10,7 @@ export type ProductType = {
   discountedPrice: string;
   rating: Array<string>;
   reviews: Array<string>;
-  quantity: string;
+  quantity: number;
   likes: Array<string>;
   views: Array<string>;
   color: string
