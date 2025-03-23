@@ -13,11 +13,17 @@ import "swiper/css/pagination";
 import CustomButton from "../../CustomButton/CustomButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
+import { useInView } from "react-intersection-observer";
+import { breakPoints } from "../../utils/breakPoints";
 
 const FlashSales = () => {
   const uniqueFlashProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.products.uniqueFlashSales
   );
+  const { ref } = useInView({
+    threshold: 0,
+  });
+
   const navigate = useNavigate();
 
   const viewProduct = (product: ProductType) => {
@@ -51,7 +57,7 @@ const FlashSales = () => {
     return discountPercent;
   };
   return (
-    <main className="flashSales-container">
+    <main className="flashSales-container" ref={ref}>
       <section className="flash-info1">
         <div className="flash-text-wrapper">
           <span className="flash-red"></span>
@@ -88,14 +94,13 @@ const FlashSales = () => {
       <section className="flashSales-swiper">
         <Swiper
           modules={[Pagination, Navigation]}
-          spaceBetween={20}
-          slidesPerView={4.2}
           slidesPerGroup={1}
           pagination={{ clickable: true }}
           navigation={{
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
           }}
+          breakpoints={breakPoints}
         >
           {uniqueFlashProducts.map((product, index) => (
             <SwiperSlide key={index} className="flash-swiper-slide">
@@ -119,10 +124,10 @@ const FlashSales = () => {
                   <div className="flash-eye">
                     <MdOutlineRemoveRedEye className="flash-icon" />
                   </div>
-                  <div>
+                  <div className="flash-image-wrapper">
                     <img
                       src={product.photo[0]}
-                      alt="gamepad"
+                      alt="loading"
                       className="flash-image"
                     />
                   </div>
@@ -132,7 +137,7 @@ const FlashSales = () => {
                     <p className="flash-item-name">{product.name}</p>
                     {product.discountedPrice && (
                       <span className="flash-new-price">
-                        ${product.discountedPrice}{" "}
+                        ₦{product.discountedPrice}{" "}
                       </span>
                     )}
                     <span
@@ -142,7 +147,7 @@ const FlashSales = () => {
                           : "flash-new-price"
                       }
                     >
-                      ${product.price}
+                      ₦{product.price}
                     </span>
                     <div className="flash-star-rating-wrapper">
                       <Rating

@@ -4,16 +4,21 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { ProductType } from "../../../states/redux/reducerTypes";
 import { Rating } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import CustomButton from "../../CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 export const BestSelling = () => {
   const uniqueBestProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.products.uniqueBestSelling
   );
+
+  const { ref } = useInView({
+      threshold: 0,
+    });
+
   const navigate = useNavigate();
 
   const viewProduct = (product: ProductType) => {
@@ -38,7 +43,7 @@ export const BestSelling = () => {
   };
 
   return (
-    <main className="best-container">
+    <main className="best-container" ref={ref}>
       <section className="best-info">
         <div className="best-text">
           <span className="best-red"></span>
@@ -66,8 +71,8 @@ export const BestSelling = () => {
               <div className="best-eye">
                 <MdOutlineRemoveRedEye className="best-icon" />
               </div>
-              <div>
-                <img src={product.photo[0]} alt="coat" className="best-image" />
+              <div className="best-image-wrapper">
+                <img src={product.photo[0]} alt="loading" className="best-image" loading="lazy"/>
               </div>
             </section>
             <section>
@@ -75,7 +80,7 @@ export const BestSelling = () => {
                 <p className="best-item-name">{product.name}</p>
                 {product.discountedPrice && (
                   <span className="best-new-price">
-                    ${product.discountedPrice}{" "}
+                    ₦{product.discountedPrice}{" "}
                   </span>
                 )}
                 <span
@@ -85,7 +90,7 @@ export const BestSelling = () => {
                       : "best-new-price"
                   }
                 >
-                  ${product.price}
+                  ₦{product.price}
                 </span>
                 <div className="best-star-rating-wrapper">
                   <Rating

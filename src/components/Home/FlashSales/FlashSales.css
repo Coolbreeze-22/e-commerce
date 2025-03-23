@@ -103,7 +103,10 @@
   /* width: 270px; */
   width: 100%;
   height: 240px;
-  justify-items: center;
+}
+.flash-image-wrapper{
+  align-content: center;
+  text-align: center;
 }
 .flash-image {
   /* max-width: 190px; */
@@ -264,8 +267,8 @@
   .flash-item-name,
   .flash-new-price, .flash-old-price {
     font-weight: 400;
-    font-size: 10px;
-    line-height: 12px;
+    font-size: 13px;
+    line-height: 15px;
   }
   .flash-rating {
     font-weight: 400;

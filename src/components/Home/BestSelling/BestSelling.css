@@ -69,13 +69,17 @@
   background-color: #ffffff;
   border-radius: 20px;
 }
+.best-image-wrapper{
+  align-content: center;
+  text-align: center;
+}
 .best-image {
   max-width: 190px;
   max-height: 160px;
   margin-top: 25px;
 }
 .best-item-name,
-.best-new-price {
+.best-new-price, .best-old-price {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -162,10 +166,10 @@
     height: 15px;
   }
   .best-item-name,
-  .best-new-price {
+  .best-new-price, .best-old-price {
     font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 13px;
+    line-height: 14px;
   }
   .best-rating {
     font-weight: 400;
