@@ -12,7 +12,7 @@ import { fetchProducts } from "./controller/productController";
 import { useDispatch } from "react-redux";
 import AllProducts from "./components/AllProducts/AllProducts";
 import ProductDetails from "./components/AllProducts/ProductDetails/ProductDetails";
-import ScrollRestoration from "./components/ScrollRestoration/ScrollRestoration";
+import ScrollRestoration from "./components/utils/ScrollRestoration";
 
 function App() {
   const dispatch = useDispatch();
