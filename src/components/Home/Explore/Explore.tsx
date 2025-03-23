@@ -15,11 +15,17 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
+import { useInView } from "react-intersection-observer";
+import { breakPoints } from "../../utils/breakPoints";
 
 export const Explore = () => {
   const uniqueExploreProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.products.uniqueExplore
   );
+  const { ref } = useInView({
+    threshold: 0,
+  });
+
   const navigate = useNavigate();
 
   const viewProduct = (product: ProductType) => {
@@ -44,7 +50,7 @@ export const Explore = () => {
   };
 
   return (
-    <main className="explore-container">
+    <main className="explore-container" ref={ref}>
       <section className="explore-info">
         <div className="explore-text">
           <span className="explore-red"></span>
@@ -66,14 +72,13 @@ export const Explore = () => {
       <section className="explore-swiper">
         <Swiper
           modules={[Pagination, Navigation]}
-          spaceBetween={20}
-          slidesPerView={4.2}
           slidesPerGroup={1}
           pagination={{ clickable: true }}
           navigation={{
             nextEl: ".explore-button-next",
             prevEl: ".explore-button-prev",
           }}
+          breakpoints={breakPoints}
         >
           {uniqueExploreProducts.map((product, index) => (
             <SwiperSlide key={index} className="explore-swiper-slide">
@@ -88,10 +93,11 @@ export const Explore = () => {
                   <div className="explore-eye">
                     <MdOutlineRemoveRedEye className="explore-icon" />
                   </div>
-                  <div>
+                  <div className="explore-image-wrapper">
                     <img
                       src={product.photo[0]}
-                      alt="coat"
+                      alt="loading"
+                      loading="lazy"
                       className="explore-image"
                     />
                   </div>
@@ -101,7 +107,7 @@ export const Explore = () => {
                     <p className="explore-item-name">{product.name}</p>
                     {product.discountedPrice && (
                       <span className="explore-new-price">
-                        ${product.discountedPrice}{" "}
+                        ₦{product.discountedPrice}{" "}
                       </span>
                     )}
                     <span
@@ -111,7 +117,7 @@ export const Explore = () => {
                           : "explore-new-price"
                       }
                     >
-                      ${product.price}
+                      ₦{product.price}
                     </span>
                     <div className="explore-star-rating-wrapper">
                       <Rating
@@ -127,17 +133,33 @@ export const Explore = () => {
                     </div>
                   </div>
 
-                  <div className="explore-color-wrapper">
-                    <span className="explore-clicked-color">
+                  <div className="explore-color">
+                    {product.allColors.map((itemColor, index) => (
                       <span
-                        className="explore-prod-color1"
-                        style={{ backgroundColor: "#184A48" }}
-                      ></span>
-                    </span>
-                    <span
-                      className="explore-prod-color2"
-                      style={{ backgroundColor: "#DB4444" }}
-                    ></span>
+                        key={index}
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                          ...(itemColor === product.color && {
+                            width: "12px",
+                            height: "12px",
+                            border: "2px solid black",
+                          }),
+                        }}
+                      >
+                        <aside
+                          style={{
+                            width: "20px",
+                            height: "20px",
+                            backgroundColor: itemColor,
+                            ...(itemColor === product.color && {
+                              width: "12px",
+                              height: "12px",
+                            }),
+                          }}
+                        ></aside>
+                      </span>
+                    ))}
                   </div>
                 </section>
               </div>
