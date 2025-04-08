@@ -18,7 +18,7 @@
 .foot-sect1 {
   width: 217px;
 }
-.foot-sect1 header {
+.foot-sect1 > header {
   font-weight: 700;
   font-size: 24px;
   letter-spacing: 3px;
@@ -49,35 +49,35 @@
 .foot-sect2 {
   width: 175px;
 }
-.foot-sect2 header {
+.foot-sect2 > header {
   font-weight: 500;
   font-size: 20px;
   width: 82px;
 }
-.foot-sect2 p {
+.foot-sect2 > p {
   font-weight: 400;
   font-size: 16px;
 }
 .foot-sect3 {
   width: 125px;
 }
-.foot-sect3 header {
+.foot-sect3 > header {
   font-weight: 500;
   font-size: 20px;
   width: 86px;
 }
-.foot-sect3 p {
+.foot-sect3 > p {
   font-weight: 400;
   font-size: 16px;
 }
 .foot-sect4 {
   width: 110px;
 }
-.foot-sect4 header {
+.foot-sect4 > header {
   font-weight: 500;
   font-size: 20px;
 }
-.foot-sect4 p {
+.foot-sect4 > p {
   font-weight: 400;
   font-size: 16px;
 }
@@ -86,11 +86,11 @@
   width: 200px;
 }
 
-.foot-sect5 header {
+.foot-sect5 > header {
   font-weight: 500;
   font-size: 20px;
 }
-.foot-sect5 p {
+.foot-sect5 > p {
   font-weight: 400;
   font-size: 13px;
   opacity: 50%;
@@ -135,6 +135,9 @@
   .foot-container {
     position: relative;
     top: 170px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
   }
   .foot-wrapper {
     flex-direction: column;
@@ -144,19 +147,24 @@
     height: auto;
     line-height: 21px;
   }
-  .foot-sect1 {
+  .foot-sect1, .foot-sect2, .foot-sect3, .foot-sect4, .foot-sect5 {
     width: auto;
   }
-  .foot-sect1-head {
+  .foot-sect1 > header, .foot-sect2 > header, .foot-sect3 >header, .foot-sect4 > header {
     width: auto;
+    font-size: 20px;
+    line-height: 25px;
   }
   .foot-sect1-sub {
+    font-size: 16px;
+    line-height: 21px;
     width: auto;
   }
-  .foot-sect1-get {
+  .foot-sect1-get, .foot-sect2 > p, .foot-sect3 > p, .foot-sect4 > p {
+    font-size: 14px;
+    line-height: 19px;
     width: auto;
   }
-
   .foot-sect1-email {
     width: 200px;
   }
@@ -165,34 +173,11 @@
     font-size: 14px;
     height: 30px;
   }
-
-  .foot-sect2 {
-    width: auto;
-  }
-
-  .foot-sect2 p {
-    width: auto;
-  }
-  .foot-sect3 {
-    width: auto;
-  }
-  .foot-sect3 p {
-    width: auto;
-  }
-  .foot-sect4 {
-    width: auto;
-  }
-  .foot-sect4 p {
-    width: auto;
-  }
-  .foot-sect5 {
-    width: 80%;
-  }
   .foot-img {
     display: flex;
     flex-direction: column;
   }
-  .foot-img-btn > div {
+  .foot-img-btn {
     margin-left: 0px;
     margin-top: 10px;
   }
