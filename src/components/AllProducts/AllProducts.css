@@ -4,17 +4,17 @@
   margin-left: 125px;
   margin-right: 125px;
 }
+.all-path {
+  font-weight: 600;
+  font-size: 16px;
+}
 .all-path1 {
   opacity: 50%;
   margin-right: 12px;
-  font-weight: 600;
-  font-size: 16px;
 }
 .all-path2 {
   margin-left: 12px;
   opacity: 80%;
-  font-weight: 600;
-  font-size: 16px;
 }
 .all-header {
   font-weight: 600;
@@ -42,23 +42,23 @@
   position: relative;
   background-color: #f5f5f5;
   width: 260px;
-  height: 240px;  
+  height: 240px;
 }
 .all-discount {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 0;
-    width: 55px;
-    height: 23px;
-    border-radius: 4px;
-    text-align: center;
-    padding-top: 3px;
-    background-color: #db4444;
-    color: #ffffff;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0;
+  width: 55px;
+  height: 23px;
+  border-radius: 4px;
+  text-align: center;
+  padding-top: 3px;
+  background-color: #db4444;
+  color: #ffffff;
 }
 .all-heart {
   position: absolute;
@@ -77,7 +77,7 @@
   background-color: #ffffff;
   border-radius: 20px;
 }
-.all-image-wrapper{
+.all-image-wrapper {
   align-content: center;
   text-align: center;
 }
@@ -88,11 +88,13 @@
 }
 .all-item-name,
 .all-new-price {
+  margin: 0;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
   margin-left: 3px;
+  margin-top: 5px;
 }
 .all-new-price {
   color: #db4444;
@@ -115,6 +117,7 @@
   color: #000000;
   opacity: 0.5;
   margin-left: 8px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 600px) {
@@ -123,13 +126,18 @@
     margin-left: 0;
     margin-right: 0;
   }
-  .all-info{
-    margin-left: 20px;
+  .all-info {
+    margin-left: 10px;
+  }
+  .all-path {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
   }
   .all-header {
     font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 14px;
+    line-height: 19px;
     letter-spacing: 1px;
     margin-bottom: 20px;
   }
@@ -151,13 +159,13 @@
     max-height: 100px;
     margin-top: 0px;
   }
-  .all-discount{
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 50px;
-  height: 20px;
-  padding-top: 0px;
+  .all-discount {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 20px;
+    padding-top: 0px;
   }
   .all-heart {
     top: 5px;
@@ -172,16 +180,17 @@
     height: 15px;
   }
   .all-item-name,
-  .all-new-price {
+  .all-new-price,
+  .all-old-price {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 18px;
   }
   .all-rating {
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    margin-left: 0px;
+    margin-left: 3px;
   }
 }
 @media (min-width: 601px) and (max-width: 768px) {
@@ -211,22 +220,22 @@
     max-height: 100px;
     margin-top: 0px;
   }
-  .all-discount{
+  .all-discount {
     position: absolute;
     top: 5px;
     left: 5px;
     width: 50px;
     height: 20px;
     padding-top: 0px;
-    }
-    .all-heart {
-      top: 5px;
-      right: 5px;
-    }
-    .all-eye {
-      top: 5px;
-      right: 50px;
-    }
+  }
+  .all-heart {
+    top: 5px;
+    right: 5px;
+  }
+  .all-eye {
+    top: 5px;
+    right: 50px;
+  }
   .all-icon {
     width: 15px;
     height: 15px;
@@ -241,6 +250,6 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    margin-left: 0px;
+    margin-left: 3px;
   }
 }

@@ -93,14 +93,10 @@
   .related-container {
     margin-top: 20px;
   }
-  .related-info {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
   .related-related {
     font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 21px;
     letter-spacing: 1px;
   }
   .related-wrapper {
@@ -150,10 +146,6 @@
   .related-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-  .related-info {
-    margin-left: 25px;
-    margin-right: 25px;
   }
   .related-related {
     font-weight: 500;
