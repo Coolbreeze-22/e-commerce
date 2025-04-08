@@ -58,7 +58,15 @@
 }
 @media (min-width: 601px) and (max-width: 768px) {
   .prof-container{
-    font-size: 15px;
+    font-size: 14px;
+}
+.prof-form-header {
+  font-size: 18px;
+  line-height: 22px;
+}
+.prof-form {
+  column-gap: 20px;
+  row-gap: 8px;
 }
 }
 

@@ -51,16 +51,15 @@
   }
   .acct-path {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 17px;
     margin-bottom: 20px;
   }
   .acct-path-title1 {
-    font-weight: 400;
     margin-right: 12px;
   }
   .acct-path-title2 {
-    font-weight: 500;
-    opacity: 90%;
+    opacity: initial;
     margin-left: 12px;
   }
   .acct-details {
@@ -85,13 +84,15 @@
     margin-right: 25px;
   }
   .acct-path {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 16px;
   }
   .acct-manage {
     flex-basis: 30%;
   }
   .acct-prof-edit {
-    flex-basis: 65%;
+    flex-basis: 60%;
     box-shadow: 0 0 6px 1px #8080801a;
     border-radius: 4px;
     padding: 30px;

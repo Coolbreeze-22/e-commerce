@@ -5,13 +5,13 @@ import CustomButton from "../../CustomButton/CustomButton";
 
 const Profile = () => {
   interface formType {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    address?: string;
-    password?: string;
-    newPassword?: string;
-    comfirmPassword?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    address: string;
+    password: string;
+    newPassword: string;
+    comfirmPassword: string;
   }
 
   const initialState: formType = {
@@ -25,7 +25,6 @@ const Profile = () => {
   };
 
   const [formData, setFormData] = useState<formType>(initialState);
-  console.log(formData);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
