@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../Navbar/Navbar";
 
 const Admin = () => {
   return (
-    <div>Admin</div>
-  )
-}
+    <Navbar>
+      <div>Admin</div>
+    </Navbar>
+  );
+};
 
-export default Admin
+export default Admin;
