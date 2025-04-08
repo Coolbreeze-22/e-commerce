@@ -1,4 +1,3 @@
-import React from "react";
 import "./FlashSales.css";
 import { useNavigate } from "react-router-dom";
 import { ProductType } from "../../../states/redux/reducerTypes";
@@ -11,51 +10,47 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CustomButton from "../../CustomButton/CustomButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { useInView } from "react-intersection-observer";
 import { breakPoints } from "../../utils/breakPoints";
+import { watchlist } from "../../../controller/cartController";
+import {
+  computeDiscountPercent,
+  computeRating,
+} from "../../utils/utilityFunctions";
 
 const FlashSales = () => {
-  const uniqueFlashProducts: Array<ProductType> = useSelector(
-    (state: RootState) => state.products.uniqueFlashSales
+  const uniqueFlashProducts = useSelector(
+    (state: RootState) => state.productReducer.uniqueFlashSales
   );
+
   const { ref } = useInView({
     threshold: 0,
   });
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const viewProduct = (product: ProductType) => {
-    navigate(`/account/product-details/${product.id}`);
+    navigate(`/product-details/${product.id}`);
   };
 
   const viewAllProducts = () => {
-    navigate("/home/products");
+    navigate("/products");
   };
-
-  const checkRating = (rating: Array<string>, label: string) => {
-    const sum = rating.reduce((acc, value) => acc + Number(value), 0);
-    const result = sum / rating.length;
-
-    const ratingStar = Number(result.toFixed(1));
-    const ratingPercent = Math.round(result * 20);
-    if (label === "percent") {
-      return ratingPercent;
-    } else {
-      return ratingStar;
-    }
+  const handleWatchlist = (product: ProductType) => {
+    watchlist({ product, dispatch });
   };
+  function checkRating(rating: Array<string>, label: string) {
+    const ratingStar =   computeRating(rating, label);
+    return ratingStar;
+  }
 
   const checkDiscountPercent = (discountedPrice: string, price: string) => {
-    if (!price && !discountedPrice) {
-      return 0;
-    }
-    const discountPercent = Math.ceil(
-      (parseFloat(discountedPrice) / parseFloat(price) - 1) * 100
-    );
-    return discountPercent;
+    const returnData = computeDiscountPercent(discountedPrice, price);
+    return returnData;
   };
+
   return (
     <main className="flashSales-container" ref={ref}>
       <section className="flash-info1">
@@ -104,10 +99,7 @@ const FlashSales = () => {
         >
           {uniqueFlashProducts.map((product, index) => (
             <SwiperSlide key={index} className="flash-swiper-slide">
-              <div
-                className="flash-swiper-slide-div"
-                onClick={() => viewProduct(product)}
-              >
+              <div className="flash-swiper-slide-div">
                 <section className="flash-image-sect">
                   {product.discountedPrice && (
                     <div className="flash-discount">
@@ -118,7 +110,10 @@ const FlashSales = () => {
                       %
                     </div>
                   )}
-                  <div className="flash-heart">
+                  <div
+                    className="flash-heart"
+                    onClick={() => handleWatchlist(product)}
+                  >
                     <FaRegHeart className="flash-icon" />
                   </div>
                   <div className="flash-eye">
@@ -129,38 +124,37 @@ const FlashSales = () => {
                       src={product.photo[0]}
                       alt="loading"
                       className="flash-image"
+                      onClick={() => viewProduct(product)}
                     />
                   </div>
                 </section>
-                <section>
-                  <div>
-                    <p className="flash-item-name">{product.name}</p>
-                    {product.discountedPrice && (
-                      <span className="flash-new-price">
-                        ₦{product.discountedPrice}{" "}
-                      </span>
-                    )}
-                    <span
-                      className={
-                        product.discountedPrice
-                          ? "flash-old-price"
-                          : "flash-new-price"
-                      }
-                    >
-                      ₦{product.price}
+                <section onClick={() => viewProduct(product)}>
+                  <p className="flash-item-name">{product.name}</p>
+                  {product.discountedPrice && (
+                    <span className="flash-new-price">
+                      ₦{product.discountedPrice}{" "}
                     </span>
-                    <div className="flash-star-rating-wrapper">
-                      <Rating
-                        name="read-only"
-                        value={checkRating(product.rating, "star")}
-                        readOnly
-                        precision={0.5}
-                        size="small"
-                      />
-                      <span className="flash-rating">
-                        ({checkRating(product.rating, "percent")})
-                      </span>
-                    </div>
+                  )}
+                  <span
+                    className={
+                      product.discountedPrice
+                        ? "flash-old-price"
+                        : "flash-new-price"
+                    }
+                  >
+                    ₦{product.price}
+                  </span>
+                  <div className="flash-star-rating-wrapper">
+                    <Rating
+                      name="read-only"
+                      value={checkRating(product.rating, "star")}
+                      readOnly
+                      precision={0.5}
+                      size="small"
+                    />
+                    <span className="flash-rating">
+                      ({checkRating(product.rating, "percent")})
+                    </span>
                   </div>
                 </section>
               </div>

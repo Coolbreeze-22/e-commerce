@@ -1,106 +1,112 @@
-.best-container {
+.group-container {
+  position: relative;
+  top: 150px;
   margin-left: 125px;
   margin-right: 125px;
-  margin-top: 60px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }
-.best-text {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.best-red {
-  width: 20px;
-  height: 40px;
-  border-radius: 4px;
-  background-color: #db4444;
-}
-.best-month {
+.group-path {
   font-weight: 600;
   font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0;
-  color: #db4444;
-  margin-left: 15px;
+  text-transform: capitalize;
 }
-.best-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 48px;
-  letter-spacing: 1.44px;
-  margin-top: 10px;
-  margin-bottom: 50px;
+.group-path1 {
+  opacity: 50%;
+  margin-right: 12px;
 }
-.best-carousel {
+.group-path2 {
+  margin-left: 12px;
+  opacity: 80%;
+}
+.group-grid {
   display: grid;
   grid-template-columns: auto auto auto auto;
   column-gap: 27px;
   row-gap: 10px;
   justify-content: space-evenly;
+  margin-top: 20px;
 }
-.best-carousel > div {
+.group-grid > div {
+  position: relative;
   width: 260px;
   border: 1px solid #ebebeb;
-
 }
-.best-image-sect {
+.group-image-sect {
   box-sizing: border-box;
   padding-top: 35px;
   position: relative;
   background-color: #f5f5f5;
   width: 260px;
   height: 240px;
-  justify-items: center;
 }
-.best-heart {
+.group-discount {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0;
+  width: 55px;
+  height: 23px;
+  border-radius: 4px;
+  text-align: center;
+  padding-top: 3px;
+  background-color: #db4444;
+  color: #ffffff;
+}
+.group-heart {
   position: absolute;
   top: 10px;
   right: 10px;
 }
-.best-eye {
+.group-eye {
   position: absolute;
   top: 50px;
   right: 10px;
 }
-.best-icon {
+.group-icon {
   width: 20px;
   height: 20px;
   padding: 5px;
   background-color: #ffffff;
   border-radius: 20px;
 }
-.best-image-wrapper{
+.group-image-wrapper {
   align-content: center;
   text-align: center;
 }
-.best-image {
+.group-image {
   max-width: 190px;
   max-height: 160px;
   margin-top: 25px;
 }
-.best-item-name,
-.best-new-price, .best-old-price {
+.group-item-name,
+.group-new-price {
+  margin: 0;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
+  margin-left: 3px;
+  margin-top: 5px;
 }
-.best-new-price {
+.group-new-price {
   color: #db4444;
 }
-.best-old-price {
+.group-old-price {
   color: #000000;
   opacity: 0.5;
   margin-left: 8px;
   text-decoration: line-through;
 }
-.best-star-rating-wrapper {
+.group-star-rating-wrapper {
   display: flex;
   margin-top: 5px;
 }
-.best-rating {
+.group-rating {
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
@@ -108,131 +114,125 @@
   color: #000000;
   opacity: 0.5;
   margin-left: 8px;
-  margin-bottom: 5px;
 }
 
 @media (max-width: 600px) {
-  .best-container {
-    margin-top: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  .best-info {
+  .group-container {
+    top: 120px;
     margin-left: 10px;
     margin-right: 10px;
   }
-  .best-month {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 1px;
+  .group-path {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
   }
-  .best-header {
-    align-items: normal;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-  .best-header > div {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 1px;
-  }
-  .best-carousel {
+  .group-grid {
     grid-template-columns: auto auto;
     column-gap: 10px;
     row-gap: 10px;
   }
-  .best-carousel > div {
+  .group-grid > div {
     width: 150px;
   }
-  .best-image-sect {
+  .group-image-sect {
     width: 100%;
     height: 150px;
+    border-radius: 4px;
   }
-  .best-image {
+  .group-image {
     max-width: 95%;
     max-height: 100px;
     margin-top: 0px;
   }
-  .best-heart {
+  .group-discount {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 20px;
+    padding-top: 0px;
+  }
+  .group-heart {
     top: 5px;
     right: 5px;
   }
-  .best-eye {
+  .group-eye {
     top: 5px;
-    left: 5px;
+    right: 50px;
   }
-  .best-icon {
+  .group-icon {
     width: 15px;
     height: 15px;
   }
-  .best-item-name,
-  .best-new-price, .best-old-price {
-    margin: 0;
-    margin-top: 5px;
+  .group-item-name,
+  .group-new-price,
+  .group-old-price {
     font-weight: 400;
-    font-size: 13px;
-    line-height: 14px;
+    font-size: 12px;
+    line-height: 18px;
   }
-  .best-rating {
+  .group-rating {
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    margin-left: 0px;
+    margin-left: 3px;
+    margin-bottom: 10px;
   }
 }
 @media (min-width: 601px) and (max-width: 768px) {
-  .best-container {
-    margin-top: 40px;
+  .group-container {
+    top: 150px;
     margin-left: 25px;
     margin-right: 25px;
   }
-  .best-header > div {
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 30px;
-    letter-spacing: 1px;
-  }
-  .best-carousel {
+  .group-grid {
     grid-template-columns: auto auto auto auto;
     column-gap: 10px;
     row-gap: 20px;
   }
-  .best-carousel > div {
+  .group-grid > div {
     width: 150px;
   }
-  .best-image-sect {
+  .group-image-sect {
     width: 100%;
     height: 150px;
   }
-  .best-image {
+  .group-image {
     max-width: 95%;
     max-height: 100px;
     margin-top: 0px;
   }
-  .best-heart {
+  .group-discount {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 20px;
+    padding-top: 0px;
+  }
+  .group-heart {
     top: 5px;
     right: 5px;
   }
-  .best-eye {
+  .group-eye {
     top: 5px;
-    left: 5px;
+    right: 50px;
   }
-  .best-icon {
+  f .group-icon {
     width: 15px;
     height: 15px;
   }
-  .best-item-name,
-  .best-new-price {
+  .group-item-name,
+  .group-new-price {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
   }
-  .best-rating {
+  .group-rating {
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    margin-left: 0px;
+    margin-left: 3px;
   }
 }

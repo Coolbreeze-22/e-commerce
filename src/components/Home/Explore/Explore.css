@@ -47,6 +47,7 @@ font-size: 38px;
 }
 .explore-swiper-slide{
   margin-bottom: 30px;
+  border: 1px solid #ebebeb;
 }
 .explore-swiper-slide-div{
   width: 100%;
@@ -120,6 +121,8 @@ font-size: 38px;
   gap: 10px;
   align-items: center;
   margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 3px;
 }
 .explore-color > span {
   border-radius: 15px;
