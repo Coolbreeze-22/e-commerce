@@ -6,12 +6,15 @@ interface ButtonPropsType {
   text?: string;
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
+  style?: React.CSSProperties;
+
 }
 
-const CustomButton = ({ type, text, className, onClick }: ButtonPropsType) => {
+const CustomButton = ({ type, text, className, onClick, disabled, style }: ButtonPropsType) => {
   return (
     <main>
-      <button type={type} onClick={onClick} className={className}>
+      <button type={type} onClick={onClick} className={className} disabled={disabled} style={style}>
         {text}
       </button>
     </main>

@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Account from "./components/Account/Account";
 import About from "./components/About/About";
@@ -13,6 +12,10 @@ import { useDispatch } from "react-redux";
 import AllProducts from "./components/AllProducts/AllProducts";
 import ProductDetails from "./components/AllProducts/ProductDetails/ProductDetails";
 import ScrollRestoration from "./components/utils/ScrollRestoration";
+import Cart from "./components/Cart/Cart";
+import RelatedProducts from "./components/Home/RelatedProducts/RelatedProducts";
+import Checkout from "./components/Checkout/Checkout";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,86 +25,27 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <div>
       <ScrollRestoration />
+      <ToastContainer />
       <main>
         <Routes>
-          <Route path="*" element={<Navigate replace to="/home" />} />
-          <Route
-            path="/home"
-            element={
-              <Navbar>
-                <Home />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/home/products"
-            element={
-              <Navbar>
-                <AllProducts />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/account/product-details/:id"
-            element={
-              <Navbar>
-                <ProductDetails />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <Navbar>
-                <Contact />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <Navbar>
-                <Login />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <Navbar>
-                <Register />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/account"
-            element={
-              <Navbar>
-                <Account />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <Navbar>
-                <About />
-              </Navbar>
-            }
-          />
-          <Route
-            path="/admin"
-            element={
-              <Navbar>
-                <Admin />
-              </Navbar>
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<AllProducts />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/categories" element={<RelatedProducts />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/products/cart/checkout" element={<Checkout />} />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
+          <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </main>
-    </BrowserRouter>
+    </div>
   );
 }
 
