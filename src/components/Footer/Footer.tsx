@@ -66,7 +66,11 @@ const Footer = () => {
           <p>Save $3 with App New User Only</p>
           <section className="foot-img">
             <div>
-              <img src={footerQrcode} alt="Qr-code" className="foot-img-qrcode" />
+              <img
+                src={footerQrcode}
+                alt="Qr-code"
+                className="foot-img-qrcode"
+              />
             </div>
             <div className="foot-img-btn">
               <div>
