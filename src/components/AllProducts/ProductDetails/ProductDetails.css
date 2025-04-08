@@ -11,6 +11,7 @@
   font-size: 14px;
   line-height: 21px;
   margin-bottom: 70px;
+  text-transform: capitalize;
 }
 .prod-dtls-routes > span {
   opacity: 0.5;
@@ -78,7 +79,7 @@
   margin-left: 10px;
   word-wrap: break-word;
 }
-.prod-dtls-hyphen {
+.prod-dtls-vertical-slash {
   opacity: 0.5;
 }
 .prod-dtls-stock {
@@ -177,21 +178,18 @@
   background-color: #db4444;
   color: #fafafa;
 }
-.prod-dtls-quantity > div > input {
+.prod-dtls-sel-quantity {
   width: 80px;
-  height: 43px;
+  height: 44px;
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
   text-align: center;
+  align-content: center;
   border: 0;
   border-top: 1px solid #00000080;
   border-bottom: 1px solid #00000080;
   border-radius: 4px;
-}
-.prod-dtls-quantity > div > input:focus {
-  border: 0;
-  outline: 1px solid #000000b3;
 }
 .prod-dtls-buy {
   font-weight: 500;
@@ -203,6 +201,12 @@
   color: #fafafa;
   justify-content: center;
   border-radius: 4px;
+  border: none;
+}
+.prod-dtls-buy:hover {
+  background-color: #fafafa;
+  color: #db4444;
+  border: 1px solid #db4444;
 }
 .prod-dtls-heart {
   width: 40px;
@@ -214,12 +218,31 @@
   justify-content: center;
 }
 .prod-dtls-heart:hover {
- background-color: #db4444;
- color: white;
+  background-color: #11ca3f;
+  color: #ffffff;
 }
 .prod-dtls-heart-icon {
   width: 20px;
   height: 20px;
+}
+.prod-dtls-view-cart {
+  display: flex;
+  justify-content: center;
+}
+.prod-dtls-view-cart > button {
+  border: 1px solid #db4444;
+  background-color: #fafafa;
+  color: #db4444;
+  width: 100px;
+  height: 30px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+.prod-dtls-view-cart > button:hover {
+  background-color: #db4444;
+  color: #fafafa;
+  width: 120px;
+  height: 32px;
 }
 .prod-dtls-delivery-wrapper {
   height: 180px;
@@ -254,10 +277,19 @@
   }
   .prod-dtls-routes {
     gap: 5px;
-    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    margin-bottom: 20px;
   }
   .prod-dtls-routes > span {
     opacity: 0.5;
+  }
+  .prod-dtls-success {
+    font-size: 14px;
+    line-height: 20px;
+    width: 200px;
+    height: 30px;
   }
   .prod-dtls-wrapper {
     flex-direction: column;
@@ -345,16 +377,16 @@
     height: 20px;
     padding: 0px;
   }
-  .prod-dtls-quantity > div > input {
+  .prod-dtls-sel-quantity {
     font-size: 12px;
     line-height: 18px;
-    height: 18px;
+    height: 20px;
+    width: 50px;
   }
   .prod-dtls-buy {
-    height: 22px;
+    height: 25px;
     width: 100px;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 13px;
   }
   .prod-dtls-heart {
     width: 26px;
@@ -363,6 +395,9 @@
   .prod-dtls-heart-icon {
     width: 14px;
     height: 14px;
+  }
+  .prod-dtls-view-cart > button {
+    margin-top: 10px;
   }
   .prod-dtls-delivery-wrapper {
     height: auto;
@@ -454,9 +489,9 @@
     width: 25px;
     height: 25px;
   }
-  .prod-dtls-quantity > div > input {
+  .prod-dtls-sel-quantity {
     width: 60px;
-    height: 23px;
+    height: 25px;
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
@@ -482,10 +517,9 @@
     margin-top: 10px;
   }
   .prod-dtls-delivery {
-    padding: 10px;
+    padding: 5px;
     display: flex;
     gap: 20px;
-    align-items: center;
   }
   .prod-dtls-free {
     font-weight: 500;

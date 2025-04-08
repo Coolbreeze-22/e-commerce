@@ -2,6 +2,7 @@ import "./CustomInput.css";
 
 interface InputPropsType {
   autoFocus?: boolean;
+  required?: boolean;
   type?: string;
   name?: string;
   placeholder?: string;
@@ -12,6 +13,7 @@ interface InputPropsType {
 
 const CustomInput = ({
   autoFocus,
+  required,
   type,
   name,
   placeholder,
@@ -21,6 +23,7 @@ const CustomInput = ({
 }: InputPropsType) => (
   <input
     autoFocus={autoFocus}
+    required={required}
     type={type}
     name={name}
     placeholder={placeholder}

@@ -1,4 +1,3 @@
-import React from "react";
 import "./RelatedProducts.css";
 import { useNavigate } from "react-router-dom";
 import { ProductType } from "../../../states/redux/reducerTypes";
@@ -10,16 +9,16 @@ import { RootState } from "../../../states/redux/store";
 
 export const RelatedProducts = ({ product }: { product: ProductType }) => {
   const allProducts: Array<ProductType> = useSelector(
-    (state: RootState) => state.products.products
+    (state: RootState) => state.productReducer.products
   );
   const relatedProducts = allProducts.filter(
-    (item) => item.id !==product.id && item.category === product.category
+    (item) => item.id !== product.id && item.category === product.category
   );
 
   const navigate = useNavigate();
 
   const viewProduct = (product: ProductType) => {
-    navigate(`/account/product-details/${product.id}`);
+    navigate(`/product-details/${product.id}`);
   };
 
   const checkRating = (rating: Array<string>, label: string) => {
@@ -34,6 +33,10 @@ export const RelatedProducts = ({ product }: { product: ProductType }) => {
       return ratingStar;
     }
   };
+
+  if (!relatedProducts.length) {
+    return null;
+  }
 
   return (
     <main className="related-container">
