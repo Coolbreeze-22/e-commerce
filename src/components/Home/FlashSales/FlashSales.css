@@ -90,9 +90,9 @@
 
 .flash-swiper-slide {
   margin-bottom: 30px;
+  border: 1px solid #ebebeb;
 }
 .flash-swiper-slide-div {
-  /* width: 270px; */
   width: 100%;
 }
 .flash-image-sect {
@@ -100,7 +100,6 @@
   padding-top: 35px;
   position: relative;
   background-color: #f5f5f5;
-  /* width: 270px; */
   width: 100%;
   height: 240px;
 }
@@ -109,7 +108,6 @@
   text-align: center;
 }
 .flash-image {
-  /* max-width: 190px; */
   max-width: 100%;
   max-height: 200px;
 }
@@ -165,6 +163,7 @@
 .flash-star-rating-wrapper {
   display: flex;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 .flash-rating {
   font-weight: 600;
@@ -251,14 +250,12 @@
     padding-top: 0px;
   }
   .flash-heart {
-    top: auto;
-    bottom: 0px;
+    top: 5px;
     right: 5px;
   }
   .flash-eye {
-    top: auto;
-    bottom: 0px;
-    left: 5px;
+    top: 45px;
+    right: 5px;
   }
   .flash-icon {
     width: 15px;
@@ -301,13 +298,11 @@
     padding: 10px;
   }
   .flash-heart {
-    top: auto;
-    bottom: 0px;
+    top: 5px;
     right: 5px;
   }
   .flash-eye {
-    top: auto;
-    bottom: 0px;
-    left: 5px;
+    top: 45px;
+    right: 5px;
   }
 }

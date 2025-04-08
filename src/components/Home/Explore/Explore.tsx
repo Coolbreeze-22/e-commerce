@@ -1,4 +1,3 @@
-import React from "react";
 import "./Explore.css";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -13,27 +12,32 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { useInView } from "react-intersection-observer";
 import { breakPoints } from "../../utils/breakPoints";
+import { watchlist } from "../../../controller/cartController";
 
 export const Explore = () => {
   const uniqueExploreProducts: Array<ProductType> = useSelector(
-    (state: RootState) => state.products.uniqueExplore
+    (state: RootState) => state.productReducer.uniqueExplore
   );
   const { ref } = useInView({
     threshold: 0,
   });
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleWatchlist = (product: ProductType) => {
+    watchlist({ product, dispatch });
+  };
 
   const viewProduct = (product: ProductType) => {
-    navigate(`/account/product-details/${product.id}`);
+    navigate(`/product-details/${product.id}`);
   };
 
   const viewAllProducts = () => {
-    navigate("/home/products");
+    navigate("/products");
   };
 
   const checkRating = (rating: Array<string>, label: string) => {
@@ -82,12 +86,12 @@ export const Explore = () => {
         >
           {uniqueExploreProducts.map((product, index) => (
             <SwiperSlide key={index} className="explore-swiper-slide">
-              <div
-                className="explore-swiper-slide-div"
-                onClick={() => viewProduct(product)}
-              >
+              <div className="explore-swiper-slide-div">
                 <section className="explore-image-sect">
-                  <div className="explore-heart">
+                  <div
+                    className="explore-heart"
+                    onClick={() => handleWatchlist(product)}
+                  >
                     <FaRegHeart className="explore-icon" />
                   </div>
                   <div className="explore-eye">
@@ -99,11 +103,12 @@ export const Explore = () => {
                       alt="loading"
                       loading="lazy"
                       className="explore-image"
+                      onClick={() => viewProduct(product)}
                     />
                   </div>
                 </section>
                 <section>
-                  <div>
+                  <div onClick={() => viewProduct(product)}>
                     <p className="explore-item-name">{product.name}</p>
                     {product.discountedPrice && (
                       <span className="explore-new-price">
