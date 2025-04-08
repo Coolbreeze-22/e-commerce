@@ -8,7 +8,6 @@ import {
 import { ProductType } from "../states/redux/reducerTypes";
 
 const initialData: InitialStateProps = { ...initialState, products };
-console.log(initialData);
 
 const uniqueCategory: Set<string> = new Set();
 const uniqueSubCategory: Set<string> = new Set();
@@ -66,7 +65,9 @@ export const fetchProducts = async (dispatch: AppDispatch) => {
 
     dispatchData(dispatch);
   } catch (error: any) {
-    dispatch(reducer.productError(error.message));
+    dispatch(
+      reducer.productError("Something went wrong while fetching products")
+    );
   }
 };
 
