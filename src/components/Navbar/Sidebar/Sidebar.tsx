@@ -14,11 +14,11 @@ import {
   InfoOutlined,
   AdminPanelSettingsOutlined,
 } from "@mui/icons-material";
+import { UserProps } from "../../../states/redux/reducerTypes";
 
 type sidebarPropType = {
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
-  user?: boolean;
-  admin?: boolean;
+  user: UserProps;
   handleSidebar: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleLogout: () => void;
 };
@@ -26,7 +26,6 @@ type sidebarPropType = {
 const Sidebar = ({
   setIsSidebar,
   user,
-  admin,
   handleSidebar,
   handleLogout,
 }: sidebarPropType) => {
@@ -41,7 +40,7 @@ const Sidebar = ({
             <span className="side-header">Exclusive</span>
           </header>
 
-          {admin && (
+          {user.isAdmin && (
             <div
               onClick={() => {
                 navigate("/admin");
@@ -56,7 +55,7 @@ const Sidebar = ({
           )}
           <div
             onClick={() => {
-              navigate("/home");
+              navigate("/");
               setIsSidebar(false);
             }}
           >
@@ -131,7 +130,7 @@ const Sidebar = ({
             </span>
             <span>My Reviews</span>
           </div>
-          {user ? (
+          {user.id ? (
             <div
               onClick={() => {
                 handleLogout();
