@@ -16,6 +16,7 @@ export type InitialStateProps = {
   subCategory: Array<string>;
   isLoading: boolean;
   error: string;
+  // [key: string]: Array<ProductType> | Array<string> |boolean | string 
   [key: string]: any;
 };
 
