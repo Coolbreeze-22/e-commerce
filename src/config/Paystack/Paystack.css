@@ -1,0 +1,38 @@
+.paystack-container {
+  display: flex;
+  justify-content: center;
+}
+.paystack-btn {
+  width: 200px;
+  height: 45px;
+  color: #11ca3f;
+  border: 1px solid #11ca3f;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+}
+.paystack-btn:hover {
+  background-color: #11ca3f;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .paystack-btn {
+    width: 150px;
+    height: 30px;
+    font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .paystack-btn {
+    width: 150px;
+    height: 35px;
+    font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  }
+}

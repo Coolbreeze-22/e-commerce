@@ -19,6 +19,8 @@ const MyIntersectionObserver = (imageRefs: RefObject<HTMLImageElement[]>) => {
       imageRefs.current.forEach((image) => {
         observer.observe(image);
       });
+      // if the element has not intersected, observer stores this iterated image elements in its internal storage which is not directly accessible. When an observed element intersects with the viewport (or the root element), the observer adds an IntersectionObserverEntry object to the entries array, which is then passed to the callback function.
+
   
       return () => {
         observer.disconnect();
