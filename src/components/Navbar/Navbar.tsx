@@ -5,36 +5,39 @@ import {
   FavoriteBorder,
   ShoppingCartOutlined,
   PersonOutlined,
-  LocalMallOutlined,
-  CancelOutlined,
-  StarBorderOutlined,
-  LogoutOutlined,
   Menu,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import Footer from "../Footer/Footer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../states/redux/store";
+import { signOut } from "../../controller/userController";
+import { useDispatch } from "react-redux";
+import Dropdown from "./Dropdown/Dropdown";
 
 interface NavPropType {
   children: React.ReactElement;
 }
 
 const Navbar = ({ children }: NavPropType) => {
-  const [user, setUser] = useState<boolean>(false);
-  const [admin, setAdmin] = useState<boolean>(false);
+  const { user } = useSelector((state: RootState) => state.userReducer);
   const [isSidebar, setIsSidebar] = useState<boolean>(false);
   const [searchItems, setSearchItems] = useState<string>("");
   const [language, setLanguage] = useState<string>("");
   const [dropdown, setDropdown] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSidebar = () => {
     setIsSidebar((prev) => !prev);
   };
 
   const handleLogout = () => {
-    navigate('/home')
+    navigate("/");
+    setDropdown(false);
+    signOut(dispatch);
   };
   const handleLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLanguage(e.target.value);
@@ -52,15 +55,15 @@ const Navbar = ({ children }: NavPropType) => {
             <a href="" className="nav-shop-link">
               ShopNow
             </a>
-            <select
-              value={language}
-              onChange={handleLanguage}
-              className="nav-language-sm-device"
-            >
-              <option value="english">English</option>
-              <option value="option2">French</option>
-            </select>
           </div>
+          <select
+            value={language}
+            onChange={handleLanguage}
+            className="nav-language-sm-device"
+          >
+            <option value="english">English</option>
+            <option value="option2">French</option>
+          </select>
           <select
             value={language}
             onChange={handleLanguage}
@@ -83,15 +86,13 @@ const Navbar = ({ children }: NavPropType) => {
             <div>
               <a href="/about">About</a>
             </div>
-            {admin && (
+            {user.isAdmin && (
               <div>
                 <a href="/admin">Admin</a>
               </div>
             )}
-            {user ? (
-              <div>
-                <a href="/home">Sign out</a>
-              </div>
+            {user.id ? (
+              <div onClick={handleLogout}>Sign out</div>
             ) : (
               <div>
                 <a href="/register">Sign up</a>
@@ -100,7 +101,7 @@ const Navbar = ({ children }: NavPropType) => {
             <div className="nav-search">
               <input
                 className="nav-search-field"
-                type="text"
+                type="search"
                 name="search"
                 placeholder="What are you looking for?"
                 value={searchItems}
@@ -110,7 +111,7 @@ const Navbar = ({ children }: NavPropType) => {
                 <Search className="nav-search-icon" />
               </span>
             </div>
-            {user && (
+            {user.id && (
               <div className="nav-icons-wrapper">
                 <FavoriteBorder />
                 <span className="nav-icons">
@@ -122,62 +123,7 @@ const Navbar = ({ children }: NavPropType) => {
               </div>
             )}
           </section>
-          {dropdown ? (
-            <section className="nav-dropdown">
-              <div className="nav-dropdown-wrapper">
-                <div
-                  onClick={() => {
-                    navigate("/account");
-                    setDropdown(false);
-                  }}
-                >
-                  <span>
-                    <PersonOutlined />
-                  </span>
-                  <span>Manage My Account</span>
-                </div>
-                <div
-                  onClick={() => {
-                    navigate("/account");
-                    setDropdown(false);
-                  }}
-                >
-                  <span>
-                    <LocalMallOutlined />
-                  </span>
-                  <span> My Order</span>
-                </div>
-                <div
-                  onClick={() => {
-                    navigate("/account");
-                    setDropdown(false);
-                  }}
-                >
-                  <span>
-                    <CancelOutlined />
-                  </span>
-                  <span> My Cancellations</span>
-                </div>
-                <div
-                  onClick={() => {
-                    navigate("/account");
-                    setDropdown(false);
-                  }}
-                >
-                  <span>
-                    <StarBorderOutlined />
-                  </span>
-                  <span> My Reviews</span>
-                </div>
-                <div onClick={handleLogout}>
-                  <span>
-                    <LogoutOutlined />
-                  </span>
-                  <span> Logout</span>
-                </div>
-              </div>
-            </section>
-          ) : null}
+          {dropdown ? <Dropdown setDropdown={setDropdown} /> : null}
         </section>
 
         <section className="nav-small-device">
@@ -188,7 +134,7 @@ const Navbar = ({ children }: NavPropType) => {
             <div className="nav-search">
               <input
                 className="nav-search-field"
-                type="text"
+                type="search"
                 name="search"
                 placeholder="Search?"
                 value={searchItems}
@@ -198,25 +144,24 @@ const Navbar = ({ children }: NavPropType) => {
                 <Search className="nav-search-icon" />
               </span>
             </div>
-            {user && (
+            {user.id && (
               <div className="nav-icons-wrapper">
                 <FavoriteBorder />
                 <span className="nav-icons">
                   <ShoppingCartOutlined />
                 </span>
-
                 <span onClick={() => setDropdown(!dropdown)}>
                   <PersonOutlined className="nav-person-icon" />
                 </span>
               </div>
             )}
           </div>
+          {dropdown ? <Dropdown setDropdown={setDropdown} /> : null}
           {isSidebar && (
             <div className="nav-sidebar">
               <Sidebar
                 setIsSidebar={setIsSidebar}
                 user={user}
-                admin={admin}
                 handleSidebar={handleSidebar}
                 handleLogout={handleLogout}
               />
