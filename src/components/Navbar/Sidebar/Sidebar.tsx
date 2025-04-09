@@ -1,19 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
-import {
-  PersonOutlined,
-  LocalMallOutlined,
-  CancelOutlined,
-  StarBorderOutlined,
-  LogoutOutlined,
-  LoginOutlined,
-  Close,
-  HomeOutlined,
-  ContactPageOutlined,
-  InfoOutlined,
-  AdminPanelSettingsOutlined,
-} from "@mui/icons-material";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { GoInfo } from "react-icons/go";
+import { MdOutlineContactPhone } from "react-icons/md";
+import { AiOutlineHome } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
+import { IoPersonOutline } from "react-icons/io5";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { RiLoginBoxLine } from "react-icons/ri";
+import { FaRegStar } from "react-icons/fa";
+import { ImCancelCircle } from "react-icons/im";
+import { IoBagHandleOutline } from "react-icons/io5";
 import { UserProps } from "../../../states/redux/reducerTypes";
 
 type sidebarPropType = {
@@ -35,7 +33,7 @@ const Sidebar = ({
     <main className="sidebar-container">
           <header>
             <span onClick={handleSidebar}>
-              <Close />
+              <IoMdClose />
             </span>
             <span className="side-header">Exclusive</span>
           </header>
@@ -48,7 +46,7 @@ const Sidebar = ({
               }}
             >
               <span>
-                <AdminPanelSettingsOutlined />
+                <MdOutlineAdminPanelSettings />
               </span>
               <span>Admin</span>
             </div>
@@ -60,7 +58,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <HomeOutlined />
+              <AiOutlineHome />
             </span>
             <span>Home</span>
           </div>
@@ -71,7 +69,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <PersonOutlined />
+              <IoPersonOutline />
             </span>
             <span>Manage My Account</span>
           </div>
@@ -82,7 +80,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <ContactPageOutlined />
+              <MdOutlineContactPhone />
             </span>
             <span>Contact</span>
           </div>
@@ -93,7 +91,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <InfoOutlined />
+              <GoInfo />
             </span>
             <span>About</span>
           </div>
@@ -104,7 +102,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <LocalMallOutlined />
+              <IoBagHandleOutline />
             </span>
             <span>My Order</span>
           </div>
@@ -115,7 +113,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <CancelOutlined />
+              <ImCancelCircle />
             </span>
             <span>My Cancellations</span>
           </div>
@@ -126,7 +124,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <StarBorderOutlined />
+              <FaRegStar />
             </span>
             <span>My Reviews</span>
           </div>
@@ -138,7 +136,7 @@ const Sidebar = ({
               }}
             >
               <span>
-                <LogoutOutlined />
+                <RiLogoutBoxLine />
               </span>
               <span>Logout</span>
             </div>
@@ -150,7 +148,7 @@ const Sidebar = ({
               }}
             >
               <span>
-                <LoginOutlined />
+                <RiLoginBoxLine />
               </span>
               <span> Login</span>
             </div>

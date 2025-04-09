@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import {
-  Search,
-  FavoriteBorder,
-  ShoppingCartOutlined,
-  PersonOutlined,
-  Menu,
-} from "@mui/icons-material";
+import { FaRegHeart } from "react-icons/fa6";
+import { IoSearchOutline } from "react-icons/io5";
+import { FiShoppingCart } from "react-icons/fi";
+import { IoPersonOutline } from "react-icons/io5";
+import { MdMenu } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import Footer from "../Footer/Footer";
@@ -108,17 +106,17 @@ const Navbar = ({ children }: NavPropType) => {
                 onChange={(e) => setSearchItems(e.target.value)}
               />
               <span onClick={handleSearch}>
-                <Search className="nav-search-icon" />
+                <IoSearchOutline className="nav-search-icon" />
               </span>
             </div>
             {user.id && (
               <div className="nav-icons-wrapper">
-                <FavoriteBorder />
+                <FaRegHeart />
                 <span className="nav-icons">
-                  <ShoppingCartOutlined />
+                  <FiShoppingCart />
                 </span>
                 <span onClick={() => setDropdown(!dropdown)}>
-                  <PersonOutlined className="nav-person-icon" />
+                  <IoPersonOutline className="nav-person-icon" />
                 </span>
               </div>
             )}
@@ -129,7 +127,7 @@ const Navbar = ({ children }: NavPropType) => {
         <section className="nav-small-device">
           <div className="nav-events">
             <div onClick={handleSidebar}>
-              <Menu />
+              <MdMenu />
             </div>
             <div className="nav-search">
               <input
@@ -141,17 +139,17 @@ const Navbar = ({ children }: NavPropType) => {
                 onChange={(e) => setSearchItems(e.target.value)}
               />
               <span onClick={handleSearch}>
-                <Search className="nav-search-icon" />
+                <IoSearchOutline className="nav-search-icon" />
               </span>
             </div>
             {user.id && (
               <div className="nav-icons-wrapper">
-                <FavoriteBorder />
+                <FaRegHeart />
                 <span className="nav-icons">
-                  <ShoppingCartOutlined />
+                  <FiShoppingCart />
                 </span>
                 <span onClick={() => setDropdown(!dropdown)}>
-                  <PersonOutlined className="nav-person-icon" />
+                  <IoPersonOutline className="nav-person-icon" />
                 </span>
               </div>
             )}

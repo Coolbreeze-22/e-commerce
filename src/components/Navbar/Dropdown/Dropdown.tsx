@@ -1,11 +1,9 @@
 import './Dropdown.css';
-import {
-  PersonOutlined,
-  LocalMallOutlined,
-  CancelOutlined,
-  StarBorderOutlined,
-  LogoutOutlined,
-} from "@mui/icons-material";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { FaRegStar } from "react-icons/fa";
+import { ImCancelCircle } from "react-icons/im";
+import { IoPersonOutline } from "react-icons/io5";
+import { IoBagHandleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
 import { signOut } from "../../../controller/userController";
@@ -36,7 +34,7 @@ const Dropdown = ({ setDropdown }: DropdownProp) => {
             }}
           >
             <span>
-              <PersonOutlined />
+              <IoPersonOutline />
             </span>
             <span>Manage My Account</span>
           </div>
@@ -47,7 +45,7 @@ const Dropdown = ({ setDropdown }: DropdownProp) => {
             }}
           >
             <span>
-              <LocalMallOutlined />
+              <IoBagHandleOutline />
             </span>
             <span> My Order</span>
           </div>
@@ -58,7 +56,7 @@ const Dropdown = ({ setDropdown }: DropdownProp) => {
             }}
           >
             <span>
-              <CancelOutlined />
+              <ImCancelCircle />
             </span>
             <span> My Cancellations</span>
           </div>
@@ -69,13 +67,13 @@ const Dropdown = ({ setDropdown }: DropdownProp) => {
             }}
           >
             <span>
-              <StarBorderOutlined />
+              <FaRegStar />
             </span>
             <span> My Reviews</span>
           </div>
           <div onClick={handleLogout}>
             <span>
-              <LogoutOutlined />
+              <RiLogoutBoxLine />
             </span>
             <span> Logout</span>
           </div>
