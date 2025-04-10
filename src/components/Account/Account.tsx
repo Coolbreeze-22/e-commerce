@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./Account.css";
 import Profile from "./Profile/Profile";
 import ManageAccount from "./ManageAccount/ManageAccount";

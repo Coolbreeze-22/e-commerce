@@ -1,4 +1,3 @@
-import React from 'react'
 import { IoIosPhonePortrait } from "react-icons/io";
 import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { TiWatch } from "react-icons/ti";
