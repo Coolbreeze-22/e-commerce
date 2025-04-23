@@ -1,8 +1,9 @@
 .all-container {
   position: relative;
   top: 150px;
-  margin-left: 125px;
-  margin-right: 125px;
+  margin-left: 115px;
+  margin-right: 115px;
+  margin-bottom: 70px;
 }
 .all-path {
   font-weight: 600;
@@ -27,7 +28,7 @@
 .all-grid {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  column-gap: 27px;
+  column-gap: 24px;
   row-gap: 10px;
   justify-content: space-evenly;
 }
@@ -71,8 +72,8 @@
   right: 10px;
 }
 .all-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   padding: 5px;
   background-color: #ffffff;
   border-radius: 20px;
@@ -85,6 +86,34 @@
   max-width: 190px;
   max-height: 160px;
   margin-top: 25px;
+}
+.all-add-to-cart {
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  height: 46px;
+  width: 100%;
+}
+.all-add-to-cart:hover {
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  height: 46px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border-radius: 0 0 4px 4px;
+}
+.all-add-to-cart > p {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+.explore-add-icon {
+  width: 24px;
+  height: 24px;
 }
 .all-item-name,
 .all-new-price {
@@ -125,6 +154,7 @@
     top: 120px;
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 20px;
   }
   .all-info {
     margin-left: 10px;
@@ -147,7 +177,7 @@
     row-gap: 10px;
   }
   .all-grid > div {
-    width: 150px;
+    width: 160px;
   }
   .all-image-sect {
     width: 100%;
@@ -179,6 +209,14 @@
     width: 15px;
     height: 15px;
   }
+  .all-add-to-cart {
+    height: 25px;
+    margin-bottom: initial;
+  }
+  .all-add-to-cart:hover {
+    height: 25px;
+    margin-bottom: initial;
+  }
   .all-item-name,
   .all-new-price,
   .all-old-price {
@@ -197,6 +235,7 @@
   .all-container {
     margin-left: 25px;
     margin-right: 25px;
+    margin-bottom: 40px;
   }
   .all-header {
     font-weight: 600;
@@ -240,8 +279,17 @@
     width: 15px;
     height: 15px;
   }
+  .all-add-to-cart {
+    height: 30px;
+    margin-bottom: initial;
+  }
+  .all-add-to-cart:hover {
+    height: 30px;
+    margin-bottom: initial;
+  }
   .all-item-name,
-  .all-new-price {
+  .all-new-price,
+  .all-old-price {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./AllProducts.css";
 import { Rating } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../states/redux/store";
 import { ProductType } from "../../states/redux/reducerTypes";
 import { FaRegHeart } from "react-icons/fa";
@@ -11,8 +11,11 @@ import MyIntersectionObserver from "../utils/IntersectionObserver";
 import {
   computeDiscountPercent,
   computeRating,
+  addItemToWishlist,
+  addItemToCart,
 } from "../utils/utilityFunctions";
 import Navbar from "../Navbar/Navbar";
+import { FiShoppingCart } from "react-icons/fi";
 
 const AllProducts = () => {
   const allProducts: Array<ProductType> = useSelector(
@@ -21,22 +24,38 @@ const AllProducts = () => {
   const imageRefs = React.useRef<HTMLImageElement[]>([]);
 
   React.useEffect(() => {
+    imageRefs.current = imageRefs.current.slice(0, allProducts.length);
+    // the above is to update the imageref with the correct number of image element in a case where admin deletes a product.
     const cleanUp = MyIntersectionObserver(imageRefs);
     return cleanUp;
   }, [allProducts]);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleWishlist = (product: ProductType) => {
+    addItemToWishlist({ product, dispatch });
+  };
 
   const viewProduct = (product: ProductType) => {
-    navigate(`/account/product-details/${product.id}`);
+    navigate(`/product-details/${product.id}`);
   };
   const checkRating = (rating: Array<string>, label: string) => {
     const returnData = computeRating(rating, label);
     return returnData;
   };
-  const checkDiscountPercent = (discountedPrice: string, price: string) => {
+  const checkDiscountPercent = (discountedPrice: number, price: number) => {
     const returnData = computeDiscountPercent(discountedPrice, price);
     return returnData;
+  };
+
+  const handleAddToCart = (item: ProductType) => {
+    addItemToCart({
+      item,
+      size: item.size,
+      quantity: 1,
+      dispatch,
+    });
   };
 
   return (
@@ -65,7 +84,13 @@ const AllProducts = () => {
                     %
                   </div>
                 )}
-                <div className="all-heart">
+                <div
+                  className="all-heart"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleWishlist(product);
+                  }}
+                >
                   <FaRegHeart className="all-icon" />
                 </div>
                 <div className="all-eye">
@@ -82,36 +107,42 @@ const AllProducts = () => {
                     className="all-image"
                   />
                 </div>
+                <div
+                  className="all-add-to-cart"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToCart(product);
+                  }}
+                >
+                  <FiShoppingCart className="all-add-icon" />
+                  <p>Add To Cart</p>
+                </div>
               </section>
               <section>
-                <div>
-                  <p className="all-item-name">{product.name}</p>
-                  {product.discountedPrice && (
-                    <span className="all-new-price">
-                      ₦{product.discountedPrice}{" "}
-                    </span>
-                  )}
-                  <span
-                    className={
-                      product.discountedPrice
-                        ? "all-old-price"
-                        : "all-new-price"
-                    }
-                  >
-                    ₦{product.price}
+                <p className="all-item-name">{product.name}</p>
+                {product.discountedPrice && (
+                  <span className="all-new-price">
+                    ₦{product.discountedPrice}{" "}
                   </span>
-                  <div className="all-star-rating-wrapper">
-                    <Rating
-                      name="read-only"
-                      value={checkRating(product.rating, "star")}
-                      readOnly
-                      precision={0.5}
-                      size="small"
-                    />
-                    <span className="all-rating">
-                      ({checkRating(product.rating, "percent")})
-                    </span>
-                  </div>
+                )}
+                <span
+                  className={
+                    product.discountedPrice ? "all-old-price" : "all-new-price"
+                  }
+                >
+                  ₦{product.price}
+                </span>
+                <div className="all-star-rating-wrapper">
+                  <Rating
+                    name="read-only"
+                    value={checkRating(product.rating, "star")}
+                    readOnly
+                    precision={0.5}
+                    size="small"
+                  />
+                  <span className="all-rating">
+                    ({checkRating(product.rating, "percent")})
+                  </span>
                 </div>
               </section>
             </div>
