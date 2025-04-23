@@ -8,20 +8,22 @@ import { RootState } from "../../../states/redux/store";
 import CustomButton from "../../CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
-import { watchlist } from "../../../controller/cartController";
-import { computeRating } from "../../utils/utilityFunctions";
+import {
+  addItemToWishlist,
+  computeRating,
+} from "../../utils/utilityFunctions";
 
 export const BestSelling = () => {
-  const uniqueBestProducts: Array<ProductType> = useSelector(
-    (state: RootState) => state.productReducer.uniqueBestSelling
+  const bestProducts = useSelector(
+    (state: RootState) => state.productReducer.bestSelling
   );
 
   const { ref } = useInView({ threshold: 0 });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleWatchlist = (product: ProductType) => {
-    watchlist({ product, dispatch });
+  const handleWishlist = (product: ProductType) => {
+    addItemToWishlist({ product, dispatch });
   };
 
   const viewProduct = (product: ProductType) => {
@@ -55,12 +57,15 @@ export const BestSelling = () => {
         </header>
       </section>
       <section className="best-carousel">
-        {uniqueBestProducts.map((product, index) => (
-          <div key={index}>
-            <section className="best-image-sect">
+        {bestProducts.map((product, index) => (
+          <div key={index} onClick={() => viewProduct(product)}>
+            <section className="best-image-sect" style={{ right: "10px" }}>
               <div
                 className="best-heart"
-                onClick={() => handleWatchlist(product)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleWishlist(product);
+                }}
               >
                 <FaRegHeart className="best-icon" />
               </div>
@@ -73,11 +78,10 @@ export const BestSelling = () => {
                   alt="loading"
                   className="best-image"
                   loading="lazy"
-                  onClick={() => viewProduct(product)}
                 />
               </div>
             </section>
-            <section onClick={() => viewProduct(product)}>
+            <section>
               <p className="best-item-name">{product.name}</p>
               {product.discountedPrice && (
                 <span className="best-new-price">

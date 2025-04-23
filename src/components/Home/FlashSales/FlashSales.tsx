@@ -14,15 +14,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { useInView } from "react-intersection-observer";
 import { breakPoints } from "../../utils/breakPoints";
-import { watchlist } from "../../../controller/cartController";
 import {
+  addItemToCart,
+  addItemToWishlist,
   computeDiscountPercent,
   computeRating,
 } from "../../utils/utilityFunctions";
+import { FiShoppingCart } from "react-icons/fi";
 
 const FlashSales = () => {
-  const uniqueFlashProducts = useSelector(
-    (state: RootState) => state.productReducer.uniqueFlashSales
+  const flashProducts = useSelector(
+    (state: RootState) => state.productReducer.flashSales
   );
 
   const { ref } = useInView({
@@ -38,17 +40,26 @@ const FlashSales = () => {
   const viewAllProducts = () => {
     navigate("/products");
   };
-  const handleWatchlist = (product: ProductType) => {
-    watchlist({ product, dispatch });
+  const handleWishlist = (product: ProductType) => {
+    addItemToWishlist({ product, dispatch });
   };
   function checkRating(rating: Array<string>, label: string) {
-    const ratingStar =   computeRating(rating, label);
+    const ratingStar = computeRating(rating, label);
     return ratingStar;
   }
 
-  const checkDiscountPercent = (discountedPrice: string, price: string) => {
+  const checkDiscountPercent = (discountedPrice: number, price: number) => {
     const returnData = computeDiscountPercent(discountedPrice, price);
     return returnData;
+  };
+
+  const handleAddToCart = (item: ProductType) => {
+    addItemToCart({
+      item,
+      size: item.size,
+      quantity: 1,
+      dispatch,
+    });
   };
 
   return (
@@ -97,9 +108,12 @@ const FlashSales = () => {
           }}
           breakpoints={breakPoints}
         >
-          {uniqueFlashProducts.map((product, index) => (
+          {flashProducts.map((product, index) => (
             <SwiperSlide key={index} className="flash-swiper-slide">
-              <div className="flash-swiper-slide-div">
+              <div
+                className="flash-swiper-slide-div"
+                onClick={() => viewProduct(product)}
+              >
                 <section className="flash-image-sect">
                   {product.discountedPrice && (
                     <div className="flash-discount">
@@ -112,7 +126,10 @@ const FlashSales = () => {
                   )}
                   <div
                     className="flash-heart"
-                    onClick={() => handleWatchlist(product)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleWishlist(product);
+                    }}
                   >
                     <FaRegHeart className="flash-icon" />
                   </div>
@@ -124,11 +141,21 @@ const FlashSales = () => {
                       src={product.photo[0]}
                       alt="loading"
                       className="flash-image"
-                      onClick={() => viewProduct(product)}
                     />
                   </div>
+                  <div
+                    className="flash-add-to-cart"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
+                  >
+                    <FiShoppingCart className="flash-add-icon" />
+                    <p>Add To Cart</p>
+                  </div>
                 </section>
-                <section onClick={() => viewProduct(product)}>
+
+                <section>
                   <p className="flash-item-name">{product.name}</p>
                   {product.discountedPrice && (
                     <span className="flash-new-price">

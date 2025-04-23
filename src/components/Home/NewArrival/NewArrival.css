@@ -1,0 +1,436 @@
+.new-container {
+  margin-left: 115px;
+  margin-right: 115px;
+  margin-top: 50px;
+}
+.new-info {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+.new-info > aside {
+  width: 20px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #db4444;
+}
+.new-info > p {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #db4444;
+}
+.new-header {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 48px;
+  letter-spacing: 1.44px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.new-image-area {
+  display: flex;
+  column-gap: 20px;
+  color: #f2f2f2;
+}
+.new-image-area p, .new-icon-section p{
+    margin: 0;
+}
+.new-image-wrapper1 {
+  position: relative;
+  flex-basis: 49%;
+  width: 570px;
+  height: 600px;
+  background-color: #000000;
+  border-radius: 4px;
+}
+.new-image-wrapper1 > img {
+  position: absolute;
+  bottom: 0;
+  width: 511px;
+  height: 511px;
+}
+.new-item-info {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  width: 255px;
+  /* height: 121px; */
+}
+.new-item-name {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0.72px;
+  margin-bottom: 10px;
+}
+.new-item-description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+}
+.new-item-shop {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: underline;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.new-image-wrapper2 {
+  flex-basis: 49%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+.new-image-wrapper2a {
+  position: relative;
+  grid-column: 1/3;
+  width: 570px;
+  height: 284px;
+  background-color: #000000;
+  border-radius: 4px;
+}
+.new-image-wrapper2a > img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 432px;
+  height: 284px;
+  border-radius: 4px;
+}
+.new-image-wrapper2b,
+.new-image-wrapper2c {
+  position: relative;
+  width: 270px;
+  height: 284px;
+  background-color: #000000cb;
+  border-radius: 4px;
+}
+.new-image-wrapper2b > img,
+.new-image-wrapper2c > img {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: 1px;
+  right: 1px;
+  width: 190px;
+  height: 221px;
+  border-radius: 4px;
+  justify-self: center;
+  align-self: center;
+}
+.new-item-info2 {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  width: 191px;
+  /* height: 81px; */
+}
+
+.new-icon-section {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+.new-icon-section > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.new-truck-icon,
+.new-service-icon,
+.new-verified-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background-color: rgb(190, 190, 190);
+}
+.new-icon-aside {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background-color: black;
+}
+.new-truck-icon > aside > .new-icon {
+  width: 31.67px;
+  height: 25px;
+  color: white;
+}
+.new-service-icon > aside > .new-icon {
+  width: 26.67px;
+  height: 26.67px;
+  color: white;
+}
+.new-verified-icon > aside > .new-icon {
+  width: 30px;
+  height: 30px;
+  color: white;
+}
+.new-icon-info {
+  margin-top: 20px;
+}
+.new-icon-info > :nth-child(1) {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+}
+.new-icon-info > :nth-child(2) {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .new-container {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top:20px;
+  }
+  .new-info {
+    margin-left: 10px;
+    column-gap: 10px;
+  }
+  .new-info > p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+  }
+  .new-header {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: 1px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .new-image-area {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  .new-image-wrapper1 {
+    flex-basis: unset;
+    width: 95%;
+    height: 250px;
+    position: relative;
+    align-self: center;
+  }
+  .new-image-wrapper1 > img {
+    all: unset;
+    width: 100%;
+    height: 100%;
+  }
+  .new-item-info {
+    bottom: 5px;
+    left: 5px;
+    width: 90%;
+  }
+  .new-item-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+  }
+  .new-item-description {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .new-item-shop {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .new-image-wrapper2 {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  .new-image-wrapper2a {
+    position: relative;
+    width: 95%;
+    height: 250px;
+    align-self: center;
+  }
+  .new-image-wrapper2a > img {
+    all: unset;
+    width: 100%;
+    height: 100%;
+  }
+  .new-image-wrapper2b,
+  .new-image-wrapper2c {
+    position: relative;
+    width: 95%;
+    height: 250px;
+    align-self: center;
+  }
+  .new-image-wrapper2b > img,
+  .new-image-wrapper2c > img {
+    width: 80%;
+    height: 80%;
+  }
+  .new-item-info2 {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 90%;
+  }
+  .new-icon-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  .new-truck-icon,
+  .new-service-icon,
+  .new-verified-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .new-icon-aside {
+    width: 35px;
+    height: 35px;
+  }
+  .new-truck-icon > aside > .new-icon {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+  .new-service-icon > aside > .new-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .new-verified-icon > aside > .new-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .new-icon-info {
+    margin-top: 5px;
+  }
+  .new-icon-info > :nth-child(1) {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+  }
+  .new-icon-info > :nth-child(2) {
+    font-size: 14px;
+    line-height: 19px;
+  }
+}
+@media (min-width: 601px) and (max-width: 768px) {
+  .new-container {
+    margin-left: 25px;
+    margin-right: 25px;
+  margin-top:20px;
+
+  }
+  .new-header {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 1px;
+  }
+  .new-image-area {
+    column-gap: 10px;
+  }
+  .new-image-wrapper1 {
+    width: 100%;
+    height: 400px;
+  }
+  .new-image-wrapper1 > img {
+    width: 80%;
+    height: 80%;
+  }
+  .new-item-info {
+    bottom: 8px;
+    left: 8px;
+    width: 90%;
+  }
+  .new-item-name {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .new-item-shop {
+    font-size: 14px;
+    line-height: 19px;
+  }
+  .new-image-wrapper2 {
+    gap: 10px;
+  }
+  .new-image-wrapper2a {
+    width: 100%;
+    /* height: 200px; */
+    height: 100%;
+  }
+  .new-image-wrapper2a > img {
+    width: 80%;
+    height: 80%;
+  }
+  .new-image-wrapper2b,
+  .new-image-wrapper2c {
+    position: relative;
+    width: 100%;
+    /* height: 200px; */
+    height: 100%;
+  }
+  .new-image-wrapper2b > img,
+  .new-image-wrapper2c > img {
+    width: 90%;
+    height: 90%;
+  }
+  .new-item-info2 {
+    bottom: 5px;
+    left: 5px;
+    width: 191px;
+  }
+  .new-icon-section {
+    margin-top: 40px;
+  }
+  .new-truck-icon,
+  .new-service-icon,
+  .new-verified-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .new-icon-aside {
+    width: 45px;
+    height: 45px;
+  }
+  .new-truck-icon > aside > .new-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .new-service-icon > aside > .new-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .new-verified-icon > aside > .new-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .new-icon-info {
+    margin-top: 10px;
+  }
+  .new-icon-info > :nth-child(1) {
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .new-icon-info > :nth-child(2) {
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+  }
+}
