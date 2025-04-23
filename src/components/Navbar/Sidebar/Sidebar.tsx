@@ -29,43 +29,95 @@ const Sidebar = ({
 }: sidebarPropType) => {
   const navigate = useNavigate();
 
+  const handleNavigate = (label: string) => {
+    switch (label) {
+      case "admin":
+        navigate("/admin");
+        setIsSidebar(false);
+        break;
+      case "home":
+        navigate("/");
+        setIsSidebar(false);
+        break;
+      case "account":
+        navigate("/account");
+        setIsSidebar(false);
+        break;
+      case "contact":
+        navigate("/contact");
+        setIsSidebar(false);
+        break;
+      case "about":
+        navigate("/about");
+        setIsSidebar(false);
+        break;
+      case "orders":
+        navigate("/account", { state: { to: "orders" } });
+        setIsSidebar(false);
+        break;
+      case "login":
+        navigate("/login");
+        setIsSidebar(false);
+        break;
+    }
+  };
+
   return (
     <main className="sidebar-container">
-          <header>
-            <span onClick={handleSidebar}>
-              <IoMdClose />
-            </span>
-            <span className="side-header">Exclusive</span>
-          </header>
+      <header>
+        <span onClick={handleSidebar}>
+          <IoMdClose />
+        </span>
+        <span className="side-header">Exclusive</span>
+      </header>
 
-          {user.isAdmin && (
-            <div
-              onClick={() => {
-                navigate("/admin");
-                setIsSidebar(false);
-              }}
-            >
-              <span>
-                <MdOutlineAdminPanelSettings />
-              </span>
-              <span>Admin</span>
-            </div>
-          )}
+      {user.isAdmin && (
+        <div
+          onClick={() => {
+            handleNavigate("admin");
+          }}
+        >
+          <span>
+            <MdOutlineAdminPanelSettings />
+          </span>
+          <span>Admin</span>
+        </div>
+      )}
+      <div
+        onClick={() => {
+          handleNavigate("home");
+        }}
+      >
+        <span>
+          <AiOutlineHome />
+        </span>
+        <span>Home</span>
+      </div>
+      <div
+        onClick={() => {
+          handleNavigate("contact");
+        }}
+      >
+        <span>
+          <MdOutlineContactPhone />
+        </span>
+        <span>Contact</span>
+      </div>
+      <div
+        onClick={() => {
+          handleNavigate("about");
+        }}
+      >
+        <span>
+          <GoInfo />
+        </span>
+        <span>About</span>
+      </div>
+      {user.id ? (
+        <>
           <div
             onClick={() => {
-              navigate("/");
-              setIsSidebar(false);
-            }}
-          >
-            <span>
-              <AiOutlineHome />
-            </span>
-            <span>Home</span>
-          </div>
-          <div
-            onClick={() => {
-              navigate("/account");
-              setIsSidebar(false);
+              handleNavigate("account");
             }}
           >
             <span>
@@ -75,30 +127,7 @@ const Sidebar = ({
           </div>
           <div
             onClick={() => {
-              navigate("/contact");
-              setIsSidebar(false);
-            }}
-          >
-            <span>
-              <MdOutlineContactPhone />
-            </span>
-            <span>Contact</span>
-          </div>
-          <div
-            onClick={() => {
-              navigate("/about");
-              setIsSidebar(false);
-            }}
-          >
-            <span>
-              <GoInfo />
-            </span>
-            <span>About</span>
-          </div>
-          <div
-            onClick={() => {
-              navigate("/account");
-              setIsSidebar(false);
+              handleNavigate("orders");
             }}
           >
             <span>
@@ -108,8 +137,7 @@ const Sidebar = ({
           </div>
           <div
             onClick={() => {
-              navigate("/account");
-              setIsSidebar(false);
+              handleNavigate("account");
             }}
           >
             <span>
@@ -119,8 +147,7 @@ const Sidebar = ({
           </div>
           <div
             onClick={() => {
-              navigate("/account");
-              setIsSidebar(false);
+              handleNavigate("account");
             }}
           >
             <span>
@@ -128,31 +155,25 @@ const Sidebar = ({
             </span>
             <span>My Reviews</span>
           </div>
-          {user.id ? (
-            <div
-              onClick={() => {
-                handleLogout();
-                setIsSidebar(false);
-              }}
-            >
-              <span>
-                <RiLogoutBoxLine />
-              </span>
-              <span>Logout</span>
-            </div>
-          ) : (
-            <div
-              onClick={() => {
-                navigate("/login");
-                setIsSidebar(false);
-              }}
-            >
-              <span>
-                <RiLoginBoxLine />
-              </span>
-              <span> Login</span>
-            </div>
-          )}
+          <div onClick={handleLogout}>
+            <span>
+              <RiLogoutBoxLine />
+            </span>
+            <span>Logout</span>
+          </div>
+        </>
+      ) : (
+        <div
+          onClick={() => {
+            handleNavigate("login");
+          }}
+        >
+          <span>
+            <RiLoginBoxLine />
+          </span>
+          <span> Login</span>
+        </div>
+      )}
     </main>
   );
 };

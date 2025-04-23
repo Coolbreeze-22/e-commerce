@@ -1,84 +1,79 @@
-import './Dropdown.css';
+import "./Dropdown.css";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { FaRegStar } from "react-icons/fa";
 import { ImCancelCircle } from "react-icons/im";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { Dispatch, SetStateAction } from "react";
 import { signOut } from "../../../controller/userController";
 import { useDispatch } from "react-redux";
+import { useStateContext } from "../../../context/context";
 
-interface DropdownProp {
-  setDropdown: Dispatch<SetStateAction<boolean>>;
-}
-
-const Dropdown = ({ setDropdown }: DropdownProp) => {
+const Dropdown = () => {
+  const { setIsDropdown } = useStateContext();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     signOut(dispatch);
     navigate("/");
-    setDropdown(false);
+    setIsDropdown(false);
   };
 
   return (
-    <main>
-      <section className="dropdown-container">
-        <div className="dropdown-wrapper">
-          <div
-            onClick={() => {
-              navigate("/account");
-              setDropdown(false);
-            }}
-          >
-            <span>
-              <IoPersonOutline />
-            </span>
-            <span>Manage My Account</span>
-          </div>
-          <div
-            onClick={() => {
-              navigate("/account");
-              setDropdown(false);
-            }}
-          >
-            <span>
-              <IoBagHandleOutline />
-            </span>
-            <span> My Order</span>
-          </div>
-          <div
-            onClick={() => {
-              navigate("/account");
-              setDropdown(false);
-            }}
-          >
-            <span>
-              <ImCancelCircle />
-            </span>
-            <span> My Cancellations</span>
-          </div>
-          <div
-            onClick={() => {
-              navigate("/account");
-              setDropdown(false);
-            }}
-          >
-            <span>
-              <FaRegStar />
-            </span>
-            <span> My Reviews</span>
-          </div>
-          <div onClick={handleLogout}>
-            <span>
-              <RiLogoutBoxLine />
-            </span>
-            <span> Logout</span>
-          </div>
+    <main className="dropdown-container">
+      <div className="dropdown-wrapper">
+        <div
+          onClick={() => {
+            navigate("/account");
+            setIsDropdown(false);
+          }}
+        >
+          <span>
+            <IoPersonOutline className="dropIcon" />
+          </span>
+          <p>Manage My Account</p>
         </div>
-      </section>
+        <div
+          onClick={() => {
+            navigate("/account", { state: { to: "orders" } });
+            setIsDropdown(false);
+          }}
+        >
+          <span>
+            <IoBagHandleOutline className="dropIcon" />
+          </span>
+          <p> My Order</p>
+        </div>
+        <div
+          onClick={() => {
+            navigate("/account");
+            setIsDropdown(false);
+          }}
+        >
+          <span>
+            <ImCancelCircle className="dropIcon" />
+          </span>
+          <p> My Cancellations</p>
+        </div>
+        <div
+          onClick={() => {
+            navigate("/account");
+            setIsDropdown(false);
+          }}
+        >
+          <span>
+            <FaRegStar className="dropIcon" />
+          </span>
+          <p> My Reviews</p>
+        </div>
+        <div onClick={handleLogout}>
+          <span>
+            <RiLogoutBoxLine className="dropIcon" />
+          </span>
+          <p> Logout</p>
+        </div>
+      </div>
     </main>
   );
 };
