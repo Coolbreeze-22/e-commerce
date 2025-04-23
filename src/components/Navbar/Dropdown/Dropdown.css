@@ -1,21 +1,32 @@
 .dropdown-container {
     position: relative;
+    z-index: 100;
   }
   .dropdown-wrapper {
+    box-sizing: border-box;
     position: absolute;
     right: 0;
-    background-color: #00000063;
+    display: grid;
+    background-color: #7c6682fc;
     color: #fafafa;
-    padding: 12px;
+    padding: 15px 5px 15px 15px ;
     border-radius: 4px;
     font-size: 13px;
     line-height: 21px;
+    height: 200px;
+    width: 200px;
   }
-  .dropdown-wrapper div {
+  .dropdown-wrapper > div {
     display: flex;
     flex-direction: row;
     align-items: center;
+    column-gap: 10px;
   }
-  .dropdown-wrapper > div span {
-    padding: 5px 0 0 5px;
+  .dropIcon{
+  width: 24px;
+  height: 24px;
   }
+  .dropdown-wrapper > div > p{
+   margin: 0;
+  }
+  
