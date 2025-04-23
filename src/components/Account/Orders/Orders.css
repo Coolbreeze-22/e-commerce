@@ -1,0 +1,200 @@
+.orders-container {
+  margin-top: 50px;
+}
+.orders-no-order {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  width: 400px;
+  display: inline;
+}
+.orders-animation {
+  width: 30px;
+  height: 30px;
+  background-color: #db4444;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  border-radius: 10px 0;
+  animation: rotate 5s linear 1;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(180deg);
+    background-color: red;
+  }
+  50% {
+    transform: rotate(180deg);
+    background-color: #11ca3f;
+  }
+  75% {
+    transform: rotate(180deg);
+    background-color: red;
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.orders-header {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+}
+.orders-caption {
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 0 1px 0px gray;
+  margin-top: 20px;
+}
+.orders-orders {
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 0 1px 0px gray;
+  margin-top: 20px;
+}
+.orders-green {
+  color: green;
+}
+.orders-orange {
+  color: orange;
+}
+.orders-total {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+  justify-content: end;
+}
+
+.orders-total-amount {
+  color: #db4444;
+}
+.orders-delete-icon{
+  width: 20px;
+  height: 20px;
+  color:#db4444;
+  position: absolute;
+  right: 5px;
+}
+.orders-selected {
+  display: flex;
+  justify-content: space-around;
+  column-gap: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0 0 1px 0px gray;
+}
+.orders-selected > div>div{
+  display: flex;
+  column-gap: 10px;
+}
+.orders-selected > div > div> p{
+  margin: 8px 0;
+}
+.orders-item > img {
+  width: 50px;
+  height: 50px;
+}
+.orders-item > p:nth-child(2) {
+  flex-basis: 45%;
+  word-wrap:break-word;
+}
+.orders-color{
+  width: 10px;
+  height: 10px;
+  border: 1px double black;
+  border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  .orders-container {
+    margin-top: 30px;
+  }
+  .orders-no-order {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .orders-header {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .orders-caption {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .orders-orders {
+    margin-top: 10px;
+    font-size: 400;
+    font-size: 14px;
+    line-height: 19px;
+  }
+  .orders-total > p {
+    font-size: 400;
+    font-size: 14px;
+    line-height: 19px;
+  }
+  .orders-selected {
+    display: block;
+    padding: 10px;
+  }
+  .orders-selected > div {
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 10px;
+  }
+  .orders-selected > div:nth-child(1)>div{
+    border-bottom: 1px solid gray;
+  }
+  .orders-selected > div > div> p{
+    margin: 7px 0;
+  }
+  .orders-item > p:nth-child(2) {
+    flex-basis: 30%;
+    word-wrap:break-word;
+  }
+}
+@media (min-width: 601px) and (max-width: 768px) {
+  .orders-container {
+    margin-top: 40px;
+  }
+  .orders-no-order {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  .orders-header {
+    font-size: 500;
+    font-size: 18px;
+    line-height: 23px;
+  }
+  .orders-caption {
+    margin-top: 15px;
+    font-size: 400;
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .orders-orders {
+    margin-top: 20px;
+    font-size: 400;
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .orders-selected > div {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .orders-selected > div >div> p{
+    margin: 8px 0;
+  }
+}
