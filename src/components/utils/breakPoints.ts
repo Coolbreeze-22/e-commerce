@@ -1,6 +1,6 @@
 export const breakPoints ={
     1080 : {
-      slidesPerView: 4.2,
+      slidesPerView: 4.5,
       spaceBetween: 20,
     },
     768: {

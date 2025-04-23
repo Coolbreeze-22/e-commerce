@@ -1,26 +1,29 @@
 import { useEffect } from "react";
-import { NavigateFunction, useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ScrollRestoration = () => {
   const location = useLocation();
-  type NavigateFunctionWithScrollRestoration = NavigateFunction & {
-    scrollRestoration: "auto" | "manual";
-  };
-
-  const navigate = useNavigate() as NavigateFunctionWithScrollRestoration;
 
   useEffect(() => {
-    // Scroll to the top on each page navigation
-    window.scrollTo(0, 0);
+    const scrollPositions: { [key: string]: number } = JSON.parse(
+      sessionStorage.getItem("scrollPositions") || "{}"
+    );
 
-    // Enable scroll restoration when navigating back
-    navigate.scrollRestoration = "manual";
+    // Restore scroll position if available
+    if (scrollPositions[location.pathname]) {
+      window.scrollTo(0, scrollPositions[location.pathname]);
+    } else {
+      // Scroll to the top if no scroll position is stored
+      window.scrollTo(0, 0);
+    }
 
+    // Store scroll position when navigating away
     return () => {
-      // Disable scroll restoration when component is unmounted
-      navigate.scrollRestoration = "auto";
+      const currentScrollPosition = window.scrollY;
+      scrollPositions[location.pathname] = currentScrollPosition;
+      sessionStorage.setItem("scrollPositions", JSON.stringify(scrollPositions));
     };
-  }, [location, navigate]);
+  }, [location]);
 
   return null;
 };
