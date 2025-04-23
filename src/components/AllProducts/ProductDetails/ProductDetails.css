@@ -1,8 +1,9 @@
 .prod-dtls-container {
   position: relative;
   top: 200px;
-  margin-left: 125px;
-  margin-right: 125px;
+  margin-left: 115px;
+  margin-right: 115px;
+  margin-bottom: 90px;
 }
 .prod-dtls-routes {
   display: flex;
@@ -191,7 +192,7 @@
   border-bottom: 1px solid #00000080;
   border-radius: 4px;
 }
-.prod-dtls-buy {
+.prod-dtls-add-to-cart {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -203,7 +204,7 @@
   border-radius: 4px;
   border: none;
 }
-.prod-dtls-buy:hover {
+.prod-dtls-add-to-cart:hover {
   background-color: #fafafa;
   color: #db4444;
   border: 1px solid #db4444;
@@ -222,8 +223,8 @@
   color: #ffffff;
 }
 .prod-dtls-heart-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 .prod-dtls-view-cart {
   display: flex;
@@ -241,8 +242,6 @@
 .prod-dtls-view-cart > button:hover {
   background-color: #db4444;
   color: #fafafa;
-  width: 120px;
-  height: 32px;
 }
 .prod-dtls-delivery-wrapper {
   height: 180px;
@@ -274,6 +273,7 @@
     top: 120px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 30px;
   }
   .prod-dtls-routes {
     gap: 5px;
@@ -315,7 +315,7 @@
   }
   .prod-dtls-small-img > div > img {
     max-width: 90%;
-    max-height: 90%;
+    max-height: 85%;
   }
   .prod-dtls-big-img {
     flex-basis: auto;
@@ -383,18 +383,18 @@
     height: 20px;
     width: 50px;
   }
-  .prod-dtls-buy {
+  .prod-dtls-add-to-cart {
     height: 25px;
     width: 100px;
     font-size: 13px;
   }
   .prod-dtls-heart {
-    width: 26px;
+    width: 30px;
     height: 22px;
   }
   .prod-dtls-heart-icon {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
   .prod-dtls-view-cart > button {
     margin-top: 10px;
@@ -409,6 +409,7 @@
     top: 150px;
     margin-left: 25px;
     margin-right: 25px;
+    margin-bottom: 50px;
   }
   .prod-dtls-routes {
     gap: 10px;
@@ -496,7 +497,7 @@
     font-size: 14px;
     line-height: 16px;
   }
-  .prod-dtls-buy {
+  .prod-dtls-add-to-cart {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
@@ -504,12 +505,12 @@
     height: 25px;
   }
   .prod-dtls-heart {
-    width: 28px;
+    width: 30px;
     height: 25px;
   }
   .prod-dtls-heart-icon {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
   .prod-dtls-delivery-wrapper {
     width: 99%;

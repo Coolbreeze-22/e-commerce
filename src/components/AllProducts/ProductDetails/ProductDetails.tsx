@@ -7,16 +7,17 @@ import { ProductType } from "../../../states/redux/reducerTypes";
 import { Rating } from "@mui/material";
 import { FiTruck } from "react-icons/fi";
 import { FaArrowsRotate } from "react-icons/fa6";
-import { RelatedProducts } from "../RelatedProducts/RelatedProducts";
+import SimilarProducts from "../SimilarProducts/SimilarProducts";
 import { FaRegHeart } from "react-icons/fa6";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
-import { handleAddToCart, handleSum, handleSelectedColor } from "./prodUtils";
+import { handleSum, handleSelectedColor } from "./prodUtils";
 import {
   handleCategoryNavigation,
   computeRating,
+  addItemToCart,
+  addItemToWishlist,
 } from "../../utils/utilityFunctions";
-import { watchlist } from "../../../controller/cartController";
 import Navbar from "../../Navbar/Navbar";
 
 const ProductDetails = () => {
@@ -33,16 +34,16 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const handleWatchlist = (product: ProductType) => {
-    watchlist({ product, dispatch });
+  const handleWishlist = (product: ProductType) => {
+    addItemToWishlist({ product, dispatch });
   };
 
   const categoryNavigation = (itemCategory: string, label: string) => {
     handleCategoryNavigation({ itemCategory, label, navigate });
   };
 
-  function addItemToCart(item: ProductType) {
-    handleAddToCart({ item, size, quantity, dispatch });
+  function handleAddToCart(item: ProductType) {
+    addItemToCart({ item, size, quantity, dispatch });
   }
   function sum(label: string) {
     handleSum({ label, quantity, selectedProduct, setQuantity });
@@ -144,39 +145,42 @@ const ProductDetails = () => {
                 <div className="prod-dtls-dscrptn">
                   {selectedProduct.description}
                 </div>
-                <div className="prod-dtls-color">
-                  <div>Colours:</div>
-                  {selectedProduct.allColors.map((itemColor, index) => (
-                    <span
-                      key={index}
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        ...(itemColor === selectedProduct.color && {
-                          width: "12px",
-                          height: "12px",
-                          border: "2px solid black",
-                        }),
-                      }}
-                      onClick={() => selectedColor(itemColor)}
-                    >
-                      <aside
+
+                {selectedProduct.allColors.length ? (
+                  <div className="prod-dtls-color">
+                    <div>Colours:</div>
+                    {selectedProduct.allColors.map((itemColor, index) => (
+                      <span
+                        key={index}
                         style={{
                           width: "20px",
                           height: "20px",
-                          backgroundColor: itemColor,
                           ...(itemColor === selectedProduct.color && {
                             width: "12px",
                             height: "12px",
+                            border: "2px solid black",
                           }),
                         }}
-                      ></aside>
-                    </span>
-                  ))}
-                </div>
+                        onClick={() => selectedColor(itemColor)}
+                      >
+                        <aside
+                          style={{
+                            width: "20px",
+                            height: "20px",
+                            backgroundColor: itemColor,
+                            ...(itemColor === selectedProduct.color && {
+                              width: "12px",
+                              height: "12px",
+                            }),
+                          }}
+                        ></aside>
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
                 <div className="prod-dtls-sizes">
                   <div>Size:</div>
-                  {selectedProduct.size.map((itemSize, index) => (
+                  {selectedProduct.allSizes.map((itemSize, index) => (
                     <button
                       key={index}
                       className={
@@ -207,14 +211,14 @@ const ProductDetails = () => {
                     />
                   </div>
                   <button
-                    className="prod-dtls-buy"
-                    onClick={() => addItemToCart(selectedProduct)}
+                    className="prod-dtls-add-to-cart"
+                    onClick={() => handleAddToCart(selectedProduct)}
                   >
                     Add To Cart
                   </button>
                   <button
                     className="prod-dtls-heart"
-                    onClick={() => handleWatchlist(selectedProduct)}
+                    onClick={() => handleWishlist(selectedProduct)}
                   >
                     <FaRegHeart className="prod-dtls-heart-icon" />
                   </button>
@@ -247,7 +251,7 @@ const ProductDetails = () => {
                 </div>
               </section>
             </div>
-            <RelatedProducts product={selectedProduct} />
+            <SimilarProducts product={selectedProduct} />
           </>
         )}
       </main>
