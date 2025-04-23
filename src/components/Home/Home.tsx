@@ -1,48 +1,29 @@
 import "./Home.css";
-import homeIphoneImg from "../../assets/homeIphoneImg.png";
 import FlashSales from "./FlashSales/FlashSales";
 import Categories from "./Categories/Categories";
 import { BestSelling } from "./BestSelling/BestSelling";
 import Explore from "./Explore/Explore";
 import homeJblImg from "../../assets/homeJblImg.png";
-import { IoIosArrowForward } from "react-icons/io";
 import Navbar from "../Navbar/Navbar";
+import HeroSection from "./HeroSection/HeroSection";
+import NewArrival from "./NewArrival/NewArrival";
+import { useRef } from "react";
+import { FaArrowUp } from "react-icons/fa6";
 
 const Home = () => {
+  const topRef = useRef<HTMLDivElement>(null);
+  const scrollToTop = () => {
+    topRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
+
   return (
     <Navbar>
       <main className="home-container">
-        <section className="home-sect1">
-          <div className="home-categories">
-            <div>
-              Women's Fashion{" "}
-              <span className="home-category-arrow">
-                <IoIosArrowForward />
-              </span>
-            </div>
-            <div>
-              Men's Fashion{" "}
-              <span className="home-category-arrow">
-                <IoIosArrowForward />
-              </span>
-            </div>
-            <div>Electronics</div>
-            <div>Home & Lifestyle</div>
-            <div>Medicine</div>
-            <div>Sports & Outdoor</div>
-            <div>Baby's & Toys</div>
-            <div>Groceries & Pets</div>
-            <div>Health & Beauty</div>
-          </div>
-          <div className="home-image-wrapper">
-            <img
-              src={homeIphoneImg}
-              alt="homeIphoneImg"
-              className="home-iphone-img"
-            />
-          </div>
-        </section>
-
+        <div ref={topRef}></div>
+        <HeroSection />
         <FlashSales />
         <hr className="home-horizontal" />
         <Categories />
@@ -52,6 +33,11 @@ const Home = () => {
           <img src={homeJblImg} alt="JblImg" className="home-jbl-img" />
         </section>
         <Explore />
+        <NewArrival />
+
+        <button className="home-arrow" onClick={scrollToTop}>
+          <FaArrowUp className="home-arrow-icon" />
+        </button>
       </main>
     </Navbar>
   );

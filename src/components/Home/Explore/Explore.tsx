@@ -10,17 +10,18 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { IoIosArrowRoundBack } from "react-icons/io";
-import { IoIosArrowRoundForward } from "react-icons/io";
+import { SlArrowRight } from "react-icons/sl";
+import { SlArrowLeft } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { useInView } from "react-intersection-observer";
 import { breakPoints } from "../../utils/breakPoints";
-import { watchlist } from "../../../controller/cartController";
+import { addItemToCart, addItemToWishlist } from "../../utils/utilityFunctions";
+import { FiShoppingCart } from "react-icons/fi";
 
 export const Explore = () => {
-  const uniqueExploreProducts: Array<ProductType> = useSelector(
-    (state: RootState) => state.productReducer.uniqueExplore
+  const exploreProducts: Array<ProductType> = useSelector(
+    (state: RootState) => state.productReducer.explore
   );
   const { ref } = useInView({
     threshold: 0,
@@ -28,8 +29,8 @@ export const Explore = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleWatchlist = (product: ProductType) => {
-    watchlist({ product, dispatch });
+  const handleWishlist = (product: ProductType) => {
+    addItemToWishlist({ product, dispatch });
   };
 
   const viewProduct = (product: ProductType) => {
@@ -53,6 +54,15 @@ export const Explore = () => {
     }
   };
 
+  const handleAddToCart = (item: ProductType) => {
+    addItemToCart({
+      item,
+      size: item.size,
+      quantity: 1,
+      dispatch,
+    });
+  };
+
   return (
     <main className="explore-container" ref={ref}>
       <section className="explore-info">
@@ -64,10 +74,10 @@ export const Explore = () => {
           <div>Explore Our Products</div>
           <section className="explore-swiper-arrow">
             <div className="explore-button-prev">
-              <IoIosArrowRoundBack />
+              <SlArrowLeft className="explore-slide-icon" />
             </div>
             <div className="explore-button-next">
-              <IoIosArrowRoundForward />
+              <SlArrowRight className="explore-slide-icon" />
             </div>
           </section>
         </header>
@@ -84,13 +94,19 @@ export const Explore = () => {
           }}
           breakpoints={breakPoints}
         >
-          {uniqueExploreProducts.map((product, index) => (
+          {exploreProducts.map((product, index) => (
             <SwiperSlide key={index} className="explore-swiper-slide">
-              <div className="explore-swiper-slide-div">
+              <div
+                className="explore-swiper-slide-div"
+                onClick={() => viewProduct(product)}
+              >
                 <section className="explore-image-sect">
                   <div
                     className="explore-heart"
-                    onClick={() => handleWatchlist(product)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleWishlist(product);
+                    }}
                   >
                     <FaRegHeart className="explore-icon" />
                   </div>
@@ -103,12 +119,21 @@ export const Explore = () => {
                       alt="loading"
                       loading="lazy"
                       className="explore-image"
-                      onClick={() => viewProduct(product)}
                     />
+                  </div>
+                  <div
+                    className="explore-add-to-cart"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
+                  >
+                    <FiShoppingCart className="explore-add-icon" />
+                    <p>Add To Cart</p>
                   </div>
                 </section>
                 <section>
-                  <div onClick={() => viewProduct(product)}>
+                  <div>
                     <p className="explore-item-name">{product.name}</p>
                     {product.discountedPrice && (
                       <span className="explore-new-price">

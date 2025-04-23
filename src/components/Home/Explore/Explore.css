@@ -1,7 +1,7 @@
 .explore-container {
   margin-top: 50px;
-  margin-left: 125px;
-  margin-right: 125px;
+  margin-left: 115px;
+  margin-right: 115px;
 }
 .explore-text {
   display: flex;
@@ -45,6 +45,9 @@ border-radius: 20px;
 text-align: center;
 font-size: 38px;
 }
+.explore-slide-icon{
+  width: 25px;
+}
 .explore-swiper-slide{
   margin-bottom: 30px;
   border: 1px solid #ebebeb;
@@ -82,11 +85,39 @@ font-size: 38px;
   right: 10px;
 }
 .explore-icon{
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   padding: 5px;
   background-color: #ffffff;
   border-radius: 20px;
+}
+.explore-add-to-cart {
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  height: 46px;
+  width: 100%;
+}
+.explore-add-to-cart:hover {
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  height: 46px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border-radius: 0 0 4px 4px;
+}
+.explore-add-to-cart > p {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+.explore-add-icon {
+  width: 24px;
+  height: 24px;
 }
 .explore-item-name,
 .explore-new-price, .explore-old-price {
@@ -149,6 +180,7 @@ font-size: 38px;
   .explore-product {
     font-weight: 500;
     font-size: 18px;
+    line-height: 23px;
   }
   .explore-header {
     font-weight: 500;
@@ -176,10 +208,19 @@ font-size: 38px;
   .explore-eye {
     top: 5px;
     left: 5px;
+    right: unset;
   }
   .explore-icon {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
+  }
+  .explore-add-to-cart {
+    height: 25px;
+    margin-bottom: initial;
+  }
+  .explore-add-to-cart:hover {
+    height: 25px;
+    margin-bottom: initial;
   }
   .explore-item-name,
   .explore-new-price, .explore-old-price {
@@ -202,10 +243,11 @@ font-size: 38px;
     margin-right: 25px;
   }
   .explore-header{
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 30px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
     letter-spacing: 1px;
+    margin-bottom: 20px;
   }
   .explore-heart {
     top: 5px;
@@ -214,5 +256,29 @@ font-size: 38px;
   .explore-eye {
     top: 5px;
     left: 5px;
+  }
+  .explore-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .explore-add-to-cart {
+    height: 30px;
+    margin-bottom: initial;
+  }
+  .explore-add-to-cart:hover {
+    height: 30px;
+    margin-bottom: initial;
+  }
+  .explore-item-name,
+  .explore-new-price, .explore-old-price {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .explore-rating {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    margin-left: 3px;
   }
 }

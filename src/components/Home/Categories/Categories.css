@@ -1,6 +1,6 @@
 .category-container {
-  margin-left: 125px;
-  margin-right: 125px;
+  margin-left: 115px;
+  margin-right: 115px;
   margin-top: 70px;
   margin-bottom: 30px;
 }
@@ -29,7 +29,6 @@
   line-height: 48px;
   letter-spacing: 1.44px;
   margin-top: 10px;
-  margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
 }
@@ -44,6 +43,9 @@ height: 40px;
 border-radius: 20px;
 text-align: center;
 font-size: 38px;
+}
+.category-slide-icon{
+  width: 25px;
 }
 .category-swiper {
   margin-top: 50px;
@@ -86,7 +88,9 @@ font-size: 38px;
     line-height: 20px;
     letter-spacing: 1px;
     margin-top: 10px;
-    margin-bottom: 20px;
+  }
+  .category-swiper {
+    margin-top: 20px;
   }
   .category-swiper-slide {
     height: 100px;
@@ -108,5 +112,14 @@ font-size: 38px;
     margin-top: 40px;
     margin-left: 25px;
     margin-right: 25px;
+  }
+  .category-header {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 1px;
+  }
+  .category-swiper {
+    margin-top: 20px;
   }
 }

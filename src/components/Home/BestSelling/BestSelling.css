@@ -1,6 +1,6 @@
 .best-container {
-  margin-left: 125px;
-  margin-right: 125px;
+  margin-left: 115px;
+  margin-right: 115px;
   margin-top: 60px;
 }
 .best-text {
@@ -36,23 +36,23 @@
 .best-carousel {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  column-gap: 27px;
+  column-gap: 24px;
   row-gap: 10px;
   justify-content: space-evenly;
 }
 .best-carousel > div {
   width: 260px;
   border: 1px solid #ebebeb;
-
 }
 .best-image-sect {
   box-sizing: border-box;
   padding-top: 35px;
   position: relative;
   background-color: #f5f5f5;
-  width: 260px;
+  width: 100%;
   height: 240px;
   justify-items: center;
+  margin-left: 10px;
 }
 .best-heart {
   position: absolute;
@@ -65,23 +65,24 @@
   right: 10px;
 }
 .best-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   padding: 5px;
   background-color: #ffffff;
   border-radius: 20px;
 }
-.best-image-wrapper{
+.best-image-wrapper {
   align-content: center;
   text-align: center;
 }
 .best-image {
-  max-width: 190px;
+  max-width: 100%;
   max-height: 160px;
   margin-top: 25px;
 }
 .best-item-name,
-.best-new-price, .best-old-price {
+.best-new-price,
+.best-old-price {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -124,7 +125,7 @@
   .best-month {
     font-weight: 500;
     font-size: 18px;
-    line-height: 20px;
+    line-height: 23px;
     letter-spacing: 1px;
   }
   .best-header {
@@ -162,13 +163,15 @@
   .best-eye {
     top: 5px;
     left: 5px;
+    right: unset;
   }
   .best-icon {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
   }
   .best-item-name,
-  .best-new-price, .best-old-price {
+  .best-new-price,
+  .best-old-price {
     margin: 0;
     margin-top: 5px;
     font-weight: 400;
@@ -188,10 +191,13 @@
     margin-left: 25px;
     margin-right: 25px;
   }
+  .best-header {
+    margin-bottom: 20px;
+  }
   .best-header > div {
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 30px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
     letter-spacing: 1px;
   }
   .best-carousel {
@@ -200,7 +206,7 @@
     row-gap: 20px;
   }
   .best-carousel > div {
-    width: 150px;
+    width: 160px;
   }
   .best-image-sect {
     width: 100%;
@@ -220,11 +226,11 @@
     left: 5px;
   }
   .best-icon {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
   .best-item-name,
-  .best-new-price {
+  .best-new-price, .best-old-price {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;

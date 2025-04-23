@@ -8,13 +8,15 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import {
+  addItemToCart,
+  addItemToWishlist,
   computeDiscountPercent,
   computeRating,
 } from "../../utils/utilityFunctions";
 import { ProductType } from "../../../states/redux/reducerTypes";
 import MyIntersectionObserver from "../../utils/IntersectionObserver";
-import { watchlist } from "../../../controller/cartController";
 import Navbar from "../../Navbar/Navbar";
+import { FiShoppingCart } from "react-icons/fi";
 
 const RelatedProducts = () => {
   const { products } = useSelector((state: RootState) => state.productReducer);
@@ -35,8 +37,8 @@ const RelatedProducts = () => {
     }
   });
 
-  const handleWatchlist = (product: ProductType) => {
-    watchlist({ product, dispatch });
+  const handleWishlist = (product: ProductType) => {
+    addItemToWishlist({ product, dispatch });
   };
 
   const viewProduct = (product: ProductType) => {
@@ -46,9 +48,18 @@ const RelatedProducts = () => {
     const returnData = computeRating(rating, label);
     return returnData;
   };
-  const checkDiscountPercent = (discountedPrice: string, price: string) => {
+  const checkDiscountPercent = (discountedPrice: number, price: number) => {
     const discountPercent = computeDiscountPercent(discountedPrice, price);
     return discountPercent;
+  };
+
+  const handleAddToCart = (item: ProductType) => {
+    addItemToCart({
+      item,
+      size: item.size,
+      quantity: 1,
+      dispatch,
+    });
   };
 
   React.useEffect(() => {
@@ -70,7 +81,7 @@ const RelatedProducts = () => {
 
         <section className="group-grid">
           {filteredProducts.map((product, index) => (
-            <div key={index}>
+            <div key={index} onClick={() => viewProduct(product)}>
               <section className="group-image-sect">
                 {product.discountedPrice && (
                   <div className="group-discount">
@@ -83,7 +94,10 @@ const RelatedProducts = () => {
                 )}
                 <div
                   className="group-heart"
-                  onClick={() => handleWatchlist(product)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleWishlist(product);
+                  }}
                 >
                   <FaRegHeart className="group-icon" />
                 </div>
@@ -99,11 +113,20 @@ const RelatedProducts = () => {
                     data-src={product.photo[0]}
                     alt="img"
                     className="group-image"
-                    onClick={() => viewProduct(product)}
                   />
                 </div>
+                <div
+                  className="group-add-to-cart"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToCart(product);
+                  }}
+                >
+                  <FiShoppingCart className="group-add-icon" />
+                  <p>Add To Cart</p>
+                </div>
               </section>
-              <section onClick={() => viewProduct(product)}>
+              <section>
                 <p className="group-item-name">{product.name}</p>
                 {product.discountedPrice && (
                   <span className="group-new-price">

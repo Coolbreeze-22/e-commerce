@@ -4,14 +4,14 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import { IoIosArrowRoundBack } from "react-icons/io";
 import { cartegoryBreakPoints } from "../../utils/breakPoints";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { getIcon } from "./CategoriesIcon";
 import { useNavigate } from "react-router-dom";
 import { handleCategoryNavigation } from "../../utils/utilityFunctions";
+import { SlArrowRight } from "react-icons/sl";
+import { SlArrowLeft } from "react-icons/sl";
 
 const Categories = () => {
   const { subCategory } = useSelector(
@@ -35,10 +35,10 @@ const navigate = useNavigate()
           <div>Browse By Category</div>
           <section className="category-swiper-arrow">
             <div className="category-button-prev">
-              <IoIosArrowRoundBack />
+              <SlArrowLeft className="category-slide-icon"/>
             </div>
             <div className="category-button-next">
-              <IoIosArrowRoundForward />
+              <SlArrowRight className="category-slide-icon"/>
             </div>
           </section>
         </header>
