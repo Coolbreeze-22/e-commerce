@@ -1,14 +1,24 @@
 import "./Account.css";
-import Profile from "./Profile/Profile";
+import EditProfile from "./EditProfile/EditProfile";
 import ManageAccount from "./ManageAccount/ManageAccount";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../states/redux/store";
 import Navbar from "../Navbar/Navbar";
+import Orders from "./Orders/Orders";
+import Profile from "./Profile/Profile";
+import { useEffect, useState } from "react";
 
 const Account = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.id) {
+      navigate('/register');
+    }
+  }, [user, navigate]);
 
   return (
     <Navbar>
@@ -30,11 +40,29 @@ const Account = () => {
             <div className="acct-manage">
               <ManageAccount />
             </div>
-            <div className="acct-prof-edit">
-              <Profile />
-            </div>
+            {isEdit ? (
+              <div className="acct-prof-edit">
+                <EditProfile>
+                  <button onClick={() => setIsEdit((prev) => !prev)}>
+                    Close
+                  </button>
+                </EditProfile>
+              </div>
+            ) : (
+              <div className="acct-prof-edit">
+                <Profile>
+                  <button
+                    onClick={() => setIsEdit((prev) => !prev)}
+                    className="acct-edit-btn"
+                  >
+                    Edit Profile
+                  </button>
+                </Profile>
+              </div>
+            )}
           </section>
         </div>
+        <Orders />
       </main>
     </Navbar>
   );

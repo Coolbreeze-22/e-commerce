@@ -50,9 +50,8 @@
   .manage-container header {
     font-weight: 500;
     font-size: 16px;
-
   }
-  .manage-container div {
+  .manage-container > div {
     margin-left: 20px;
     opacity: 90%;
     font-weight: 500;
@@ -60,36 +59,36 @@
   }
   .manage-acc {
     width: 166px;
-    height: 28px;
+    height: 25px;
   }
   .manage-pro {
     color: #db4444;
     width: 76px;
-    height: 28px;
+    height: 25px;
   }
   .manage-add {
     width: 165px;
-    height: 28px;
+    height: 25px;
   }
   .manage-pay {
     width: 165px;
-    height: 28px;
+    height: 25px;
   }
   .manage-ord {
     width: 82px;
-    height: 28px;
+    height: 25px;
   }
   .manage-rtns {
     width: 88px;
-    height: 28px;
+    height: 25px;
   }
   .manage-can {
     width: 138px;
-    height: 28px;
+    height: 25px;
   }
   .manage-wish {
     width: 93px;
-    height: 28px;
+    height: 25px;
   }
 }
 
