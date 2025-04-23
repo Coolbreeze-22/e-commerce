@@ -6,6 +6,8 @@ import authimg from "../../../assets/authimg.png";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Navbar from "../../Navbar/Navbar";
+import { signUp } from "../../../controller/userController";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
   interface formType {
@@ -24,9 +26,11 @@ const Register = () => {
 
   const [formData, setFormData] = useState<formType>(initialState);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    signUp({ ...formData, dispatch, navigate });
 
     setFormData(initialState);
   };

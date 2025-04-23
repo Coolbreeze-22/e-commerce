@@ -27,7 +27,7 @@ const Login = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signIn(formData, dispatch);
+    signIn({...formData, dispatch, navigate});
 
     setFormData(initialState);
   };
