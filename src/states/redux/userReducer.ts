@@ -37,7 +37,6 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     signIn(state, action: PayloadAction<UserProps>) {
-      console.log(action.payload);
       state.user = action.payload;
     },
     signOut(state) {

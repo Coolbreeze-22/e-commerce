@@ -6,12 +6,12 @@ import { toastNotification } from "../../components/utils/toastNotification";
 export type CartInitialStateType = {
   products: Array<CartProductType>;
   total: number;
-  watchlist: Array<ProductType>;
+  wishlist: Array<ProductType>;
 };
 export const cartInitialState: CartInitialStateType = {
   products: [],
   total: 0,
-  watchlist: [],
+  wishlist: [],
 };
 
 const cartSlice = createSlice({
@@ -19,55 +19,45 @@ const cartSlice = createSlice({
   initialState: cartInitialState,
   reducers: {
     addToCart(state, action: PayloadAction<CartProductType>) {
+      const { payload } = action;
+      const existingProduct = state.products.find(
+        (product) => product.id === payload.id && product.size === payload.size
+      );
+      const soldPrice = payload.discountedPrice
+        ? payload.discountedPrice
+        : payload.price;
+
+      if (existingProduct) {
+        toastNotification("Item already in cart !", "warning");
+      } else {
+        if (payload.quantity > payload.inStock) {
+          toastNotification("Available quantity exceeded !", "warning");
+          return;
+        }
+        state.products.push(payload);
+        state.total += Number(soldPrice * payload.quantity);
+        toastNotification("Added to cart successfully !", "success");
+      }
+    },
+
+    removeFromCart(state, action: PayloadAction<{ id: string; size: string }>) {
       const existingProduct = state.products.find(
         (product) =>
           product.id === action.payload.id &&
           product.size === action.payload.size
       );
-      const isItemInStock =
-        existingProduct &&
-        existingProduct.quantity + action.payload.quantity <=
-          existingProduct.inStock;
-      const isItemNotInStock =
-        existingProduct &&
-        existingProduct.quantity + action.payload.quantity >
-          existingProduct.inStock;
-      const soldPrice = action.payload.discountedPrice
-        ? action.payload.discountedPrice
-        : action.payload.price;
 
-      if (isItemInStock) {
-        existingProduct.quantity += action.payload.quantity;
-        state.total += Number(soldPrice * action.payload.quantity);
-
-        toastNotification("Quantity increased successfully !", "success");
-      } else if (isItemNotInStock) {
-        toastNotification("Available quantity exceeded !", "warning");
-      } else {
-        state.products.push(action.payload);
-        state.total += Number(soldPrice * action.payload.quantity);
-        toastNotification("Added successfully !", "success");
-      }
-    },
-
-    removeFromCart(state, action: PayloadAction<{ id: string; size: string }>) {
-      const removeProduct = state.products.find(
-        (product) =>
-          product.id === action.payload.id &&
-          product.size === action.payload.size
-      );
-
-      if (removeProduct) {
-        const soldPrice = removeProduct.discountedPrice
-          ? removeProduct.discountedPrice
-          : removeProduct.price;
+      if (existingProduct) {
+        const soldPrice = existingProduct.discountedPrice
+          ? existingProduct.discountedPrice
+          : existingProduct.price;
 
         state.products = state.products.filter(
           (product) =>
             product.id !== action.payload.id ||
             product.size !== action.payload.size
         );
-        state.total -= Number(soldPrice * removeProduct.quantity);
+        state.total -= Number(soldPrice * existingProduct.quantity);
         toastNotification("Removed from cart successfully !", "success");
       }
     },
@@ -76,41 +66,66 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; size: string; quantity: number }>
     ) {
-      const product = action.payload;
+      const payload = action.payload;
+
       const existingProduct = state.products.find(
-        (p) => p.id === product.id && p.size === product.size
+        (product) => product.id === payload.id && product.size === payload.size
       );
-      if (existingProduct) {
+      const isItemInStock =
+        existingProduct && existingProduct.inStock >= payload.quantity;
+      if (isItemInStock && payload.quantity > 0) {
         const soldPrice = existingProduct.discountedPrice
           ? existingProduct.discountedPrice
           : existingProduct.price;
 
         state.total += Number(
-          soldPrice * (product.quantity - existingProduct.quantity)
+          soldPrice * (payload.quantity - existingProduct.quantity)
         );
-
-        existingProduct.quantity = product.quantity;
-
+        existingProduct.quantity = payload.quantity;
         toastNotification("Updated successfully !", "success");
+      } else if (isItemInStock && payload.quantity < 1) {
+        toastNotification(
+          `Select betweeen 1 to ${existingProduct.inStock}`,
+          "warning"
+        );
+      } else if (!payload.id) {
+        toastNotification("No changes made", "warning");
+        // this Notification will never occur, since this scenario is blocked in cartInitialState.tsx
+      } else {
+        toastNotification("Available quantity exceeded !", "warning");
       }
     },
 
-    watchlist(state, action: PayloadAction<ProductType>) {
-      const existingProduct = state.watchlist.find(
+    addToWishlist(state, action: PayloadAction<ProductType>) {
+      const existingProduct = state.wishlist.find(
         (product) => product.id === action.payload.id
       );
       if (existingProduct) {
-        state.watchlist = state.watchlist.filter(
-          (product) => product.id !== action.payload.id
-        );
-        toastNotification("Removed from watchlist successfully !", "success");
+        toastNotification("Item already in wishlist !", "warning");
         return;
       }
-      state.watchlist.push(action.payload);
-      toastNotification("Added to watchlist successfully !", "success");
+      state.wishlist.push(action.payload);
+      toastNotification("Added to wishlist successfully !", "success");
     },
+    removeFromWishlist(
+      state,
+      action: PayloadAction<{ id: string; label: string }>
+    ) {
+      const { id, label } = action.payload;
+      const existingProduct = state.wishlist.find(
+        (product) => product.id === id
+      );
+      if (existingProduct) {
+        state.wishlist = state.wishlist.filter((product) => product.id !== id);
+        if (label === "no notification") return;
+        toastNotification("Removed from wishlist successfully !", "success");
+      } else {
+        toastNotification("Product not found in wishlist !", "error");
+      }
+    },
+
     clearCart(state) {
-      (state.products = []), (state.total = 0), (state.watchlist = []);
+      (state.products = []), (state.total = 0), (state.wishlist = []);
     },
   },
 });
@@ -119,7 +134,8 @@ export const {
   addToCart,
   removeFromCart,
   updateQuantity,
-  watchlist,
+  addToWishlist,
+  removeFromWishlist,
   clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;
