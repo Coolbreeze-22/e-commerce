@@ -10,9 +10,13 @@ interface CreateOrderProps {
   dispatch: AppDispatch;
   navigate: NavigateFunction;
 }
+interface UpdateOrderProps {
+  id: string;
+  orderStatus: string;
+  dispatch: AppDispatch;
+}
 export const createOrder = async (data: CreateOrderProps) => {
   const { order, dispatch, navigate } = data;
-  console.log("controller", order);
   try {
     dispatch(reducer.orderLoading(true));
     // const data = addDoc(order)
@@ -20,9 +24,9 @@ export const createOrder = async (data: CreateOrderProps) => {
     dispatch(reducer.createOrder(order));
     dispatch(clearCart());
     dispatch(reducer.orderLoading(false));
-    navigate("/account");
+    navigate("/account", { state: { to: "orders" }, replace: true });
   } catch (error: any) {
-      toastNotification(error.message, "error");
+    toastNotification(error.message, "error");
   }
 };
 
@@ -34,4 +38,12 @@ export const deleteOrder = async (id: string, dispatch: AppDispatch) => {
     toastNotification(error.message, "error");
   }
 };
-
+export const updateOrder = async (data: UpdateOrderProps) => {
+  const { id, orderStatus, dispatch } = data;
+  try {
+    //await updateDoc(order)
+    dispatch(reducer.updateOrder({ id, orderStatus }));
+  } catch (error: any) {
+    toastNotification(error.message, "error");
+  }
+};

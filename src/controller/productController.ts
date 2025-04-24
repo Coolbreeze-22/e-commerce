@@ -75,9 +75,13 @@ const groupProducts = (item: ItemType1) => {
   const { product, label, category, uniqueLabel } = item;
   const labelAndCategory = `${label}-${category.trim()}`;
 
-  initialData[label] = [...initialData[label], product];
+  initialData[label] = [...(initialData[label] as ProductType[]), product];
+
   if (!uniqueCategory.has(labelAndCategory)) {
-    initialData[uniqueLabel] = [...initialData[uniqueLabel], product];
+    initialData[uniqueLabel] = [
+      ...(initialData[uniqueLabel] as ProductType[]),
+      product,
+    ];
     uniqueCategory.add(labelAndCategory);
   }
 };
@@ -86,7 +90,7 @@ const groupCategories = (item: ItemType2) => {
   const { label, group } = item;
   const currentCategory = group.trim();
 
-  initialData[label] = [...initialData[label], currentCategory];
+  initialData[label] = [...(initialData[label] as string[]), currentCategory];
 
   if (label === "category") {
     uniqueCategory.add(currentCategory);

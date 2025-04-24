@@ -5,26 +5,51 @@ import { user } from "../dummy/dummyUser";
 import { user as userObj } from "../states/redux/userReducer";
 import { UserProps } from "../states/redux/reducerTypes";
 import { toastNotification } from "../components/utils/toastNotification";
+import { NavigateFunction } from "react-router-dom";
 
-interface ItemProps {
+interface SignInProps {
   email: string;
   phoneNumber: string;
   password: string;
+  dispatch: AppDispatch;
+  navigate: NavigateFunction;
 }
-const newUser: UserProps = {...userObj}
+interface SignUpProps extends SignInProps {
+  name: string;
+}
+const newUser: UserProps = { ...userObj };
 
-export const signUp = async (dispatch: AppDispatch) => {
+export const signUp = async (item: SignUpProps) => {
+  const {
+    // email,
+    // phoneNumber,
+    // password,
+    dispatch,
+    navigate,
+  } = item;
+  // const data = { email, phoneNumber, password };
+  // data will be sent to firebase
   try {
     dispatch(reducer.signUp(user));
+    navigate("/");
   } catch (error: any) {
-      toastNotification(error.message, "error");
+    toastNotification(error.message, "error");
   }
 };
 
-export const signIn = async (item: ItemProps, dispatch: AppDispatch) => {
+export const signIn = async (item: SignInProps) => {
+  const {
+    // email,
+    // phoneNumber,
+    // password,
+    dispatch,
+    navigate,
+  } = item;
+  // const data = { email, phoneNumber, password };
+  // data will be sent to firebase
   try {
-    console.log("logged to remove ts warnig", item)
     dispatch(reducer.signIn(user));
+    navigate("/");
   } catch (error: any) {
     toastNotification(error.message, "error");
   }

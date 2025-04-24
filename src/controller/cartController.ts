@@ -7,7 +7,7 @@ type AddToCartProps = {
   cartProduct: CartProductType;
   dispatch: AppDispatch;
 };
-type WatchlistProps = {
+type WishlistProps = {
   product: ProductType;
   dispatch: AppDispatch;
 };
@@ -15,6 +15,11 @@ type UpdateQuantityProps = {
   id: string;
   size: string;
   quantity: number;
+};
+type RemoveFromWishlistProps = {
+  id: string;
+  label: string;
+  dispatch: AppDispatch;
 };
 type RemoveFromCartProps = Omit<UpdateQuantityProps, "quantity">;
 
@@ -49,12 +54,22 @@ export const removeFromCart = async (
   }
 };
 
-export const watchlist = async (item: WatchlistProps) => {
+export const addToWishlist = async (item: WishlistProps) => {
   const { product, dispatch } = item;
   try {
-    dispatch(reducer.watchlist(product));
+    dispatch(reducer.addToWishlist(product));
   } catch (error: any) {
-    toastNotification("Watchlist action failed !", "error");
+    toastNotification("Failed to add item to wishlist !", "error");
+  }
+};
+export const removeFromWishlist = async (item: RemoveFromWishlistProps) => {
+  const {id, label, dispatch }= item;
+  
+  try {
+    dispatch(reducer.removeFromWishlist({id, label}));
+  } catch (error: any) {
+    toastNotification("Failed to remove item from wishlist !", "error");
+    toastNotification(error.message, "error");
   }
 };
 
