@@ -6,26 +6,27 @@ export type ProductType = {
   category: string;
   subCategory: string;
   photo: Array<string>;
-  price: string;
-  discountedPrice: string;
+  price: number;
+  discountedPrice: number | null;
   rating: Array<string>;
   reviews: Array<string>;
-  quantity: number;
+  inStock: number;
   likes: Array<string>;
   views: Array<string>;
   color: string;
   allColors: Array<string>;
-  size: Array<string>;
+  size: string;
+  allSizes: Array<string>;
   isNewArrival: boolean;
   isFlashSales: boolean;
   isExplore: boolean;
   isBestSelling: boolean;
   otherSizeInfo: {
-    XS: { quantity: number; price: number; discountedPrice: number };
-    S: { quantity: number; price: number; discountedPrice: number };
-    M: { quantity: number; price: number; discountedPrice: number };
-    L: { quantity: number; price: number; discountedPrice: number };
-    XL: { quantity: number; price: number; discountedPrice: number };
+    XS: { inStock: number; price: number; discountedPrice: number };
+    S: { inStock: number; price: number; discountedPrice: number };
+    M: { inStock: number; price: number; discountedPrice: number };
+    L: { inStock: number; price: number; discountedPrice: number };
+    XL: { inStock: number; price: number; discountedPrice: number };
     [key: string]: any;
   };
   timeStamp: string;
@@ -66,6 +67,13 @@ export interface UserProps {
 
 export type OrderProps = {
   id: string;
+  firstName: string;
+  companyName: string;
+  streetAddress: string;
+  apartment: string;
+  townCity: string;
+  phoneNumber: string;
+  email: string;
   transactionId: string;
   refId: string;
   userId: string;

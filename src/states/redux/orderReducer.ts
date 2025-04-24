@@ -36,15 +36,26 @@ const orderSlice = createSlice({
         toastNotification("Order deleted successfully", "success");
       }
     },
+    updateOrder(state, action: PayloadAction<{ id: string; orderStatus: string }>) {
+      const existingOrderIndex = state.orders.findIndex(
+        (order) => order.transactionId === action.payload.id
+      );
+      if (existingOrderIndex) {
+        state.orders[existingOrderIndex].orderStatus = action.payload.orderStatus
+        toastNotification("Order-status updated successfully", "success");
+      }
+    },
+    clearOrdersByAdmin(state) {
+      state.orders = [];
+      (state.total = 0),
+        (state.isLoading = false),
+        toastNotification("Order cleared successfully", "success");
+    },
     orderLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
   },
 });
 
-export const {
-  createOrder,
-  deleteOrder,
-  orderLoading,
-} = orderSlice.actions;
+export const { createOrder, deleteOrder, updateOrder, clearOrdersByAdmin, orderLoading } = orderSlice.actions;
 export default orderSlice.reducer;
