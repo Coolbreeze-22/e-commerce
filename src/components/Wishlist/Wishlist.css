@@ -1,0 +1,110 @@
+.wishlist-container {
+  position: relative;
+  top: 200px;
+  margin-left: 115px;
+  margin-right: 115px;
+}
+.wishlist-no-item {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+}
+.wishlist-no-item > button {
+  background-color: transparent;
+  color: #db4444;
+  border: none;
+  font-weight: 400;
+  font-size: 18px;
+}
+.wishlist-header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.wishlist-header {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  margin-bottom: 50px;
+}
+.wishlist-more-info {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+.wishlist-more-info > aside {
+  width: 20px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #db4444;
+}
+.wishlist-more-info > p {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+}
+.wishlist-more-info > button {
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .wishlist-container {
+    top: 120px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .wishlist-no-item {
+    font-size: 18px;
+    line-height: 23px;
+  }
+  .wishlist-no-item > button {
+    font-size: 17px;
+  }
+  .wishlist-header-wrapper {
+    margin-bottom: 15px;
+  }
+  .wishlist-header {
+    font-size: 17px;
+    line-height: 22px;
+    margin-bottom: 20px;
+  }
+  .wishlist-more-info {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    column-gap: 10px;
+  }
+  .wishlist-more-info > p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .wishlist-container {
+    top: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+  .wishlist-no-item {
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .wishlist-no-item > button {
+    font-size: 17px;
+  }
+  .wishlist-header-wrapper {
+    margin-bottom: 20px;
+  }
+  .wishlist-header {
+    font-size: 18px;
+    line-height: 23px;
+  }
+  .wishlist-more-info {
+    margin-top: 25px;
+    margin-top: 20px;
+  }
+}
