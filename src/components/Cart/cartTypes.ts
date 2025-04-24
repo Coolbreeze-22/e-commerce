@@ -13,4 +13,7 @@ export type QuantityProps = {
   size: string;
   event: React.ChangeEvent<HTMLInputElement>;
   index: number;
+  quantity: number
+  inStock: number
 };
+

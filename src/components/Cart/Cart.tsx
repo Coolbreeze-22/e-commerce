@@ -13,33 +13,47 @@ import CustomInput from "../CustomInput/CustomInput";
 import { UpdateItemProps, ShowQuantityProps, QuantityProps } from "./cartTypes";
 import { MdCancel } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
+import CartWishlist from "./CartWishlist/CartWishlist";
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cartReducer);
+  const { user } = useSelector((state: RootState) => state.userReducer);
 
   const [updateItem, setUpdateItem] = useState<UpdateItemProps>(
     {} as UpdateItemProps
   );
   const [couponCode, setCouponCode] = useState<string>("");
   const [currIndex, setCurrIndex] = useState<number>(-1);
+  const [inStockMessage, setInStockMessage] = useState<string>("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function initialize() {
+  function initializeStates() {
     setCurrIndex(-1);
     setUpdateItem({} as UpdateItemProps);
     setCouponCode("");
+    setInStockMessage("");
   }
 
   const handleClearCart = () => {
     clearCart(dispatch);
-    initialize();
-    navigate(-1);
+    initializeStates();
   };
-  const handdleQuantity = (item: QuantityProps) => {
-    const { id, size, event, index } = item;
+  const handleQuantity = (item: QuantityProps) => {
+    const { id, size, event, index, quantity, inStock } = item;
     const { value } = event.target;
+    const notInRange = Number(value) > inStock || Number(value) < 1;
+    const equal = Number(value) === quantity;
+    if (notInRange && inStock !== 1) {
+      setInStockMessage(`Select from 1 to ${inStock}`);
+    } else if (equal) {
+      setInStockMessage(`No changes made`);
+    } else if (inStock === 1) {
+      setInStockMessage("Select 1");
+    } else {
+      setInStockMessage("");
+    }
     setUpdateItem({
       id,
       size,
@@ -52,27 +66,32 @@ const Cart = () => {
     navigate("/products");
   };
   const updateCart = () => {
-    updateQuantity(updateItem, dispatch);
-    initialize();
+    if (updateItem.id) {
+      updateQuantity(updateItem, dispatch);
+      initializeStates();
+    }
   };
   const removeItemFromCart = (id: string, size: string) => {
     removeFromCart({ id, size }, dispatch);
-    initialize();
+    initializeStates();
   };
-  const applyCoupon = () => {
-    // applyCoupon(couponCode, dispatch);
+  const handleApplyCoupon = () => {
     setCouponCode("");
   };
-  const checkout = () => {
+  const checkout = (label: string) => {
+    if (label === "login") {
+      navigate("/login");
+      return;
+    }
     navigate("/products/cart/checkout");
-    initialize();
+    initializeStates();
   };
 
   useEffect(() => {
     if (!cart.products.length) {
       navigate(-1);
     }
-  }, [cart]);
+  }, [cart.products.length]);
 
   const showQuantity = (item: ShowQuantityProps) => {
     const { itemId, itemSize, itemQuantity } = item;
@@ -95,6 +114,7 @@ const Cart = () => {
           <header className="cart-headers">
             <div className="cart-headers-product">Product</div>
             <p>Price</p>
+            <p>In Stock</p>
             <p>Quantity</p>
             <p>Subtotal</p>
           </header>
@@ -106,30 +126,30 @@ const Cart = () => {
                   className="cart-cancel-icon"
                 />
                 <img src={item.photo} alt="loading" loading="lazy" />
-                <span>{item.name}</span>
+                <aside>{item.name}</aside>
               </div>
               <p>₦{item.discountedPrice ? item.discountedPrice : item.price}</p>
+              <p>{item.inStock} Piece(s)</p>
               <div className="cart-input-wrapper">
                 <input
                   type="number"
                   min={1}
                   max={item.inStock}
                   name="quantity"
-                  onKeyDown={(event) => event.preventDefault()}
-                  className={
-                    index === currIndex ? "cart-dynamic-input" : "none"
-                  }
+                  className={index === currIndex ? "cart-active-input" : "none"}
                   value={showQuantity({
                     itemId: item.id,
                     itemSize: item.size,
                     itemQuantity: item.quantity,
                   })}
                   onChange={(event) =>
-                    handdleQuantity({
+                    handleQuantity({
                       id: item.id,
                       size: item.size,
                       event,
                       index,
+                      quantity: item.quantity,
+                      inStock: item.inStock,
                     })
                   }
                 />
@@ -140,8 +160,13 @@ const Cart = () => {
                   ? item.discountedPrice * item.quantity
                   : item.price * item.quantity}
               </p>
+              {currIndex === index && (
+                <aside className="cart-message">{inStockMessage}</aside>
+              )}
             </div>
           ))}
+          <CartWishlist />
+
           <div className="cart-button-section">
             <CustomButton
               type="button"
@@ -159,14 +184,15 @@ const Cart = () => {
             </div>
             <div>
               <CustomButton
-                disabled={currIndex >= 0 ? false : true}
+                disabled={currIndex < 0 || !!inStockMessage}
                 type="button"
                 text="Update Cart"
                 onClick={updateCart}
                 className="cart-update-button"
                 style={{
-                  backgroundColor: currIndex >= 0 ? "" : "#e7e7e7",
-                  color: currIndex >= 0 ? "" : "#808080",
+                  backgroundColor:
+                    currIndex < 0 || !!inStockMessage ? "#e7e7e7" : "",
+                  color: currIndex < 0 || !!inStockMessage ? "#808080" : "",
                 }}
               />
             </div>
@@ -184,7 +210,7 @@ const Cart = () => {
               <CustomButton
                 type="button"
                 text="Apply Coupon"
-                onClick={applyCoupon}
+                onClick={handleApplyCoupon}
                 className="cart-coupon-button"
               />
             </section>
@@ -206,12 +232,21 @@ const Cart = () => {
                 <p>₦{cart.total}</p>
               </div>
               <aside className="cart-checkout-btn">
-                <CustomButton
-                  type="button"
-                  text="Process to checkout"
-                  onClick={checkout}
-                  className="cart-checkout-button"
-                />
+                {user?.id ? (
+                  <CustomButton
+                    type="button"
+                    text="Process to checkout"
+                    onClick={() => checkout("")}
+                    className="cart-checkout-button"
+                  />
+                ) : (
+                  <CustomButton
+                    type="button"
+                    text="Login to checkout"
+                    onClick={() => checkout("login")}
+                    className="cart-checkout-button"
+                  />
+                )}
               </aside>
             </section>
           </div>
