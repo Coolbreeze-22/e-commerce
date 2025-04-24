@@ -1,0 +1,77 @@
+.checkout-form {
+    flex-basis: 45%;
+  }
+  .checkout-form > div {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .checkout-form > div > label {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 5px;
+  }
+  .checkout-form > div > label > span {
+    color: red;
+  }
+  .checkout-form > aside {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
+  .checkout-aside> button{
+    all: unset;
+   }
+   .checkout-mark-icon{
+     width: 24px;
+     height: 24px;
+     color: #DB4444;
+   }
+   .checkout-mark-icon:active{
+     color: #00FF66;
+   }
+   .checkout-form > aside > p {
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .checkout-form {
+      margin-top: 10px;
+    }
+    .checkout-form > div {
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    .checkout-form > div > label {
+      font-size: 14px;
+      line-height: 19px;
+    }
+    .checkout-form > aside {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 768px) {
+    .checkout-form > div {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .checkout-form > div > label {
+      font-size: 15px;
+      line-height: 20px;
+      margin-bottom: 0px;
+    }
+    .checkout-form > aside {
+      font-size: 15px;
+      line-height: 20px;
+    }    
+  }
+  

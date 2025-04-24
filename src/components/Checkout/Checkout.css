@@ -1,11 +1,12 @@
 .check-container {
   position: relative;
   top: 200px;
-  margin-left: 125px;
-  margin-right: 125px;
+  margin-left: 115px;
+  margin-right: 115px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  margin-bottom: 100px;
 }
 .check-routes {
   font-weight: 400;
@@ -32,39 +33,6 @@
   justify-content: space-between;
   column-gap: 10px;
   margin-top: 20px;
-}
-.checkout-form {
-  flex-basis: 45%;
-}
-.checkout-form > div {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-.checkout-form > div > label {
-  display: inline-block;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 5px;
-}
-.checkout-form > div > label > span {
-  color: red;
-}
-.checkout-form > aside {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-  column-gap: 5px;
-}
-.checkout-mark-icon{
-  width: 24px;
-  height: 24px;
-  color: #DB4444;
-}
-.checkout-form > aside > p {
-  margin: 0;
 }
 .checkout-cart-details {
   flex-basis: 45%;
@@ -136,7 +104,6 @@
   padding: 5px;
   vertical-align: middle;
 }
-
 .checkout-cash {
   margin-bottom: 20px;
 }
@@ -152,7 +119,7 @@
   column-gap: 10px;
   margin-bottom: 30px;
 }
-.checkout-cart-input-coupon{
+.checkout-cart-input-coupon {
   height: 56px;
   flex-basis: 55%;
   box-sizing: border-box;
@@ -165,13 +132,13 @@
 
 @media (max-width: 600px) {
   .check-container {
-    position: relative;
     top: 120px;
     margin-left: 10px;
     margin-right: 10px;
     font-weight: 400;
     font-size: 14px;
-    line-height: 16px;
+    line-height: 19px;
+    margin-bottom: 30px;
   }
   .check-routes {
     font-weight: 400;
@@ -189,24 +156,6 @@
   .checkout-form-cart {
     display: block;
     margin-top: 10px;
-  }
-  .checkout-form {
-    margin-top: 10px;
-  }
-  .checkout-form > div {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-  .checkout-form > div > label {
-    font-size: 14px;
-    line-height: 19px;
-  }
-  .checkout-form > aside {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 18px;
   }
   .checkout-cart-details {
     margin-top: 20px;
@@ -262,10 +211,10 @@
 
 @media (min-width: 601px) and (max-width: 768px) {
   .check-container {
-    position: relative;
     top: 150px;
     margin-left: 25px;
     margin-right: 25px;
+    margin-bottom: 50px;
   }
   .check-container > header {
     font-weight: 500;
@@ -278,26 +227,13 @@
   .checkout-form-cart {
     margin-top: 10px;
   }
-  .checkout-form > div {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  .checkout-form > div > label {
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 0px;
-  }
-  .checkout-form > aside {
-    font-size: 14px;
-    line-height: 19px;
-  }
   .checkout-cart {
     margin-top: 5px;
     margin-bottom: 5px;
   }
   .checkout-cart > div > span {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 20px;
   }
   .checkout-cost {
@@ -311,7 +247,7 @@
   }
   .checkout-cost > div > p {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 20px;
   }
   .checkout-bank {
@@ -330,7 +266,7 @@
   .checkout-cash > div {
     padding: 3px;
   }
-  
+
   .checkout-cash {
     margin-bottom: 10px;
   }
@@ -343,5 +279,4 @@
   .checkout-cart-btn-wrapper {
     flex-basis: 40%;
   }
-  
 }

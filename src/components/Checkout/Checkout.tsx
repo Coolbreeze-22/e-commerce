@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Checkout.css";
 import Paystack from "../../config/Paystack/Paystack";
-import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
-import { IoCheckmarkCircle } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "../../states/redux/store";
 import indianPay from "../../assets/indianPay.png";
@@ -12,40 +10,11 @@ import masterCard from "../../assets/masterCard.png";
 import visaCard from "../../assets/visaCard.png";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import CheckoutForm from "./CheckoutForm/CheckoutForm";
 
 const Checkout = () => {
-  interface formType {
-    firstName: string;
-    companyName: string;
-    streetAddress: string;
-    apartment: string;
-    townCity: string;
-    phoneNumber: string;
-    email: string;
-  }
-
-  const initialState: formType = {
-    firstName: "",
-    companyName: "",
-    streetAddress: "",
-    apartment: "",
-    townCity: "",
-    phoneNumber: "",
-    email: "",
-  };
   const cart = useSelector((state: RootState) => state.cartReducer);
-  const [formData, setFormData] = useState<formType>(initialState);
   const [coupon, setCoupon] = useState<string>("");
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setFormData(initialState);
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prev: formType) => ({ ...prev, [name]: value }));
-  };
 
   return (
     <Navbar>
@@ -64,111 +33,7 @@ const Checkout = () => {
         <header>Billing Details</header>
 
         <div className="checkout-form-cart">
-          <form
-            id="myForm"
-            onSubmit={(event) => handleSubmit(event)}
-            className="checkout-form"
-          >
-            <div>
-              <label>
-                First Name<span>*</span>
-              </label>
-              <br />
-              <CustomInput
-                autoFocus
-                required
-                type="text"
-                name="firstName"
-                className="checkout-input"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Company Name</label>
-              <br />
-              <CustomInput
-                required
-                type="text"
-                name="companyName"
-                value={formData.companyName}
-                className="checkout-input"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>
-                Street Address<span>*</span>
-              </label>
-              <br />
-              <CustomInput
-                required
-                type="text"
-                name="streetAddress"
-                className="checkout-input"
-                value={formData.streetAddress}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Apartment, floor, etc. (optional)</label>
-              <br />
-              <CustomInput
-                type="text"
-                name="apartment"
-                className="checkout-input"
-                value={formData.apartment}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>
-                Town/City<span>*</span>
-              </label>
-              <br />
-              <CustomInput
-                required
-                type="text"
-                name="townCity"
-                className="checkout-input"
-                value={formData.townCity}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>
-                Phone Number<span>*</span>
-              </label>
-              <br />
-              <CustomInput
-                required
-                type="text"
-                name="phoneNumber"
-                className="checkout-input"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>
-                Email Address<span>*</span>
-              </label>
-              <br />
-              <CustomInput
-                required
-                type="email"
-                name="email"
-                className="checkout-input"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <aside>
-              <IoCheckmarkCircle className="checkout-mark-icon" />
-              <p>Save this information for faster check-out next time</p>
-            </aside>
-          </form>
-
+          <CheckoutForm />
           <section className="checkout-cart-details">
             {cart.products.map((product, index) => (
               <div key={index} className="checkout-cart">
