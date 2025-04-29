@@ -178,6 +178,8 @@
     line-height: 17px;
   }
   .cart-no-item {
+    box-sizing: border-box;
+    padding-top: 10px;
     font-size: 18px;
     line-height: 23px;
   }

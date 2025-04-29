@@ -9,21 +9,22 @@ import {
 } from "../../controller/cartController";
 import CustomButton from "../CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
-import CustomInput from "../CustomInput/CustomInput";
+// import CustomInput from "../CustomInput/CustomInput";
 import { UpdateItemProps, ShowQuantityProps, QuantityProps } from "./cartTypes";
 import { MdCancel } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import CartWishlist from "./CartWishlist/CartWishlist";
 import { GrUpdate } from "react-icons/gr";
+// import { useStateContext } from "../../context/context";
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cartReducer);
   const { user } = useSelector((state: RootState) => state.userReducer);
+  // const { couponCode, setCouponCode } = useStateContext();
 
   const [updateItem, setUpdateItem] = useState<UpdateItemProps>(
     {} as UpdateItemProps
   );
-  const [couponCode, setCouponCode] = useState<string>("");
   const [currIndex, setCurrIndex] = useState<number>(-1);
   const [inStockMessage, setInStockMessage] = useState<string>("");
 
@@ -33,7 +34,7 @@ const Cart = () => {
   function initializeStates() {
     setCurrIndex(-1);
     setUpdateItem({} as UpdateItemProps);
-    setCouponCode("");
+    // setCouponCode("");
     setInStockMessage("");
   }
 
@@ -76,9 +77,9 @@ const Cart = () => {
     removeFromCart({ id, size }, dispatch);
     initializeStates();
   };
-  const handleApplyCoupon = () => {
-    setCouponCode("");
-  };
+  // const handleApplyCoupon = () => {
+  //   setCouponCode("");
+  // };
   const checkout = (label: string) => {
     if (label === "login") {
       navigate("/login");
@@ -219,7 +220,7 @@ const Cart = () => {
                 </div>
               </div>
               <div className="cart-coup-checkout">
-                <section className="cart-coupon">
+                {/* <section className="cart-coupon">
                   <CustomInput
                     type="text"
                     name="couponCode"
@@ -234,7 +235,7 @@ const Cart = () => {
                     onClick={handleApplyCoupon}
                     className="cart-coupon-button"
                   />
-                </section>
+                </section> */}
 
                 <section className="cart-checkout">
                   <p>Cart Total</p>
