@@ -4,7 +4,7 @@ export const breakPoints ={
       spaceBetween: 20,
     },
     768: {
-      slidesPerView: 3.4,
+      slidesPerView: 4.2,
       spaceBetween: 15,
     },
     600: {
@@ -31,6 +31,24 @@ export const cartegoryBreakPoints ={
     },
     320: {
       slidesPerView: 3.2,
+      spaceBetween: 5,
+    },
+  }
+export const aboutBreakPoints ={
+    1080 : {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 15,
+    },
+    600: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    320: {
+      slidesPerView: 1,
       spaceBetween: 5,
     },
   }

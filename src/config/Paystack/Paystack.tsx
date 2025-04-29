@@ -89,7 +89,7 @@ const Paystack = () => {
         <PaystackButton {...componentProps} className="paystack-btn" />
       ) : (
         <div>
-          {isWarning && <i>Fill in the required fields*</i>}
+          {isWarning && <p>Fill in the required fields*</p>}
           <CustomButton
             type="submit"
             text="Place Order"
