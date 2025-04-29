@@ -24,6 +24,7 @@ import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
 function App() {
   const { user } = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
+  
   const UserCheckout = ({ children }: { children: React.ReactNode }) => {
     if (user?.id) {
       return children;
