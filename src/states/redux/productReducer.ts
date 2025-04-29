@@ -1,23 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ProductType } from "./reducerTypes";
+import { CountdownType, InitialStateProps, ProductType } from "./reducerTypes";
 
-export type InitialStateProps = {
-  products: Array<ProductType>;
-  flashSales: Array<ProductType>;
-  bestSelling: Array<ProductType>;
-  explore: Array<ProductType>;
-  newArrival: Array<ProductType>;
-  uniqueFlashSales: Array<ProductType>;
-  uniqueBestSelling: Array<ProductType>;
-  uniqueExplore: Array<ProductType>;
-  uniqueNewArrival: Array<ProductType>;
-  category: Array<string>;
-  subCategory: Array<string>;
-  isLoading: boolean;
-  error: string;
-  [key: string]: Array<ProductType> | Array<string> |boolean | string 
-  // [key: string]: any;
+export const initialCountdown = {
+  startDate: "",
+  endDate: "",
 };
 
 export const initialState: InitialStateProps = {
@@ -34,8 +21,8 @@ export const initialState: InitialStateProps = {
   subCategory: [],
   isLoading: false,
   error: "",
+  flashSaleCountdown: initialCountdown,
 };
-
 
 const productSlice = createSlice({
   name: "product",
@@ -74,6 +61,9 @@ const productSlice = createSlice({
     getSubCategory(state, action: PayloadAction<Array<string>>) {
       state.subCategory = action.payload;
     },
+    getFlashSaleCountdown(state, action: PayloadAction<CountdownType>) {
+      state.flashSaleCountdown = action.payload;
+    },
     // addProduct(state, action: PayloadAction<ProductType>) {
     // },
     // deleteProduct(state, action: PayloadAction<any>) {
@@ -103,5 +93,6 @@ export const {
   getSubCategory,
   productLoading,
   productError,
+  getFlashSaleCountdown,
 } = productSlice.actions;
 export default productSlice.reducer;
