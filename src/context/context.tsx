@@ -1,6 +1,4 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../states/redux/store";
 
 interface ContextType {
   isWishlist: boolean;
@@ -36,16 +34,15 @@ export interface CheckoutFormType {
 export const CommerceContext = createContext<ContextType>({} as ContextType);
 
 export const CommerceProvider = ({ children }: ChildrenType) => {
-  const { user } = useSelector((state: RootState) => state.userReducer);
 
   const initialState: CheckoutFormType = {
-    firstName: user.firstName ? user.firstName : "",
-    companyName: user.companyName ? user.companyName : "",
-    streetAddress: user.address ? user.address : "",
-    apartment: user.apartment ? user.apartment : "",
-    townCity: user.city ? user.city : "",
-    phoneNumber: user.phoneNumber ? user.phoneNumber : "",
-    email: user.email ? user.email : "",
+    firstName: "",
+    companyName: "",
+    streetAddress: "",
+    apartment: "",
+    townCity: "",
+    phoneNumber: "",
+    email: "",
   };
 
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
