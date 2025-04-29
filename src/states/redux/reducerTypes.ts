@@ -1,3 +1,32 @@
+export type CountdownType = {
+  startDate: string;
+  endDate: string;
+};
+
+export type InitialStateProps = {
+  products: Array<ProductType>;
+  flashSales: Array<ProductType>;
+  bestSelling: Array<ProductType>;
+  explore: Array<ProductType>;
+  newArrival: Array<ProductType>;
+  uniqueFlashSales: Array<ProductType>;
+  uniqueBestSelling: Array<ProductType>;
+  uniqueExplore: Array<ProductType>;
+  uniqueNewArrival: Array<ProductType>;
+  category: Array<string>;
+  subCategory: Array<string>;
+  isLoading: boolean;
+  error: string;
+  flashSaleCountdown: CountdownType;
+  [key: string]:
+    | Array<ProductType>
+    | Array<string>
+    | boolean
+    | string
+    | CountdownType;
+  // [key: string]: any;
+};
+
 export type ProductType = {
   id: string;
   name: string;
@@ -79,6 +108,7 @@ export type OrderProps = {
   userId: string;
   orderStatus: string;
   paymentStatus: string;
+  paymentMode: string;
   items: Array<CartProductType>;
   createdAt: string;
   updatedAt: string;

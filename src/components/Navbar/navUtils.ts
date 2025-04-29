@@ -8,23 +8,44 @@ export const useLabelNavigate = () => {
 
   return (label: string) => {
     switch (label) {
+      case "home":
+        navigate("/");
+        break;
+      case "admin":
+        navigate("/admin");
+        break;
       case "cart":
         navigate("/cart");
         break;
       case "wishlist":
         navigate("/wishlist");
         break;
+      case "about":
+        navigate("/about");
+        break;
+      case "account":
+        navigate("/account");
+        break;
+      case "contact":
+        navigate("/contact");
+        break;
+      case "login":
+        navigate("/login");
+        break;
+      case "orders":
+        navigate("/account", { state: { to: "orders" } });
+        break;
     }
   };
 };
 
 export const useLogout = () => {
-  const { setIsDropdown } = useStateContext();
+  const { setIsSidebar, setIsDropdown } = useStateContext();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return () => {
-    navigate("/");
+    setIsSidebar(false);
     setIsDropdown(false);
-    signOut(dispatch);
+    signOut({ navigate, dispatch });
   };
 };

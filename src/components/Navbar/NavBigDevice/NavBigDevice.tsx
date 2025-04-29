@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { useStateContext } from "../../../context/context";
 import * as utils from "../navUtils";
+import { useNavigate } from "react-router-dom";
 
 const NavBigDevice = () => {
   const useLabelNavigate = utils.useLabelNavigate();
@@ -22,22 +23,31 @@ const NavBigDevice = () => {
   const { searchItems, setSearchItems, isDropdown, setIsDropdown } =
     useStateContext();
 
-  const handleNavigate = (label: string) => {
-    useLabelNavigate(label);
-  };
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     useLogout();
   };
 
   const handleSearch = () => {
+    if (searchItems) {
+      navigate({
+        pathname: "/search",
+        search: `?name=${searchItems}`,
+      });
+    }
     setSearchItems("");
   };
 
   return (
     <nav className="nav-big-routes">
       <section className="nav-big-navigation-section">
-        <header className="nav-big-header">Exclusive</header>
+        <header
+          className="nav-big-header"
+          onClick={() => useLabelNavigate("home")}
+        >
+          Shopinu
+        </header>
         <div>
           <a href="/">Home</a>
         </div>
@@ -72,20 +82,21 @@ const NavBigDevice = () => {
             <IoSearchOutline className="nav-big-search-icon" />
           </span>
         </div>
-        {user.id && (
-          <div className="nav-big-icons-wrapper">
-            <Badge badgeContent={wishlist.length} color="error">
-              <FaRegHeart
-                className="nav-big-icon"
-                onClick={() => handleNavigate("wishlist")}
-              />
-            </Badge>
-            <Badge badgeContent={products.length} color="error">
-              <FiShoppingCart
-                className="nav-big-icon"
-                onClick={() => handleNavigate("cart")}
-              />
-            </Badge>
+
+        <div className="nav-big-icons-wrapper">
+          <Badge badgeContent={wishlist.length} color="error">
+            <FaRegHeart
+              className="nav-big-icon"
+              onClick={() => useLabelNavigate("wishlist")}
+            />
+          </Badge>
+          <Badge badgeContent={products.length} color="error">
+            <FiShoppingCart
+              className="nav-big-icon"
+              onClick={() => useLabelNavigate("cart")}
+            />
+          </Badge>
+          {user.id && (
             <IoPersonOutline
               className="nav-big-person-icon nav-big-icon"
               onClick={(e) => {
@@ -93,8 +104,8 @@ const NavBigDevice = () => {
                 setIsDropdown((prev) => !prev);
               }}
             />
-          </div>
-        )}
+          )}
+        </div>
       </section>
       {isDropdown ? <Dropdown /> : null}
     </nav>

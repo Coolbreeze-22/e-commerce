@@ -1,6 +1,4 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../states/redux/store";
 
 interface ContextType {
   isWishlist: boolean;
@@ -14,6 +12,12 @@ interface ContextType {
 
   isDropdown: boolean;
   setIsDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+
+  paymentMode: string;
+  setPaymentMode: React.Dispatch<React.SetStateAction<string>>;
+
+  couponCode: string;
+  setCouponCode: React.Dispatch<React.SetStateAction<string>>;
 
   checkoutFormData: CheckoutFormType;
   setCheckoutFormData: React.Dispatch<React.SetStateAction<CheckoutFormType>>;
@@ -36,16 +40,14 @@ export interface CheckoutFormType {
 export const CommerceContext = createContext<ContextType>({} as ContextType);
 
 export const CommerceProvider = ({ children }: ChildrenType) => {
-  const { user } = useSelector((state: RootState) => state.userReducer);
-
   const initialState: CheckoutFormType = {
-    firstName: user.firstName ? user.firstName : "",
-    companyName: user.companyName ? user.companyName : "",
-    streetAddress: user.address ? user.address : "",
-    apartment: user.apartment ? user.apartment : "",
-    townCity: user.city ? user.city : "",
-    phoneNumber: user.phoneNumber ? user.phoneNumber : "",
-    email: user.email ? user.email : "",
+    firstName: "",
+    companyName: "",
+    streetAddress: "",
+    apartment: "",
+    townCity: "",
+    phoneNumber: "",
+    email: "",
   };
 
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
@@ -53,7 +55,9 @@ export const CommerceProvider = ({ children }: ChildrenType) => {
     useState<CheckoutFormType>(initialState);
   const [searchItems, setSearchItems] = useState<string>("");
   const [isSidebar, setIsSidebar] = useState<boolean>(false);
+  const [paymentMode, setPaymentMode] = useState<string>("bank");
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
+  const [couponCode, setCouponCode] = useState<string>("");
 
   return (
     <CommerceContext.Provider
@@ -68,6 +72,10 @@ export const CommerceProvider = ({ children }: ChildrenType) => {
         setIsSidebar,
         isDropdown,
         setIsDropdown,
+        paymentMode,
+        setPaymentMode,
+        couponCode,
+        setCouponCode,
       }}
     >
       {children}

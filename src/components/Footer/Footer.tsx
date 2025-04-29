@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import "./Footer.css";
 import CustomInput from "../CustomInput/CustomInput";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { RiLinkedinLine } from "react-icons/ri";
 import { FiTwitter } from "react-icons/fi";
 import { AiOutlineSend } from "react-icons/ai";
 import footerQrcode from "../../assets/footerQrcode.png";
 import footerPlaystore from "../../assets/footerPlaystore.png";
 import footerAppstore from "../../assets/footerAppstore.png";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const [email, setEmail] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -20,7 +23,7 @@ const Footer = () => {
     <main className="foot-container">
       <div className="foot-wrapper">
         <section className="foot-sect1">
-          <header>Exclusive</header>
+          <header>Shopinu</header>
           <p className="foot-sect1-sub">Subscribe</p>
           <p className="foot-sect1-get">Get 10% off your first order</p>
           <div className="foot-sect1-email">
@@ -41,16 +44,18 @@ const Footer = () => {
         <section className="foot-sect2">
           <header>Support</header>
           <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
-          <p>exclusive@gmail.com</p>
-          <p>+88015-88888-9999</p>
+          <p>cooolbreeze123@gmail.com</p>
+          <p>+2348005777660</p>
         </section>
         <section className="foot-sect3">
           <header>Account</header>
-          <p>My Account</p>
-          <p>Login / Register</p>
-          <p>Cart</p>
-          <p>Wishlist</p>
-          <p>Shop</p>
+          <p onClick={() => navigate("/account")}>My Account</p>
+          <p>
+            <span onClick={()=> navigate('/login')}>Login</span> / <span onClick={()=> navigate('/register')}>Register</span>
+          </p>
+          <p onClick={()=> navigate('/cart')}>Cart</p>
+          <p onClick={()=> navigate('/wishlist')}>Wishlist</p>
+          <p onClick={()=> navigate('/products')}>Shop</p>
         </section>
 
         <section className="foot-sect4">
@@ -100,7 +105,7 @@ const Footer = () => {
               <FaInstagram />
             </span>
             <span>
-              <FaLinkedinIn />
+              <RiLinkedinLine />
             </span>
           </section>
         </section>

@@ -44,54 +44,31 @@
   font-size: 22px;
   line-height: 27px;
 }
-.orders-caption {
-  display: flex;
-  justify-content: space-around;
-  box-shadow: 0 0 1px 0px gray;
-  margin-top: 20px;
-}
-.orders-orders {
-  display: flex;
-  justify-content: space-around;
-  box-shadow: 0 0 1px 0px gray;
-  margin-top: 20px;
-}
-.orders-green {
-  color: green;
-}
-.orders-orange {
-  color: orange;
-}
-.orders-total {
-  display: flex;
-  justify-content: space-between;
-  column-gap: 10px;
-  justify-content: end;
-}
-
-.orders-total-amount {
-  color: #db4444;
-}
-.orders-delete-icon{
-  width: 20px;
-  height: 20px;
-  color:#db4444;
-  position: absolute;
-  right: 5px;
-}
-.orders-selected {
+.orders-list {
   display: flex;
   justify-content: space-around;
   column-gap: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
-  box-shadow: 0 0 1px 0px gray;
+  box-shadow: 0 0 6px 1px #8080801a;
+  margin-top: 30px;
 }
-.orders-selected > div>div{
+.orders-info>div{
   display: flex;
   column-gap: 10px;
 }
-.orders-selected > div > div> p{
+.orders-items>div{
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+}
+.orders-info> div> p{
+  margin: 8px 0;
+}
+.orders-items > div{
+  margin: 8px 0;
+}
+.orders-items > div>p{
   margin: 8px 0;
 }
 .orders-item > img {
@@ -105,9 +82,29 @@
 .orders-color{
   width: 10px;
   height: 10px;
-  border: 1px double black;
-  border-radius: 10px;
+  border-radius: 4px;
 }
+.orders-green {
+  color: green;
+}
+.orders-orange {
+  color: orange;
+}
+.orders-red {
+  color: red;
+}
+.orders-total {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+  justify-content: end;
+}
+
+.orders-total-amount {
+  color: #db4444;
+}
+
+
 
 @media (max-width: 600px) {
   .orders-container {
@@ -123,38 +120,19 @@
     font-size: 16px;
     line-height: 21px;
   }
-  .orders-caption {
-    margin-top: 10px;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 18px;
-  }
-  .orders-orders {
-    margin-top: 10px;
-    font-size: 400;
-    font-size: 14px;
-    line-height: 19px;
-  }
   .orders-total > p {
     font-size: 400;
     font-size: 14px;
     line-height: 19px;
   }
-  .orders-selected {
-    display: block;
-    padding: 10px;
-  }
-  .orders-selected > div {
+  .orders-list {
     display: block;
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
-    margin-bottom: 10px;
+    padding: 10px;
   }
-  .orders-selected > div:nth-child(1)>div{
-    border-bottom: 1px solid gray;
-  }
-  .orders-selected > div > div> p{
+  .orders-info > div> p{
     margin: 7px 0;
   }
   .orders-item > p:nth-child(2) {
@@ -177,24 +155,12 @@
     font-size: 18px;
     line-height: 23px;
   }
-  .orders-caption {
-    margin-top: 15px;
-    font-size: 400;
-    font-size: 15px;
-    line-height: 20px;
-  }
-  .orders-orders {
-    margin-top: 20px;
-    font-size: 400;
-    font-size: 15px;
-    line-height: 20px;
-  }
-  .orders-selected > div {
+  .orders-list > div {
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
   }
-  .orders-selected > div >div> p{
+  .orders-info >div> p{
     margin: 8px 0;
   }
 }

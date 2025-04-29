@@ -24,7 +24,7 @@ const Navbar = ({ children }: NavPropType) => {
         <section className="nav-description">
           <div>
             Summer Sale For All suits And Free Express Delivery - OFF 50%!
-            <a href="" className="nav-shop-link">
+            <a href="/products" className="nav-shop-link">
               ShopNow
             </a>
           </div>

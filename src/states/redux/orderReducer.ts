@@ -26,11 +26,11 @@ const orderSlice = createSlice({
 
     deleteOrder(state, action: PayloadAction<string>) {
       const existingOrder = state.orders.find(
-        (order) => order.transactionId === action.payload
+        (order) => order.id === action.payload
       );
-      if (existingOrder) {
+      if (existingOrder?.email) {
         state.orders = state.orders.filter(
-          (order) => order.transactionId !== action.payload
+          (order) => order.id !== action.payload
         );
         state.total -= existingOrder.total;
         toastNotification("Order deleted successfully", "success");

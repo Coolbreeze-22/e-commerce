@@ -11,6 +11,7 @@ import { RootState } from "../../../states/redux/store";
 import Badge from "@mui/material/Badge";
 import Dropdown from "../Dropdown/Dropdown";
 import * as utils from "../navUtils";
+import { useNavigate } from "react-router-dom";
 
 const NavSmallDevice = () => {
   const useLabelNavigate = utils.useLabelNavigate();
@@ -30,6 +31,8 @@ const NavSmallDevice = () => {
     setIsDropdown,
   } = useStateContext();
 
+  const navigate = useNavigate();
+
   const handleSidebar = () => {
     setIsSidebar((prev) => !prev);
   };
@@ -43,6 +46,12 @@ const NavSmallDevice = () => {
   };
 
   const handleSearch = () => {
+    if (searchItems) {
+      navigate({
+        pathname: "/search",
+        search: `?name=${searchItems}`,
+      });
+    }
     setSearchItems("");
   };
 
@@ -50,7 +59,7 @@ const NavSmallDevice = () => {
     <nav className="nav-small-device">
       <div className="nav-small-events">
         <div onClick={handleSidebar}>
-          <MdMenu />
+          <MdMenu size={24} />
         </div>
         <div className="nav-small-search">
           <input
@@ -65,29 +74,32 @@ const NavSmallDevice = () => {
             <IoSearchOutline className="nav-small-search-icon" />
           </span>
         </div>
-        {user.id && (
-          <div className="nav-small-icons-wrapper">
-            <Badge badgeContent={wishlist.length} color="error">
-              <FaRegHeart
-                className="nav-small-icon"
-                onClick={() => handleNavigate("wishlist")}
-              />
-            </Badge>
-            <Badge badgeContent={products.length} color="error">
-              <FiShoppingCart
-                className="nav-small-icon"
-                onClick={() => handleNavigate("cart")}
-              />
-            </Badge>
+        <div className="nav-small-icons-wrapper">
+          <Badge badgeContent={wishlist.length} color="error">
+            <FaRegHeart
+              size={20}
+              className="nav-small-icon"
+              onClick={() => handleNavigate("wishlist")}
+            />
+          </Badge>
+          <Badge badgeContent={products.length} color="error">
+            <FiShoppingCart
+              size={20}
+              className="nav-small-icon"
+              onClick={() => handleNavigate("cart")}
+            />
+          </Badge>
+          {user.id && (
             <IoPersonOutline
+              size={20}
               className="nav-small-person-icon nav-small-icon"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsDropdown((prev) => !prev);
               }}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
       {isDropdown ? <Dropdown /> : null}
       {isSidebar && (

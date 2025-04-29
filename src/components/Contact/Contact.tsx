@@ -1,4 +1,3 @@
-// import React from "react";
 import Navbar from "../Navbar/Navbar";
 import "./Contact.css";
 import { IoCallOutline } from "react-icons/io5";
@@ -62,13 +61,13 @@ const Contact = () => {
             <p>
               Emails: customer
               <a href="mailto:c0oolbreeze22@gmail.com">
-                cooolbreeze22@gmail.com
+                cooolbreeze123@gmail.com
               </a>
             </p>
             <p>
               Emails: support
               <a href="mailto:c0oolbreeze22@gmail.com">
-                cooolbreeze22@gmail.com
+                cooolbreeze123@gmail.com
               </a>
             </p>
           </section>

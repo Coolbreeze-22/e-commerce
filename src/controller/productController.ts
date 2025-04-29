@@ -1,13 +1,14 @@
 import * as reducer from "../states/redux/productReducer";
 import { products } from "../dummy/dummyProducts";
 import { AppDispatch } from "../states/redux/store";
-import {
-  initialState,
-  InitialStateProps,
-} from "../states/redux/productReducer";
-import { ProductType } from "../states/redux/reducerTypes";
-
-const initialData: InitialStateProps = { ...initialState, products };
+import { initialState } from "../states/redux/productReducer";
+import { InitialStateProps, ProductType } from "../states/redux/reducerTypes";
+import { flashSaleCountdown } from "../dummy/dummyCountdown";
+const initialData: InitialStateProps = {
+  ...initialState,
+  products,
+  flashSaleCountdown,
+};
 
 const uniqueCategory: Set<string> = new Set();
 const uniqueSubCategory: Set<string> = new Set();
@@ -64,6 +65,16 @@ export const fetchProducts = async (dispatch: AppDispatch) => {
     }
 
     dispatchData(dispatch);
+  } catch (error: any) {
+    dispatch(
+      reducer.productError("Something went wrong while fetching products")
+    );
+  }
+};
+
+export const getFlashSaleCountdown = async (dispatch: AppDispatch) => {
+  try {
+    dispatch(reducer.getFlashSaleCountdown(initialData.flashSaleCountdown));
   } catch (error: any) {
     dispatch(
       reducer.productError("Something went wrong while fetching products")

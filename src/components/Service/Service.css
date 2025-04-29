@@ -1,0 +1,148 @@
+.service-icon-section {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 100px;
+  }
+  .service-icon-section > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .service-truck-icon,
+  .service-service-icon,
+  .service-verified-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: #00000040;
+  }
+  .service-icon-aside {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: black;
+  }
+  .service-truck-icon > aside > .service-icon {
+    width: 31.67px;
+    height: 25px;
+    color: white;
+  }
+  .service-service-icon > aside > .service-icon {
+    width: 26.67px;
+    height: 26.67px;
+    color: white;
+  }
+  .service-verified-icon > aside > .service-icon {
+    width: 30px;
+    height: 30px;
+    color: white;
+  }
+  .service-icon-info {
+    margin-top: 15px;
+  }
+  .service-icon-info > :nth-child(1) {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    margin: 0;
+  }
+  .service-icon-info > :nth-child(2) {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    margin: 5px 0 0 0;
+  }
+
+
+  @media (max-width: 600px) {
+    .service-icon-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    .service-truck-icon,
+    .service-service-icon,
+    .service-verified-icon {
+      width: 50px;
+      height: 50px;
+    }
+    .service-icon-aside {
+      width: 35px;
+      height: 35px;
+    }
+    .service-truck-icon > aside > .service-icon {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+    .service-service-icon > aside > .service-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .service-verified-icon > aside > .service-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .service-icon-info {
+      margin-top: 5px;
+    }
+    .service-icon-info > :nth-child(1) {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 19px;
+      text-align: center;
+    }
+    .service-icon-info > :nth-child(2) {
+      font-size: 14px;
+      line-height: 19px;
+      margin-top: 0px;
+    }
+  }
+  @media (min-width: 601px) and (max-width: 768px) {
+    .service-icon-section {
+      margin-top: 40px;
+    }
+    .service-truck-icon,
+    .service-service-icon,
+    .service-verified-icon {
+      width: 60px;
+      height: 60px;
+    }
+    .service-icon-aside {
+      width: 45px;
+      height: 45px;
+    }
+    .service-truck-icon > aside > .service-icon {
+      width: 25px;
+      height: 25px;
+    }
+    .service-service-icon > aside > .service-icon {
+      width: 25px;
+      height: 25px;
+    }
+    .service-verified-icon > aside > .service-icon {
+      width: 30px;
+      height: 30px;
+    }
+    .service-icon-info {
+      margin-top: 10px;
+    }
+    .service-icon-info > :nth-child(1) {
+      font-size: 16px;
+      line-height: 21px;
+    }
+    .service-icon-info > :nth-child(2) {
+      font-size: 14px;
+      line-height: 19px;
+      text-align: center;
+    }
+  }
+  
