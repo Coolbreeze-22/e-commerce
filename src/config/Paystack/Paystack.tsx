@@ -11,7 +11,7 @@ import { useState } from "react";
 
 const Paystack = () => {
   const paystackPublicKey: string = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-  const { checkoutFormData } = useStateContext();
+  const { paymentMode, setPaymentMode, checkoutFormData } = useStateContext();
   const { user } = useSelector((state: RootState) => state.userReducer);
   const cart = useSelector((state: RootState) => state.cartReducer);
   const [isWarning, setIsWarning] = useState<boolean>(false);
@@ -55,6 +55,7 @@ const Paystack = () => {
         userId: user.id,
         items: cart.products,
         paymentStatus: data.status,
+        paymentMode,
         subtotal: cart.total,
         deliveryFee: fee,
         total,
@@ -65,10 +66,41 @@ const Paystack = () => {
       createOrder({ order, dispatch, navigate });
     }
     setIsWarning(false);
+    setPaymentMode("bank");
   };
   const handleClose = () => {
     // logic
     setIsWarning(false);
+    setPaymentMode("bank");
+  };
+
+  const handlePayOnDelivery = () => {
+    const order: OrderProps = {
+      id: "",
+      firstName,
+      companyName,
+      streetAddress,
+      apartment,
+      townCity,
+      phoneNumber,
+      email,
+      transactionId: "",
+      refId: "",
+      userId: user.id,
+      items: cart.products,
+      paymentStatus: "unpaid",
+      paymentMode,
+      subtotal: cart.total,
+      deliveryFee: fee,
+      total,
+      orderStatus: "processing",
+      createdAt: new Date().getTime().toString(),
+      updatedAt: new Date().getTime().toString(),
+    };
+    createOrder({ order, dispatch, navigate });
+
+    setIsWarning(false);
+    setPaymentMode("bank");
   };
 
   const componentProps = {
@@ -86,7 +118,13 @@ const Paystack = () => {
   return (
     <div className="paystack-container">
       {showButton ? (
-        <PaystackButton {...componentProps} className="paystack-btn" />
+        paymentMode === "cash" ? (
+          <button className="cash-btn" onClick={handlePayOnDelivery}>
+            Place Orders
+          </button>
+        ) : (
+          <PaystackButton {...componentProps} className="paystack-btn" />
+        )
       ) : (
         <div>
           {isWarning && <p>Fill in the required fields*</p>}
