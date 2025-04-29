@@ -50,7 +50,7 @@ const Login = () => {
             onSubmit={(event) => handleSubmit(event)}
             className="login-form"
           >
-            <header>Log in to Exclusive</header>
+            <header>Log in to Shopinu</header>
             <div className="login-form-details">Enter your details below</div>
 
             <div>
