@@ -2,9 +2,28 @@ import "./CheckoutForm.css";
 import CustomInput from "../../CustomInput/CustomInput";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { useStateContext } from "../../../context/context";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState
 
+ } from "../../../states/redux/store";
 const CheckoutForm = () => {
   const { checkoutFormData, setCheckoutFormData } = useStateContext();
+  const { user } = useSelector((state: RootState) => state.userReducer);
+
+  useEffect(() => {
+  if (user.id) {
+    setCheckoutFormData({
+      firstName: user.firstName,
+      companyName: user.companyName,
+      streetAddress: user.address,
+      apartment: user.apartment,
+      townCity: user.city,
+      phoneNumber: user.phoneNumber,
+      email: user.email,
+    });
+  }
+}, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
