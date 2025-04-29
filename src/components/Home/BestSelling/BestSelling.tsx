@@ -56,7 +56,7 @@ export const BestSelling = () => {
           </div>
         </header>
       </section>
-      <section className="best-carousel">
+      <section className="best-grid">
         {bestProducts.map((product, index) => (
           <div key={index} onClick={() => viewProduct(product)}>
             <section className="best-image-sect" style={{ right: "10px" }}>

@@ -83,7 +83,7 @@ export const Explore = () => {
         </header>
       </section>
 
-      <section className="explore-swiper">
+      <section >
         <Swiper
           modules={[Pagination, Navigation]}
           slidesPerGroup={1}

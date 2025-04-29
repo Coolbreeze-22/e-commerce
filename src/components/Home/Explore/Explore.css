@@ -33,46 +33,50 @@
   margin-top: 10px;
   margin-bottom: 60px;
 }
-.explore-swiper-arrow{
-  display: flex ;
+.explore-swiper-arrow {
+  display: flex;
+  gap: 10px;
 }
-.explore-button-prev, .explore-button-next{
-margin-left: 10px;
-background-color: #f5f5f5;
-width: 40px;
-height: 40px;
-border-radius: 20px;
-text-align: center;
-font-size: 38px;
+.explore-button-prev,
+.explore-button-next {
+  background-color: #f5f5f5;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.explore-slide-icon{
+.explore-slide-icon {
   width: 25px;
+  height: 16px;
 }
-.explore-swiper-slide{
+.explore-swiper-slide {
   margin-bottom: 30px;
   border: 1px solid #ebebeb;
 }
-.explore-swiper-slide-div{
+.explore-swiper-slide-div {
   width: 100%;
+  height: 390px;
 }
 .explore-image-sect {
   box-sizing: border-box;
-  padding-top: 35px;
+  padding-top: 45px;
   position: relative;
   background-color: #f5f5f5;
   /* width: 270px; */
   width: 100%;
-  height: 240px;
+  height: 250px;
   justify-items: center;
 }
-.explore-image-wrapper{
+.explore-image-wrapper {
   align-content: center;
   text-align: center;
 }
 .explore-image {
- /* max-width: 190px; */
- max-width: 100%;
- max-height: 200px;
+  /* max-width: 190px; */
+  max-width: 100%;
+  max-height: 200px;
 }
 .explore-heart {
   position: absolute;
@@ -84,7 +88,7 @@ font-size: 38px;
   top: 50px;
   right: 10px;
 }
-.explore-icon{
+.explore-icon {
   width: 24px;
   height: 24px;
   padding: 5px;
@@ -120,7 +124,8 @@ font-size: 38px;
   height: 24px;
 }
 .explore-item-name,
-.explore-new-price, .explore-old-price {
+.explore-new-price,
+.explore-old-price {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -163,10 +168,10 @@ font-size: 38px;
 .explore-color > span > aside {
   border-radius: 15px;
 }
-.explore-btn-wrapper{
-    margin-top: 30px;
-    text-align: center;
-  }
+.explore-btn-wrapper {
+  margin-top: 30px;
+  text-align: center;
+}
 @media (max-width: 600px) {
   .explore-container {
     margin-top: 20px;
@@ -189,6 +194,17 @@ font-size: 38px;
     align-items: normal;
     margin-top: 10px;
     margin-bottom: 20px;
+  }
+  .explore-button-prev,
+  .explore-button-next {
+    width: 30px;
+    height: 30px;
+  }
+  .explore-slide-icon {
+    width: 18px;
+  }
+  .explore-swiper-slide-div {
+    height: 260px;
   }
   .explore-image-sect {
     padding-top: 25px;
@@ -223,7 +239,10 @@ font-size: 38px;
     margin-bottom: initial;
   }
   .explore-item-name,
-  .explore-new-price, .explore-old-price {
+  .explore-new-price,
+  .explore-old-price {
+    margin: 0;
+    margin-top: 5px;
     font-weight: 400;
     font-size: 13px;
     line-height: 14px;
@@ -234,7 +253,6 @@ font-size: 38px;
     line-height: 15px;
     margin-left: 0px;
   }
-  
 }
 @media (min-width: 601px) and (max-width: 768px) {
   .explore-container {
@@ -242,12 +260,22 @@ font-size: 38px;
     margin-left: 25px;
     margin-right: 25px;
   }
-  .explore-header{
+  .explore-header {
     font-weight: 500;
     font-size: 20px;
     line-height: 25px;
     letter-spacing: 1px;
     margin-bottom: 20px;
+  }
+  .explore-swiper-slide-div {
+    height: 300px;
+  }
+  .explore-image-sect {
+    height: 180px;
+  }
+  .explore-image {
+    max-width: 90%;
+    max-height: 150px;
   }
   .explore-heart {
     top: 5px;
@@ -270,7 +298,10 @@ font-size: 38px;
     margin-bottom: initial;
   }
   .explore-item-name,
-  .explore-new-price, .explore-old-price {
+  .explore-new-price,
+  .explore-old-price {
+    margin: 0;
+    margin-top: 10px;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;

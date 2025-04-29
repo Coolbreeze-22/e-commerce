@@ -4,16 +4,14 @@ import { RootState } from "../../../states/redux/store";
 import newArrivalWoman from "../../../assets/newArrivalWoman.png";
 import { useNavigate } from "react-router-dom";
 import { handleCategoryNavigation } from "../../utils/utilityFunctions";
-import { FiTruck } from "react-icons/fi";
-import { RiCustomerServiceLine } from "react-icons/ri";
-import { MdOutlineVerifiedUser } from "react-icons/md";
+import Service from "../../Service/Service";
 
 const NewArrival = () => {
   const { newArrival } = useSelector(
     (state: RootState) => state.productReducer
   );
   const navigate = useNavigate();
- 
+
   const viewProduct = (id: string) => {
     navigate(`/product-details/${id}`);
   };
@@ -95,41 +93,7 @@ const NewArrival = () => {
           </div>
         </div>
       </section>
-      <section className="new-icon-section">
-        <div>
-          <div className="new-truck-icon">
-            <aside className="new-icon-aside">
-              <FiTruck className="new-icon" />
-            </aside>
-          </div>
-          <div className="new-icon-info">
-            <p>FREE AND FAST DELIVERY</p>
-            <p>Free delivery for all orders over $140</p>
-          </div>
-        </div>
-        <div>
-          <div className="new-service-icon">
-            <aside className="new-icon-aside">
-              <RiCustomerServiceLine className="new-icon" />
-            </aside>
-          </div>
-          <div className="new-icon-info">
-            <p>24/7 CUSTOMER SERVICE</p>
-            <p>Friendly 24/7 customer support</p>
-          </div>
-        </div>
-        <div>
-          <div className="new-verified-icon">
-            <aside className="new-icon-aside">
-              <MdOutlineVerifiedUser className="new-icon" />
-            </aside>
-          </div>
-          <div className="new-icon-info">
-            <p>MONEY BACK GUARANTE</p>
-            <p>We return money within 30 days</p>
-          </div>
-        </div>
-      </section>
+      <Service />
     </main>
   );
 };
