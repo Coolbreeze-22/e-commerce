@@ -4,8 +4,6 @@
   padding: 20px;
 }
 .prof-container > div {
-  display: flex;
-  column-gap: 15px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.219);
 }
 .prof-container > div > p {
