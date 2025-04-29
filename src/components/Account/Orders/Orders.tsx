@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./Orders.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
-import { OrderProps } from "../../../states/redux/reducerTypes";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
 import { deleteOrder } from "../../../controller/orderController";
@@ -13,11 +12,6 @@ const Orders = () => {
   const { orders, total } = useSelector(
     (state: RootState) => state.orderReducer
   );
-
-  const [selectedOrder, setSelectedOrder] = useState<OrderProps>(
-    {} as OrderProps
-  );
-  const viewOrderRef = useRef<HTMLDivElement>(null);
   const ordersRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -25,17 +19,6 @@ const Orders = () => {
     threshold: 0,
     triggerOnce: true,
   });
-  useEffect(() => {
-    const handleScroll = () => {
-      if (selectedOrder.transactionId) {
-        viewOrderRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }
-    };
-    handleScroll();
-  }, [selectedOrder]);
 
   useEffect(() => {
     switch (location.state?.to) {
@@ -48,13 +31,18 @@ const Orders = () => {
     }
   }, [location]);
 
-  function statusColor(status: string) {
+  function orderStatus(status: string) {
     return status === "delivered"
-      ? "orders-green"
-      : status === "success"
       ? "orders-green"
       : status === "shipped"
       ? "orders-orange"
+      : "";
+  }
+  function paymentStatus(status: string) {
+    return status === "success"
+      ? "orders-green"
+      : status === "unpaid"
+      ? "orders-red"
       : "";
   }
 
@@ -68,77 +56,45 @@ const Orders = () => {
       ) : (
         <div className="orders-wrapper">
           <header className="orders-header">Orders</header>
-          <section className="orders-caption">
-            <p>Payment Status</p>
-            <p>Order Status</p>
-            <p>Number Of Items</p>
-            <p>Amount</p>
-          </section>
 
           {orders.map((order, index) => (
-            <section
-              key={index}
-              className="orders-orders"
-              onClick={() => setSelectedOrder(order)}
-            >
-              <p className={statusColor(order.paymentStatus)}>
-                {order.paymentStatus}
-              </p>
-              <p className={statusColor(order.orderStatus)}>
-                {order.orderStatus}
-              </p>
-              <p>{order.items.length}</p>
-              <p>
-                ₦{order.total}{" "}
-                <MdDeleteForever
-                  className="orders-delete-icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteOrder(order.transactionId, dispatch);
-                  }}
-                />
-              </p>
-            </section>
-          ))}
-
-          <section className="orders-total">
-            <p>Total:</p>
-            <p className="orders-total-amount">₦{total}</p>
-          </section>
-
-          {selectedOrder.transactionId && (
-            <section ref={viewOrderRef} className="orders-selected">
-              <div>
+            <section key={index} className="orders-list">
+              <div className="orders-info">
                 <div>
                   <p>Transaction id:</p>
-                  <p>{selectedOrder.transactionId}</p>
+                  <p>{order.transactionId}</p>
                 </div>
+                <MdDeleteForever onClick={()=> deleteOrder(order.id, dispatch)}/>
                 <div>
                   <p>Payment Status:</p>
-                  <p>{selectedOrder.paymentStatus}</p>
+                  <p className={paymentStatus(order.paymentStatus)}>
+                    {order.paymentStatus}
+                  </p>
                 </div>
                 <div>
                   <p>Order Status:</p>
-                  <p>{selectedOrder.orderStatus}</p>
+                  <p className={orderStatus(order.orderStatus)}>
+                    {order.orderStatus}
+                  </p>
                 </div>
                 <div>
                   <p>Delivery Fee:</p>
-                  <p>₦{selectedOrder.deliveryFee}</p>
+                  <p>₦{order.deliveryFee}</p>
                 </div>
                 <div>
                   <p>Subtotal:</p>
-                  <p>₦{selectedOrder.subtotal}</p>
+                  <p>₦{order.subtotal}</p>
                 </div>
                 <div>
                   <p>Total:</p>
-                  <p>₦{selectedOrder.total}</p>
+                  <p>₦{order.total}</p>
                 </div>
                 <div>
-                  <p>{moment(Number(selectedOrder.createdAt)).fromNow()}</p>
+                  <p>{moment(Number(order.createdAt)).fromNow()}</p>
                 </div>
               </div>
-              <div>
-                {selectedOrder.items.map((item, index) => (
+              <div className="orders-items">
+                {order.items.map((item, index) => (
                   <div key={index} className="orders-item">
                     <img src={item.photo} alt="loading" loading="lazy" />
                     <p>{item.name}</p>
@@ -157,7 +113,12 @@ const Orders = () => {
                 ))}
               </div>
             </section>
-          )}
+          ))}
+
+          <section className="orders-total">
+            <p>Total:</p>
+            <p className="orders-total-amount">₦{total}</p>
+          </section>
         </div>
       )}
     </main>
