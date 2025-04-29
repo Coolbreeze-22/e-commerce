@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   border-right: 1px solid #00000033;
-  flex-basis: 20%;
+  flex-basis: 21%;
   margin-top: -170px;
   padding-top: 170px;
 }
@@ -19,6 +19,7 @@
   border-bottom: 1px solid #80808025;
   border-top: 1px solid #80808025;
   overflow-y: auto;
+  cursor: pointer;
 }
 .hero-categories > div {
   font-weight: 400;
@@ -36,11 +37,60 @@
   height: 12.73px;
 }
 .hero-image-wrapper {
-  flex-basis: 76%;
+  box-sizing: border-box;
+  position: relative;
+  flex-basis: 75%;
+  background-color: #000000;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 20px;
+  height: 344px;
+
+}
+.hero-image-wrapper > div {
+  flex-basis: 55%;
+  height: 344px;
 }
 .hero-iphone-img {
-  width: 835px;
-  height: 344px;
+  /* width: 496px; */
+  width: 100%;
+  height: 100%;
+}
+.hero-image-info {
+  flex-basis: 35%;
+  color: white;
+}
+.hero-image-info > div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.hero-image-info > div > aside {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fafafa;
+}
+.hero-image-info > p {
+  margin: 10px 0;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 60px;
+  letter-spacing: 1.92px;
+}
+.hero-image-info > aside {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fafafa;
+  cursor: pointer;
+}
+.hero-image-info > aside > span {
+  padding-bottom: 3px;
+  border-bottom: 1px solid gray;
 }
 
 @media (max-width: 600px) {
@@ -63,30 +113,33 @@
     height: unset;
     overflow-y: unset;
     overflow-x: auto;
+    scrollbar-width: none;
     margin-bottom: 20px;
     border-bottom: unset;
     border-top: unset;
   }
 
   .hero-categories > div {
-    min-width: 100px;
+    min-width: 150px;
     min-height: 35px;
-    max-height: 45px;
+    max-height: 35px;
     margin-bottom: 0;
     font-weight: 400;
     font-size: 12px;
     line-height: 17px;
-    background-color: black;
-    color: white;
-    border: 3px double white;
+    border: 1px double gray;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
-  .hero-icon-wrapper {
+  .hero-icon-wrapper-sm {
     margin-right: unset;
-    margin-top: 10px;
+    padding: 5px;
+  }
+  .hero-icon-wrapper > :nth-child(1) {
+    display: none;
   }
   .hero-icon-wrapper > :nth-child(2) {
     display: none;
@@ -95,9 +148,28 @@
     width: 20px;
     height: 20px;
   }
+  .hero-image-wrapper {
+    padding: 0 10px;
+    height: 300px;
+  }
+  .hero-image-wrapper > div {
+    flex-basis: 60%;
+    height: 100%;
+
+  }
   .hero-iphone-img {
     width: 100%;
-    height: 300px;
+    height: 100%;
+  }
+  .hero-image-info > p {
+    margin: 10px 0;
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: 1px;
+  }
+  .hero-image-info > aside {
+    font-size: 14px;
+    line-height: 19px;
   }
 }
 
@@ -119,10 +191,21 @@
   }
   .hero-image-wrapper {
     flex-basis: 70%;
+    padding: 0 10px;
+    height: 300px;
+  }
+  .hero-image-wrapper > div {
+    height: 300px;
   }
   .hero-iphone-img {
-    width: 500px;
-    height: 334px;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-image-info > p {
+    margin: 10px 0;
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: 1px;
   }
   .hero-icon-wrapper-sm {
     display: none;

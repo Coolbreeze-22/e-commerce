@@ -9,6 +9,7 @@ import HeroSection from "./HeroSection/HeroSection";
 import NewArrival from "./NewArrival/NewArrival";
 import { useRef } from "react";
 import { FaArrowUp } from "react-icons/fa6";
+import CustomButton from "../CustomButton/CustomButton";
 
 const Home = () => {
   const topRef = useRef<HTMLDivElement>(null);
@@ -29,8 +30,16 @@ const Home = () => {
         <Categories />
         <hr className="home-horizontal" />
         <BestSelling />
-        <section className="home-sect5">
-          <img src={homeJblImg} alt="JblImg" className="home-jbl-img" />
+        <section className="home-jbl-section">
+          <div className="home-jbl">
+            <aside>Categories</aside>
+            <aside>Enhance Your Music Experience</aside>
+            <aside>Count</aside>
+            <CustomButton text="Buy Now!" className="home-buy-btn"/>
+          </div>
+          <div className="home-jbl-img">
+            <img src={homeJblImg} alt="JblImg" />
+          </div>
         </section>
         <Explore />
         <NewArrival />
