@@ -19,10 +19,10 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import ScrollRestoration from "./components/utils/ScrollRestoration";
 import Cart from "./components/Cart/Cart";
 import RelatedProducts from "./components/Home/RelatedProducts/RelatedProducts";
-import Checkout from "./components/Checkout/Checkout";
-import Wishlist from "./components/Wishlist/Wishlist";
-import Error404 from "./components/Error404/Error404";
-import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
+// import Checkout from "./components/Checkout/Checkout";
+// import Wishlist from "./components/Wishlist/Wishlist";
+// import Error404 from "./components/Error404/Error404";
+// import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
 
 function App() {
   const { user } = useSelector((state: RootState) => state.userReducer);
