@@ -1,9 +1,10 @@
-.paystack-container {
+/* .paystack-container {
   display: flex;
   justify-content: center;
-}
-.paystack-container > div > i {
+} */
+.paystack-container > div >p{
   color: #db4444;
+  font-style: italic;
 }
 .paystack-btn,
 .decoy-paystack-btn {
@@ -12,8 +13,6 @@
   color: #ffffff;
   background-color: #db4444;
   border-width: 0;
-  /* color: #11ca3f;
-  border: 1px solid #11ca3f; */
   border-radius: 4px;
   font-weight: 500;
   font-size: 16px;
@@ -29,7 +28,7 @@
 .paystack-btn:active,
 .decoy-paystack-btn:active {
   color: #11ca3f;
-  border: 1px solid #11ca3f;
+  border: 3px double #11ca3f;
 }
 
 @media (max-width: 600px) {
