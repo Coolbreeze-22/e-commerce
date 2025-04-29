@@ -20,6 +20,7 @@
 .nav-big-header {
   font-weight: 700;
   font-size: 24px;
+  cursor: pointer;
 }
 .nav-big-search {
   position: relative;

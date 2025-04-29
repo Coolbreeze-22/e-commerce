@@ -15,7 +15,7 @@ const Dropdown = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    signOut(dispatch);
+    signOut({ navigate, dispatch });
     navigate("/");
     setIsDropdown(false);
   };
