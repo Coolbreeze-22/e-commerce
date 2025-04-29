@@ -49,7 +49,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "15",
@@ -81,7 +82,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "1",
@@ -118,7 +120,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "10",
@@ -150,7 +153,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "8",
@@ -182,7 +186,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "14",
@@ -214,7 +219,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "13",
@@ -246,7 +252,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "12",
@@ -278,7 +285,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "9",
@@ -310,7 +318,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "38",
@@ -342,7 +351,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
 
   {
@@ -375,7 +385,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
 
   {
@@ -408,7 +419,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "4",
@@ -440,7 +452,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "4a",
@@ -472,7 +485,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
 
   {
@@ -505,7 +519,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "7",
@@ -543,7 +558,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
 
   {
@@ -576,7 +592,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
 
   {
@@ -609,7 +626,8 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
   {
     id: "37",
@@ -641,6 +659,7 @@ export const products: ProductType[] = [
       L: { inStock: 2, price: 100, discountedPrice: 80 },
       XL: { inStock: 1, price: 100, discountedPrice: 70 },
     },
-    timeStamp: "",
+    createdAt: "",
+    upDatedAt: "",
   },
 ];
