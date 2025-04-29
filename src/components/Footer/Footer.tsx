@@ -8,9 +8,11 @@ import { AiOutlineSend } from "react-icons/ai";
 import footerQrcode from "../../assets/footerQrcode.png";
 import footerPlaystore from "../../assets/footerPlaystore.png";
 import footerAppstore from "../../assets/footerAppstore.png";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const [email, setEmail] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -47,11 +49,13 @@ const Footer = () => {
         </section>
         <section className="foot-sect3">
           <header>Account</header>
-          <p>My Account</p>
-          <p>Login / Register</p>
-          <p>Cart</p>
-          <p>Wishlist</p>
-          <p>Shop</p>
+          <p onClick={() => navigate("/account")}>My Account</p>
+          <p>
+            <span onClick={()=> navigate('/login')}>Login</span> / <span onClick={()=> navigate('/register')}>Register</span>
+          </p>
+          <p onClick={()=> navigate('/cart')}>Cart</p>
+          <p onClick={()=> navigate('/wishlist')}>Wishlist</p>
+          <p onClick={()=> navigate('/products')}>Shop</p>
         </section>
 
         <section className="foot-sect4">
