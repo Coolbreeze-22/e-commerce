@@ -7,10 +7,10 @@ import Admin from "./components/Admin/Admin";
 import Login from "./components/Authentication/Login/Login";
 import Register from "./components/Authentication/Register/Register";
 import { useEffect } from "react";
-import { fetchProducts } from "./controller/productController";
+import { fetchProducts, getFlashSaleCountdown } from "./controller/productController";
 import { useDispatch, useSelector } from "react-redux";
 import AllProducts from "./components/AllProducts/AllProducts";
-import ProductDetails from "./components/AllProducts/ProductDetails/ProductDetails";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 import ScrollRestoration from "./components/utils/ScrollRestoration";
 import Cart from "./components/Cart/Cart";
 import RelatedProducts from "./components/Home/RelatedProducts/RelatedProducts";
@@ -18,6 +18,8 @@ import Checkout from "./components/Checkout/Checkout";
 import { ToastContainer } from "react-toastify";
 import { RootState } from "./states/redux/store";
 import Wishlist from "./components/Wishlist/Wishlist";
+import Error404 from "./components/Error404/Error404";
+import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
 
 function App() {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -39,6 +41,7 @@ function App() {
 
   useEffect(() => {
     fetchProducts(dispatch);
+    getFlashSaleCountdown(dispatch)
   }, []);
 
   return (
@@ -80,8 +83,9 @@ function App() {
               </UserCheckout>
             }
           />
+          <Route path="/search" element={<SearchedProducts />} />
           <Route path="/product-details/:id" element={<ProductDetails />} />
-          <Route path="*" element={<Navigate replace to="/" />} />
+          <Route path="/*" element={<Error404 />} />
         </Routes>
       </main>
     </div>
