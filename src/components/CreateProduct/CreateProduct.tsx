@@ -56,6 +56,15 @@ const CreateProduct = () => {
           value={formData.name}
           onChange={handleChange}
         />
+        <CustomInput
+          autoFocus
+          type="text"
+          name="firstName"
+          placeholder="Md"
+          className="editProf-input-1"
+          value={formData.name}
+          onChange={handleChange}
+        />
       </form>
     </main>
   );
