@@ -1,7 +1,6 @@
-import { useState } from "react";
 import "./Checkout.css";
 import Paystack from "../../config/Paystack/Paystack";
-import CustomButton from "../CustomButton/CustomButton";
+// import CustomButton from "../CustomButton/CustomButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../states/redux/store";
 import indianPay from "../../assets/indianPay.png";
@@ -11,10 +10,12 @@ import visaCard from "../../assets/visaCard.png";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import CheckoutForm from "./CheckoutForm/CheckoutForm";
+import { useStateContext } from "../../context/context";
 
 const Checkout = () => {
   const cart = useSelector((state: RootState) => state.cartReducer);
-  const [coupon, setCoupon] = useState<string>("");
+  const { paymentMode, setPaymentMode } = useStateContext();
+  // const { couponCode, setCouponCode } = useStateContext();
 
   return (
     <Navbar>
@@ -66,9 +67,11 @@ const Checkout = () => {
               </div>
             </aside>
 
-            <div className="checkout-bank">
-              <div>
-                <div>{""}</div>
+            <div className="checkout-bank-area">
+              <div className="checkout-bank" onClick={() => setPaymentMode("bank")}>
+                <aside className="checkout-bank-mode">
+                  <div className={paymentMode === "bank" ? "checkout-mode-div" : ""}></div>
+                </aside>
                 <span>Bank</span>
               </div>
               <section>
@@ -79,14 +82,19 @@ const Checkout = () => {
               </section>
             </div>
 
-            <div className="checkout-cash">
-              <div>
-                <div></div>
-              </div>
+            <div
+              className="checkout-cash"
+              onClick={() => setPaymentMode("cash")}
+            >
+              <aside className="checkout-cash-mode">
+                <div
+                  className={paymentMode === "cash" ? "checkout-mode-div" : ""}
+                ></div>
+              </aside>
               <span>Cash on delivery</span>
             </div>
 
-            <div className="checkout-cart-coupon">
+            {/* <div className="checkout-cart-coupon">
               <input
                 type="text"
                 name="text"
@@ -102,7 +110,7 @@ const Checkout = () => {
                   className="checkout-coupon-btn"
                 />
               </div>
-            </div>
+            </div> */}
             <Paystack />
           </section>
         </div>
