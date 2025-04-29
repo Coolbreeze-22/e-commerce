@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { GoInfo } from "react-icons/go";
@@ -13,11 +12,12 @@ import { FaRegStar } from "react-icons/fa";
 import { ImCancelCircle } from "react-icons/im";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { UserProps } from "../../../states/redux/reducerTypes";
+import * as utils from "../navUtils";
 
 type sidebarPropType = {
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   user: UserProps;
-  handleSidebar: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSidebar: () => void;
   handleLogout: () => void;
 };
 
@@ -27,48 +27,20 @@ const Sidebar = ({
   handleSidebar,
   handleLogout,
 }: sidebarPropType) => {
-  const navigate = useNavigate();
+  const useLabelNavigate = utils.useLabelNavigate();
 
   const handleNavigate = (label: string) => {
-    switch (label) {
-      case "admin":
-        navigate("/admin");
-        setIsSidebar(false);
-        break;
-      case "home":
-        navigate("/");
-        setIsSidebar(false);
-        break;
-      case "account":
-        navigate("/account");
-        setIsSidebar(false);
-        break;
-      case "contact":
-        navigate("/contact");
-        setIsSidebar(false);
-        break;
-      case "about":
-        navigate("/about");
-        setIsSidebar(false);
-        break;
-      case "orders":
-        navigate("/account", { state: { to: "orders" } });
-        setIsSidebar(false);
-        break;
-      case "login":
-        navigate("/login");
-        setIsSidebar(false);
-        break;
-    }
+    useLabelNavigate(label);
+    setIsSidebar(false);
   };
 
   return (
     <main className="sidebar-container">
       <header>
         <span onClick={handleSidebar}>
-          <IoMdClose />
+          <IoMdClose size={24} />
         </span>
-        <span className="side-header">Exclusive</span>
+        <span className="side-header" onClick={()=> handleNavigate('home')}>Shopinu</span>
       </header>
 
       {user.isAdmin && (
@@ -78,7 +50,7 @@ const Sidebar = ({
           }}
         >
           <span>
-            <MdOutlineAdminPanelSettings />
+            <MdOutlineAdminPanelSettings size={20}/>
           </span>
           <span>Admin</span>
         </div>
@@ -89,7 +61,7 @@ const Sidebar = ({
         }}
       >
         <span>
-          <AiOutlineHome />
+          <AiOutlineHome size={20}/>
         </span>
         <span>Home</span>
       </div>
@@ -99,7 +71,7 @@ const Sidebar = ({
         }}
       >
         <span>
-          <MdOutlineContactPhone />
+          <MdOutlineContactPhone size={20}/>
         </span>
         <span>Contact</span>
       </div>
@@ -109,7 +81,7 @@ const Sidebar = ({
         }}
       >
         <span>
-          <GoInfo />
+          <GoInfo size={20}/>
         </span>
         <span>About</span>
       </div>
@@ -121,7 +93,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <IoPersonOutline />
+              <IoPersonOutline size={20}/>
             </span>
             <span>Manage My Account</span>
           </div>
@@ -131,7 +103,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <IoBagHandleOutline />
+              <IoBagHandleOutline size={20}/>
             </span>
             <span>My Order</span>
           </div>
@@ -141,7 +113,7 @@ const Sidebar = ({
             }}
           >
             <span>
-              <ImCancelCircle />
+              <ImCancelCircle size={20}/>
             </span>
             <span>My Cancellations</span>
           </div>
@@ -151,13 +123,13 @@ const Sidebar = ({
             }}
           >
             <span>
-              <FaRegStar />
+              <FaRegStar size={20}/>
             </span>
             <span>My Reviews</span>
           </div>
           <div onClick={handleLogout}>
             <span>
-              <RiLogoutBoxLine />
+              <RiLogoutBoxLine size={20}/>
             </span>
             <span>Logout</span>
           </div>
@@ -169,7 +141,7 @@ const Sidebar = ({
           }}
         >
           <span>
-            <RiLoginBoxLine />
+            <RiLoginBoxLine size={20}/>
           </span>
           <span> Login</span>
         </div>
