@@ -108,6 +108,7 @@ export type OrderProps = {
   userId: string;
   orderStatus: string;
   paymentStatus: string;
+  paymentMode: string;
   items: Array<CartProductType>;
   createdAt: string;
   updatedAt: string;

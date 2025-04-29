@@ -27,7 +27,7 @@ const cartSlice = createSlice({
         ? payload.discountedPrice
         : payload.price;
 
-      if (existingProduct) {
+      if (existingProduct?.id) {
         toastNotification("Item already in cart !", "warning");
       } else {
         if (payload.quantity > payload.inStock) {
@@ -47,7 +47,7 @@ const cartSlice = createSlice({
           product.size === action.payload.size
       );
 
-      if (existingProduct) {
+      if (existingProduct?.id) {
         const soldPrice = existingProduct.discountedPrice
           ? existingProduct.discountedPrice
           : existingProduct.price;
@@ -100,7 +100,7 @@ const cartSlice = createSlice({
       const existingProduct = state.wishlist.find(
         (product) => product.id === action.payload.id
       );
-      if (existingProduct) {
+      if (existingProduct?.id) {
         toastNotification("Item already in wishlist !", "warning");
         return;
       }
@@ -115,7 +115,7 @@ const cartSlice = createSlice({
       const existingProduct = state.wishlist.find(
         (product) => product.id === id
       );
-      if (existingProduct) {
+      if (existingProduct?.id) {
         state.wishlist = state.wishlist.filter((product) => product.id !== id);
         if (label === "no notification") return;
         toastNotification("Removed from wishlist successfully !", "success");
@@ -125,7 +125,7 @@ const cartSlice = createSlice({
     },
 
     clearCart(state) {
-      (state.products = []), (state.total = 0), (state.wishlist = []);
+      (state.products = []), (state.total = 0);
     },
   },
 });
