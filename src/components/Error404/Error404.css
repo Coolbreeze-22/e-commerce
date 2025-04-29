@@ -1,0 +1,95 @@
+.error-container {
+  position: relative;
+  top: 200px;
+  margin-left: 115px;
+  margin-right: 115px;
+  margin-bottom: 100px;
+}
+.error-routes {
+  display: flex;
+  gap: 15px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.error-route1,
+.error-route-slash {
+  opacity: 0.5;
+}
+.error-body {
+  margin-top: 100px;
+  text-align: center;
+}
+.error-body > header {
+  font-weight: 500;
+  font-size: 110px;
+  line-height: 115px;
+  letter-spacing: 3.3px;
+}
+.error-body > p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+  .error-container {
+    top: 120px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  .error-routes {
+    gap: 10px;
+    font-size: 14px;
+    line-height: 19px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+  }
+  .error-body {
+    margin-top: 50px;
+  }
+  .error-body > header {
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 1.5px;
+  }
+  .error-body > p {
+    line-height: 21px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .error-container {
+    top: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 50px;
+  }
+  .error-routes {
+    gap: 10px;
+    line-height: 19px;
+    margin-bottom: 30px;
+  }
+  .error-body {
+    margin-top: 50px;
+  }
+  .error-body > header {
+    font-size: 30px;
+    line-height: 35px;
+    letter-spacing: 2px;
+  }
+  .error-body > p {
+    line-height: 21px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+}
