@@ -1,0 +1,48 @@
+.create-container {
+  position: relative;
+  top: 200px;
+  margin-left: 115px;
+  margin-right: 115px;
+  margin-bottom: 100px;
+}
+.contact-routes {
+  display: flex;
+  gap: 15px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.contact-route1,
+.contact-route-slash {
+  opacity: 0.5;
+}
+@media (max-width: 600px) {
+  .create-container {
+    top: 120px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  .contact-routes {
+    gap: 10px;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .create-container {
+    top: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 50px;
+  }
+  .contact-routes {
+    gap: 10px;
+    line-height: 19px;
+    margin-bottom: 30px;
+  }
+}
