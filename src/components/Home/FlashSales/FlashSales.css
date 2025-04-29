@@ -94,15 +94,16 @@
 }
 .flash-swiper-slide-div {
   width: 100%;
+  height: 370px;
 }
 .flash-image-sect {
   position: relative;
   box-sizing: border-box;
-  padding-top: 35px;
+  padding-top: 45px;
   position: relative;
   background-color: #f5f5f5;
   width: 100%;
-  height: 240px;
+  height: 250px;
 }
 .flash-image-wrapper {
   align-content: center;
@@ -257,6 +258,9 @@
     margin-right: 0px;
     margin-left: 0px;
   }
+  .flash-swiper-slide-div {
+    height: 240px;
+  }
   .flash-image-sect {
     padding-top: 25px;
     height: 150px;
@@ -303,6 +307,8 @@
   .flash-item-name,
   .flash-new-price,
   .flash-old-price {
+    margin: 0;
+    margin-top: 5px;
     font-weight: 400;
     font-size: 13px;
     line-height: 15px;
@@ -333,9 +339,18 @@
     margin-left: 30px;
     column-gap: 8px;
   }
+  .flash-swiper-slide-div {
+    height: 280px;
+  }
+  .flash-image-sect {
+    padding-top: 35px;
+    height: 180px;
+  }
   .flash-image {
     box-sizing: border-box;
     padding: 10px;
+    max-width: 90%;
+    max-height: 150px;
   }
   .flash-heart {
     top: 5px;
@@ -358,7 +373,10 @@
     margin-bottom: initial;
   }
   .flash-item-name,
-  .flash-new-price, .flash-old-price {
+  .flash-new-price,
+  .flash-old-price {
+    margin: 0;
+    margin-top: 10px;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;

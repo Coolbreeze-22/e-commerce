@@ -47,7 +47,7 @@ const navigate = useNavigate()
       <section className="category-swiper">
         <Swiper
           modules={[Pagination, Navigation]}
-          slidesPerGroup={2}
+          slidesPerGroup={1}
           pagination={{ clickable: true }}
           navigation={{
             nextEl: ".category-button-next",

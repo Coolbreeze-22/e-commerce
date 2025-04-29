@@ -21,11 +21,12 @@ import {
   computeRating,
 } from "../../utils/utilityFunctions";
 import { FiShoppingCart } from "react-icons/fi";
+import useCountdown from "../../utils/useCountdown";
 
 const FlashSales = () => {
-  const flashProducts = useSelector(
-    (state: RootState) => state.productReducer.flashSales
-  );
+  const { flashSales: flashProducts, flashSaleCountdown: countdown } =
+    useSelector((state: RootState) => state.productReducer);
+  const timeLeft = useCountdown(countdown.startDate, countdown.endDate);
 
   const { ref } = useInView({
     threshold: 0,
@@ -64,6 +65,7 @@ const FlashSales = () => {
 
   return (
     <main className="flashSales-container" ref={ref}>
+      {!flashProducts.length && <h1>kaka</h1>}
       <section className="flash-info1">
         <div className="flash-text-wrapper">
           <span className="flash-red"></span>
@@ -74,19 +76,19 @@ const FlashSales = () => {
           <div className="flash-cntdwn-arrow-wrapper">
             <time className="flash-countdown">
               <div>
-                <span>Days</span> <div>03</div>
+                <span>Days</span> <div>{timeLeft.days}</div>
               </div>
               <div className="flash-colon"> : </div>
               <div>
-                <span>Hours</span> <div>23</div>
+                <span>Hours</span> <div>{timeLeft.hours}</div>
               </div>
               <div className="flash-colon"> : </div>
               <div>
-                <span>Minutes</span> <div>19</div>
+                <span>Minutes</span> <div>{timeLeft.minutes}</div>
               </div>
               <div className="flash-colon"> : </div>
               <div>
-                <span>Seconds</span> <div>56</div>
+                <span>Seconds</span> <div>{timeLeft.seconds}</div>
               </div>
             </time>
             <section className="flash-swiper-arrow">

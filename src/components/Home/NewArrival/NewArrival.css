@@ -130,65 +130,7 @@
   /* height: 81px; */
 }
 
-.new-icon-section {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 100px;
-}
-.new-icon-section > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.new-truck-icon,
-.new-service-icon,
-.new-verified-icon {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  background-color: rgb(190, 190, 190);
-}
-.new-icon-aside {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  background-color: black;
-}
-.new-truck-icon > aside > .new-icon {
-  width: 31.67px;
-  height: 25px;
-  color: white;
-}
-.new-service-icon > aside > .new-icon {
-  width: 26.67px;
-  height: 26.67px;
-  color: white;
-}
-.new-verified-icon > aside > .new-icon {
-  width: 30px;
-  height: 30px;
-  color: white;
-}
-.new-icon-info {
-  margin-top: 20px;
-}
-.new-icon-info > :nth-child(1) {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 28px;
-}
-.new-icon-info > :nth-child(2) {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  text-align: center;
-}
+
 
 @media (max-width: 600px) {
   .new-container {
@@ -286,48 +228,6 @@
     left: 5px;
     width: 90%;
   }
-  .new-icon-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 30px;
-  }
-  .new-truck-icon,
-  .new-service-icon,
-  .new-verified-icon {
-    width: 50px;
-    height: 50px;
-  }
-  .new-icon-aside {
-    width: 35px;
-    height: 35px;
-  }
-  .new-truck-icon > aside > .new-icon {
-    width: 24px;
-    height: 24px;
-    color: white;
-  }
-  .new-service-icon > aside > .new-icon {
-    width: 24px;
-    height: 24px;
-  }
-  .new-verified-icon > aside > .new-icon {
-    width: 24px;
-    height: 24px;
-  }
-  .new-icon-info {
-    margin-top: 5px;
-  }
-  .new-icon-info > :nth-child(1) {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 19px;
-    text-align: center;
-  }
-  .new-icon-info > :nth-child(2) {
-    font-size: 14px;
-    line-height: 19px;
-  }
 }
 @media (min-width: 601px) and (max-width: 768px) {
   .new-container {
@@ -395,42 +295,5 @@
     bottom: 5px;
     left: 5px;
     width: 191px;
-  }
-  .new-icon-section {
-    margin-top: 40px;
-  }
-  .new-truck-icon,
-  .new-service-icon,
-  .new-verified-icon {
-    width: 60px;
-    height: 60px;
-  }
-  .new-icon-aside {
-    width: 45px;
-    height: 45px;
-  }
-  .new-truck-icon > aside > .new-icon {
-    width: 25px;
-    height: 25px;
-  }
-  .new-service-icon > aside > .new-icon {
-    width: 25px;
-    height: 25px;
-  }
-  .new-verified-icon > aside > .new-icon {
-    width: 30px;
-    height: 30px;
-  }
-  .new-icon-info {
-    margin-top: 10px;
-  }
-  .new-icon-info > :nth-child(1) {
-    font-size: 16px;
-    line-height: 21px;
-  }
-  .new-icon-info > :nth-child(2) {
-    font-size: 14px;
-    line-height: 19px;
-    text-align: center;
   }
 }
