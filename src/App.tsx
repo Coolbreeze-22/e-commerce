@@ -35,6 +35,7 @@ function App() {
       return <Navigate to="/login" replace={false} />;
     }
   };
+  
   const UserAuth = ({ children }: { children: React.ReactNode }) => {
     if (!user?.id) {
       return children;
