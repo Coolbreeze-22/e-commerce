@@ -7,7 +7,10 @@ import Admin from "./components/Admin/Admin";
 import Login from "./components/Authentication/Login/Login";
 import Register from "./components/Authentication/Register/Register";
 import { useEffect } from "react";
-import { fetchProducts, getFlashSaleCountdown } from "./controller/productController";
+import {
+  fetchProducts,
+  getFlashSaleCountdown,
+} from "./controller/productController";
 import { useDispatch, useSelector } from "react-redux";
 import AllProducts from "./components/AllProducts/AllProducts";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
@@ -24,7 +27,7 @@ import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
 function App() {
   const { user } = useSelector((state: RootState) => state.userReducer);
   const dispatch = useDispatch();
-  
+
   const UserCheckout = ({ children }: { children: React.ReactNode }) => {
     if (user?.id) {
       return children;
@@ -42,7 +45,7 @@ function App() {
 
   useEffect(() => {
     fetchProducts(dispatch);
-    getFlashSaleCountdown(dispatch)
+    getFlashSaleCountdown(dispatch);
   }, []);
 
   return (
