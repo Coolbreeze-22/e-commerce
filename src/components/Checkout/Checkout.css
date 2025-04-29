@@ -77,42 +77,40 @@
   font-size: 16px;
   line-height: 24px;
 }
-.checkout-bank {
+.checkout-bank-area  {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.checkout-bank > div > div,
-.checkout-cash > div {
-  display: inline-block;
+.checkout-bank,
+.checkout-cash {
+  display: flex;
+  gap: 10px;
 }
-.checkout-bank > section > img {
-  vertical-align: middle;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.checkout-bank > div > span,
-.checkout-cash > span {
-  margin-left: 20px;
-}
-.checkout-bank > div > div,
-.checkout-cash > div {
+.checkout-bank-mode,
+.checkout-cash-mode{
   width: 14px;
   height: 14px;
   border: 2px solid black;
   border-radius: 20px;
-  padding: 5px;
-  vertical-align: middle;
+  padding: 4px;
 }
-.checkout-cash {
-  margin-bottom: 20px;
-}
-.checkout-cash > div > div {
+.checkout-mode-div,
+.checkout-mode-div {
   width: 14px;
   height: 14px;
-  background-color: black;
   border-radius: 20px;
+  background-color: #000000;
+}
+.checkout-bank-area > section > img {
+  vertical-align: middle;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.checkout-cash {
+  margin-bottom: 20px;
 }
 .checkout-cart-coupon {
   display: flex;
@@ -184,16 +182,16 @@
     font-size: 13px;
     line-height: 18px;
   }
-  .checkout-bank {
+  .checkout-bank-area {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .checkout-bank > div > span,
+  .checkout-bank > span,
   .checkout-cash > span {
     margin-left: 10px;
   }
-  .checkout-bank > div > div,
-  .checkout-cash > div {
+  .checkout-bank-mode,
+  .checkout-cash-mode {
     padding: 2px;
   }
   .checkout-cart-coupon {
@@ -251,7 +249,7 @@
     font-size: 15px;
     line-height: 20px;
   }
-  .checkout-bank {
+  .checkout-bank-area {
     margin-top: 5px;
     margin-bottom: 10px;
   }
@@ -259,12 +257,12 @@
     margin-left: 3px;
     margin-right: 3px;
   }
-  .checkout-bank > div > span,
+  .checkout-bank > span,
   .checkout-cash > span {
     margin-left: 10px;
   }
-  .checkout-bank > div > div,
-  .checkout-cash > div {
+  .checkout-bank-mode,
+  .checkout-cash-mode {
     padding: 3px;
   }
 
