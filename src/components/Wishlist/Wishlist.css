@@ -8,6 +8,7 @@
   font-weight: 500;
   font-size: 25px;
   line-height: 30px;
+  height: 200px;
 }
 .wishlist-no-item > button {
   background-color: transparent;
