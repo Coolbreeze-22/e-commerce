@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Footer.css";
 import CustomInput from "../CustomInput/CustomInput";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { RiLinkedinLine } from "react-icons/ri";
 import { FiTwitter } from "react-icons/fi";
 import { AiOutlineSend } from "react-icons/ai";
 import footerQrcode from "../../assets/footerQrcode.png";
@@ -20,7 +21,7 @@ const Footer = () => {
     <main className="foot-container">
       <div className="foot-wrapper">
         <section className="foot-sect1">
-          <header>Exclusive</header>
+          <header>Shopinu</header>
           <p className="foot-sect1-sub">Subscribe</p>
           <p className="foot-sect1-get">Get 10% off your first order</p>
           <div className="foot-sect1-email">
@@ -41,8 +42,8 @@ const Footer = () => {
         <section className="foot-sect2">
           <header>Support</header>
           <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
-          <p>exclusive@gmail.com</p>
-          <p>+88015-88888-9999</p>
+          <p>cooolbreeze123@gmail.com</p>
+          <p>+2348005777660</p>
         </section>
         <section className="foot-sect3">
           <header>Account</header>
@@ -100,7 +101,7 @@ const Footer = () => {
               <FaInstagram />
             </span>
             <span>
-              <FaLinkedinIn />
+              <RiLinkedinLine />
             </span>
           </section>
         </section>
