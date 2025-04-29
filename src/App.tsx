@@ -1,4 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { RootState } from "./states/redux/store";
+import {
+  fetchProducts,
+  getFlashSaleCountdown,
+} from "./controller/productController";
 import Home from "./components/Home/Home";
 import Account from "./components/Account/Account";
 import About from "./components/About/About";
@@ -6,20 +14,12 @@ import Contact from "./components/Contact/Contact";
 import Admin from "./components/Admin/Admin";
 import Login from "./components/Authentication/Login/Login";
 import Register from "./components/Authentication/Register/Register";
-import { useEffect } from "react";
-import {
-  fetchProducts,
-  getFlashSaleCountdown,
-} from "./controller/productController";
-import { useDispatch, useSelector } from "react-redux";
 import AllProducts from "./components/AllProducts/AllProducts";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import ScrollRestoration from "./components/utils/ScrollRestoration";
 import Cart from "./components/Cart/Cart";
 import RelatedProducts from "./components/Home/RelatedProducts/RelatedProducts";
 import Checkout from "./components/Checkout/Checkout";
-import { ToastContainer } from "react-toastify";
-import { RootState } from "./states/redux/store";
 import Wishlist from "./components/Wishlist/Wishlist";
 import Error404 from "./components/Error404/Error404";
 import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
