@@ -23,6 +23,7 @@ import Checkout from "./components/Checkout/Checkout";
 import Wishlist from "./components/Wishlist/Wishlist";
 import Error404 from "./components/Error404/Error404";
 import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
+import CreateProduct from "./components/CreateProduct/CreateProduct";
 
 function App() {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -35,9 +36,17 @@ function App() {
       return <Navigate to="/login" replace={false} />;
     }
   };
-  
+
   const UserAuth = ({ children }: { children: React.ReactNode }) => {
     if (!user?.id) {
+      return children;
+    } else {
+      return <Navigate to="/" replace={false} />;
+    }
+  };
+
+  const AdminOnly = ({ children }: { children: React.ReactNode }) => {
+    if (user?.isAdmin) {
       return children;
     } else {
       return <Navigate to="/" replace={false} />;
@@ -79,7 +88,22 @@ function App() {
           />
           <Route path="/account" element={<Account />} />
           <Route path="/about" element={<About />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminOnly>
+                <Admin />
+              </AdminOnly>
+            }
+          />
+          <Route
+            path="/create-product"
+            element={
+              <AdminOnly>
+                <CreateProduct />
+              </AdminOnly>
+            }
+          />
           <Route
             path="/products/cart/checkout"
             element={
