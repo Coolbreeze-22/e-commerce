@@ -33,6 +33,7 @@ export const createOrder = async (data: CreateOrderProps) => {
 export const deleteOrder = async (id: string, dispatch: AppDispatch) => {
   try {
     console.log("testing",id, dispatch)
+    
     //await deleteDoc(order)
     // dispatch(reducer.deleteOrder(id));
   } catch (error: any) {
