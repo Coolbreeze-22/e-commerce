@@ -3,29 +3,35 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { UserProps } from "./reducerTypes";
 
 export type InitialStateProps = {
+  users: Array<UserProps>;
   user: UserProps;
   isLoading: boolean;
 };
 
-export const user: UserProps = {
+export const userInitialState: UserProps = {
   id: "",
   firstName: "",
   lastName: "",
   email: "",
+  emailVerified: false,
   phoneNumber: "",
+  photoUrl: "",
   address: "",
   companyName: "",
   apartment: "",
   city: "",
   isAdmin: false,
   isOwner: false,
-  password: "",
+  isSignedIn: false,
+  lastLoginAt: "",
+  lastLogoutAt: "",
   createdAt: "",
   updatedAt: "",
 };
 
 const initialState: InitialStateProps = {
-  user,
+  users: [],
+  user: userInitialState,
   isLoading: false,
 };
 
@@ -33,21 +39,20 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    getUsers(state, action: PayloadAction<Array<UserProps>>) {
+      state.users = action.payload;
+    },
     signUp(state, action: PayloadAction<UserProps>) {
       state.user = action.payload;
     },
     signIn(state, action: PayloadAction<UserProps>) {
       state.user = action.payload;
     },
-    signOut(state) {
-      state.user = user;
-      state.isLoading= false;
+    logOut(state) {
+      state.user = userInitialState;
     },
-    updateUser(state, action: PayloadAction<UserProps>) {
-      state.user = action.payload;
-    },
-    deleteUser(state, action: PayloadAction<UserProps>) {
-      state.user = action.payload;
+    updateProfile(state, action: PayloadAction<UserProps>) {
+      state.user = { ...action.payload };
     },
     userLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
@@ -55,12 +60,6 @@ const userSlice = createSlice({
   },
 });
 
-export const {
-  signUp,
-  signIn,
-  signOut,
-  updateUser,
-  deleteUser,
-  userLoading,
-} = userSlice.actions;
+export const { getUsers, signUp, signIn, logOut, updateProfile, userLoading } =
+  userSlice.actions;
 export default userSlice.reducer;
