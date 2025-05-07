@@ -3,12 +3,9 @@
   border-radius: 4px;
   padding: 20px;
 }
-.prof-container > div {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.219);
-}
 .prof-container > div > p {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .pro-child{
     margin-top: 15px;
@@ -19,6 +16,7 @@
     border: 1px solid #db4444;
     color: #db4444;
     border-radius: 4px;
+    margin-top: 15px;
 }
 .pro-child> button:hover{
     background-color:  #db4444;
@@ -32,8 +30,8 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .pro-child > button{
     font-weight: 400;
@@ -51,7 +49,7 @@
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
