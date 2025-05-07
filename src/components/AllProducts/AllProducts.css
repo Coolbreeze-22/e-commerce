@@ -72,12 +72,52 @@
   top: 50px;
   right: 10px;
 }
+.all-edit {
+  position: absolute;
+  bottom: 50px;
+  right: 5px;
+}
+.all-delete {
+  position: absolute;
+  bottom: 50px;
+  left: 5px;
+}
 .all-icon {
   width: 24px;
   height: 24px;
   padding: 5px;
   background-color: #ffffff;
   border-radius: 20px;
+}
+.all-warning {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 50px;
+  left: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 0 5px;
+  background-color: white;
+  height: 40px;
+  width: 100%;
+}
+.all-warning > button:nth-child(1) {
+  box-sizing: border-box;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 3px;
+}
+.all-warning > button:nth-child(2) {
+  box-sizing: border-box;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 3px;
 }
 .all-image-wrapper {
   align-content: center;
@@ -206,9 +246,15 @@
     top: 5px;
     right: 50px;
   }
+  .all-edit {
+    bottom: 30px;
+  }
+  .all-delete {
+    bottom: 30px;
+  }
   .all-icon {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
   .all-add-to-cart {
     height: 25px;
@@ -277,9 +323,15 @@
     top: 5px;
     right: 50px;
   }
+  .all-edit {
+    bottom: 40px;
+  }
+  .all-delete {
+    bottom: 40px;
+  }
   .all-icon {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
   .all-add-to-cart {
     height: 30px;

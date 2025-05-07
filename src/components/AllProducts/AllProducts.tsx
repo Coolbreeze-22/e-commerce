@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AllProducts.css";
 import { Rating } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,11 +16,16 @@ import {
 } from "../utils/utilityFunctions";
 import Navbar from "../Navbar/Navbar";
 import { FiShoppingCart } from "react-icons/fi";
+import { MdOutlineEdit } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
+import { deleteProductByAdmin } from "../../controller/productController";
 
 const AllProducts = () => {
   const allProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.productReducer.products
   );
+  const [warning, setWarning] = useState("");
+
   const imageRefs = React.useRef<HTMLImageElement[]>([]);
 
   React.useEffect(() => {
@@ -33,6 +38,13 @@ const AllProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const navigateToUpdateProduct = (product: ProductType) => {
+    navigate(`/admin/update-product/${product.id}`);
+  };
+  const handleDelete = (id: string) => {
+    deleteProductByAdmin(id, dispatch);
+    setWarning("");
+  };
   const handleWishlist = (product: ProductType) => {
     addItemToWishlist({ product, dispatch });
   };
@@ -96,6 +108,47 @@ const AllProducts = () => {
                 <div className="all-eye">
                   <MdOutlineRemoveRedEye className="all-icon" />
                 </div>
+                <div
+                  className="all-edit"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigateToUpdateProduct(product);
+                  }}
+                >
+                  <MdOutlineEdit className="all-icon" />
+                </div>
+                <div className="all-delete">
+                  <MdDeleteOutline className="all-icon" />
+                </div>
+                <div
+                  className="all-delete"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setWarning(product.id);
+                  }}
+                >
+                  <MdDeleteOutline className="all-icon" />
+                </div>
+                {warning === product.id && (
+                  <div className="all-warning">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(product.id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setWarning("");
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
                 <div className="all-image-wrapper">
                   <img
                     loading="lazy"
