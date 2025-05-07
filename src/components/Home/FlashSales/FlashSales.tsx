@@ -26,8 +26,8 @@ import useCountdown from "../../utils/useCountdown";
 const FlashSales = () => {
   const { flashSales: flashProducts, flashSaleCountdown: countdown } =
     useSelector((state: RootState) => state.productReducer);
-  const timeLeft = useCountdown(countdown.startDate, countdown.endDate);
 
+  // const timeLeft = useCountdown(countdown.startDate, countdown.endDate);
   const { ref } = useInView({
     threshold: 0,
   });
@@ -74,7 +74,7 @@ const FlashSales = () => {
         <div className="flash-info2">
           <header className="flash-header">Flash Sales</header>
           <div className="flash-cntdwn-arrow-wrapper">
-            <time className="flash-countdown">
+            {/* <time className="flash-countdown">
               <div>
                 <span>Days</span> <div>{timeLeft.days}</div>
               </div>
@@ -90,7 +90,7 @@ const FlashSales = () => {
               <div>
                 <span>Seconds</span> <div>{timeLeft.seconds}</div>
               </div>
-            </time>
+            </time> */}
             <section className="flash-swiper-arrow">
               <div className="swiper-button-prev" />
               <div className="swiper-button-next" />
