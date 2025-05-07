@@ -113,13 +113,6 @@ const Cart = () => {
               <p className="cart-route-2">Cart</p>
             </div>
             <section>
-              <header className="cart-headers">
-                <div className="cart-headers-product">Product</div>
-                <p>Price</p>
-                <p>In Stock</p>
-                <p>Quantity</p>
-                <p>Subtotal</p>
-              </header>
               <div
                 className={
                   cart.products.length ? "cart-clear" : "cart-hide-clear"
@@ -132,6 +125,13 @@ const Cart = () => {
                   className="cart-clear-button"
                 />
               </div>
+              <header className="cart-headers">
+                <div className="cart-headers-product">Product</div>
+                <p>Price</p>
+                <p>In Stock</p>
+                <p>Quantity</p>
+                <p>Subtotal</p>
+              </header>
 
               {cart.products.map((item, index) => (
                 <div key={index} className="cart-items">
