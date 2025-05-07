@@ -3,11 +3,14 @@
     position: fixed;
     top: 0px;
     width: 70%;
-    height: 90%;
+    min-height: 50%;
+    max-height: 99%;
     padding: 10px ;
     background-color: #ffffff;
     border: 1px solid #00000033;
     border-radius: 0px 0px 20px 0;
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
   }
   .side-header {
     font-weight: 500;

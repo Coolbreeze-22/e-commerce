@@ -105,9 +105,7 @@ const NavSmallDevice = () => {
       {isSidebar && (
         <div className="nav-small-sidebar">
           <Sidebar
-            setIsSidebar={setIsSidebar}
             user={user}
-            handleSidebar={handleSidebar}
             handleLogout={handleLogout}
           />
         </div>

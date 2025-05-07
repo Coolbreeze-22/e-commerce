@@ -1,4 +1,3 @@
-import React from "react";
 import "./Sidebar.css";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { GoInfo } from "react-icons/go";
@@ -13,140 +12,157 @@ import { ImCancelCircle } from "react-icons/im";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { UserProps } from "../../../states/redux/reducerTypes";
 import * as utils from "../navUtils";
+import { ClickAwayListener } from "@mui/material";
+import { useStateContext } from "../../../context/context";
 
 type sidebarPropType = {
-  setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   user: UserProps;
-  handleSidebar: () => void;
   handleLogout: () => void;
 };
 
-const Sidebar = ({
-  setIsSidebar,
-  user,
-  handleSidebar,
-  handleLogout,
-}: sidebarPropType) => {
+const Sidebar = ({ user, handleLogout }: sidebarPropType) => {
   const useLabelNavigate = utils.useLabelNavigate();
+  const {  setIsSidebar } = useStateContext();
 
   const handleNavigate = (label: string) => {
     useLabelNavigate(label);
     setIsSidebar(false);
   };
+  const handleClick = () => {
+    setIsSidebar((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setIsSidebar(false);
+  };
 
   return (
-    <main className="sidebar-container">
-      <header>
-        <span onClick={handleSidebar}>
-          <IoMdClose size={24} />
-        </span>
-        <span className="side-header" onClick={()=> handleNavigate('home')}>Shopinu</span>
-      </header>
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <main className="sidebar-container">
+        <header>
+          <span onClick={handleClick}>
+            <IoMdClose size={24} />
+          </span>
+          <span className="side-header" onClick={() => handleNavigate("home")}>
+            Shopinu
+          </span>
+        </header>
 
-      {user.isAdmin && (
+        {user.isAdmin && (
+          <div
+            onClick={() => {
+              handleNavigate("admin");
+            }}
+          >
+            <span>
+              <MdOutlineAdminPanelSettings size={20} />
+            </span>
+            <span>Admin</span>
+          </div>
+        )}
         <div
           onClick={() => {
-            handleNavigate("admin");
+            handleNavigate("home");
           }}
         >
           <span>
-            <MdOutlineAdminPanelSettings size={20}/>
+            <AiOutlineHome size={20} />
           </span>
-          <span>Admin</span>
+          <span>Home</span>
         </div>
-      )}
-      <div
-        onClick={() => {
-          handleNavigate("home");
-        }}
-      >
-        <span>
-          <AiOutlineHome size={20}/>
-        </span>
-        <span>Home</span>
-      </div>
-      <div
-        onClick={() => {
-          handleNavigate("contact");
-        }}
-      >
-        <span>
-          <MdOutlineContactPhone size={20}/>
-        </span>
-        <span>Contact</span>
-      </div>
-      <div
-        onClick={() => {
-          handleNavigate("about");
-        }}
-      >
-        <span>
-          <GoInfo size={20}/>
-        </span>
-        <span>About</span>
-      </div>
-      {user.id ? (
-        <>
-          <div
-            onClick={() => {
-              handleNavigate("account");
-            }}
-          >
-            <span>
-              <IoPersonOutline size={20}/>
-            </span>
-            <span>Manage My Account</span>
-          </div>
-          <div
-            onClick={() => {
-              handleNavigate("orders");
-            }}
-          >
-            <span>
-              <IoBagHandleOutline size={20}/>
-            </span>
-            <span>My Order</span>
-          </div>
-          <div
-            onClick={() => {
-              handleNavigate("account");
-            }}
-          >
-            <span>
-              <ImCancelCircle size={20}/>
-            </span>
-            <span>My Cancellations</span>
-          </div>
-          <div
-            onClick={() => {
-              handleNavigate("account");
-            }}
-          >
-            <span>
-              <FaRegStar size={20}/>
-            </span>
-            <span>My Reviews</span>
-          </div>
-          <div onClick={handleLogout}>
-            <span>
-              <RiLogoutBoxLine size={20}/>
-            </span>
-            <span>Logout</span>
-          </div>
-        </>
-      ) : (
         <div
           onClick={() => {
-            handleNavigate("login");
+            handleNavigate("contact");
           }}
         >
           <span>
-            <RiLoginBoxLine size={20}/>
+            <MdOutlineContactPhone size={20} />
           </span>
-          <span> Login</span>
+          <span>Contact</span>
         </div>
-      )}
-    </main>
+        <div
+          onClick={() => {
+            handleNavigate("about");
+          }}
+        >
+          <span>
+            <GoInfo size={20} />
+          </span>
+          <span>About</span>
+        </div>
+        {user.id ? (
+          <>
+            <div
+              onClick={() => {
+                handleNavigate("account");
+              }}
+            >
+              <span>
+                <IoPersonOutline size={20} />
+              </span>
+              <span>Manage My Account</span>
+            </div>
+            <div
+              onClick={() => {
+                handleNavigate("orders");
+              }}
+            >
+              <span>
+                <IoBagHandleOutline size={20} />
+              </span>
+              <span>My Order</span>
+            </div>
+            <div
+              onClick={() => {
+                handleNavigate("account");
+              }}
+            >
+              <span>
+                <ImCancelCircle size={20} />
+              </span>
+              <span>My Cancellations</span>
+            </div>
+            <div
+              onClick={() => {
+                handleNavigate("account");
+              }}
+            >
+              <span>
+                <FaRegStar size={20} />
+              </span>
+              <span>My Reviews</span>
+            </div>
+            <div
+              onClick={() => {
+                handleNavigate("account");
+              }}
+            >
+              <span>
+                <FaRegStar size={20} />
+              </span>
+              <span>My Reviews</span>
+            </div>
+            <div onClick={handleLogout}>
+              <span>
+                <RiLogoutBoxLine size={20} />
+              </span>
+              <span>Logout</span>
+            </div>
+          </>
+        ) : (
+          <div
+            onClick={() => {
+              handleNavigate("login");
+            }}
+          >
+            <span>
+              <RiLoginBoxLine size={20} />
+            </span>
+            <span> Login</span>
+          </div>
+        )}
+      </main>
+    </ClickAwayListener>
   );
 };
 

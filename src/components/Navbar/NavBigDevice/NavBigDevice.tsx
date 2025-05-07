@@ -66,7 +66,7 @@ const NavBigDevice = () => {
           <div onClick={handleLogout}>Sign out</div>
         ) : (
           <div>
-            <a href="/register">Sign up</a>
+            <a href="/login">Sign in</a>
           </div>
         )}
         <div className="nav-big-search">
