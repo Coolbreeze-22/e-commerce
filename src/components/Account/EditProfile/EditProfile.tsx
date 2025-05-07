@@ -1,45 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./EditProfile.css";
 import CustomInput from "../../CustomInput/CustomInput";
 import CustomButton from "../../CustomButton/CustomButton";
+import { useStateContext } from "../../../context/context";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../states/redux/store";
+import { updateProfile } from "../../../controller/userController";
 
-const EditProfile = ({ children }: {
-  children: React.ReactNode;}) => {
-  interface formType {
-    firstName: string;
-    lastName: string;
-    email: string;
-    address: string;
-    password: string;
-    newPassword: string;
-    comfirmPassword: string;
-  }
+const EditProfile = ({
+  setIsEdit,
+}: {
+  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const { userFormData, setUserFormData } = useStateContext();
+  const { user } = useSelector((state: RootState) => state.userReducer);
+  const [isInput, setIsInput] = useState<boolean>(false);
 
-  const initialState: formType = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    address: "",
-    password: "",
-    newPassword: "",
-    comfirmPassword: "",
-  };
+  const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState<formType>(initialState);
+  useEffect(() => {
+    if (user.id) {
+      setUserFormData({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        phoneNumber: user.phoneNumber,
+        photoUrl: user.photoUrl,
+        address: user.address,
+        companyName: user.companyName,
+        apartment: user.apartment,
+        city: user.city,
+        isAdmin: user.isAdmin,
+        isOwner: user.isOwner,
+        isSignedIn: user.isSignedIn,
+        lastLoginAt: user.lastLoginAt,
+        lastLogoutAt: user.lastLogoutAt,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      });
+    }
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setFormData(initialState);
+    updateProfile(userFormData, dispatch);
+    setIsInput(false);
   };
-  const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
 
-    setFormData(initialState);
-  };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData((prev: formType) => ({ ...prev, [name]: value }));
+    setUserFormData((prev) => ({ ...prev, [name]: value }));
+    setIsInput(true);
+  };
+  const handleClose = () => {
+    setIsEdit(false);
+    setIsInput(true);
   };
 
   return (
@@ -53,9 +71,8 @@ const EditProfile = ({ children }: {
             autoFocus
             type="text"
             name="firstName"
-            placeholder="Md"
             className="editProf-input-1"
-            value={formData.firstName}
+            value={userFormData.firstName}
             onChange={handleChange}
           />
         </div>
@@ -65,84 +82,83 @@ const EditProfile = ({ children }: {
           <CustomInput
             type="text"
             name="lastName"
-            placeholder="Rimel"
-            value={formData.lastName}
+            value={userFormData.lastName}
             className="editProf-input-1"
             onChange={handleChange}
           />
         </div>
         <div className="editProf-form-text">
-          <label>Email</label>
+          <label>Phone Number</label>
           <br />
           <CustomInput
-            type="email"
-            name="email"
-            placeholder="rimel1111@gmail.com"
+            type="tel"
+            name="phoneNumber"
             className="editProf-input-1"
-            value={formData.email}
+            value={userFormData.phoneNumber}
             onChange={handleChange}
           />
         </div>
-        <div className="prof-form-text">
+        <div className="editProf-form-text">
           <label>Address</label>
           <br />
           <CustomInput
-            type="name"
+            type="text"
             name="address"
-            placeholder="Kingston, 5236, United State"
             className="editProf-input-1"
-            value={formData.address}
+            value={userFormData.address}
             onChange={handleChange}
           />
         </div>
-        <div className="editProf-form-password">
-          <label>Password Changes</label>
+        <div className="editProf-form-text">
+          <label>Company Name</label>
           <br />
           <CustomInput
-            type="password"
-            name="password"
-            placeholder="Current Password"
+            type="text"
+            name="companyName"
             className="editProf-input-2"
-            value={formData.password}
+            value={userFormData.companyName}
             onChange={handleChange}
           />
         </div>
-        <div className="editProf-form-password">
+        <div className="editProf-form-text">
+          <label>Apartment</label>
+          <br />
           <CustomInput
-            type="password"
-            name="newPassword"
-            placeholder="New Password"
+            type="text"
+            name="apartment"
             className="editProf-input-2"
-            value={formData.newPassword}
+            value={userFormData.apartment}
             onChange={handleChange}
           />
         </div>
-        <div className="editProf-form-password">
+        <div className="editProf-form-text">
+          <label>City</label>
+          <br />
           <CustomInput
-            type="password"
-            name="comfirmPassword"
-            placeholder="Comfirm New Password"
+            type="text"
+            name="city"
             className="editProf-input-2"
-            value={formData.comfirmPassword}
+            value={userFormData.city}
             onChange={handleChange}
           />
         </div>
         <div className="editProf-btn-wrapper">
           <CustomButton
-            onClick={(event) => handleClear(event)}
+            type="button"
+            onClick={handleClose}
             text="Cancel"
             className="editProf-cancel-btn"
           />
           <CustomButton
             type="submit"
             text="Save Changes"
-            className="editProf-save-btn"
+            className={
+              isInput ? "editProf-save-btn" : "editProf-save-btn-disabled"
+            }
+            disabled={!isInput}
           />
         </div>
       </form>
-      <aside className="editProf-child">
-      {children}
-      </aside>
     </main>
   );
 };

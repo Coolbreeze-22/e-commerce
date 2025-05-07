@@ -40,6 +40,32 @@
 .acct-prof-edit {
   flex-basis: 72%;
 }
+.acct-del-area {
+  margin-top: 50px;
+}
+.acct-del-area > aside > p {
+  font-weight: 500;
+  color: red;
+}
+.acct-del-btn-no,
+.acct-del-btn-yes {
+  width: 100px;
+  height: 56px;
+  margin-right: 60px;
+  border-radius: 4px;
+  border-width: 0;
+  color: white;
+}
+.acct-del-btn-no {
+  background-color: green;
+}
+.acct-del-btn-yes {
+  background-color: red;
+}
+.acct-del-btn-no:active,
+.acct-del-btn-yes:active {
+  background-color: gray;
+}
 
 @media (max-width: 600px) {
   .acct-container {
@@ -69,6 +95,11 @@
   .acct-manage {
     margin-bottom: 20px;
   }
+  .acct-del-btn-no,
+  .acct-del-btn-yes {
+    width: 100px;
+    height: 35px;
+  }
 }
 
 @media (min-width: 601px) and (max-width: 768px) {
@@ -86,5 +117,10 @@
   }
   .acct-manage {
     flex-basis: 30%;
+  }
+  .acct-del-btn-no,
+  .acct-del-btn-yes {
+    width: 100px;
+    height: 40px;
   }
 }

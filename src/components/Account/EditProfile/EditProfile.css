@@ -38,27 +38,16 @@
   justify-content: flex-end;
   padding-top: 5px;
 }
-.editProf-child > button {
-  width: 150px;
-  height: 40px;
-  border: 1px solid #db4444;
-  color: #db4444;
-  border-radius: 4px;
-}
-.editProf-child > button:hover {
-  background-color: #db4444;
-  color: #ffffff;
-}
+
 @media (max-width: 600px) {
   .editProf-container {
     font-size: 14px;
     line-height: 19px;
-    padding: 10px;
+    padding: 20px 10px 10px 10px;
   }
   .editProf-form-header {
     font-size: 17px;
     line-height: 22px;
-    margin-bottom: 10px;
   }
   .editProf-form {
     row-gap: 7px;
