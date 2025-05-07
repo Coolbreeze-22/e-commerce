@@ -3,44 +3,52 @@ import CustomInput from "../../CustomInput/CustomInput";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { useStateContext } from "../../../context/context";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { RootState
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../states/redux/store";
+import { updateProfile } from "../../../controller/userController";
 
- } from "../../../states/redux/store";
 const CheckoutForm = () => {
-  const { checkoutFormData, setCheckoutFormData } = useStateContext();
+  const { userFormData, setUserFormData } = useStateContext();
   const { user } = useSelector((state: RootState) => state.userReducer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-  if (user.id) {
-    setCheckoutFormData({
-      firstName: user.firstName,
-      companyName: user.companyName,
-      streetAddress: user.address,
-      apartment: user.apartment,
-      townCity: user.city,
-      phoneNumber: user.phoneNumber,
-      email: user.email,
-    });
-  }
-}, []);
+    if (user.id) {
+      setUserFormData({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        phoneNumber: user.phoneNumber,
+        photoUrl: user.photoUrl,
+        address: user.address,
+        companyName: user.companyName,
+        apartment: user.apartment,
+        city: user.city,
+        isAdmin: user.isAdmin,
+        isOwner: user.isOwner,
+        isSignedIn: user.isSignedIn,
+        lastLoginAt: user.lastLoginAt,
+        lastLogoutAt: user.lastLogoutAt,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      });
+    }
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // edditProfile(formData, dispatch)
+    updateProfile(userFormData, dispatch);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setCheckoutFormData((prev) => ({ ...prev, [name]: value }));
+    setUserFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <form
-      id="myForm"
-      onSubmit={(event) => handleSubmit(event)}
-      className="checkout-form"
-    >
+    <form onSubmit={(event) => handleSubmit(event)} className="checkout-form">
       <div>
         <label>
           First Name<span>*</span>
@@ -51,7 +59,7 @@ const CheckoutForm = () => {
           type="text"
           name="firstName"
           className="checkout-input"
-          value={checkoutFormData.firstName}
+          value={userFormData.firstName}
           onChange={handleChange}
         />
       </div>
@@ -62,7 +70,7 @@ const CheckoutForm = () => {
           required
           type="text"
           name="companyName"
-          value={checkoutFormData.companyName}
+          value={userFormData.companyName}
           className="checkout-input"
           onChange={handleChange}
         />
@@ -75,9 +83,9 @@ const CheckoutForm = () => {
         <CustomInput
           required
           type="text"
-          name="streetAddress"
+          name="address"
           className="checkout-input"
-          value={checkoutFormData.streetAddress}
+          value={userFormData.address}
           onChange={handleChange}
         />
       </div>
@@ -88,7 +96,7 @@ const CheckoutForm = () => {
           type="text"
           name="apartment"
           className="checkout-input"
-          value={checkoutFormData.apartment}
+          value={userFormData.apartment}
           onChange={handleChange}
         />
       </div>
@@ -100,9 +108,9 @@ const CheckoutForm = () => {
         <CustomInput
           required
           type="text"
-          name="townCity"
+          name="city"
           className="checkout-input"
-          value={checkoutFormData.townCity}
+          value={userFormData.city}
           onChange={handleChange}
         />
       </div>
@@ -116,7 +124,7 @@ const CheckoutForm = () => {
           type="text"
           name="phoneNumber"
           className="checkout-input"
-          value={checkoutFormData.phoneNumber}
+          value={userFormData.phoneNumber}
           onChange={handleChange}
         />
       </div>
@@ -130,8 +138,9 @@ const CheckoutForm = () => {
           type="email"
           name="email"
           className="checkout-input"
-          value={checkoutFormData.email}
-          onChange={handleChange}
+          readOnly={true}
+          value={userFormData.email}
+          // onChange={handleChange}
         />
       </div>
       <aside className="checkout-aside">
