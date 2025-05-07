@@ -1,0 +1,123 @@
+.mng-orders-container {
+  position: relative;
+  top: 200px;
+  margin-left: 115px;
+  margin-right: 115px;
+  margin-bottom: 100px;
+}
+.mng-orders-routes {
+  display: flex;
+  gap: 15px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.mng-orders-route1,
+.mng-orders-route-slash {
+  opacity: 0.5;
+}
+.mng-orders-body {
+  box-sizing: border-box;
+  margin-top: 50px;
+  padding: 20px 30px;
+  box-shadow: 0 0 6px 1px #8080801a;
+}
+.mng-orders-total {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.mng-orders-total > p:nth-child(1) {
+  color: #db4444;
+}
+.mng-orders-header,
+.mng-orders-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #8080804b;
+  margin: 10px 0;
+  padding: 0 10px;
+  height: 60px;
+}
+.mng-orders-header {
+  border: none;
+}
+.mng-orders-content {
+  position: relative;
+}
+.mng-orders-header > p,
+.mng-orders-content > p {
+  flex-basis: 20%;
+}
+.mng-orders-content > time {
+  flex-basis: 20%;
+}
+.mng-orders-green {
+  color: green;
+}
+.mng-orders-orange {
+  color: orange;
+}
+.mng-orders-red {
+  color: red;
+}
+.mng-orders-more-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media (max-width: 600px) {
+  .mng-orders-container {
+    top: 120px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  .mng-orders-routes {
+    gap: 10px;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 20px;
+  }
+  .mng-orders-body {
+    margin-top: 30px;
+    padding: 10px;
+  }
+  .mng-orders-total > p {
+    margin: 5px 0;
+  }
+  .mng-orders-header,
+  .mng-orders-content {
+    gap: 5px;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .mng-orders-container {
+    top: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 50px;
+  }
+  .mng-orders-routes {
+    gap: 10px;
+    line-height: 19px;
+    margin-bottom: 30px;
+  }
+  .mng-orders-body {
+    padding: 15px;
+  }
+  .mng-orders-header,
+  .mng-orders-content {
+    gap: 10px;
+    padding: 0 5px;
+    font-size: 15px;
+  }
+}
