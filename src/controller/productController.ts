@@ -1,29 +1,56 @@
+import {
+  auth,
+  fireStore,
+  collection,
+  doc,
+  updateDoc,
+  getDocs,
+  addDoc,
+  deleteDoc,
+} from "../config/firebase";
 import * as reducer from "../states/redux/productReducer";
-import { products } from "../dummy/dummyProducts";
 import { AppDispatch } from "../states/redux/store";
 import { initialState } from "../states/redux/productReducer";
 import { InitialStateProps, ProductType } from "../states/redux/reducerTypes";
-import { flashSaleCountdown } from "../dummy/dummyCountdown";
+// import { flashSaleCountdown } from "../dummy/dummyCountdown";
+import { toastNotification } from "../components/utils/toastNotification";
+
+interface CreateProductProps {
+  product: ProductType;
+  isAdmin: boolean;
+  dispatch: AppDispatch;
+}
+interface UpdateProductByAdminProps {
+  product: ProductType;
+  isAdmin: boolean;
+  dispatch: AppDispatch;
+}
 const initialData: InitialStateProps = {
   ...initialState,
-  products,
-  flashSaleCountdown,
 };
 
 const uniqueCategory: Set<string> = new Set();
 const uniqueSubCategory: Set<string> = new Set();
 
-type ItemType1 = {
+type GroupProductsProps = {
   category: string;
   label: string;
   product: ProductType;
   uniqueLabel: string;
 };
-type ItemType2 = Pick<ItemType1, "label"> & { group: string };
+type GroupCategoriesProps = Pick<GroupProductsProps, "label"> & {
+  group: string;
+};
 
 export const fetchProducts = async (dispatch: AppDispatch) => {
   try {
-    for (const product of products) {
+    dispatch(reducer.productLoading(true));
+    const colRef = collection(fireStore, "products");
+    const querySnapshot = await getDocs(colRef);
+
+    for (const doc of querySnapshot.docs) {
+      const product = doc.data() as ProductType;
+      initialData.products = [...initialData.products, product];
       if (product.isFlashSales) {
         groupProducts({
           product,
@@ -66,23 +93,78 @@ export const fetchProducts = async (dispatch: AppDispatch) => {
 
     dispatchData(dispatch);
   } catch (error: any) {
-    dispatch(
-      reducer.productError("Something went wrong while fetching products")
-    );
+    dispatch(reducer.productLoading(false));
+    toastNotification(error.message, "error");
   }
 };
 
-export const getFlashSaleCountdown = async (dispatch: AppDispatch) => {
+export const createProduct = async (data: CreateProductProps) => {
+  const { product, isAdmin, dispatch } = data;
   try {
-    dispatch(reducer.getFlashSaleCountdown(initialData.flashSaleCountdown));
+    dispatch(reducer.productLoading(true));
+    if (auth.currentUser?.uid && isAdmin) {
+      const colRef = collection(fireStore, "products");
+      const docRef = await addDoc(colRef, product);
+      await updateDoc(docRef, {
+        id: docRef.id,
+        createdAt: Date.now().toString(),
+      });
+      const productData = { ...product, id: docRef.id };
+      dispatch(reducer.createProduct(productData));
+      toastNotification("Product created successfully", "success");
+    } else {
+      toastNotification("Forbidden: Admin access required.", "error");
+    }
+    dispatch(reducer.productLoading(false));
   } catch (error: any) {
-    dispatch(
-      reducer.productError("Something went wrong while fetching products")
-    );
+    dispatch(reducer.productLoading(false));
+    toastNotification(error.message, "error");
   }
 };
 
-const groupProducts = (item: ItemType1) => {
+export const updateProductByAdmin = async (data: UpdateProductByAdminProps) => {
+  const { product, isAdmin, dispatch } = data;
+  try {
+    if (auth.currentUser?.uid && isAdmin) {
+      const docRef = doc(fireStore, "products", product.id);
+      const newDate = Date.now().toString();
+      await updateDoc(docRef, { ...product, updatedAt: newDate });
+      dispatch(
+        reducer.updateProductByAdmin({
+          ...product,
+          updatedAt: newDate,
+        })
+      );
+      toastNotification("Product updated successfully !", "success");
+    } else if (auth.currentUser?.uid && isAdmin) {
+      toastNotification("Forbidden: Admin access required.", "error");
+    } else {
+      toastNotification("Sign in to complete this action !", "warning");
+    }
+  } catch (error: any) {
+    toastNotification(error.message, "error");
+  }
+};
+
+export const deleteProductByAdmin = async (
+  id: string,
+  dispatch: AppDispatch
+) => {
+  try {
+    if (auth.currentUser?.uid) {
+      const docRef = doc(fireStore, "products", id);
+      await deleteDoc(docRef);
+      dispatch(reducer.deleteProductByAdmin(id));
+      toastNotification("Product deleted successfully !", "success");
+    } else {
+      toastNotification("Sign in to complete this action !", "warning");
+    }
+  } catch (error: any) {
+    toastNotification(error.message, "error");
+  }
+};
+
+const groupProducts = (item: GroupProductsProps) => {
   const { product, label, category, uniqueLabel } = item;
   const labelAndCategory = `${label}-${category.trim()}`;
 
@@ -97,7 +179,7 @@ const groupProducts = (item: ItemType1) => {
   }
 };
 
-const groupCategories = (item: ItemType2) => {
+const groupCategories = (item: GroupCategoriesProps) => {
   const { label, group } = item;
   const currentCategory = group.trim();
 
@@ -111,8 +193,8 @@ const groupCategories = (item: ItemType2) => {
 };
 
 function dispatchData(dispatch: AppDispatch) {
-  dispatch(reducer.productLoading(true));
   dispatch(reducer.getProducts(initialData.products));
+
   dispatch(reducer.getFlashSales(initialData.flashSales));
   dispatch(reducer.getBestSelling(initialData.bestSelling));
   dispatch(reducer.getExplore(initialData.explore));
