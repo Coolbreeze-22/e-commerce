@@ -1,0 +1,125 @@
+.admin-container {
+    position: relative;
+    top: 200px;
+    margin-left: 115px;
+    margin-right: 115px;
+    margin-bottom: 100px;
+  }
+  .admin-routes {
+    display: flex;
+    gap: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    margin-bottom: 50px;
+    cursor: pointer;
+  }
+  .admin-route1,
+  .admin-route-slash {
+    opacity: 0.5;
+  }
+  .admin-body{
+    margin-top: 50px;
+  }
+  .admin-info {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    align-items: center;
+  }
+  .admin-red {
+    width: 20px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #db4444;
+  }
+  .admin-header {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: 1.5px;
+  }
+  .admin-content{
+    box-sizing: border-box;
+    margin-top: 30px;
+    padding: 20px 40px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 6px 1px #8080801a;
+  }
+  .admin-content>div{
+    margin: 20px 0;
+    padding: 20px 0;
+    text-align: center;
+    border: 1px solid #8080804b;
+  }
+  .admin-content>div:hover{
+    background-color: #db4444;
+    color: white;
+    padding: 23px 0;
+    border-radius: 4px;
+  }
+  @media (max-width: 600px) {
+    .admin-container {
+      top: 120px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 20px;
+    }
+    .admin-routes {
+      gap: 10px;
+      font-size: 14px;
+      line-height: 19px;
+      margin-bottom: 20px;
+    }
+    .admin-header {
+      font-size: 20px;
+      line-height: 30px;
+      letter-spacing: 1px;
+    }
+    .admin-content{
+      margin-top: 20px;
+      padding: 15px;
+      width: 100%;
+    }
+    .admin-content>div{
+      margin: 15px 0;
+      padding: 15px 0;
+    }
+    .admin-content>div:hover{
+      padding: 17px 0;
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 768px) {
+    .admin-container {
+      top: 150px;
+      margin-left: 25px;
+      margin-right: 25px;
+      margin-bottom: 50px;
+    }
+    .admin-routes {
+      gap: 10px;
+      line-height: 19px;
+      margin-bottom: 30px;
+    }
+    .admin-header {
+      font-size: 25px;
+      line-height: 33px;
+      letter-spacing: 1.3px;
+    }
+    .admin-content{
+      margin-top: 20px 30px;
+      padding: 15px;
+      width: 70%;
+    }
+    .admin-content>div{
+      margin: 15px 0;
+      padding: 15px 0;
+    }
+    .admin-content>div:hover{
+      padding: 18px 0;
+    }
+  }
+  
