@@ -1,16 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { OrderProps } from "./reducerTypes";
-import { toastNotification } from "../../components/utils/toastNotification";
 
 export type OrderInitialStateProps = {
-  orders: Array<OrderProps>;
-  total: number;
+  userOrders: Array<OrderProps>;
+  allUsersOrders: Array<OrderProps>;
+  userTotal: number;
+  allUsersTotal: number;
   isLoading: boolean;
 };
+export interface UpdateOrderByAdminProps {
+  id: string;
+  updateData: {
+    orderStatus?: string;
+    paymentStatus?: string;
+    updatedAt: string;
+  };
+}
 export const orderInitialState: OrderInitialStateProps = {
-  orders: [],
-  total: 0,
+  userOrders: [],
+  allUsersOrders: [],
+  userTotal: 0,
+  allUsersTotal: 0,
   isLoading: false,
 };
 
@@ -18,38 +29,58 @@ const orderSlice = createSlice({
   name: "order",
   initialState: orderInitialState,
   reducers: {
+    getAllUsersOrders(state, action: PayloadAction<Array<OrderProps>>) {
+      state.allUsersOrders = action.payload;
+      state.allUsersTotal = action.payload.reduce(
+        (totalAmount, order) => totalAmount + order.total,
+        0
+      );
+    },
+    getUserOrders(state, action: PayloadAction<Array<OrderProps>>) {
+      state.userOrders = action.payload;
+      state.userTotal = action.payload.reduce(
+        (totalAmount, order) => totalAmount + order.total,
+        0
+      );
+    },
     createOrder(state, action: PayloadAction<OrderProps>) {
-      state.orders.push(action.payload);
-      state.total += action.payload.total;
-      toastNotification("Order created successfully", "success");
+      state.userOrders.push(action.payload);
+      state.userTotal += action.payload.total;
     },
 
-    deleteOrder(state, action: PayloadAction<string>) {
-      const existingOrder = state.orders.find(
-        (order) => order.id === action.payload
+    updateOrderByAdmin(state, action: PayloadAction<UpdateOrderByAdminProps>) {
+      const existingOrderIndex = state.allUsersOrders.findIndex(
+        (order) => order.id === action.payload.id
       );
-      if (existingOrder?.email) {
-        state.orders = state.orders.filter(
-          (order) => order.id !== action.payload
+      if (existingOrderIndex>=0) {
+        state.allUsersOrders[existingOrderIndex] = {
+          ...state.allUsersOrders[existingOrderIndex],
+          ...action.payload.updateData,
+        };
+      }
+    },
+    deleteOrder(state, action: PayloadAction<{ id: string; label: string }>) {
+      if (action.payload.label === "admin") {
+        const existingOrder = state.allUsersOrders.find(
+          (order) => order.id === action.payload.id
         );
-        state.total -= existingOrder.total;
-        toastNotification("Order deleted successfully", "success");
+        if (existingOrder?.id) {
+          state.allUsersOrders = state.allUsersOrders.filter(
+            (order) => order.id !== action.payload.id
+          );
+          state.allUsersTotal -= existingOrder.total;
+        }
+      } else {
+        const existingOrder = state.userOrders.find(
+          (order) => order.id === action.payload.id
+        );
+        if (existingOrder?.id) {
+          state.userOrders = state.userOrders.filter(
+            (order) => order.id !== action.payload.id
+          );
+          state.userTotal -= existingOrder.total;
+        }
       }
-    },
-    updateOrder(state, action: PayloadAction<{ id: string; orderStatus: string }>) {
-      const existingOrderIndex = state.orders.findIndex(
-        (order) => order.transactionId === action.payload.id
-      );
-      if (existingOrderIndex) {
-        state.orders[existingOrderIndex].orderStatus = action.payload.orderStatus
-        toastNotification("Order-status updated successfully", "success");
-      }
-    },
-    clearOrdersByAdmin(state) {
-      state.orders = [];
-      (state.total = 0),
-        (state.isLoading = false),
-        toastNotification("Order cleared successfully", "success");
     },
     orderLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
@@ -57,5 +88,12 @@ const orderSlice = createSlice({
   },
 });
 
-export const { createOrder, deleteOrder, updateOrder, clearOrdersByAdmin, orderLoading } = orderSlice.actions;
+export const {
+  getAllUsersOrders,
+  getUserOrders,
+  createOrder,
+  deleteOrder,
+  updateOrderByAdmin,
+  orderLoading,
+} = orderSlice.actions;
 export default orderSlice.reducer;
