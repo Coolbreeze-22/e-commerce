@@ -7,18 +7,20 @@ import { RootState } from "../../states/redux/store";
 import Navbar from "../Navbar/Navbar";
 import Orders from "./Orders/Orders";
 import Profile from "./Profile/Profile";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import CustomButton from "../CustomButton/CustomButton";
+import { deleteMyAccount } from "../../controller/userController";
 
 const Account = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [isWarning, setIsWarning] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user.id) {
-      navigate('/register');
-    }
-  }, [user, navigate]);
+  const handleDeleteMyAccount = () => {
+    setIsWarning(false);
+    deleteMyAccount(user.id, navigate);
+  };
 
   return (
     <Navbar>
@@ -42,11 +44,7 @@ const Account = () => {
             </div>
             {isEdit ? (
               <div className="acct-prof-edit">
-                <EditProfile>
-                  <button onClick={() => setIsEdit((prev) => !prev)}>
-                    Close
-                  </button>
-                </EditProfile>
+                <EditProfile setIsEdit={setIsEdit} />
               </div>
             ) : (
               <div className="acct-prof-edit">
@@ -63,6 +61,34 @@ const Account = () => {
           </section>
         </div>
         <Orders />
+        <div className="acct-del-area">
+          {isWarning ? (
+            <aside>
+              <p>
+                Are you sure you want to delete your account? This action cannot
+                be undone.
+              </p>
+              <button
+                className="acct-del-btn-no"
+                onClick={() => setIsWarning(false)}
+              >
+                No
+              </button>
+              <button
+                className="acct-del-btn-yes"
+                onClick={handleDeleteMyAccount}
+              >
+                Yes
+              </button>
+            </aside>
+          ) : (
+            <CustomButton
+              text="Delete Account"
+              className="acct-del-acct-btn"
+              onClick={() => setIsWarning(true)}
+            />
+          )}
+        </div>
       </main>
     </Navbar>
   );

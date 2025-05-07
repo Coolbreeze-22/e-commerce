@@ -26,7 +26,7 @@
   margin-top: 20px;
   margin-bottom: 50px;
 }
-.search-header> div> i {
+.search-header > div > i {
   color: #db4444;
   font-weight: 500;
   font-size: 30px;
@@ -52,7 +52,7 @@
   position: relative;
   background-color: #f5f5f5;
   width: 260px;
-  height: 240px;
+  height: 250px;
 }
 .search-discount {
   position: absolute;
@@ -80,12 +80,52 @@
   top: 50px;
   right: 10px;
 }
+.search-edit {
+  position: absolute;
+  bottom: 50px;
+  right: 5px;
+}
+.search-delete {
+  position: absolute;
+  bottom: 50px;
+  left: 5px;
+}
 .search-icon {
   width: 24px;
   height: 24px;
   padding: 5px;
   background-color: #ffffff;
   border-radius: 20px;
+}
+.search-warning{
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 50px;
+  left: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 0 5px;
+  background-color: white;
+  height: 40px;
+  width: 100%;
+}
+.search-warning>button:nth-child(1){
+  box-sizing: border-box;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 3px;
+}
+.search-warning>button:nth-child(2){
+  box-sizing: border-box;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 3px;
 }
 .search-image-wrapper {
   align-content: center;
@@ -180,7 +220,7 @@
     letter-spacing: 1px;
     margin-bottom: 20px;
   }
-  .search-header> div> i {
+  .search-header > div > i {
     color: #db4444;
     font-size: 13px;
     line-height: 18px;
@@ -195,7 +235,6 @@
     width: 160px;
   }
   .search-image-sect {
-    padding-top: 25px;
     width: 100%;
     height: 150px;
     border-radius: 4px;
@@ -221,9 +260,15 @@
     top: 5px;
     right: 50px;
   }
+  .search-edit {
+    bottom: 30px;
+  }
+  .search-delete {
+    bottom: 30px;
+  }
   .search-icon {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
   .search-add-to-cart {
     height: 25px;
@@ -259,7 +304,7 @@
     font-size: 25px;
     line-height: 30px;
   }
-  .search-header> div> i {
+  .search-header > div > i {
     font-weight: 500;
     font-size: 20px;
     line-height: 25px;
@@ -273,7 +318,6 @@
     width: 150px;
   }
   .search-image-sect {
-    padding-top: 35px;
     width: 100%;
     height: 150px;
   }
@@ -298,9 +342,15 @@
     top: 5px;
     right: 50px;
   }
+  .search-edit {
+    bottom: 40px;
+  }
+  .search-delete {
+    bottom: 40px;
+  }
   .search-icon {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
   .search-add-to-cart {
     height: 30px;

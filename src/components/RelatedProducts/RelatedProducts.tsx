@@ -3,7 +3,7 @@ import "./RelatedProducts.css";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "@mui/material";
-import { RootState } from "../../../states/redux/store";
+import { RootState } from "../../states/redux/store";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -12,10 +12,10 @@ import {
   addItemToWishlist,
   computeDiscountPercent,
   computeRating,
-} from "../../utils/utilityFunctions";
-import { ProductType } from "../../../states/redux/reducerTypes";
-import MyIntersectionObserver from "../../utils/IntersectionObserver";
-import Navbar from "../../Navbar/Navbar";
+} from "../utils/utilityFunctions";
+import { ProductType } from "../../states/redux/reducerTypes";
+import MyIntersectionObserver from "../utils/IntersectionObserver";
+import Navbar from "../Navbar/Navbar";
 import { FiShoppingCart } from "react-icons/fi";
 
 const RelatedProducts = () => {

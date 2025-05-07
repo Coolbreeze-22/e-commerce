@@ -34,7 +34,8 @@
 .prod-dtls-small-img {
   flex-basis: 27%;
   overflow: auto;
-  scrollbar-width:none;
+  /* scrollbar-width:none; */
+  scrollbar-color: transparent transparent;
   height: 600px;
 }
 .prod-dtls-small-img > div {
@@ -132,7 +133,7 @@
 .prod-dtls-color > span {
   border-radius: 15px;
   padding: 2px;
-  background-color: white;
+  background-color: #b9adad;
 }
 .prod-dtls-color > span > aside {
   border-radius: 15px;

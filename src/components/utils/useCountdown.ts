@@ -63,20 +63,23 @@ const useCountdown = (startDate: string, endDate: string) => {
         hasStarted: true,
         hasEnded: false,
       });
-    } else if (startDate && endDate && !hasStarted) {
+    } else if (startDate && endDate && !hasStarted && !hasStarted) {
+      // this block of code is for upcoming event feature which is not yet in needed, hence the returned value to avoid typescript warning
+
       const timeRemainingToStart = startTime - currentTime;
       const days = Math.floor(timeRemainingToStart / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeRemainingToStart / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeRemainingToStart / 1000 / 60) % 60);
       const seconds = Math.floor((timeRemainingToStart / 1000) % 60);
-      setTimeLeft({
-        days,
-        hours,
-        minutes,
-        seconds,
-        hasStarted: false,
-        hasEnded: false,
-      });
+      // setTimeLeft({
+      //   days,
+      //   hours,
+      //   minutes,
+      //   seconds,
+      //   hasStarted: false,
+      //   hasEnded: false,
+      // });
+      return { days, hours, minutes, seconds };
     } else if (startDate && endDate && hasEnded) {
       setTimeLeft({
         days: 0,

@@ -1,20 +1,17 @@
 import { useEffect, useRef } from "react";
 import "./Orders.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
-import { deleteOrder } from "../../../controller/orderController";
-import { MdDeleteForever } from "react-icons/md";
 import { useInView } from "react-intersection-observer";
 
 const Orders = () => {
-  const { orders, total } = useSelector(
+  const { userOrders: orders, userTotal } = useSelector(
     (state: RootState) => state.orderReducer
   );
   const ordersRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const dispatch = useDispatch();
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
@@ -61,10 +58,13 @@ const Orders = () => {
             <section key={index} className="orders-list">
               <div className="orders-info">
                 <div>
-                  <p>Transaction id:</p>
-                  <p>{order.transactionId}</p>
+                  <p>Order id:</p>
+                  <p>{order.id}</p>
                 </div>
-                <MdDeleteForever onClick={()=> deleteOrder(order.id, dispatch)}/>
+                <div>
+                  <p>Transaction id:</p>
+                  <p>{order.transactionId ? order.transactionId : "none"}</p>
+                </div>
                 <div>
                   <p>Payment Status:</p>
                   <p className={paymentStatus(order.paymentStatus)}>
@@ -117,7 +117,7 @@ const Orders = () => {
 
           <section className="orders-total">
             <p>Total:</p>
-            <p className="orders-total-amount">₦{total}</p>
+            <p className="orders-total-amount">₦{userTotal}</p>
           </section>
         </div>
       )}

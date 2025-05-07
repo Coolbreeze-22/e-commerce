@@ -39,7 +39,7 @@ const HeroSection = () => {
         <div className="hero-icon-wrapper-sm">
           <aside>
             <IoIosArrowBack
-              size={25}
+              size={18}
               onClick={() => handleArrowClick("left")}
             />
           </aside>
@@ -57,7 +57,7 @@ const HeroSection = () => {
         <div className="hero-icon-wrapper-sm">
           <aside>
             <IoIosArrowForward
-              size={25}
+              size={18}
               onClick={() => handleArrowClick("right")}
             />
           </aside>
@@ -82,7 +82,13 @@ const HeroSection = () => {
             <aside>iPhone 14 Series</aside>
           </div>
           <p>Up to 10% off Voucher</p>
-          <aside onClick={()=> navigate("/products")}><span>Shop Now </span><FaArrowRightLong size={16} style={{verticalAlign:"middle", marginLeft:"10px"}}/></aside>
+          <aside onClick={() => navigate("/products")}>
+            <span>Shop Now </span>
+            <FaArrowRightLong
+              size={16}
+              style={{ verticalAlign: "middle", marginLeft: "10px" }}
+            />
+          </aside>
         </section>
       </div>
     </main>

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { signOut } from "../../controller/userController";
+import { logOut } from "../../controller/userController";
 import { useStateContext } from "../../context/context";
+import { useDispatch } from "react-redux";
 
 export const useLabelNavigate = () => {
   const navigate = useNavigate();
@@ -46,6 +46,6 @@ export const useLogout = () => {
   return () => {
     setIsSidebar(false);
     setIsDropdown(false);
-    signOut({ navigate, dispatch });
+    logOut(navigate, dispatch);
   };
 };

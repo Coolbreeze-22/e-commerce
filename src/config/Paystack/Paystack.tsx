@@ -11,24 +11,24 @@ import { useState } from "react";
 
 const Paystack = () => {
   const paystackPublicKey: string = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-  const { paymentMode, setPaymentMode, checkoutFormData } = useStateContext();
+  const { paymentMode, setPaymentMode, userFormData } = useStateContext();
   const { user } = useSelector((state: RootState) => state.userReducer);
   const cart = useSelector((state: RootState) => state.cartReducer);
   const [isWarning, setIsWarning] = useState<boolean>(false);
   const {
     firstName,
     companyName,
-    streetAddress,
+    address,
     apartment,
-    townCity,
+    city,
     phoneNumber,
     email,
-  } = checkoutFormData;
+  } = userFormData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const fee: number = 200;
+  const fee: number = 2000;
   const total = cart.total + fee;
   const totalInKobo = total * 100;
 
@@ -45,9 +45,9 @@ const Paystack = () => {
         id: "",
         firstName,
         companyName,
-        streetAddress,
+        address,
         apartment,
-        townCity,
+        city,
         phoneNumber,
         email,
         transactionId: data.transaction,
@@ -61,7 +61,7 @@ const Paystack = () => {
         total,
         orderStatus: "processing",
         createdAt: new Date().getTime().toString(),
-        updatedAt: new Date().getTime().toString(),
+        updatedAt: "",
       };
       createOrder({ order, dispatch, navigate });
     }
@@ -79,9 +79,9 @@ const Paystack = () => {
       id: "",
       firstName,
       companyName,
-      streetAddress,
+      address,
       apartment,
-      townCity,
+      city,
       phoneNumber,
       email,
       transactionId: "",
@@ -95,7 +95,7 @@ const Paystack = () => {
       total,
       orderStatus: "processing",
       createdAt: new Date().getTime().toString(),
-      updatedAt: new Date().getTime().toString(),
+      updatedAt: "",
     };
     createOrder({ order, dispatch, navigate });
 
@@ -111,7 +111,7 @@ const Paystack = () => {
   };
 
   const showButton =
-    firstName && streetAddress && townCity && phoneNumber && email
+    firstName && address && city && phoneNumber && email
       ? true
       : false;
 
@@ -120,7 +120,7 @@ const Paystack = () => {
       {showButton ? (
         paymentMode === "cash" ? (
           <button className="cash-btn" onClick={handlePayOnDelivery}>
-            Place Orders
+            Place Order
           </button>
         ) : (
           <PaystackButton {...componentProps} className="paystack-btn" />

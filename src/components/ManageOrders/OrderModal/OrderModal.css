@@ -1,0 +1,169 @@
+.mng-orders-modal {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 20px 30px;
+  width: 60%;
+  box-shadow: 0 0 6px 1px #8080804f;
+}
+.mng-orders-update-wrapper {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 0 6px 1px #8080804f;
+  height: 200px;
+  background-color: white;
+}
+.mng-orders-update-wrapper > aside {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 10px 0 10px;
+}
+.mng-orders-close-icon {
+  justify-items: flex-start;
+}
+.mng-orders-update-btn {
+  width: 150px;
+  height: 40px;
+  background-color: #db4444;
+  color: white;
+  border-radius: 4px;
+  border: none;
+}
+.mng-orders-update {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 20px;
+}
+.mng-orders-update label {
+  font-weight: 500;
+  font-size: 13px;
+  opacity: 0.7;
+}
+.mng-orders-update select {
+  width: 100px;
+  height: 35px;
+  margin-top: 10px;
+}
+
+.mng-orders-change > button {
+  width: 150px;
+  height: 40px;
+  background-color: #db4444;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+.mng-orders-modal > div {
+  display: flex;
+  gap: 20px;
+}
+.mng-orders-modal > div > p {
+  margin: 8px 0;
+}
+.mng-orders-modal > div > p:nth-child(1) {
+  flex-basis: 30%;
+}
+.mng-orders-hr {
+  border: 1px solid #8080804b;
+}
+.mng-order-item-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 20px;
+  color: #db4444;
+  margin: 15px 0;
+}
+.mng-order-item-header > aside {
+  width: 24px;
+  height: 40px;
+  background-color: #db4444;
+  border-radius: 4px;
+}
+.mng-orders-items > div {
+  display: flex;
+  gap: 10px;
+}
+.mng-orders-items > div > img {
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 200px;
+  max-height: 200px;
+  margin: 10px auto;
+}
+.mng-orders-items > div > p {
+  margin: 8px 0;
+}
+.mng-orders-items > div > p:nth-child(1) {
+  flex-basis: 30%;
+}
+
+@media (max-width: 600px) {
+  .mng-orders-modal {
+    margin: unset;
+    padding: unset;
+    width: unset;
+    box-shadow: unset;
+  }
+
+  .mng-orders-update-btn {
+    width: 120px;
+    height: 35px;
+  }
+  .mng-orders-update label {
+    font-size: 12px;
+  }
+  .mng-orders-update select {
+    height: 30px;
+    margin-top: 5px;
+  }
+
+  .mng-orders-change > button {
+    width: 120px;
+    height: 35px;
+  }
+
+  .mng-orders-modal > div {
+    gap: 10px;
+    font-size: 14px;
+  }
+  .mng-orders-modal > div > p {
+    margin: 7px 0;
+  }
+  .mng-orders-modal > div > p:nth-child(1) {
+    margin: 5px 0;
+  }
+  .mng-order-item-header {
+    gap: 15px;
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  .mng-orders-items > div {
+    font-size: 14px;
+  }
+  .mng-orders-items > div > p {
+    margin: 5px 0;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .mng-orders-modal {
+    padding: 15px;
+    width: 80%;
+  }
+  .mng-orders-modal > div {
+    gap: 10px;
+    font-size: 16px;
+  }
+  .mng-order-item-header {
+    width: 150px;
+    padding: 10px 0;
+  }
+}

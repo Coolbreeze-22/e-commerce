@@ -14,11 +14,16 @@ import {
 } from "../utils/utilityFunctions";
 import Navbar from "../Navbar/Navbar";
 import { FiShoppingCart } from "react-icons/fi";
+import { MdOutlineEdit } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
+import { useState } from "react";
+import { deleteProductByAdmin } from "../../controller/productController";
 
 const SearchedProducts = () => {
   const allProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.productReducer.products
   );
+  const [warning, setWarning] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -31,6 +36,13 @@ const SearchedProducts = () => {
       : false
   );
 
+  const navigateToUpdateProduct = (product: ProductType) => {
+    navigate(`/admin/update-product/${product.id}`);
+  };
+  const handleDelete = (id: string) => {
+    deleteProductByAdmin(id, dispatch);
+    setWarning("")
+  };
   const handleWishlist = (product: ProductType) => {
     addItemToWishlist({ product, dispatch });
   };
@@ -105,6 +117,44 @@ const SearchedProducts = () => {
                   <div className="search-eye">
                     <MdOutlineRemoveRedEye className="search-icon" />
                   </div>
+                  <div
+                    className="search-edit"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigateToUpdateProduct(product);
+                    }}
+                  >
+                    <MdOutlineEdit className="search-icon" />
+                  </div>
+                  <div
+                    className="search-delete"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setWarning(product.id);
+                    }}
+                  >
+                    <MdDeleteOutline className="search-icon" />
+                  </div>
+                  {warning === product.id && (
+                    <div className="search-warning">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(product.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setWarning("");
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
                   <div className="search-image-wrapper">
                     <img
                       loading="lazy"

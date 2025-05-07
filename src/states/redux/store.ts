@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 import productReducer from "./productReducer";
 import cartReducer from "./cartReducer";
 import orderReducer from "./orderReducer";
+import countdownReducer from "./countdownReducer";
 // import chatReducer from "./chatReducer";
 import userReducer from "./userReducer";
 
@@ -22,12 +23,12 @@ const rootReducer = combineReducers({
   orderReducer,
   //   chatReducer,
   userReducer,
+  countdownReducer,
 });
-
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cartReducer", "userReducer", "orderReducer"],
+  whitelist: ["userReducer", "cartReducer"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

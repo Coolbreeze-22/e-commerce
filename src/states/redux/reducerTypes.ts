@@ -1,6 +1,8 @@
 export type CountdownType = {
+  name: string;
   startDate: string;
   endDate: string;
+  id: string;
 };
 
 export type InitialStateProps = {
@@ -17,13 +19,7 @@ export type InitialStateProps = {
   subCategory: Array<string>;
   isLoading: boolean;
   error: string;
-  flashSaleCountdown: CountdownType;
-  [key: string]:
-    | Array<ProductType>
-    | Array<string>
-    | boolean
-    | string
-    | CountdownType;
+  [key: string]: Array<ProductType> | Array<string> | boolean | string;
   // [key: string]: any;
 };
 
@@ -56,10 +52,17 @@ export type ProductType = {
     M: { inStock: number; price: number; discountedPrice: number };
     L: { inStock: number; price: number; discountedPrice: number };
     XL: { inStock: number; price: number; discountedPrice: number };
-    [key: string]: any;
+    [key: string]: Record<string, number>;
   };
   createdAt: string;
   upDatedAt: string;
+  [key: string]:
+    | string
+    | number
+    | boolean
+    | Array<string>
+    | null
+    | { [key: string]: Record<string, number> };
 };
 
 export type CartProductType = {
@@ -83,14 +86,18 @@ export interface UserProps {
   firstName: string;
   lastName: string;
   email: string;
+  emailVerified: boolean;
   phoneNumber: string;
+  photoUrl: string;
   address: string;
   companyName: string;
   apartment: string;
   city: string;
   isAdmin: boolean;
   isOwner: boolean;
-  password: string;
+  isSignedIn: boolean;
+  lastLoginAt: string;
+  lastLogoutAt: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -99,9 +106,9 @@ export type OrderProps = {
   id: string;
   firstName: string;
   companyName: string;
-  streetAddress: string;
+  address: string;
   apartment: string;
-  townCity: string;
+  city: string;
   phoneNumber: string;
   email: string;
   transactionId: string;

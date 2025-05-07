@@ -19,6 +19,8 @@
   border-bottom: 1px solid #80808025;
   border-top: 1px solid #80808025;
   overflow-y: auto;
+  /* scrollbar-width: none; */
+  scrollbar-color: transparent transparent;
   cursor: pointer;
 }
 .hero-categories > div {
@@ -32,10 +34,6 @@
 .hero-icon-wrapper {
   margin-right: 10px;
 }
-.hero-icon {
-  width: 7.78px;
-  height: 12.73px;
-}
 .hero-image-wrapper {
   box-sizing: border-box;
   position: relative;
@@ -48,7 +46,6 @@
   align-items: center;
   padding: 0 20px;
   height: 344px;
-
 }
 .hero-image-wrapper > div {
   flex-basis: 55%;
@@ -113,7 +110,6 @@
     height: unset;
     overflow-y: unset;
     overflow-x: auto;
-    scrollbar-width: none;
     margin-bottom: 20px;
     border-bottom: unset;
     border-top: unset;
@@ -144,10 +140,6 @@
   .hero-icon-wrapper > :nth-child(2) {
     display: none;
   }
-  .hero-icon {
-    width: 20px;
-    height: 20px;
-  }
   .hero-image-wrapper {
     padding: 0 10px;
     height: 300px;
@@ -155,7 +147,6 @@
   .hero-image-wrapper > div {
     flex-basis: 60%;
     height: 100%;
-
   }
   .hero-iphone-img {
     width: 100%;

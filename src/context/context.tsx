@@ -1,4 +1,6 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
+import { UserProps } from "../states/redux/reducerTypes";
+import { userInitialState } from "../states/redux/userReducer";
 
 interface ContextType {
   isWishlist: boolean;
@@ -19,40 +21,24 @@ interface ContextType {
   couponCode: string;
   setCouponCode: React.Dispatch<React.SetStateAction<string>>;
 
-  checkoutFormData: CheckoutFormType;
-  setCheckoutFormData: React.Dispatch<React.SetStateAction<CheckoutFormType>>;
+  userFormData: UserProps;
+  setUserFormData: React.Dispatch<React.SetStateAction<UserProps>>;
 }
 
 interface ChildrenType {
   children: ReactNode;
 }
 
-export interface CheckoutFormType {
-  firstName: string;
-  companyName: string;
-  streetAddress: string;
-  apartment: string;
-  townCity: string;
-  phoneNumber: string;
-  email: string;
-}
-
 export const CommerceContext = createContext<ContextType>({} as ContextType);
 
 export const CommerceProvider = ({ children }: ChildrenType) => {
-  const initialState: CheckoutFormType = {
-    firstName: "",
-    companyName: "",
-    streetAddress: "",
-    apartment: "",
-    townCity: "",
-    phoneNumber: "",
-    email: "",
+  const initialState: UserProps = {
+    ...userInitialState,
   };
 
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
-  const [checkoutFormData, setCheckoutFormData] =
-    useState<CheckoutFormType>(initialState);
+  const [userFormData, setUserFormData] =
+    useState<UserProps>(initialState);
   const [searchItems, setSearchItems] = useState<string>("");
   const [isSidebar, setIsSidebar] = useState<boolean>(false);
   const [paymentMode, setPaymentMode] = useState<string>("bank");
@@ -64,8 +50,8 @@ export const CommerceProvider = ({ children }: ChildrenType) => {
       value={{
         isWishlist,
         setIsWishlist,
-        checkoutFormData,
-        setCheckoutFormData,
+        userFormData,
+        setUserFormData,
         searchItems,
         setSearchItems,
         isSidebar,

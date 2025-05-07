@@ -22,7 +22,7 @@ export const handleSelectedColor = (data: SelectedColorProps) => {
   }
   const similarProduct = allProducts.find(
     (item) =>
-      item.id !== selectedProduct.id &&
+      // item.id !== selectedProduct.id &&
       item.name === selectedProduct.name &&
       item.color === color
   );
