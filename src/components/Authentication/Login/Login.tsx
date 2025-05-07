@@ -11,13 +11,11 @@ import Navbar from "../../Navbar/Navbar";
 const Login = () => {
   interface formType {
     email: string;
-    phoneNumber: string;
     password: string;
   }
 
   const initialState: formType = {
     email: "",
-    phoneNumber: "",
     password: "",
   };
 
@@ -57,7 +55,7 @@ const Login = () => {
               <CustomInput
                 type="email"
                 name="email"
-                placeholder="Email or Phone Number"
+                placeholder="Email"
                 className="login-input"
                 value={formData.email}
                 onChange={handleChange}
