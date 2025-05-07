@@ -58,7 +58,8 @@ export type ProductType = {
     XL: { inStock: number; price: number; discountedPrice: number };
     [key: string]: any;
   };
-  timeStamp: string;
+  createdAt: string;
+  upDatedAt: string;
 };
 
 export type CartProductType = {

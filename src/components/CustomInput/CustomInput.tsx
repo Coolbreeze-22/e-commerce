@@ -6,7 +6,9 @@ interface InputPropsType {
   type?: string;
   name?: string;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
+  checked?: boolean;
+  readOnly?: boolean;
   className?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -18,6 +20,8 @@ const CustomInput = ({
   name,
   placeholder,
   value,
+  checked,
+  readOnly,
   className,
   onChange,
 }: InputPropsType) => (
@@ -28,6 +32,8 @@ const CustomInput = ({
     name={name}
     placeholder={placeholder}
     value={value}
+    checked={checked}
+    readOnly={readOnly}
     className={className}
     onChange={onChange}
   />

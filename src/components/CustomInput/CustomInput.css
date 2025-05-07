@@ -3,7 +3,7 @@
   background-color: #ffffff;
   border-width: 0;
   border-bottom: 1px solid gray;
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
@@ -22,7 +22,7 @@
 .contact-input {
   box-sizing: border-box;
   background-color: #f5f5f5;
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
@@ -65,7 +65,24 @@
   padding-right: 40px;
   border-radius: 4px;
 }
-
+.create-input {
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  border-width: 0;
+  padding-left: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+}
+.create-input-checkbox {
+  accent-color: green;
+  width: 100%;
+  height: 50px;
+}
 @media (max-width: 600px) {
   .editProf-input-1,
   .editProf-input-2,
@@ -73,16 +90,26 @@
   .contact-input {
     font-size: 14px;
     line-height: 19px;
-    height: 40px;
+    height: 35px;
   }
   .foot-input {
     font-size: 14px;
-    height: 30px;
+    height: 35px;
   }
   .cart-coupon-input {
     width: 100px;
-    height: 30px;
+    height: 35px;
     font-size: 14px;
+  }
+  .create-input {
+    font-weight: 400px;
+    font-size: 14px;
+    line-height: 21px;
+    width: 100%;
+    height: 35px;
+  }
+  .create-input-checkbox {
+    height: 35px;
   }
 }
 
@@ -93,11 +120,21 @@
   .contact-input {
     font-size: 14px;
     line-height: 20px;
-    height: 35px;
+    height: 40px;
   }
   .cart-coupon-input {
     width: 100px;
-    height: 35px;
+    height: 40px;
     font-size: 14px;
+  }
+  .create-input {
+    font-weight: 400px;
+    font-size: 15px;
+    line-height: 22px;
+    width: 100%;
+    height: 40px;
+  }
+  .create-input-checkbox {
+    height: 40px;
   }
 }

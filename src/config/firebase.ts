@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  deleteUser,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -18,6 +19,8 @@ import {
   deleteDoc,
   onSnapshot,
   updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 type keyType = string;
@@ -52,6 +55,7 @@ export {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
+  deleteUser,
   onAuthStateChanged,
   collection,
   doc,
@@ -62,4 +66,6 @@ export {
   deleteDoc,
   onSnapshot,
   updateDoc,
+  query,
+  where,
 };
