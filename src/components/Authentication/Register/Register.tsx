@@ -11,16 +11,12 @@ import { useDispatch } from "react-redux";
 
 const Register = () => {
   interface formType {
-    name: string;
     email: string;
-    phoneNumber: string;
     password: string;
   }
 
   const initialState: formType = {
-    name: "",
     email: "",
-    phoneNumber: "",
     password: "",
   };
 
@@ -66,20 +62,9 @@ const Register = () => {
 
             <div>
               <CustomInput
-                type="text"
-                name="name"
-                placeholder="Name"
-                className="register-input"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <CustomInput
                 type="email"
                 name="email"
-                placeholder="Email or Phone Number"
+                placeholder="Email"
                 className="register-input"
                 value={formData.email}
                 onChange={handleChange}
