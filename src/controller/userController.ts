@@ -1,77 +1,179 @@
-// import { auth, createUserWithEmailAndPassword } from "../config/firebase";
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  deleteUser,
+  fireStore,
+  updateDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  deleteDoc,
+  setDoc,
+} from "../config/firebase";
 import * as reducer from "../states/redux/userReducer";
 import { AppDispatch } from "../states/redux/store";
-import { user } from "../dummy/dummyUser";
-import { user as userObj } from "../states/redux/userReducer";
+import { userInitialState } from "../states/redux/userReducer";
 import { UserProps } from "../states/redux/reducerTypes";
 import { toastNotification } from "../components/utils/toastNotification";
 import { NavigateFunction } from "react-router-dom";
 
 interface AuthProps {
   email: string;
-  phoneNumber: string;
   password: string;
-  dispatch: AppDispatch;
-  navigate: NavigateFunction;
-}
-interface SignOutProps {
   navigate: NavigateFunction;
   dispatch: AppDispatch;
 }
+interface GetUsersProps {
+  id: string;
+  dispatch: AppDispatch;
+}
 
-const newUser: UserProps = { ...userObj };
-
-export const signUp = async (item: AuthProps) => {
-  const {
-    // email,
-    // phoneNumber,
-    // password,
-    dispatch,
-    navigate,
-  } = item;
-  // const data = { email, phoneNumber, password };
-  // data will be sent to firebase
+export const getUsers = async (data: GetUsersProps) => {
+  const { id, dispatch } = data;
   try {
-    dispatch(reducer.signUp(user));
-    navigate("/");
+    dispatch(reducer.userLoading(true));
+    if (id) {
+      const colRef = collection(fireStore, "users");
+      const querySnapshot = await getDocs(colRef);
+      const users: Array<UserProps> = [];
+      querySnapshot.forEach((doc) => {
+        users.push({ ...doc.data() } as UserProps);
+      });
+      dispatch(reducer.getUsers(users));
+    }
+    dispatch(reducer.userLoading(false));
   } catch (error: any) {
     toastNotification(error.message, "error");
+    dispatch(reducer.userLoading(false));
+  }
+};
+
+export const signUp = async (item: AuthProps) => {
+  const { email, password, navigate, dispatch } = item;
+  dispatch(reducer.userLoading(true));
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    const docRef = doc(fireStore, "users", user.uid);
+    const newProfile = createUserProfile(user);
+    await setDoc(docRef, newProfile);
+    const docSnap = await getDoc(docRef);
+    dispatch(reducer.signUp({ ...docSnap.data() } as UserProps));
+    dispatch(reducer.userLoading(false));
+    navigate(-1);
+  } catch (error: any) {
+    toastNotification(error.message, "error");
+    dispatch(reducer.userLoading(false));
   }
 };
 
 export const signIn = async (item: AuthProps) => {
-  const {
-    // email,
-    // phoneNumber,
-    // password,
-    dispatch,
-    navigate,
-  } = item;
-  // const data = { email, phoneNumber, password };
-  // data will be sent to firebase
+  const { email, password, navigate, dispatch } = item;
+  dispatch(reducer.userLoading(true));
   try {
-    dispatch(reducer.signIn(user));
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    const docRef = doc(fireStore, "users", user.uid);
+    await updateDoc(docRef, {
+      isSignedIn: true,
+      lastLoginAt: Date.now().toString(),
+    });
+    const docSnap = await getDoc(docRef);
+    dispatch(reducer.signIn({ ...docSnap.data() } as UserProps));
+    dispatch(reducer.userLoading(false));
     navigate(-1);
   } catch (error: any) {
     toastNotification(error.message, "error");
-  }
-};
-export const signOut = async (hooks: SignOutProps) => {
-  const { navigate, dispatch } = hooks;
-  try {
-    dispatch(reducer.signOut());
-    navigate('/login');
-  } catch (error) {
-    toastNotification("Sign out failed !", "error");
+    dispatch(reducer.userLoading(false));
   }
 };
 
-export const deleteUser = async (dispatch: AppDispatch) => {
+export const logOut = async (
+  navigate: NavigateFunction,
+  dispatch: AppDispatch
+) => {
+  dispatch(reducer.userLoading(true));
   try {
-    // setDoc(newUser) set this to firebase and dispatch data returned
-    // dispatch(reducer.deleteUser(data));this is the main code
-    dispatch(reducer.deleteUser(newUser));
+    const currentUser = auth.currentUser;
+    if (!currentUser?.uid) {
+      throw new Error("User not signed in !");
+    }
+
+    const docRef = doc(fireStore, "users", currentUser.uid);
+    await updateDoc(docRef, {
+      lastLogoutAt: Date.now().toString(),
+      isSignedIn: false,
+    });
+
+    await signOut(auth);
+    dispatch(reducer.logOut());
+    dispatch(reducer.userLoading(false));
+    navigate("/");
+  } catch (error: any) {
+    toastNotification(error.message, "error");
+    dispatch(reducer.userLoading(false));
+  }
+};
+
+export const updateProfile = async (data: UserProps, dispatch: AppDispatch) => {
+  try {
+    if (auth.currentUser?.uid) {
+      const docRef = doc(fireStore, "users", auth.currentUser.uid);
+      await updateDoc(docRef, {
+        ...data,
+        updatedAt: Date.now().toString(),
+      });
+      dispatch(reducer.updateProfile(data));
+      toastNotification("Profile updated successfully !", "success");
+    } else {
+      toastNotification("Sign in to complete this action !", "warning");
+    }
   } catch (error: any) {
     toastNotification(error.message, "error");
   }
+};
+
+export const deleteMyAccount = async (
+  id: string,
+  navigate: NavigateFunction
+) => {
+  try {
+    if (auth.currentUser?.uid) {
+      const docRef = doc(fireStore, "users", id);
+
+      await deleteDoc(docRef);
+      await deleteUser(auth.currentUser);
+      await signOut(auth);
+      navigate("/register");
+      toastNotification("Account deleted successfully !", "success");
+    } else {
+      toastNotification("Sign in to complete this action !", "warning");
+    }
+  } catch (error: any) {
+    toastNotification(error.message, "error");
+  }
+};
+
+const createUserProfile = (user: any) => {
+  const userProfile = {
+    ...userInitialState,
+    id: user.uid,
+    email: user.email,
+    emailVerified: user.emailVerified,
+    isSignedIn: true,
+    lastLoginAt: user.metadata.lastLoginAt,
+    createdAt: user.metadata.createdAt,
+  };
+  return userProfile;
 };
