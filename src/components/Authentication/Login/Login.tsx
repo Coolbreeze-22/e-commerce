@@ -89,13 +89,19 @@ const Login = () => {
             </div>
             <div>
               <div className="login-btn-wrapper">
-                <aside style={{color:"#db4444", fontStyle:"italic"}}>{warning}</aside>
+                {warning ? (
+                  <aside style={{ color: "#db4444", fontStyle: "italic" }}>
+                    {warning}
+                  </aside>
+                ) : null}
                 <CustomButton
                   type="submit"
                   text="Log In"
                   className="login-btn"
                 />
-                <div>Forget Password?</div>
+                <div onClick={() => navigate("/reset-password")}>
+                  Forgot Password?
+                </div>
               </div>
               <p className="login-form-signup-toggle">
                 Dont have an account?

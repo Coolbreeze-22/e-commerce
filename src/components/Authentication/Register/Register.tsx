@@ -99,9 +99,11 @@ const Register = () => {
             </div>
 
             <div className="register-btn-wrapper1">
-              <aside style={{ color: "#db4444", fontStyle: "italic" }}>
-                {warning}
-              </aside>
+              {warning ? (
+                <aside style={{ color: "#db4444", fontStyle: "italic" }}>
+                  {warning}
+                </aside>
+              ) : null}
               <CustomButton
                 type="submit"
                 text="Create Account"
