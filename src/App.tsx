@@ -28,8 +28,11 @@ import Loading from "./components/Loading/Loading";
 import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import Countdown from "./components/Countdown/Countdown";
 import { getCountdown } from "./controller/countdownController";
+import ResetPassword from "./components/Authentication/ResetPassword/ResetPassword";
+import { useStateContext } from "./context/context";
 
 function App() {
+  const { isDropdown, setIsDropdown } = useStateContext();
   const { user, isLoading: userIsLoading } = useSelector(
     (state: RootState) => state.userReducer
   );
@@ -73,7 +76,7 @@ function App() {
     <div>
       <ScrollRestoration />
       <ToastContainer />
-      <main>
+      <main onClick={() => isDropdown && setIsDropdown(false)}>
         {isLoading ? (
           <Loading />
         ) : (
@@ -97,6 +100,14 @@ function App() {
               element={
                 <UserAuth>
                   <Register />
+                </UserAuth>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <UserAuth>
+                  <ResetPassword />
                 </UserAuth>
               }
             />
