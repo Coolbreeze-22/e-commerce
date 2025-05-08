@@ -20,14 +20,28 @@ const Login = () => {
   };
 
   const [formData, setFormData] = useState<formType>(initialState);
+  const [warning, setWarning] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signIn({...formData, dispatch, navigate});
 
-    setFormData(initialState);
+    if (!formData.email) {
+      setWarning("Enter email");
+    } else if (!formData.password) {
+      setWarning("Enter password");
+    } else {
+      signIn({ ...formData, dispatch, navigate });
+      setFormData(initialState);
+      setWarning("");
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +73,7 @@ const Login = () => {
                 className="login-input"
                 value={formData.email}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div>
@@ -69,10 +84,12 @@ const Login = () => {
                 className="login-input"
                 value={formData.password}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div>
               <div className="login-btn-wrapper">
+                <aside style={{color:"#db4444", fontStyle:"italic"}}>{warning}</aside>
                 <CustomButton
                   type="submit"
                   text="Log In"
@@ -81,7 +98,7 @@ const Login = () => {
                 <div>Forget Password?</div>
               </div>
               <p className="login-form-signup-toggle">
-                Dont have an account?{" "}
+                Dont have an account?
                 <span onClick={() => navigate("/register")}>Sign Up</span>
               </p>
             </div>

@@ -11,6 +11,7 @@ interface InputPropsType {
   readOnly?: boolean;
   className?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = ({
@@ -24,6 +25,7 @@ const CustomInput = ({
   readOnly,
   className,
   onChange,
+  onKeyDown,
 }: InputPropsType) => (
   <input
     autoFocus={autoFocus}
@@ -36,6 +38,7 @@ const CustomInput = ({
     readOnly={readOnly}
     className={className}
     onChange={onChange}
+    onKeyDown={onKeyDown}
   />
 );
 export default CustomInput;
