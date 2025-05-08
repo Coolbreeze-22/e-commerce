@@ -19,7 +19,8 @@
 .editProf-input-1,
 .editProf-input-2,
 .checkout-input,
-.contact-input {
+.contact-input,
+.reset-input {
   box-sizing: border-box;
   background-color: #f5f5f5;
   font-weight: 400;
@@ -36,7 +37,8 @@
 .editProf-input-1:focus,
 .editProf-input-2:focus,
 .checkout-input:focus,
-.contact-input:focus {
+.contact-input:focus,
+.reset-input:focus {
   outline: 1px solid #00000033;
 }
 
@@ -87,7 +89,8 @@
   .editProf-input-1,
   .editProf-input-2,
   .checkout-input,
-  .contact-input {
+  .contact-input,
+  .reset-input {
     font-size: 14px;
     line-height: 19px;
     height: 35px;
@@ -117,7 +120,8 @@
   .editProf-input-1,
   .editProf-input-2,
   .checkout-input,
-  .contact-input {
+  .contact-input,
+  .reset-input {
     font-size: 14px;
     line-height: 20px;
     height: 40px;

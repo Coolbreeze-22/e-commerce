@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { RootState } from "./states/redux/store";
@@ -28,6 +28,7 @@ import Loading from "./components/Loading/Loading";
 import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import Countdown from "./components/Countdown/Countdown";
 import { getCountdown } from "./controller/countdownController";
+import ResetPassword from "./components/Authentication/ResetPassword/ResetPassword";
 import { useStateContext } from "./context/context";
 
 function App() {
@@ -99,6 +100,14 @@ function App() {
               element={
                 <UserAuth>
                   <Register />
+                </UserAuth>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <UserAuth>
+                  <ResetPassword />
                 </UserAuth>
               }
             />

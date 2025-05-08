@@ -2,6 +2,8 @@ import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  // sendEmailVerification,
   signOut,
   deleteUser,
   fireStore,
@@ -29,6 +31,11 @@ interface AuthProps {
 interface GetUsersProps {
   id: string;
   dispatch: AppDispatch;
+}
+interface ResetPasswordProps {
+  email: string;
+  dispatch: AppDispatch;
+  navigate: NavigateFunction;
 }
 
 export const getUsers = async (data: GetUsersProps) => {
@@ -126,6 +133,20 @@ export const logOut = async (
   }
 };
 
+export const resetPassword = async (data: ResetPasswordProps) => {
+  const { email, dispatch, navigate } = data;
+  dispatch(reducer.userLoading(true));
+  try {
+    await sendPasswordResetEmail(auth, email);
+    toastNotification("Password reset email sent!", "success");
+    dispatch(reducer.userLoading(false));
+    navigate("/login");
+  } catch (error: any) {
+    toastNotification(error.message, "error");
+    dispatch(reducer.userLoading(false));
+  }
+};
+
 export const updateProfile = async (data: UserProps, dispatch: AppDispatch) => {
   try {
     if (auth.currentUser?.uid) {
@@ -177,3 +198,26 @@ const createUserProfile = (user: any) => {
   };
   return userProfile;
 };
+
+
+
+// interface VerifyEmailProps {
+//   dispatch: AppDispatch;
+// }
+
+// export const verifyEmail = async (data: VerifyEmailProps) => {
+//   const { dispatch } = data;
+//   dispatch(reducer.userLoading(true));
+//   try {
+//     if (auth.currentUser) {
+//       await sendEmailVerification(auth.currentUser);
+//       toastNotification("Email verification sent!", "success");
+//     } else {
+//       toastNotification("User not signed in!", "error");
+//     }
+//     dispatch(reducer.userLoading(false));
+//   } catch (error: any) {
+//     toastNotification(error.message, "error");
+//     dispatch(reducer.userLoading(false));
+//   }
+// };
