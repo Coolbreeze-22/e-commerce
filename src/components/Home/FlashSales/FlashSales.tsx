@@ -21,13 +21,17 @@ import {
   computeRating,
 } from "../../utils/utilityFunctions";
 import { FiShoppingCart } from "react-icons/fi";
-import useCountdown from "../../utils/useCountdown";
+import CustomCountdown from "../CustomCountdown/CustomCountdown";
 
 const FlashSales = () => {
-  const { flashSales: flashProducts, flashSaleCountdown: countdown } =
-    useSelector((state: RootState) => state.productReducer);
+  const { flashSales: flashProducts } = useSelector(
+    (state: RootState) => state.productReducer
+  );
+  const { countdowns } = useSelector(
+    (state: RootState) => state.countdownReducer
+  );
+  const flashCountdown = countdowns.find((item) => item.name === "flashsale");
 
-  // const timeLeft = useCountdown(countdown.startDate, countdown.endDate);
   const { ref } = useInView({
     threshold: 0,
   });
@@ -74,23 +78,12 @@ const FlashSales = () => {
         <div className="flash-info2">
           <header className="flash-header">Flash Sales</header>
           <div className="flash-cntdwn-arrow-wrapper">
-            {/* <time className="flash-countdown">
-              <div>
-                <span>Days</span> <div>{timeLeft.days}</div>
-              </div>
-              <div className="flash-colon"> : </div>
-              <div>
-                <span>Hours</span> <div>{timeLeft.hours}</div>
-              </div>
-              <div className="flash-colon"> : </div>
-              <div>
-                <span>Minutes</span> <div>{timeLeft.minutes}</div>
-              </div>
-              <div className="flash-colon"> : </div>
-              <div>
-                <span>Seconds</span> <div>{timeLeft.seconds}</div>
-              </div>
-            </time> */}
+            {flashCountdown?.startDate && flashCountdown.endDate && (
+              <CustomCountdown
+                startDate={flashCountdown.startDate}
+                endDate={flashCountdown.endDate}
+              />
+            )}
             <section className="flash-swiper-arrow">
               <div className="swiper-button-prev" />
               <div className="swiper-button-next" />
