@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { RootState } from "./states/redux/store";
@@ -28,8 +28,10 @@ import Loading from "./components/Loading/Loading";
 import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import Countdown from "./components/Countdown/Countdown";
 import { getCountdown } from "./controller/countdownController";
+import { useStateContext } from "./context/context";
 
 function App() {
+  const { isDropdown, setIsDropdown } = useStateContext();
   const { user, isLoading: userIsLoading } = useSelector(
     (state: RootState) => state.userReducer
   );
@@ -73,7 +75,7 @@ function App() {
     <div>
       <ScrollRestoration />
       <ToastContainer />
-      <main>
+      <main onClick={() => isDropdown && setIsDropdown(false)}>
         {isLoading ? (
           <Loading />
         ) : (
