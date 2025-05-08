@@ -84,15 +84,18 @@
   border-width: 0px;
 }
 .count-all-counts-wrapper {
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 15px;
+  gap: 20px;
+  margin-top: 50px;
+
 }
 .count-all-counts {
+  box-sizing: border-box;
   position: relative;
   box-shadow: 0 0 6px 1px #80808031;
-  margin-top: 20px;
-  padding: 30px;
+  padding: 20px;
 }
 .count-delete {
   position: absolute;
@@ -126,7 +129,7 @@
     letter-spacing: 1px;
   }
   .count-form {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
   .count-form label {
     margin-bottom: 5px;
@@ -137,9 +140,6 @@
     line-height: 19px;
     height: 35px;
   }
-  .count-btn-wrapper {
-    grid-column: 1/3;
-  }
   .count-form button {
     width: 100%;
     height: 35px;
@@ -147,7 +147,11 @@
     font-size: 12px;
   }
   .count-all-counts-wrapper {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+  .count-all-counts {
+    padding: 10px;
+    font-size: 14px;
   }
 }
 
@@ -187,5 +191,8 @@
   }
   .count-all-counts-wrapper {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .count-all-counts {
+    padding: 10px;
   }
 }

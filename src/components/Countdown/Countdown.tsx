@@ -9,16 +9,16 @@ import {
   deleteCountdown,
 } from "../../controller/countdownController";
 import { CountdownType } from "../../states/redux/reducerTypes";
-import { countdownInitial } from "../../states/redux/countdownReducer";
 import { MdDeleteOutline } from "react-icons/md";
+import { initialState } from "../../constants/countdown";
 
 const Countdown = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
   const allCountdown = useSelector(
-    (state: RootState) => state.countdownReducer
+    (state: RootState) => state.countdownReducer.countdowns
   );
 
-  const [formData, setFormData] = useState<CountdownType>(countdownInitial);
+  const [formData, setFormData] = useState<CountdownType>(initialState);
   const [warning, setWarning] = useState<string>("");
   console.log("check", allCountdown);
 
@@ -35,8 +35,12 @@ const Countdown = () => {
       setWarning("select end date");
     } else {
       createCountdown({ countdown: formData, isAdmin: user.isAdmin, dispatch });
+      setFormData(initialState);
       setWarning("");
     }
+  };
+  const handleDeleteCountdown = (id: string) => {
+    deleteCountdown(id, dispatch), setFormData(initialState);
   };
 
   return (
@@ -113,23 +117,20 @@ const Countdown = () => {
                   <span className="count-delete">
                     <MdDeleteOutline
                       size={25}
-                      onClick={() => deleteCountdown(countdown.id, dispatch)}
+                      style={{color:"#db4444"}}
+                      onClick={() => handleDeleteCountdown(countdown.id)}
                     />
                   </span>
-                  <aside>
-                    <p>Id</p>
-                    <p>{countdown.id}</p>
-                  </aside>
                   <time>
-                    <p>Name</p>
+                    <p>Name:</p>
                     <p>{countdown.name}</p>
                   </time>
                   <time>
-                    <p>Start Date</p>
+                    <p>Start:</p>
                     <p>{countdown.startDate}</p>
                   </time>
                   <aside>
-                    <p>End Date</p>
+                    <p>End:</p>
                     <p>{countdown.endDate}</p>
                   </aside>
                 </div>
