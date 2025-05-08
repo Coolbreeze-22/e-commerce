@@ -29,6 +29,10 @@ const ManageOrders = () => {
     getAllUsersOrders({ id: user.id, dispatch });
   }, []);
 
+  const sortedUsersOrders = [...allUsersOrders].sort(
+    (a, b) => Number(b.createdAt) - Number(a.createdAt)
+  );
+
   let timeoutId: NodeJS.Timeout | undefined;
 
   const handleClick = (order: OrderProps) => {
@@ -69,10 +73,7 @@ const ManageOrders = () => {
               Home
             </aside>
             <aside className="mng-orders-route-slash">/</aside>
-            <aside
-              className="mng-orders-route1"
-              onClick={() => navigate(-1)}
-            >
+            <aside className="mng-orders-route1" onClick={() => navigate(-1)}>
               admin
             </aside>
             <aside className="mng-orders-route-slash">/</aside>
@@ -90,7 +91,7 @@ const ManageOrders = () => {
               <p>Total</p>
               <p>Created On</p>
             </header>
-            {allUsersOrders.map((order, index) => (
+            {sortedUsersOrders.map((order, index) => (
               <div key={index} className="mng-orders-content">
                 <p className={orderStatus(order.orderStatus)}>
                   {order.orderStatus}
