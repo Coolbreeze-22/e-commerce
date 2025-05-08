@@ -2,33 +2,31 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { CountdownType } from "./reducerTypes";
 
-export const countdownInitial = {
-  name: "",
-  startDate: "",
-  endDate: "",
-  id: "",
+interface InitialStateProps {
+  countdowns: Array<CountdownType>;
+}
+export const initialState: InitialStateProps = {
+  countdowns: [],
 };
-
-export const initialState: Array<CountdownType> = [];
 
 const countdownSlice = createSlice({
   name: "countdown",
   initialState,
   reducers: {
     getCountdown(state, action: PayloadAction<Array<CountdownType>>) {
-      state = action.payload;
-      console.log("redux", state);
-      console.log("redux", state);
+      state.countdowns = action.payload;
     },
     createCountdown(state, action: PayloadAction<CountdownType>) {
-      state.push(action.payload);
+      state.countdowns.push(action.payload);
     },
     deleteCountdown(state, action: PayloadAction<string>) {
-      const existingCountdown = state.find(
+      const existingCountdown = state.countdowns.find(
         (countdown) => countdown.id === action.payload
       );
       if (existingCountdown?.id) {
-        state = state.filter((countdown) => countdown.id !== action.payload);
+        state.countdowns = state.countdowns.filter(
+          (countdown) => countdown.id !== action.payload
+        );
       }
     },
   },
