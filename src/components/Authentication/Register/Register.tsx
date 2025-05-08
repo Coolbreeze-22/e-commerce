@@ -21,14 +21,29 @@ const Register = () => {
   };
 
   const [formData, setFormData] = useState<formType>(initialState);
+  const [warning, setWarning] = useState<string>("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signUp({ ...formData, dispatch, navigate });
 
-    setFormData(initialState);
+    if (!formData.email) {
+      setWarning("Enter email");
+    } else if (!formData.password) {
+      setWarning("Enter password");
+    } else {
+      signUp({ ...formData, dispatch, navigate });
+      setFormData(initialState);
+      setWarning("");
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
   };
 
   const handleGoogle = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -68,6 +83,7 @@ const Register = () => {
                 className="register-input"
                 value={formData.email}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div>
@@ -78,10 +94,14 @@ const Register = () => {
                 className="register-input"
                 value={formData.password}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
 
             <div className="register-btn-wrapper1">
+              <aside style={{ color: "#db4444", fontStyle: "italic" }}>
+                {warning}
+              </aside>
               <CustomButton
                 type="submit"
                 text="Create Account"
@@ -99,7 +119,7 @@ const Register = () => {
                 </span>
               </button>
               <p className="register-form-signup-toggle">
-                Already have account?{" "}
+                Already have account?
                 <span onClick={() => navigate("/login")}>Log in</span>
               </p>
             </div>
