@@ -43,6 +43,7 @@ export const useLogout = () => {
   const { setIsSidebar, setIsDropdown } = useStateContext();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   return () => {
     setIsSidebar(false);
     setIsDropdown(false);
