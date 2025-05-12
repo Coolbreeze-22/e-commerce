@@ -8,13 +8,15 @@ import { OrderProps } from "../../states/redux/reducerTypes";
 import { useStateContext } from "../../context/context";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useState } from "react";
+import { UserProps } from "../../states/redux/reducerTypes";
 
-const Paystack = () => {
+const Paystack = ({ userFormData }: { userFormData: UserProps }) => {
   const paystackPublicKey: string = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-  const { paymentMode, setPaymentMode, userFormData } = useStateContext();
+  const { paymentMode, setPaymentMode } = useStateContext();
   const { user } = useSelector((state: RootState) => state.userReducer);
   const cart = useSelector((state: RootState) => state.cartReducer);
   const [isWarning, setIsWarning] = useState<boolean>(false);
+
   const {
     firstName,
     companyName,
@@ -111,9 +113,7 @@ const Paystack = () => {
   };
 
   const showButton =
-    firstName && address && city && phoneNumber && email
-      ? true
-      : false;
+    firstName && address && city && phoneNumber && email ? true : false;
 
   return (
     <div className="paystack-container">

@@ -5,7 +5,6 @@ import { RootState } from "../../states/redux/store";
 import Navbar from "../Navbar/Navbar";
 import { useEffect, useRef, useState } from "react";
 import { getAllUsersOrders } from "../../controller/orderController";
-// import { deleteOrder } from "../../controller/orderController";
 import { GoKebabHorizontal } from "react-icons/go";
 import { OrderProps } from "../../states/redux/reducerTypes";
 import OrderModal from "./OrderModal/OrderModal";
