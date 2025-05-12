@@ -27,6 +27,7 @@ const FlashSales = () => {
   const { flashSales: flashProducts } = useSelector(
     (state: RootState) => state.productReducer
   );
+
   const { countdowns } = useSelector(
     (state: RootState) => state.countdownReducer
   );
@@ -69,7 +70,6 @@ const FlashSales = () => {
 
   return (
     <main className="flashSales-container" ref={ref}>
-      {!flashProducts.length && <h1>kaka</h1>}
       <section className="flash-info1">
         <div className="flash-text-wrapper">
           <span className="flash-red"></span>
