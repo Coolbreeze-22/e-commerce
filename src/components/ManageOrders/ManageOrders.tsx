@@ -5,7 +5,6 @@ import { RootState } from "../../states/redux/store";
 import Navbar from "../Navbar/Navbar";
 import { useEffect, useRef, useState } from "react";
 import { getAllUsersOrders } from "../../controller/orderController";
-// import { deleteOrder } from "../../controller/orderController";
 import { GoKebabHorizontal } from "react-icons/go";
 import { OrderProps } from "../../states/redux/reducerTypes";
 import OrderModal from "./OrderModal/OrderModal";
@@ -64,59 +63,59 @@ const ManageOrders = () => {
 
   return (
     <Navbar>
-      {isLoading ? (
+      {/* {isLoading ? (
         <Loading />
-      ) : (
-        <main className="mng-orders-container">
-          <div className="mng-orders-routes">
-            <aside className="mng-orders-route1" onClick={() => navigate("/")}>
-              Home
-            </aside>
-            <aside className="mng-orders-route-slash">/</aside>
-            <aside className="mng-orders-route1" onClick={() => navigate(-1)}>
-              admin
-            </aside>
-            <aside className="mng-orders-route-slash">/</aside>
-            <aside className="mng-orders-route2">manage-orders</aside>
+      ) : ( */}
+      <main className="mng-orders-container">
+        <div className="mng-orders-routes">
+          <aside className="mng-orders-route1" onClick={() => navigate("/")}>
+            Home
+          </aside>
+          <aside className="mng-orders-route-slash">/</aside>
+          <aside className="mng-orders-route1" onClick={() => navigate(-1)}>
+            admin
+          </aside>
+          <aside className="mng-orders-route-slash">/</aside>
+          <aside className="mng-orders-route2">manage-orders</aside>
+        </div>
+        <div className="mng-orders-body">
+          <div className="mng-orders-total">
+            <p>Total</p>
+            <p>₦{allUsersTotal}</p>
           </div>
-          <div className="mng-orders-body">
-            <div className="mng-orders-total">
-              <p>Total</p>
-              <p>₦{allUsersTotal}</p>
+          <header className="mng-orders-header">
+            <p>Order Status</p>
+            <p>Payment Status</p>
+            <p>Payment Mode</p>
+            <p>Total</p>
+            <p>Created On</p>
+          </header>
+          {sortedUsersOrders.map((order, index) => (
+            <div key={index} className="mng-orders-content">
+              <p className={orderStatus(order.orderStatus)}>
+                {order.orderStatus}
+              </p>
+              <p className={paymentStatus(order.paymentStatus)}>
+                {order.paymentStatus}
+              </p>
+              <p>{order.paymentMode}</p>
+              <p>₦{order.total}</p>
+              <time>{new Date(Number(order.createdAt)).toDateString()}</time>
+              <GoKebabHorizontal
+                size={25}
+                className="mng-orders-more-icon"
+                onClick={() => handleClick(order)}
+              />
             </div>
-            <header className="mng-orders-header">
-              <p>Order Status</p>
-              <p>Payment Status</p>
-              <p>Payment Mode</p>
-              <p>Total</p>
-              <p>Created On</p>
-            </header>
-            {sortedUsersOrders.map((order, index) => (
-              <div key={index} className="mng-orders-content">
-                <p className={orderStatus(order.orderStatus)}>
-                  {order.orderStatus}
-                </p>
-                <p className={paymentStatus(order.paymentStatus)}>
-                  {order.paymentStatus}
-                </p>
-                <p>{order.paymentMode}</p>
-                <p>₦{order.total}</p>
-                <time>{new Date(Number(order.createdAt)).toDateString()}</time>
-                <GoKebabHorizontal
-                  size={25}
-                  className="mng-orders-more-icon"
-                  onClick={() => handleClick(order)}
-                />
-              </div>
-            ))}
-            {modal.id && (
-              <div ref={ordersRef}>
-                <OrderModal modal={modal} setModal={setModal} />
-              </div>
-            )}
-          </div>
-        </main>
-      )}
+          ))}
+          {modal.id && (
+            <div ref={ordersRef}>
+              <OrderModal modal={modal} setModal={setModal} />
+            </div>
+          )}
+        </div>
+      </main>
+      {/* )} */}
     </Navbar>
   );
 };

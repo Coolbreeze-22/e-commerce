@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./OrderModal.css";
 import { OrderProps } from "../../../states/redux/reducerTypes";
-import { updateOrderByAdmin } from "../../../controller/orderController";
+import {
+  deleteOrder,
+  updateOrderByAdmin,
+} from "../../../controller/orderController";
 import { IoMdClose } from "react-icons/io";
 import { ClickAwayListener } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -42,6 +45,10 @@ const OrderModal = ({ modal, setModal }: OrderModalProps) => {
     setModal(initialState);
   };
 
+  const handleDeleteOrder = () => {
+    deleteOrder({ id: modal.id, label: "admin", dispatch });
+    setModal(initialState);
+  };
   const handleClose = () => {
     setIsEdit(false);
     setStatus(statusInitial);
@@ -248,7 +255,7 @@ const OrderModal = ({ modal, setModal }: OrderModalProps) => {
               <p>Color:</p>
               <p
                 style={{
-                  border:"2px solid rgb(107, 106, 106)",
+                  border: "2px solid rgb(107, 106, 106)",
                   backgroundColor: item.color,
                   width: "20px",
                   height: "20px",
@@ -259,6 +266,9 @@ const OrderModal = ({ modal, setModal }: OrderModalProps) => {
             <hr className="mng-orders-hr" />
           </section>
         ))}
+        <button className="mng-orders-delete" onClick={handleDeleteOrder}>
+          Delete
+        </button>
       </section>
     </ClickAwayListener>
   );
