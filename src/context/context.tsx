@@ -1,6 +1,4 @@
 import React, { createContext, useState, ReactNode, useContext } from "react";
-import { UserProps } from "../states/redux/reducerTypes";
-import { userInitialState } from "../states/redux/userReducer";
 
 interface ContextType {
   isWishlist: boolean;
@@ -20,9 +18,6 @@ interface ContextType {
 
   couponCode: string;
   setCouponCode: React.Dispatch<React.SetStateAction<string>>;
-
-  userFormData: UserProps;
-  setUserFormData: React.Dispatch<React.SetStateAction<UserProps>>;
 }
 
 interface ChildrenType {
@@ -32,13 +27,7 @@ interface ChildrenType {
 export const CommerceContext = createContext<ContextType>({} as ContextType);
 
 export const CommerceProvider = ({ children }: ChildrenType) => {
-  const initialState: UserProps = {
-    ...userInitialState,
-  };
-
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
-  const [userFormData, setUserFormData] =
-    useState<UserProps>(initialState);
   const [searchItems, setSearchItems] = useState<string>("");
   const [isSidebar, setIsSidebar] = useState<boolean>(false);
   const [paymentMode, setPaymentMode] = useState<string>("bank");
@@ -50,8 +39,6 @@ export const CommerceProvider = ({ children }: ChildrenType) => {
       value={{
         isWishlist,
         setIsWishlist,
-        userFormData,
-        setUserFormData,
         searchItems,
         setSearchItems,
         isSidebar,
