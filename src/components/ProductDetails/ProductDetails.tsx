@@ -28,7 +28,7 @@ const ProductDetails = () => {
   const [selectedProduct, setSelectedProduct] =
     React.useState<ProductType | null>(null);
   const [quantity, setQuantity] = React.useState<number>(1);
-  const [size, setSize] = React.useState<string>("M");
+  const [size, setSize] = React.useState<string>("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,6 +67,7 @@ const ProductDetails = () => {
       const product = allProducts.find((item) => item.id === id);
       if (product) {
         setSelectedProduct(product);
+        setSize(() => product.size);
       }
     }
     findItem();
