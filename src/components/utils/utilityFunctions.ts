@@ -25,6 +25,17 @@ type AddItemToWishlistProps = {
 export const addItemToCart = (data: AddToCartProps) => {
   const { item, size, quantity, dispatch } = data;
 
+  const price =
+    size === item.size ? item.price : item.otherSizeInfo[size].price;
+  const checkedDiscountedPrice = item.discountedPrice
+    ? item.discountedPrice
+    : 0;
+
+  const discountedPrice =
+    size === item.size
+      ? checkedDiscountedPrice
+      : item.otherSizeInfo[size].discountedPrice;
+
   const cartProduct: CartProductType = {
     id: item.id,
     name: item.name,
@@ -33,8 +44,8 @@ export const addItemToCart = (data: AddToCartProps) => {
     category: item.category,
     subCategory: item.subCategory,
     photo: item.photo[0],
-    price: item.otherSizeInfo[size].price,
-    discountedPrice: item.otherSizeInfo[size].discountedPrice,
+    price: price,
+    discountedPrice: discountedPrice,
     quantity: quantity,
     inStock: item.otherSizeInfo[size].inStock,
     color: item.color,

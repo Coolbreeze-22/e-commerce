@@ -49,7 +49,7 @@
   margin-top: 10px;
 }
 
-.mng-orders-change > button {
+.mng-orders-change > button, .mng-orders-delete {
   width: 150px;
   height: 40px;
   background-color: #db4444;
@@ -125,7 +125,7 @@
     margin-top: 5px;
   }
 
-  .mng-orders-change > button {
+  .mng-orders-change > button, .mng-orders-delete {
     width: 120px;
     height: 35px;
   }
