@@ -17,10 +17,10 @@ import {
 } from "../config/firebase";
 import * as reducer from "../states/redux/userReducer";
 import { AppDispatch } from "../states/redux/store";
-import { userInitialState } from "../states/redux/userReducer";
 import { UserProps } from "../states/redux/reducerTypes";
 import { toastNotification } from "../components/utils/toastNotification";
 import { NavigateFunction } from "react-router-dom";
+import { initialState } from "../constants/user";
 
 interface AuthProps {
   email: string;
@@ -41,7 +41,7 @@ interface ResetPasswordProps {
 export const getUsers = async (data: GetUsersProps) => {
   const { id, dispatch } = data;
   try {
-    dispatch(reducer.userLoading(true));
+    // dispatch(reducer.userLoading(true));
     if (id) {
       const colRef = collection(fireStore, "users");
       const querySnapshot = await getDocs(colRef);
@@ -51,6 +51,8 @@ export const getUsers = async (data: GetUsersProps) => {
       });
       dispatch(reducer.getUsers(users));
     }
+    // the below isnt part of the redux infinte loop problem, but i still removed it
+
     dispatch(reducer.userLoading(false));
   } catch (error: any) {
     toastNotification(error.message, "error");
@@ -188,7 +190,7 @@ export const deleteMyAccount = async (
 
 const createUserProfile = (user: any) => {
   const userProfile = {
-    ...userInitialState,
+    ...initialState,
     id: user.uid,
     email: user.email,
     emailVerified: user.emailVerified,
@@ -198,8 +200,6 @@ const createUserProfile = (user: any) => {
   };
   return userProfile;
 };
-
-
 
 // interface VerifyEmailProps {
 //   dispatch: AppDispatch;
