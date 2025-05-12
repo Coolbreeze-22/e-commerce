@@ -23,37 +23,37 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     getProducts(state, action: PayloadAction<Array<ProductType>>) {
-      state.products = [...action.payload];
+      state.products = action.payload;
     },
     getFlashSales(state, action: PayloadAction<Array<ProductType>>) {
-      state.flashSales = [...action.payload];
+      state.flashSales = action.payload;
     },
     getBestSelling(state, action: PayloadAction<Array<ProductType>>) {
-      state.bestSelling = [...action.payload];
+      state.bestSelling = action.payload;
     },
     getExplore(state, action: PayloadAction<Array<ProductType>>) {
       state.explore = action.payload;
     },
     getNewArrival(state, action: PayloadAction<Array<ProductType>>) {
-      state.newArrival = [...action.payload];
+      state.newArrival = action.payload;
     },
     getUniqueFlashSales(state, action: PayloadAction<Array<ProductType>>) {
-      state.uniqueFlashSales = [...action.payload];
+      state.uniqueFlashSales = action.payload;
     },
     getUniqueBestSelling(state, action: PayloadAction<Array<ProductType>>) {
-      state.uniqueBestSelling = [...action.payload];
+      state.uniqueBestSelling = action.payload;
     },
     getUniqueExplore(state, action: PayloadAction<Array<ProductType>>) {
-      state.uniqueExplore = [...action.payload];
+      state.uniqueExplore = action.payload;
     },
     getUniqueNewArrival(state, action: PayloadAction<Array<ProductType>>) {
-      state.uniqueNewArrival = [...action.payload];
+      state.uniqueNewArrival = action.payload;
     },
     getCategory(state, action: PayloadAction<Array<string>>) {
       state.category = action.payload;
     },
     getSubCategory(state, action: PayloadAction<Array<string>>) {
-      state.subCategory = [...action.payload];
+      state.subCategory = action.payload;
     },
     createProduct(state, action: PayloadAction<ProductType>) {
       state.products.push(action.payload);

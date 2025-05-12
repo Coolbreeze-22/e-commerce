@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { UserProps } from "./reducerTypes";
+import isEqual from "lodash/isEqual";
+import { initialState as initial } from "../../constants/user";
 
 export type InitialStateProps = {
   users: Array<UserProps>;
@@ -8,30 +10,9 @@ export type InitialStateProps = {
   isLoading: boolean;
 };
 
-export const userInitialState: UserProps = {
-  id: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  emailVerified: false,
-  phoneNumber: "",
-  photoUrl: "",
-  address: "",
-  companyName: "",
-  apartment: "",
-  city: "",
-  isAdmin: false,
-  isOwner: false,
-  isSignedIn: false,
-  lastLoginAt: "",
-  lastLogoutAt: "",
-  createdAt: "",
-  updatedAt: "",
-};
-
 const initialState: InitialStateProps = {
   users: [],
-  user: userInitialState,
+  user: { ...initial },
   isLoading: false,
 };
 
@@ -40,7 +21,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     getUsers(state, action: PayloadAction<Array<UserProps>>) {
-      state.users = action.payload;
+      if (!isEqual(state.users, action.payload)) {
+        state.users = action.payload;
+      }
     },
     signUp(state, action: PayloadAction<UserProps>) {
       state.user = action.payload;
@@ -49,7 +32,8 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logOut(state) {
-      state.user = userInitialState;
+      state.user = { ...initial };
+      state.users = [];
     },
     updateProfile(state, action: PayloadAction<UserProps>) {
       state.user = { ...action.payload };
