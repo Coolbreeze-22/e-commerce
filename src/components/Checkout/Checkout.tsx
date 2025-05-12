@@ -11,10 +11,16 @@ import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import CheckoutForm from "./CheckoutForm/CheckoutForm";
 import { useStateContext } from "../../context/context";
+import { UserProps } from "../../states/redux/reducerTypes";
+import { initialState } from "../../constants/user";
+import { useState } from "react";
 
 const Checkout = () => {
   const cart = useSelector((state: RootState) => state.cartReducer);
   const { paymentMode, setPaymentMode } = useStateContext();
+  const [userFormData, setUserFormData] = useState<UserProps>({
+    ...initialState,
+  });
   // const { couponCode, setCouponCode } = useStateContext();
 
   return (
@@ -34,7 +40,10 @@ const Checkout = () => {
         <header>Billing Details</header>
 
         <div className="checkout-form-cart">
-          <CheckoutForm />
+          <CheckoutForm
+            userFormData={userFormData}
+            setUserFormData={setUserFormData}
+          />
           <section className="checkout-cart-details">
             {cart.products.map((product, index) => (
               <div key={index} className="checkout-cart">
@@ -68,9 +77,16 @@ const Checkout = () => {
             </aside>
 
             <div className="checkout-bank-area">
-              <div className="checkout-bank" onClick={() => setPaymentMode("bank")}>
+              <div
+                className="checkout-bank"
+                onClick={() => setPaymentMode("bank")}
+              >
                 <aside className="checkout-bank-mode">
-                  <div className={paymentMode === "bank" ? "checkout-mode-div" : ""}></div>
+                  <div
+                    className={
+                      paymentMode === "bank" ? "checkout-mode-div" : ""
+                    }
+                  ></div>
                 </aside>
                 <span>Bank</span>
               </div>
@@ -111,7 +127,7 @@ const Checkout = () => {
                 />
               </div>
             </div> */}
-            <Paystack />
+            <Paystack userFormData={userFormData} />
           </section>
         </div>
       </main>

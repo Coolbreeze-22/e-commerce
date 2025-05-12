@@ -1,15 +1,19 @@
 import "./CheckoutForm.css";
 import CustomInput from "../../CustomInput/CustomInput";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import { useStateContext } from "../../../context/context";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { updateProfile } from "../../../controller/userController";
+import { UserProps } from "../../../states/redux/reducerTypes";
 
-const CheckoutForm = () => {
-  const { userFormData, setUserFormData } = useStateContext();
+interface CheckoutFormProps {
+  userFormData: UserProps;
+  setUserFormData: React.Dispatch<React.SetStateAction<UserProps>>;
+}
+const CheckoutForm = ({ userFormData, setUserFormData }: CheckoutFormProps) => {
   const { user } = useSelector((state: RootState) => state.userReducer);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
