@@ -468,31 +468,31 @@ const UpdateProduct = () => {
                 <div className="update-other-size-items xs">
                   <aside>XS</aside>
                   <aside>₦{formData.otherSizeInfo.XS.price}</aside>
-                  <aside>₦{formData.otherSizeInfo.XS.price}</aside>
+                  <aside>₦{formData.otherSizeInfo.XS.discountedPrice}</aside>
                   <aside>{formData.otherSizeInfo.XS.inStock}</aside>
                 </div>
                 <div className="update-other-size-items s">
                   <aside>S</aside>
                   <aside>₦{formData.otherSizeInfo.S.price}</aside>
-                  <aside>₦{formData.otherSizeInfo.S.price}</aside>
+                  <aside>₦{formData.otherSizeInfo.S.discountedPrice}</aside>
                   <aside>{formData.otherSizeInfo.S.inStock}</aside>
                 </div>
                 <div className="update-other-size-items m">
                   <aside>M</aside>
                   <aside>₦{formData.otherSizeInfo.M.price}</aside>
-                  <aside>₦{formData.otherSizeInfo.M.price}</aside>
+                  <aside>₦{formData.otherSizeInfo.M.discountedPrice}</aside>
                   <aside>{formData.otherSizeInfo.M.inStock}</aside>
                 </div>
                 <div className="update-other-size-items l">
                   <aside>L</aside>
                   <aside>₦{formData.otherSizeInfo.L.price}</aside>
-                  <aside>₦{formData.otherSizeInfo.L.price}</aside>
+                  <aside>₦{formData.otherSizeInfo.L.discountedPrice}</aside>
                   <aside>{formData.otherSizeInfo.L.inStock}</aside>
                 </div>
                 <div className="update-other-size-items xl">
                   <aside>XL</aside>
                   <aside>₦{formData.otherSizeInfo.XL.price}</aside>
-                  <aside>₦{formData.otherSizeInfo.XL.price}</aside>
+                  <aside>₦{formData.otherSizeInfo.XL.discountedPrice}</aside>
                   <aside>{formData.otherSizeInfo.XL.inStock}</aside>
                 </div>
               </header>
