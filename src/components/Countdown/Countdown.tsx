@@ -20,14 +20,13 @@ const Countdown = () => {
 
   const [formData, setFormData] = useState<CountdownType>(initialState);
   const [warning, setWarning] = useState<string>("");
-  console.log("check", allCountdown);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleCountdown = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!setFormData.name) {
+    if (!formData.name) {
       setWarning("select name");
     } else if (!formData.startDate) {
       setWarning("select start date");
@@ -117,7 +116,7 @@ const Countdown = () => {
                   <span className="count-delete">
                     <MdDeleteOutline
                       size={25}
-                      style={{color:"#db4444"}}
+                      style={{ color: "#db4444" }}
                       onClick={() => handleDeleteCountdown(countdown.id)}
                     />
                   </span>
