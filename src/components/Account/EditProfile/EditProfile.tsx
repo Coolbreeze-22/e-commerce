@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import "./EditProfile.css";
 import CustomInput from "../../CustomInput/CustomInput";
 import CustomButton from "../../CustomButton/CustomButton";
-import { useStateContext } from "../../../context/context";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { updateProfile } from "../../../controller/userController";
+import { initialState } from "../../../constants/user";
+import { UserProps } from "../../../states/redux/reducerTypes";
 
 const EditProfile = ({
   setIsEdit,
 }: {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { userFormData, setUserFormData } = useStateContext();
   const { user } = useSelector((state: RootState) => state.userReducer);
+  const [userFormData, setUserFormData] = useState<UserProps>({
+    ...initialState,
+  });
   const [isInput, setIsInput] = useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -57,7 +60,7 @@ const EditProfile = ({
   };
   const handleClose = () => {
     setIsEdit(false);
-    setIsInput(true);
+    setIsInput(false);
   };
 
   return (

@@ -50,7 +50,7 @@ const Account = () => {
               <div className="acct-prof-edit">
                 <Profile>
                   <button
-                    onClick={() => setIsEdit((prev) => !prev)}
+                    onClick={() => setIsEdit(() => true)}
                     className="acct-edit-btn"
                   >
                     Edit Profile
