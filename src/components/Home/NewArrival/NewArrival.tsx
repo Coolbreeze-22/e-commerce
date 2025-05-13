@@ -31,7 +31,6 @@ const NewArrival = () => {
           <img src={newArrival[1]?.photo[0]} alt="loading" />
           <aside className="new-item-info">
             <p className="new-item-name">{newArrival[1]?.name}</p>
-            <p className="new-item-description">{newArrival[1]?.description}</p>
             <p
               className="new-item-shop"
               onClick={() => viewProduct(newArrival[1]?.id)}
@@ -64,9 +63,6 @@ const NewArrival = () => {
             <img src={newArrival[2]?.photo[0]} alt="loading" />
             <aside className="new-item-info2">
               <p className="new-item-name">{newArrival[2]?.name}</p>
-              <p className="new-item-description">
-                {newArrival[2]?.description}
-              </p>
               <p
                 className="new-item-shop"
                 onClick={() => viewProduct(newArrival[2]?.id)}
@@ -80,9 +76,6 @@ const NewArrival = () => {
             <img src={newArrival[0]?.photo[0]} alt="loading" />
             <aside className="new-item-info2">
               <p className="new-item-name">{newArrival[0]?.name}</p>
-              <p className="new-item-description">
-                {newArrival[0]?.description}
-              </p>
               <p
                 className="new-item-shop"
                 onClick={() => viewProduct(newArrival[0]?.id)}

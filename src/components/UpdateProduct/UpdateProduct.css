@@ -194,7 +194,7 @@
     margin-top: 40px;
   }
   .update-img {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
   .update-body > form {
     grid-template-columns: 1fr 1fr 1fr;

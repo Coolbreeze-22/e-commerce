@@ -25,16 +25,27 @@ type AddItemToWishlistProps = {
 export const addItemToCart = (data: AddToCartProps) => {
   const { item, size, quantity, dispatch } = data;
 
-  const price =
-    size === item.size ? item.price : item.otherSizeInfo[size].price;
+  const price = !item.size
+    ? item.price
+    : item.size === size
+    ? item.price
+    : item.otherSizeInfo[size].price;
+
   const checkedDiscountedPrice = item.discountedPrice
     ? item.discountedPrice
     : 0;
 
-  const discountedPrice =
-    size === item.size
-      ? checkedDiscountedPrice
-      : item.otherSizeInfo[size].discountedPrice;
+  const discountedPrice = !item.size
+    ? checkedDiscountedPrice
+    : item.size === size
+    ? checkedDiscountedPrice
+    : item.otherSizeInfo[size].discountedPrice;
+
+  const stock = !item.size
+    ? item.inStock
+    : item.size === size
+    ? item.inStock
+    : item.otherSizeInfo[size].inStock;
 
   const cartProduct: CartProductType = {
     id: item.id,
@@ -47,7 +58,7 @@ export const addItemToCart = (data: AddToCartProps) => {
     price: price,
     discountedPrice: discountedPrice,
     quantity: quantity,
-    inStock: item.otherSizeInfo[size].inStock,
+    inStock: stock,
     color: item.color,
     size,
   };
