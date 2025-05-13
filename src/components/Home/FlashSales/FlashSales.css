@@ -71,7 +71,7 @@
 }
 .flash-swiper-slide-div {
   width: 100%;
-  height: 370px;
+  height: 390px;
 }
 .flash-image-sect {
   position: relative;
@@ -216,7 +216,7 @@
     letter-spacing: 1px;
   }
   .flash-swiper-slide-div {
-    height: 240px;
+    height: 250px;
   }
   .flash-image-sect {
     padding-top: 25px;
@@ -289,7 +289,7 @@
     letter-spacing: 1px;
   }
   .flash-swiper-slide-div {
-    height: 280px;
+    height: 300px;
   }
   .flash-image-sect {
     padding-top: 35px;
@@ -328,7 +328,7 @@
     margin-top: 10px;
     font-weight: 400;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 17px;
   }
   .flash-rating {
     font-weight: 400;

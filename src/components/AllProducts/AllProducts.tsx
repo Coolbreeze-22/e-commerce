@@ -24,6 +24,7 @@ const AllProducts = () => {
   const allProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.productReducer.products
   );
+  const { user } = useSelector((state: RootState) => state.userReducer);
   const [warning, setWarning] = useState("");
 
   const imageRefs = React.useRef<HTMLImageElement[]>([]);
@@ -108,46 +109,51 @@ const AllProducts = () => {
                 <div className="all-eye">
                   <MdOutlineRemoveRedEye className="all-icon" />
                 </div>
-                <div
-                  className="all-edit"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigateToUpdateProduct(product);
-                  }}
-                >
-                  <MdOutlineEdit className="all-icon" />
-                </div>
-                <div className="all-delete">
-                  <MdDeleteOutline className="all-icon" />
-                </div>
-                <div
-                  className="all-delete"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setWarning(product.id);
-                  }}
-                >
-                  <MdDeleteOutline className="all-icon" />
-                </div>
-                {warning === product.id && (
-                  <div className="all-warning">
-                    <button
+
+                {user.isAdmin && (
+                  <>
+                    <div
+                      className="all-edit"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDelete(product.id);
+                        navigateToUpdateProduct(product);
                       }}
                     >
-                      Delete
-                    </button>
-                    <button
+                      <MdOutlineEdit className="all-icon" />
+                    </div>
+                    <div className="all-delete">
+                      <MdDeleteOutline className="all-icon" />
+                    </div>
+                    <div
+                      className="all-delete"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setWarning("");
+                        setWarning(product.id);
                       }}
                     >
-                      Cancel
-                    </button>
-                  </div>
+                      <MdDeleteOutline className="all-icon" />
+                    </div>
+                    {warning === product.id && (
+                      <div className="all-warning">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(product.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setWarning("");
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    )}
+                  </>
                 )}
                 <div className="all-image-wrapper">
                   <img
