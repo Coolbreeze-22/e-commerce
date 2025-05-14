@@ -5,11 +5,14 @@ import { RootState } from "../../../states/redux/store";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import { Skeleton } from "@mui/material";
 
 const Orders = () => {
-  const { userOrders: orders, userTotal } = useSelector(
-    (state: RootState) => state.orderReducer
-  );
+  const {
+    userOrders: orders,
+    userTotal,
+    isLoading,
+  } = useSelector((state: RootState) => state.orderReducer);
   const ordersRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { ref, inView } = useInView({
@@ -45,81 +48,99 @@ const Orders = () => {
 
   return (
     <main ref={ordersRef} className="orders-container">
-      {!orders.length ? (
-        <aside>
-          <div ref={ref} className={inView ? "orders-animation" : ""}></div>
-          <div className="orders-no-order">Place orders to see them here</div>
-        </aside>
+      {isLoading ? (
+        <>
+          <Skeleton height={60}/>
+          <Skeleton height={60}/>
+          <Skeleton height={60}/>
+          <Skeleton height={60}/>
+          <Skeleton height={60}/>
+        </>
       ) : (
-        <div className="orders-wrapper">
-          <header className="orders-header">Orders</header>
-
-          {orders.map((order, index) => (
-            <section key={index} className="orders-list">
-              <div className="orders-info">
-                <div>
-                  <p>Order id:</p>
-                  <p>{order.id}</p>
-                </div>
-                <div>
-                  <p>Transaction id:</p>
-                  <p>{order.transactionId ? order.transactionId : "none"}</p>
-                </div>
-                <div>
-                  <p>Payment Status:</p>
-                  <p className={paymentStatus(order.paymentStatus)}>
-                    {order.paymentStatus}
-                  </p>
-                </div>
-                <div>
-                  <p>Order Status:</p>
-                  <p className={orderStatus(order.orderStatus)}>
-                    {order.orderStatus}
-                  </p>
-                </div>
-                <div>
-                  <p>Delivery Fee:</p>
-                  <p>₦{order.deliveryFee}</p>
-                </div>
-                <div>
-                  <p>Subtotal:</p>
-                  <p>₦{order.subtotal}</p>
-                </div>
-                <div>
-                  <p>Total:</p>
-                  <p>₦{order.total}</p>
-                </div>
-                <div>
-                  <p>{moment(Number(order.createdAt)).fromNow()}</p>
-                </div>
+        <>
+          {!orders.length ? (
+            <aside>
+              <div ref={ref} className={inView ? "orders-animation" : ""}></div>
+              <div className="orders-no-order">
+                Place orders to see them here
               </div>
-              <div className="orders-items">
-                {order.items.map((item, index) => (
-                  <div key={index} className="orders-item">
-                    <img src={item.photo} alt="loading" loading="lazy" />
-                    <p>{item.name}</p>
-                    <p>
-                      ₦
-                      {item.discountedPrice ? item.discountedPrice : item.price}
-                    </p>
+            </aside>
+          ) : (
+            <div className="orders-wrapper">
+              <header className="orders-header">Orders</header>
 
-                    <p>{item.size}</p>
-                    <p>{item.quantity}piece(s)</p>
-                    <p
-                      style={{ backgroundColor: item.color }}
-                      className="orders-color"
-                    ></p>
+              {orders.map((order, index) => (
+                <section key={index} className="orders-list">
+                  <div className="orders-info">
+                    <div>
+                      <p>Order ID:</p>
+                      <p>{order.id}</p>
+                    </div>
+                    <div>
+                      <p>Transaction ID:</p>
+                      <p>
+                        {order.transactionId ? order.transactionId : "none"}
+                      </p>
+                    </div>
+                    <div>
+                      <p>Payment Status:</p>
+                      <p className={paymentStatus(order.paymentStatus)}>
+                        {order.paymentStatus}
+                      </p>
+                    </div>
+                    <div>
+                      <p>Order Status:</p>
+                      <p className={orderStatus(order.orderStatus)}>
+                        {order.orderStatus}
+                      </p>
+                    </div>
+                    <div>
+                      <p>Delivery Fee:</p>
+                      <p>₦{order.deliveryFee}</p>
+                    </div>
+                    <div>
+                      <p>Subtotal:</p>
+                      <p>₦{order.subtotal}</p>
+                    </div>
+                    <div>
+                      <p>Total:</p>
+                      <p>₦{order.total}</p>
+                    </div>
+                    <div>
+                      <p>{moment(Number(order.createdAt)).fromNow()}</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </section>
-          ))}
+                  <div className="orders-items">
+                    {order.items.map((item, index) => (
+                      <div key={index} className="orders-item">
+                        <img src={item.photo} alt="loading" loading="lazy" />
+                        <p>{item.name}</p>
+                        <p>
+                          ₦
+                          {item.discountedPrice
+                            ? item.discountedPrice
+                            : item.price}
+                        </p>
 
-          <section className="orders-total">
-            <p>Total:</p>
-            <p className="orders-total-amount">₦{userTotal}</p>
-          </section>
-        </div>
+                        <p>{item.size}</p>
+                        <p>{item.quantity}piece(s)</p>
+                        <p
+                          style={{ backgroundColor: item.color }}
+                          className="orders-color"
+                        ></p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ))}
+
+              <section className="orders-total">
+                <p>Total:</p>
+                <p className="orders-total-amount">₦{userTotal}</p>
+              </section>
+            </div>
+          )}
+        </>
       )}
     </main>
   );

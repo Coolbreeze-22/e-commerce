@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import {getMessaging} from 'firebase/messaging';
+
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -48,11 +50,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const fireStore = getFirestore(app);
+const storage = getStorage(app);
+const messaging = getMessaging(app);
 
 export {
   fireStore,
   auth,
-  getStorage,
+  storage,
+  messaging,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,

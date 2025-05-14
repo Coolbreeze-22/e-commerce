@@ -45,7 +45,9 @@ const WishlistProducts = ({ products, isWishlist }: WishlistProductsProps) => {
       quantity: 1,
       dispatch,
     });
-    handleRemoveFromWishlist(item.id, "no notification");
+    if (isWishlist) {
+      handleRemoveFromWishlist(item.id, "no notification");
+    }
   };
   return (
     <main className="wishlist-grid">

@@ -18,10 +18,11 @@ import { useInView } from "react-intersection-observer";
 import { breakPoints } from "../../utils/breakPoints";
 import { addItemToCart, addItemToWishlist } from "../../utils/utilityFunctions";
 import { FiShoppingCart } from "react-icons/fi";
+import HomeLoading from "../HomeLoading/HomeLoading";
 
 export const Explore = () => {
-  const exploreProducts: Array<ProductType> = useSelector(
-    (state: RootState) => state.productReducer.explore
+  const { explore, isLoading } = useSelector(
+    (state: RootState) => state.productReducer
   );
   const { ref } = useInView({
     threshold: 0,
@@ -83,119 +84,123 @@ export const Explore = () => {
         </header>
       </section>
 
-      <section >
-        <Swiper
-          modules={[Pagination, Navigation]}
-          slidesPerGroup={1}
-          pagination={{ clickable: true }}
-          navigation={{
-            nextEl: ".explore-button-next",
-            prevEl: ".explore-button-prev",
-          }}
-          breakpoints={breakPoints}
-        >
-          {exploreProducts.map((product, index) => (
-            <SwiperSlide key={index} className="explore-swiper-slide">
-              <div
-                className="explore-swiper-slide-div"
-                onClick={() => viewProduct(product)}
-              >
-                <section className="explore-image-sect">
-                  <div
-                    className="explore-heart"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleWishlist(product);
-                    }}
-                  >
-                    <FaRegHeart className="explore-icon" />
-                  </div>
-                  <div className="explore-eye">
-                    <MdOutlineRemoveRedEye className="explore-icon" />
-                  </div>
-                  <div className="explore-image-wrapper">
-                    <img
-                      src={product.photo[0]}
-                      alt="loading"
-                      loading="lazy"
-                      className="explore-image"
-                    />
-                  </div>
-                  <div
-                    className="explore-add-to-cart"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToCart(product);
-                    }}
-                  >
-                    <FiShoppingCart className="explore-add-icon" />
-                    <p>Add To Cart</p>
-                  </div>
-                </section>
-                <section>
-                  <div>
-                    <p className="explore-item-name">{product.name}</p>
-                    {product.discountedPrice && (
-                      <span className="explore-new-price">
-                        ₦{product.discountedPrice}{" "}
-                      </span>
-                    )}
-                    <span
-                      className={
-                        product.discountedPrice
-                          ? "explore-old-price"
-                          : "explore-new-price"
-                      }
+      <section>
+        {isLoading ? (
+          <HomeLoading />
+        ) : (
+          <Swiper
+            modules={[Pagination, Navigation]}
+            slidesPerGroup={1}
+            pagination={{ clickable: true }}
+            navigation={{
+              nextEl: ".explore-button-next",
+              prevEl: ".explore-button-prev",
+            }}
+            breakpoints={breakPoints}
+          >
+            {explore.map((product, index) => (
+              <SwiperSlide key={index} className="explore-swiper-slide">
+                <div
+                  className="explore-swiper-slide-div"
+                  onClick={() => viewProduct(product)}
+                >
+                  <section className="explore-image-sect">
+                    <div
+                      className="explore-heart"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleWishlist(product);
+                      }}
                     >
-                      ₦{product.price}
-                    </span>
-                    <div className="explore-star-rating-wrapper">
-                      <Rating
-                        name="read-only"
-                        value={checkRating(product.rating, "star")}
-                        readOnly
-                        precision={0.5}
-                        size="small"
-                      />
-                      <span className="explore-rating">
-                        ({checkRating(product.rating, "percent")})
-                      </span>
+                      <FaRegHeart className="explore-icon" />
                     </div>
-                  </div>
-
-                  <div className="explore-color">
-                    {product.allColors.map((itemColor, index) => (
+                    <div className="explore-eye">
+                      <MdOutlineRemoveRedEye className="explore-icon" />
+                    </div>
+                    <div className="explore-image-wrapper">
+                      <img
+                        src={product.photo[0]}
+                        alt="loading"
+                        loading="lazy"
+                        className="explore-image"
+                      />
+                    </div>
+                    <div
+                      className="explore-add-to-cart"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(product);
+                      }}
+                    >
+                      <FiShoppingCart className="explore-add-icon" />
+                      <p>Add To Cart</p>
+                    </div>
+                  </section>
+                  <section>
+                    <div>
+                      <p className="explore-item-name">{product.name}</p>
+                      {product.discountedPrice && (
+                        <span className="explore-new-price">
+                          ₦{product.discountedPrice}{" "}
+                        </span>
+                      )}
                       <span
-                        key={index}
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          ...(itemColor === product.color && {
-                            width: "12px",
-                            height: "12px",
-                            border: "2px solid black",
-                          }),
-                        }}
+                        className={
+                          product.discountedPrice
+                            ? "explore-old-price"
+                            : "explore-new-price"
+                        }
                       >
-                        <aside
+                        ₦{product.price}
+                      </span>
+                      <div className="explore-star-rating-wrapper">
+                        <Rating
+                          name="read-only"
+                          value={checkRating(product.rating, "star")}
+                          readOnly
+                          precision={0.5}
+                          size="small"
+                        />
+                        <span className="explore-rating">
+                          ({checkRating(product.rating, "percent")})
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="explore-color">
+                      {product.allColors.map((itemColor, index) => (
+                        <span
+                          key={index}
                           style={{
                             width: "20px",
                             height: "20px",
-                            backgroundColor: itemColor,
                             ...(itemColor === product.color && {
                               width: "12px",
                               height: "12px",
+                              border: "2px solid black",
                             }),
                           }}
-                        ></aside>
-                      </span>
-                    ))}
-                  </div>
-                </section>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                        >
+                          <aside
+                            style={{
+                              width: "20px",
+                              height: "20px",
+                              backgroundColor: itemColor,
+                              ...(itemColor === product.color && {
+                                width: "12px",
+                                height: "12px",
+                              }),
+                            }}
+                          ></aside>
+                        </span>
+                      ))}
+                    </div>
+                  </section>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </section>
 
       <section>
