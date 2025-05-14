@@ -1,7 +1,7 @@
 import "./FlashSales.css";
 import { useNavigate } from "react-router-dom";
 import { ProductType } from "../../../states/redux/reducerTypes";
-import { Rating, Skeleton } from "@mui/material";
+import { Rating } from "@mui/material";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Swiper, SwiperSlide } from "swiper/react";

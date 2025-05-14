@@ -8,8 +8,8 @@ import { getAllUsersOrders } from "../../controller/orderController";
 import { GoKebabHorizontal } from "react-icons/go";
 import { OrderProps } from "../../states/redux/reducerTypes";
 import OrderModal from "./OrderModal/OrderModal";
-import Loading from "../Loading/Loading";
 import { initialState } from "../../constants/order";
+import { Skeleton } from "@mui/material";
 
 const ManageOrders = () => {
   const { allUsersOrders, allUsersTotal, isLoading } = useSelector(
@@ -64,7 +64,9 @@ const ManageOrders = () => {
   return (
     <Navbar>
       {isLoading ? (
-        <Loading />
+        <>
+        <Skeleton width={"90%"} height={400} sx={{margin:"0 auto"}}/>
+        </>
       ) : (
         <main className="mng-orders-container">
           <div className="mng-orders-routes">
