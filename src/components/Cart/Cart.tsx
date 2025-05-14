@@ -134,55 +134,58 @@ const Cart = () => {
               </header>
 
               {cart.products.map((item, index) => (
-                <div key={index} className="cart-items">
-                  <div className="cart-image-area">
-                    <MdCancel
-                      onClick={() => removeItemFromCart(item.id, item.size)}
-                      className="cart-cancel-icon"
-                    />
-                    <img src={item.photo} alt="loading" loading="lazy" />
-                    <aside>{item.name}</aside>
+                <section key={index} className="cart-items-wrapper">
+                  <aside>{item.name}</aside>
+                  <div className="cart-items">
+                    <div className="cart-image-area">
+                      <MdCancel
+                        onClick={() => removeItemFromCart(item.id, item.size)}
+                        className="cart-cancel-icon"
+                      />
+                      <img src={item.photo} alt="loading" loading="lazy" />
+                    </div>
+                    <p>
+                      ₦
+                      {item.discountedPrice ? item.discountedPrice : item.price}
+                    </p>
+                    <p>{item.inStock} Piece(s)</p>
+                    <div className="cart-input-wrapper">
+                      <input
+                        type="number"
+                        min={1}
+                        max={item.inStock}
+                        name="quantity"
+                        className={
+                          index === currIndex ? "cart-active-input" : "none"
+                        }
+                        value={showQuantity({
+                          itemId: item.id,
+                          itemSize: item.size,
+                          itemQuantity: item.quantity,
+                        })}
+                        onChange={(event) =>
+                          handleQuantity({
+                            id: item.id,
+                            size: item.size,
+                            event,
+                            index,
+                            quantity: item.quantity,
+                            inStock: item.inStock,
+                          })
+                        }
+                      />
+                    </div>
+                    <p>
+                      ₦
+                      {item.discountedPrice
+                        ? item.discountedPrice * item.quantity
+                        : item.price * item.quantity}
+                    </p>
+                    {currIndex === index && (
+                      <aside className="cart-message">{inStockMessage}</aside>
+                    )}
                   </div>
-                  <p>
-                    ₦{item.discountedPrice ? item.discountedPrice : item.price}
-                  </p>
-                  <p>{item.inStock} Piece(s)</p>
-                  <div className="cart-input-wrapper">
-                    <input
-                      type="number"
-                      min={1}
-                      max={item.inStock}
-                      name="quantity"
-                      className={
-                        index === currIndex ? "cart-active-input" : "none"
-                      }
-                      value={showQuantity({
-                        itemId: item.id,
-                        itemSize: item.size,
-                        itemQuantity: item.quantity,
-                      })}
-                      onChange={(event) =>
-                        handleQuantity({
-                          id: item.id,
-                          size: item.size,
-                          event,
-                          index,
-                          quantity: item.quantity,
-                          inStock: item.inStock,
-                        })
-                      }
-                    />
-                  </div>
-                  <p>
-                    ₦
-                    {item.discountedPrice
-                      ? item.discountedPrice * item.quantity
-                      : item.price * item.quantity}
-                  </p>
-                  {currIndex === index && (
-                    <aside className="cart-message">{inStockMessage}</aside>
-                  )}
-                </div>
+                </section>
               ))}
               <CartWishlist />
 

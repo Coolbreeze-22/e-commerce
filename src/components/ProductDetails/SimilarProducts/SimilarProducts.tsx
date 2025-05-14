@@ -86,7 +86,7 @@ const SimilarProducts = ({ product }: { product: ProductType }) => {
                     className="similar-add-to-cart"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleAddToCart(product);
+                      handleAddToCart(similarProduct);
                     }}
                   >
                     <FiShoppingCart className="similar-add-icon" />
@@ -98,7 +98,7 @@ const SimilarProducts = ({ product }: { product: ProductType }) => {
                     <p className="similar-item-name">{similarProduct.name}</p>
                     {similarProduct.discountedPrice && (
                       <span className="similar-new-price">
-                        ${similarProduct.discountedPrice}
+                        ₦{similarProduct.discountedPrice}
                       </span>
                     )}
                     <span
@@ -108,7 +108,7 @@ const SimilarProducts = ({ product }: { product: ProductType }) => {
                           : "best-new-price"
                       }
                     >
-                      ${similarProduct.price}
+                      ₦{similarProduct.price}
                     </span>
                     <div className="similar-star-rating-wrapper">
                       <Rating

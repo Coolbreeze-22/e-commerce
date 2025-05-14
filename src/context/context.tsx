@@ -4,9 +4,6 @@ interface ContextType {
   isWishlist: boolean;
   setIsWishlist: React.Dispatch<React.SetStateAction<boolean>>;
 
-  searchItems: string;
-  setSearchItems: React.Dispatch<React.SetStateAction<string>>;
-
   isSidebar: boolean;
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -28,7 +25,6 @@ export const CommerceContext = createContext<ContextType>({} as ContextType);
 
 export const CommerceProvider = ({ children }: ChildrenType) => {
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
-  const [searchItems, setSearchItems] = useState<string>("");
   const [isSidebar, setIsSidebar] = useState<boolean>(false);
   const [paymentMode, setPaymentMode] = useState<string>("bank");
   const [isDropdown, setIsDropdown] = useState<boolean>(false);
@@ -39,8 +35,6 @@ export const CommerceProvider = ({ children }: ChildrenType) => {
       value={{
         isWishlist,
         setIsWishlist,
-        searchItems,
-        setSearchItems,
         isSidebar,
         setIsSidebar,
         isDropdown,

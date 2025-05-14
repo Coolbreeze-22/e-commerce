@@ -1,7 +1,7 @@
 import "./CheckoutForm.css";
 import CustomInput from "../../CustomInput/CustomInput";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import { updateProfile } from "../../../controller/userController";
@@ -13,6 +13,7 @@ interface CheckoutFormProps {
 }
 const CheckoutForm = ({ userFormData, setUserFormData }: CheckoutFormProps) => {
   const { user } = useSelector((state: RootState) => state.userReducer);
+  const [isMarked, setIsMarked] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -44,6 +45,7 @@ const CheckoutForm = ({ userFormData, setUserFormData }: CheckoutFormProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     updateProfile(userFormData, dispatch);
+    setIsMarked(true);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +73,6 @@ const CheckoutForm = ({ userFormData, setUserFormData }: CheckoutFormProps) => {
         <label>Company Name</label>
         <br />
         <CustomInput
-          required
           type="text"
           name="companyName"
           value={userFormData.companyName}
@@ -149,7 +150,11 @@ const CheckoutForm = ({ userFormData, setUserFormData }: CheckoutFormProps) => {
       </div>
       <aside className="checkout-aside">
         <button type="submit">
-          <IoCheckmarkCircle className="checkout-mark-icon" />
+          <IoCheckmarkCircle
+            className={
+              isMarked ? "checkout-mark-icon" : "checkout-mark-icon-false"
+            }
+          />
         </button>
         <p>Save this information for faster check-out next time</p>
       </aside>

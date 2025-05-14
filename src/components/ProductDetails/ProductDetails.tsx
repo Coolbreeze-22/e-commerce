@@ -146,6 +146,9 @@ const ProductDetails = () => {
                 <div className="prod-dtls-dscrptn">
                   {selectedProduct.description}
                 </div>
+                <div className="prod-dtls-dscrptn">
+                  Instock: {selectedProduct.inStock}
+                </div>
 
                 {selectedProduct.allColors.length ? (
                   <div className="prod-dtls-color">
@@ -179,22 +182,24 @@ const ProductDetails = () => {
                     ))}
                   </div>
                 ) : null}
-                <div className="prod-dtls-sizes">
-                  <div>Size:</div>
-                  {selectedProduct.allSizes.map((itemSize, index) => (
-                    <button
-                      key={index}
-                      className={
-                        itemSize === size
-                          ? "prod-dtls-defaultSize"
-                          : "prod-dtls-size"
-                      }
-                      onClick={() => setSize(itemSize)}
-                    >
-                      {itemSize}
-                    </button>
-                  ))}
-                </div>
+                {selectedProduct.allSizes.length ? (
+                  <div className="prod-dtls-sizes">
+                    <div>Size:</div>
+                    {selectedProduct.allSizes.map((itemSize, index) => (
+                      <button
+                        key={index}
+                        className={
+                          itemSize === size
+                            ? "prod-dtls-defaultSize"
+                            : "prod-dtls-size"
+                        }
+                        onClick={() => setSize(itemSize)}
+                      >
+                        {itemSize}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
                 <div className="prod-dtls-quantity">
                   <div>
                     <FiMinus

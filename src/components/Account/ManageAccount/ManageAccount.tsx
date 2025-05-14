@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "./ManageAccount.css";
 
 const ManageAccount = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="manage-container">
       <header className="manage-acc">Manage My Account</header>
@@ -10,7 +13,7 @@ const ManageAccount = () => {
       <header className="manage-ord">My Orders</header>
       <div className="manage-rtns">My Returns</div>
       <div className="manage-can">My Cancellations</div>
-      <header className="manage-wish">My Wishlist</header>
+      <header className="manage-wish" onClick={()=> navigate('/wishlist')}>My Wishlist</header>
     </main>
   );
 };
