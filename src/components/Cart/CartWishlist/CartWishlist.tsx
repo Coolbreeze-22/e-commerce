@@ -24,7 +24,8 @@ const CartWishlist = () => {
 
   const { wishlist } = useSelector((state: RootState) => state.cartReducer);
   const { isWishlist, setIsWishlist } = useStateContext();
-  const [updatedItem, setUpdatedItem] = useState<UpdatedItemProps>(initialState);
+  const [updatedItem, setUpdatedItem] =
+    useState<UpdatedItemProps>(initialState);
 
   const wishlistRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
@@ -107,41 +108,45 @@ const CartWishlist = () => {
                 <p>In Stock</p>
               </header>
               {wishlist.map((item, index) => (
-                <div key={index} className="cart-wish-items">
-                  <div className="cart-wish-image-area">
-                    <MdCancel
-                      onClick={() => handleRemoveFromWishlist(item.id, "")}
-                      className="cart-wish-cancel-icon"
-                    />
-                    <img src={item.photo[0]} alt="loading" loading="lazy" />
-                    <aside>{item.name}</aside>
-                  </div>
-                  <p>
-                    ₦{item.discountedPrice ? item.discountedPrice : item.price}
-                  </p>
-
-                  <select
-                    defaultValue={item.allSizes[2]}
-                    onChange={(event) => handleSelect(item.id, event)}
-                    onBlur={() => setUpdatedItem(initialState)}
-                  >
-                    {item.allSizes.map((itemSize, index) => (
-                      <option key={index} value={itemSize}>
-                        {itemSize}
-                      </option>
-                    ))}
-                  </select>
-
-                  <p>
-                    {item.inStock} Piece(s)
-                    {!updatedItem.id || updatedItem.id === item.id ? (
-                      <FiShoppingCart
-                        className="cart-wish-cart-icon"
-                        onClick={() => handleAddToCart(item)}
+                <section key={index} className="cart-wish-items-wrapper">
+                  <aside>{item.name}</aside>
+                  <div className="cart-wish-items">
+                    <div className="cart-wish-image-area">
+                      <MdCancel
+                        onClick={() => handleRemoveFromWishlist(item.id, "")}
+                        className="cart-wish-cancel-icon"
                       />
-                    ) : null}
-                  </p>
-                </div>
+                      <img src={item.photo[0]} alt="loading" loading="lazy" />
+                    </div>
+                    <p>
+                      ₦
+                      {item.discountedPrice ? item.discountedPrice : item.price}
+                    </p>
+                    {item.size && (
+                      <select
+                        defaultValue={item.allSizes[2]}
+                        onChange={(event) => handleSelect(item.id, event)}
+                        onBlur={() => setUpdatedItem(initialState)}
+                      >
+                        {item.allSizes.map((itemSize, index) => (
+                          <option key={index} value={itemSize}>
+                            {itemSize}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+
+                    <p>
+                      {item.inStock} Piece(s)
+                      {!updatedItem.id || updatedItem.id === item.id ? (
+                        <FiShoppingCart
+                          className="cart-wish-cart-icon"
+                          onClick={() => handleAddToCart(item)}
+                        />
+                      ) : null}
+                    </p>
+                  </div>
+                </section>
               ))}
             </main>
           )}

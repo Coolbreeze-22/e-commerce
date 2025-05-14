@@ -10,6 +10,7 @@ import { RootState } from "../../../states/redux/store";
 import { useStateContext } from "../../../context/context";
 import * as utils from "../navUtils";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const NavBigDevice = () => {
   const useLabelNavigate = utils.useLabelNavigate();
@@ -19,9 +20,9 @@ const NavBigDevice = () => {
   const { products, wishlist } = useSelector(
     (state: RootState) => state.cartReducer
   );
+  const [searchItems, setSearchItems] = useState<string>("");
 
-  const { searchItems, setSearchItems, isDropdown, setIsDropdown } =
-    useStateContext();
+  const { isDropdown, setIsDropdown } = useStateContext();
 
   const navigate = useNavigate();
 

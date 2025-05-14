@@ -31,8 +31,10 @@
      height: 24px;
      color: #DB4444;
    }
-   .checkout-mark-icon:active{
-     color: #00FF66;
+   .checkout-mark-icon-false{
+     width: 24px;
+     height: 24px;
+     color: gray;
    }
    .checkout-form > aside > p {
     margin: 0;

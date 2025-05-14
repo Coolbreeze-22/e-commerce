@@ -12,6 +12,7 @@ import Badge from "@mui/material/Badge";
 import Dropdown from "../Dropdown/Dropdown";
 import * as utils from "../navUtils";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const NavSmallDevice = () => {
   const useLabelNavigate = utils.useLabelNavigate();
@@ -21,15 +22,10 @@ const NavSmallDevice = () => {
   const { products, wishlist } = useSelector(
     (state: RootState) => state.cartReducer
   );
+  const [searchItems, setSearchItems] = useState<string>("");
 
-  const {
-    searchItems,
-    setSearchItems,
-    isSidebar,
-    setIsSidebar,
-    isDropdown,
-    setIsDropdown,
-  } = useStateContext();
+  const { isSidebar, setIsSidebar, isDropdown, setIsDropdown } =
+    useStateContext();
 
   const navigate = useNavigate();
 
@@ -104,10 +100,7 @@ const NavSmallDevice = () => {
       {isDropdown ? <Dropdown /> : null}
       {isSidebar && (
         <div className="nav-small-sidebar">
-          <Sidebar
-            user={user}
-            handleLogout={handleLogout}
-          />
+          <Sidebar user={user} handleLogout={handleLogout} />
         </div>
       )}
     </nav>
