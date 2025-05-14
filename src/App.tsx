@@ -24,7 +24,6 @@ import CreateProduct from "./components/CreateProduct/CreateProduct";
 import { getUserOrders } from "./controller/orderController";
 import ManageOrders from "./components/ManageOrders/ManageOrders";
 import Users from "./components/Users/Users";
-import Loading from "./components/Loading/Loading";
 import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import Countdown from "./components/Countdown/Countdown";
 import { getCountdown } from "./controller/countdownController";
@@ -33,14 +32,9 @@ import { useStateContext } from "./context/context";
 
 function App() {
   const { isDropdown, setIsDropdown } = useStateContext();
-  const { user, isLoading: userIsLoading } = useSelector(
-    (state: RootState) => state.userReducer
-  );
-  const { isLoading: productIsLoading } = useSelector(
-    (state: RootState) => state.productReducer
-  );
+  const { user } = useSelector((state: RootState) => state.userReducer);
+
   const dispatch = useDispatch();
-  const isLoading = userIsLoading || productIsLoading;
 
   const UserOnly = ({ children }: { children: React.ReactNode }) => {
     if (user?.id) {
@@ -77,110 +71,106 @@ function App() {
       <ScrollRestoration />
       <ToastContainer />
       <main onClick={() => isDropdown && setIsDropdown(false)}>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<AllProducts />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/categories" element={<RelatedProducts />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route
-              path="/login"
-              element={
-                <UserAuth>
-                  <Login />
-                </UserAuth>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <UserAuth>
-                  <Register />
-                </UserAuth>
-              }
-            />
-            <Route
-              path="/reset-password"
-              element={
-                <UserAuth>
-                  <ResetPassword />
-                </UserAuth>
-              }
-            />
-            <Route
-              path="/account"
-              element={
-                <UserOnly>
-                  <Account />
-                </UserOnly>
-              }
-            />
-            <Route path="/about" element={<About />} />
-            <Route
-              path="/admin"
-              element={
-                <AdminOnly>
-                  <Admin />
-                </AdminOnly>
-              }
-            />
-            <Route
-              path="/admin/users"
-              element={
-                <AdminOnly>
-                  <Users />
-                </AdminOnly>
-              }
-            />
-            <Route
-              path="/admin/orders"
-              element={
-                <AdminOnly>
-                  <ManageOrders />
-                </AdminOnly>
-              }
-            />
-            <Route
-              path="/admin/create-product"
-              element={
-                <AdminOnly>
-                  <CreateProduct />
-                </AdminOnly>
-              }
-            />
-            <Route
-              path="/admin/Countdown"
-              element={
-                <AdminOnly>
-                  <Countdown />
-                </AdminOnly>
-              }
-            />
-            <Route
-              path="/admin/update-product/:id"
-              element={
-                <AdminOnly>
-                  <UpdateProduct />
-                </AdminOnly>
-              }
-            />
-            <Route
-              path="/products/cart/checkout"
-              element={
-                <UserOnly>
-                  <Checkout />
-                </UserOnly>
-              }
-            />
-            <Route path="/search" element={<SearchedProducts />} />
-            <Route path="/product-details/:id" element={<ProductDetails />} />
-            <Route path="/*" element={<Error404 />} />
-          </Routes>
-        )}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<AllProducts />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/categories" element={<RelatedProducts />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/login"
+            element={
+              <UserAuth>
+                <Login />
+              </UserAuth>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <UserAuth>
+                <Register />
+              </UserAuth>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <UserAuth>
+                <ResetPassword />
+              </UserAuth>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <UserOnly>
+                <Account />
+              </UserOnly>
+            }
+          />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminOnly>
+                <Admin />
+              </AdminOnly>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminOnly>
+                <Users />
+              </AdminOnly>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <AdminOnly>
+                <ManageOrders />
+              </AdminOnly>
+            }
+          />
+          <Route
+            path="/admin/create-product"
+            element={
+              <AdminOnly>
+                <CreateProduct />
+              </AdminOnly>
+            }
+          />
+          <Route
+            path="/admin/Countdown"
+            element={
+              <AdminOnly>
+                <Countdown />
+              </AdminOnly>
+            }
+          />
+          <Route
+            path="/admin/update-product/:id"
+            element={
+              <AdminOnly>
+                <UpdateProduct />
+              </AdminOnly>
+            }
+          />
+          <Route
+            path="/products/cart/checkout"
+            element={
+              <UserOnly>
+                <Checkout />
+              </UserOnly>
+            }
+          />
+          <Route path="/search" element={<SearchedProducts />} />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
+          <Route path="/*" element={<Error404 />} />
+        </Routes>
       </main>
     </div>
   );

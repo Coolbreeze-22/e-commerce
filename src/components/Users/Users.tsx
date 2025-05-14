@@ -97,7 +97,7 @@ const Users = () => {
               <section className="user-modal-wrapper">
                 <div className="user-modal">
                   <div>
-                    <p>Id:</p>
+                    <p>User ID:</p>
                     <p>{modal.id}</p>
                   </div>
                   <div>

@@ -8,14 +8,12 @@ import { RootState } from "../../../states/redux/store";
 import CustomButton from "../../CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
-import {
-  addItemToWishlist,
-  computeRating,
-} from "../../utils/utilityFunctions";
+import { addItemToWishlist, computeRating } from "../../utils/utilityFunctions";
+import HomeLoading from "../HomeLoading/HomeLoading";
 
 export const BestSelling = () => {
-  const bestProducts = useSelector(
-    (state: RootState) => state.productReducer.bestSelling
+  const { bestSelling, isLoading } = useSelector(
+    (state: RootState) => state.productReducer
   );
 
   const { ref } = useInView({ threshold: 0 });
@@ -56,61 +54,67 @@ export const BestSelling = () => {
           </div>
         </header>
       </section>
-      <section className="best-grid">
-        {bestProducts.map((product, index) => (
-          <div key={index} onClick={() => viewProduct(product)}>
-            <section className="best-image-sect" style={{ right: "10px" }}>
-              <div
-                className="best-heart"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleWishlist(product);
-                }}
-              >
-                <FaRegHeart className="best-icon" />
-              </div>
-              <div className="best-eye">
-                <MdOutlineRemoveRedEye className="best-icon" />
-              </div>
-              <div className="best-image-wrapper">
-                <img
-                  src={product.photo[0]}
-                  alt="loading"
-                  className="best-image"
-                  loading="lazy"
-                />
-              </div>
-            </section>
-            <section>
-              <p className="best-item-name">{product.name}</p>
-              {product.discountedPrice && (
-                <span className="best-new-price">
-                  ₦{product.discountedPrice}{" "}
+      {isLoading ? (
+        <HomeLoading />
+      ) : (
+        <section className="best-grid">
+          {bestSelling.map((product, index) => (
+            <div key={index} onClick={() => viewProduct(product)}>
+              <section className="best-image-sect" style={{ right: "10px" }}>
+                <div
+                  className="best-heart"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleWishlist(product);
+                  }}
+                >
+                  <FaRegHeart className="best-icon" />
+                </div>
+                <div className="best-eye">
+                  <MdOutlineRemoveRedEye className="best-icon" />
+                </div>
+                <div className="best-image-wrapper">
+                  <img
+                    src={product.photo[0]}
+                    alt="loading"
+                    className="best-image"
+                    loading="lazy"
+                  />
+                </div>
+              </section>
+              <section>
+                <p className="best-item-name">{product.name}</p>
+                {product.discountedPrice && (
+                  <span className="best-new-price">
+                    ₦{product.discountedPrice}{" "}
+                  </span>
+                )}
+                <span
+                  className={
+                    product.discountedPrice
+                      ? "best-old-price"
+                      : "best-new-price"
+                  }
+                >
+                  ₦{product.price}
                 </span>
-              )}
-              <span
-                className={
-                  product.discountedPrice ? "best-old-price" : "best-new-price"
-                }
-              >
-                ₦{product.price}
-              </span>
-              <div className="best-star-rating-wrapper">
-                <Rating
-                  name="read-only"
-                  value={checkRating(product.rating, "star")}
-                  readOnly
-                  precision={0.5}
-                  size="small"
-                />
-                <span className="best-rating">
-                  ({checkRating(product.rating, "percent")})
-                </span>
-              </div>
-            </section>
-          </div>
-        ))}
-      </section>
+                <div className="best-star-rating-wrapper">
+                  <Rating
+                    name="read-only"
+                    value={checkRating(product.rating, "star")}
+                    readOnly
+                    precision={0.5}
+                    size="small"
+                  />
+                  <span className="best-rating">
+                    ({checkRating(product.rating, "percent")})
+                  </span>
+                </div>
+              </section>
+            </div>
+          ))}
+        </section>
+      )}
     </main>
   );
 };

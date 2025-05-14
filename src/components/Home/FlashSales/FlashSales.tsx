@@ -1,7 +1,7 @@
 import "./FlashSales.css";
 import { useNavigate } from "react-router-dom";
 import { ProductType } from "../../../states/redux/reducerTypes";
-import { Rating } from "@mui/material";
+import { Rating, Skeleton } from "@mui/material";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,9 +22,10 @@ import {
 } from "../../utils/utilityFunctions";
 import { FiShoppingCart } from "react-icons/fi";
 import CustomCountdown from "../CustomCountdown/CustomCountdown";
+import HomeLoading from "../HomeLoading/HomeLoading";
 
 const FlashSales = () => {
-  const { flashSales: flashProducts } = useSelector(
+  const { flashSales: flashProducts, isLoading } = useSelector(
     (state: RootState) => state.productReducer
   );
 
@@ -103,85 +104,91 @@ const FlashSales = () => {
           }}
           breakpoints={breakPoints}
         >
-          {flashProducts.map((product, index) => (
-            <SwiperSlide key={index} className="flash-swiper-slide">
-              <div
-                className="flash-swiper-slide-div"
-                onClick={() => viewProduct(product)}
-              >
-                <section className="flash-image-sect">
-                  {product.discountedPrice && (
-                    <div className="flash-discount">
-                      {checkDiscountPercent(
-                        product.discountedPrice,
-                        product?.price
+          {isLoading ? (
+            <HomeLoading />
+          ) : (
+            <>
+              {flashProducts.map((product, index) => (
+                <SwiperSlide key={index} className="flash-swiper-slide">
+                  <div
+                    className="flash-swiper-slide-div"
+                    onClick={() => viewProduct(product)}
+                  >
+                    <section className="flash-image-sect">
+                      {product.discountedPrice && (
+                        <div className="flash-discount">
+                          {checkDiscountPercent(
+                            product.discountedPrice,
+                            product?.price
+                          )}
+                          %
+                        </div>
                       )}
-                      %
-                    </div>
-                  )}
-                  <div
-                    className="flash-heart"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleWishlist(product);
-                    }}
-                  >
-                    <FaRegHeart className="flash-icon" />
-                  </div>
-                  <div className="flash-eye">
-                    <MdOutlineRemoveRedEye className="flash-icon" />
-                  </div>
-                  <div className="flash-image-wrapper">
-                    <img
-                      src={product.photo[0]}
-                      alt="loading"
-                      className="flash-image"
-                    />
-                  </div>
-                  <div
-                    className="flash-add-to-cart"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToCart(product);
-                    }}
-                  >
-                    <FiShoppingCart className="flash-add-icon" />
-                    <p>Add To Cart</p>
-                  </div>
-                </section>
+                      <div
+                        className="flash-heart"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleWishlist(product);
+                        }}
+                      >
+                        <FaRegHeart className="flash-icon" />
+                      </div>
+                      <div className="flash-eye">
+                        <MdOutlineRemoveRedEye className="flash-icon" />
+                      </div>
+                      <div className="flash-image-wrapper">
+                        <img
+                          src={product.photo[0]}
+                          alt="loading"
+                          className="flash-image"
+                        />
+                      </div>
+                      <div
+                        className="flash-add-to-cart"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToCart(product);
+                        }}
+                      >
+                        <FiShoppingCart className="flash-add-icon" />
+                        <p>Add To Cart</p>
+                      </div>
+                    </section>
 
-                <section>
-                  <p className="flash-item-name">{product.name}</p>
-                  {product.discountedPrice && (
-                    <span className="flash-new-price">
-                      ₦{product.discountedPrice}{" "}
-                    </span>
-                  )}
-                  <span
-                    className={
-                      product.discountedPrice
-                        ? "flash-old-price"
-                        : "flash-new-price"
-                    }
-                  >
-                    ₦{product.price}
-                  </span>
-                  <div className="flash-star-rating-wrapper">
-                    <Rating
-                      name="read-only"
-                      value={checkRating(product.rating, "star")}
-                      readOnly
-                      precision={0.5}
-                      size="small"
-                    />
-                    <span className="flash-rating">
-                      ({checkRating(product.rating, "percent")})
-                    </span>
+                    <section>
+                      <p className="flash-item-name">{product.name}</p>
+                      {product.discountedPrice && (
+                        <span className="flash-new-price">
+                          ₦{product.discountedPrice}{" "}
+                        </span>
+                      )}
+                      <span
+                        className={
+                          product.discountedPrice
+                            ? "flash-old-price"
+                            : "flash-new-price"
+                        }
+                      >
+                        ₦{product.price}
+                      </span>
+                      <div className="flash-star-rating-wrapper">
+                        <Rating
+                          name="read-only"
+                          value={checkRating(product.rating, "star")}
+                          readOnly
+                          precision={0.5}
+                          size="small"
+                        />
+                        <span className="flash-rating">
+                          ({checkRating(product.rating, "percent")})
+                        </span>
+                      </div>
+                    </section>
                   </div>
-                </section>
-              </div>
-            </SwiperSlide>
-          ))}
+                </SwiperSlide>
+              ))}
+            </>
+          )}
         </Swiper>
       </section>
 
