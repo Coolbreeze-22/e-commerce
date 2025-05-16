@@ -4,9 +4,9 @@ import { OrderProps } from "./reducerTypes";
 
 export type OrderInitialStateProps = {
   userOrders: Array<OrderProps>;
-  allUsersOrders: Array<OrderProps>;
   userTotal: number;
-  allUsersTotal: number;
+  allOrders: Array<OrderProps>;
+  allOrdersTotal: number;
   isLoading: boolean;
 };
 export interface UpdateOrderByAdminProps {
@@ -19,9 +19,9 @@ export interface UpdateOrderByAdminProps {
 }
 export const orderInitialState: OrderInitialStateProps = {
   userOrders: [],
-  allUsersOrders: [],
   userTotal: 0,
-  allUsersTotal: 0,
+  allOrders: [],
+  allOrdersTotal: 0,
   isLoading: false,
 };
 
@@ -29,9 +29,9 @@ const orderSlice = createSlice({
   name: "order",
   initialState: orderInitialState,
   reducers: {
-    getAllUsersOrders(state, action: PayloadAction<Array<OrderProps>>) {
-      state.allUsersOrders = action.payload;
-      state.allUsersTotal = action.payload.reduce(
+    fetchOrders(state, action: PayloadAction<Array<OrderProps>>) {
+      state.allOrders = action.payload;
+      state.allOrdersTotal = action.payload.reduce(
         (totalAmount, order) => totalAmount + order.total,
         0
       );
@@ -49,26 +49,26 @@ const orderSlice = createSlice({
     },
 
     updateOrderByAdmin(state, action: PayloadAction<UpdateOrderByAdminProps>) {
-      const existingOrderIndex = state.allUsersOrders.findIndex(
+      const existingOrderIndex = state.allOrders.findIndex(
         (order) => order.id === action.payload.id
       );
-      if (existingOrderIndex>=0) {
-        state.allUsersOrders[existingOrderIndex] = {
-          ...state.allUsersOrders[existingOrderIndex],
+      if (existingOrderIndex >= 0) {
+        state.allOrders[existingOrderIndex] = {
+          ...state.allOrders[existingOrderIndex],
           ...action.payload.updateData,
         };
       }
     },
     deleteOrder(state, action: PayloadAction<{ id: string; label: string }>) {
       if (action.payload.label === "admin") {
-        const existingOrder = state.allUsersOrders.find(
+        const existingOrder = state.allOrders.find(
           (order) => order.id === action.payload.id
         );
         if (existingOrder?.id) {
-          state.allUsersOrders = state.allUsersOrders.filter(
+          state.allOrders = state.allOrders.filter(
             (order) => order.id !== action.payload.id
           );
-          state.allUsersTotal -= existingOrder.total;
+          state.allOrdersTotal -= existingOrder.total;
         }
       } else {
         const existingOrder = state.userOrders.find(
@@ -89,7 +89,7 @@ const orderSlice = createSlice({
 });
 
 export const {
-  getAllUsersOrders,
+  fetchOrders,
   getUserOrders,
   createOrder,
   deleteOrder,

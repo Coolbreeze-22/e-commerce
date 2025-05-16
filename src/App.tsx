@@ -1,9 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { RootState } from "./states/redux/store";
-import { fetchProducts } from "./controller/productController";
 import Home from "./components/Home/Home";
 import Account from "./components/Account/Account";
 import About from "./components/About/About";
@@ -21,20 +19,16 @@ import Wishlist from "./components/Wishlist/Wishlist";
 import Error404 from "./components/Error404/Error404";
 import SearchedProducts from "./components/SearchedProducts/SearchedProducts";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
-import { getUserOrders } from "./controller/orderController";
 import ManageOrders from "./components/ManageOrders/ManageOrders";
 import Users from "./components/Users/Users";
 import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import Countdown from "./components/Countdown/Countdown";
-import { getCountdown } from "./controller/countdownController";
 import ResetPassword from "./components/Authentication/ResetPassword/ResetPassword";
 import { useStateContext } from "./context/context";
 
 function App() {
   const { isDropdown, setIsDropdown } = useStateContext();
   const { user } = useSelector((state: RootState) => state.userReducer);
-
-  const dispatch = useDispatch();
 
   const UserOnly = ({ children }: { children: React.ReactNode }) => {
     if (user?.id) {
@@ -59,12 +53,6 @@ function App() {
       return <Navigate to="/" replace={false} />;
     }
   };
-
-  useEffect(() => {
-    fetchProducts(dispatch);
-    getCountdown(dispatch);
-    getUserOrders({ id: user.id, dispatch });
-  }, [user.id]);
 
   return (
     <div>

@@ -21,10 +21,10 @@ const rootReducer = combineReducers({
   productReducer,
   cartReducer,
   orderReducer,
-  //   chatReducer,
   userReducer,
   countdownReducer,
 });
+
 const persistConfig = {
   key: "root",
   storage,

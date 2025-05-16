@@ -2,7 +2,6 @@ import {
   auth,
   fireStore,
   collection,
-  //   doc,
   updateDoc,
   getDocs,
   addDoc,
@@ -13,6 +12,7 @@ import * as reducer from "../states/redux/countdownReducer";
 import { AppDispatch } from "../states/redux/store";
 import { CountdownType } from "../states/redux/reducerTypes";
 import { toastNotification } from "../components/utils/toastNotification";
+import { useEffect } from "react";
 
 interface CreateFlashsaleCountdownProps {
   countdown: CountdownType;
@@ -20,18 +20,28 @@ interface CreateFlashsaleCountdownProps {
   dispatch: AppDispatch;
 }
 
-export const getCountdown = async (dispatch: AppDispatch) => {
-  try {
-    const colRef = collection(fireStore, "countdown");
-    const querySnapshot = await getDocs(colRef);
-    const countdowns: Array<CountdownType> = [];
-    querySnapshot.forEach((doc) => {
-      countdowns.push({ ...doc.data() } as CountdownType);
-    });
-    dispatch(reducer.getCountdown(countdowns));
-  } catch (error: any) {
-    toastNotification(error.message, "error");
-  }
+export const useGetCountdown = (length: number, dispatch: AppDispatch) => {
+  useEffect(() => {
+    // to prevent infinite loop and unnecessary getquests
+    if (length) {
+      return;
+    }
+
+    async function getCountdown() {
+      try {
+        const colRef = collection(fireStore, "countdown");
+        const querySnapshot = await getDocs(colRef);
+        const countdowns: Array<CountdownType> = [];
+        querySnapshot.forEach((doc) => {
+          countdowns.push({ ...doc.data() } as CountdownType);
+        });
+        dispatch(reducer.getCountdown(countdowns));
+      } catch (error: any) {
+        toastNotification(error.message, "error");
+      }
+    }
+    getCountdown();
+  }, []);
 };
 
 export const createCountdown = async (data: CreateFlashsaleCountdownProps) => {

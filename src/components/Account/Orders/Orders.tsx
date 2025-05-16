@@ -1,24 +1,32 @@
 import { useEffect, useRef } from "react";
 import "./Orders.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../states/redux/store";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { Skeleton } from "@mui/material";
+import { useFetchOrders } from "../../../controller/orderController";
 
 const Orders = () => {
-  const {
-    userOrders: orders,
-    userTotal,
-    isLoading,
-  } = useSelector((state: RootState) => state.orderReducer);
+  const { user } = useSelector((state: RootState) => state.userReducer);
+  const { allOrders, isLoading } = useSelector(
+    (state: RootState) => state.orderReducer
+  );
+  const dispatch = useDispatch();
+  useFetchOrders({ id: user.id, dispatch, length: allOrders.length });
+
   const ordersRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
   });
+
+  const orders = allOrders
+    .filter((item) => item.userId === user.id)
+    .sort((a, b) => Number(b.createdAt) - Number(a.createdAt));
+  const userTotal = orders.reduce((total, order) => total + order.total, 0);
 
   useEffect(() => {
     switch (location.state?.to) {
@@ -50,11 +58,10 @@ const Orders = () => {
     <main ref={ordersRef} className="orders-container">
       {isLoading ? (
         <>
-          <Skeleton height={60}/>
-          <Skeleton height={60}/>
-          <Skeleton height={60}/>
-          <Skeleton height={60}/>
-          <Skeleton height={60}/>
+          <Skeleton height={60} />
+          <Skeleton height={60} />
+          <Skeleton height={60} />
+          <Skeleton height={60} />
         </>
       ) : (
         <>

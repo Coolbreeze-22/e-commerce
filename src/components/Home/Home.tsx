@@ -10,8 +10,15 @@ import NewArrival from "./NewArrival/NewArrival";
 import { useRef } from "react";
 import { FaArrowUp } from "react-icons/fa6";
 import CustomButton from "../CustomButton/CustomButton";
+import { useFetchProducts } from "../../controller/productController";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../states/redux/store";
 
 const Home = () => {
+  const { products } = useSelector((state: RootState) => state.productReducer);
+  const dispatch = useDispatch();
+  useFetchProducts(products.length, dispatch);
+
   const topRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () => {
     topRef.current?.scrollIntoView({
@@ -35,7 +42,7 @@ const Home = () => {
             <aside>Categories</aside>
             <aside>Enhance Your Music Experience</aside>
             <aside>Count</aside>
-            <CustomButton text="Buy Now!" className="home-buy-btn"/>
+            <CustomButton text="Buy Now!" className="home-buy-btn" />
           </div>
           <div className="home-jbl-img">
             <img src={homeJblImg} alt="JblImg" />

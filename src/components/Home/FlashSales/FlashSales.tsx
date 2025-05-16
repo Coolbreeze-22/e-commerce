@@ -23,22 +23,25 @@ import {
 import { FiShoppingCart } from "react-icons/fi";
 import CustomCountdown from "../CustomCountdown/CustomCountdown";
 import HomeLoading from "../HomeLoading/HomeLoading";
+import { useGetCountdown } from "../../../controller/countdownController";
 
 const FlashSales = () => {
+  const { countdowns } = useSelector(
+    (state: RootState) => state.countdownReducer
+  );
+  const dispatch = useDispatch();
+  useGetCountdown(countdowns.length, dispatch);
+
   const { flashSales: flashProducts, isLoading } = useSelector(
     (state: RootState) => state.productReducer
   );
 
-  const { countdowns } = useSelector(
-    (state: RootState) => state.countdownReducer
-  );
   const flashCountdown = countdowns.find((item) => item.name === "flashsale");
 
   const { ref } = useInView({
     threshold: 0,
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const viewProduct = (product: ProductType) => {
     navigate(`/product-details/${product.id}`);

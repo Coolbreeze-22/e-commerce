@@ -1,10 +1,8 @@
-import React from "react";
 import "./Wishlist.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../states/redux/store";
 import { addItemToCart } from "../utils/utilityFunctions";
 import Navbar from "../Navbar/Navbar";
-import MyIntersectionObserver from "../utils/IntersectionObserver";
 import { removeFromWishlist } from "../../controller/cartController";
 import CustomButton from "../CustomButton/CustomButton";
 import WishlistProducts from "./WishlistProducts/WishlistProducts";
@@ -15,12 +13,6 @@ const Wishlist = () => {
   const { bestSelling } = useSelector(
     (state: RootState) => state.productReducer
   );
-  const imageRefs = React.useRef<HTMLImageElement[]>([]);
-
-  React.useEffect(() => {
-    const cleanUp = MyIntersectionObserver(imageRefs);
-    return cleanUp;
-  }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
