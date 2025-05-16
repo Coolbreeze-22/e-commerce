@@ -4,16 +4,17 @@ import {
   collection,
   doc,
   updateDoc,
-  getDocs,
+  // getDocs,
   addDoc,
   deleteDoc,
+  onSnapshot,
 } from "../config/firebase";
 import * as reducer from "../states/redux/productReducer";
 import { AppDispatch } from "../states/redux/store";
 import { initialState } from "../states/redux/productReducer";
 import { InitialStateProps, ProductType } from "../states/redux/reducerTypes";
-// import { flashSaleCountdown } from "../dummy/dummyCountdown";
 import { toastNotification } from "../components/utils/toastNotification";
+import { useEffect } from "react";
 
 interface CreateProductProps {
   product: ProductType;
@@ -25,7 +26,7 @@ interface UpdateProductByAdminProps {
   isAdmin: boolean;
   dispatch: AppDispatch;
 }
-const initialData: InitialStateProps = {
+let initialData: InitialStateProps = {
   ...initialState,
 };
 
@@ -42,60 +43,83 @@ type GroupCategoriesProps = Pick<GroupProductsProps, "label"> & {
   group: string;
 };
 
-export const fetchProducts = async (dispatch: AppDispatch) => {
-  try {
-    dispatch(reducer.productLoading(true));
-    const colRef = collection(fireStore, "products");
-    const querySnapshot = await getDocs(colRef);
-
-    for (const doc of querySnapshot.docs) {
-      const product = doc.data() as ProductType;
-      initialData.products = [...initialData.products, product];
-      if (product.isFlashSales) {
-        groupProducts({
-          product,
-          label: "flashSales",
-          category: product.category,
-          uniqueLabel: "uniqueFlashSales",
-        });
-      }
-      if (product.isBestSelling) {
-        groupProducts({
-          product,
-          label: "bestSelling",
-          category: product.category,
-          uniqueLabel: "uniqueBestSelling",
-        });
-      }
-      if (product.isExplore) {
-        groupProducts({
-          product,
-          label: "explore",
-          category: product.category,
-          uniqueLabel: "uniqueExplore",
-        });
-      }
-      if (product.isNewArrival) {
-        groupProducts({
-          product,
-          label: "newArrival",
-          category: product.category,
-          uniqueLabel: "uniqueNewArrival",
-        });
-      }
-      if (!uniqueCategory.has(product.category.trim())) {
-        groupCategories({ label: "category", group: product.category });
-      }
-      if (!uniqueSubCategory.has(product.subCategory.trim())) {
-        groupCategories({ label: "subCategory", group: product.subCategory });
-      }
+export const useFetchProducts = (length: number, dispatch: AppDispatch) => {
+  useEffect(() => {
+    if (length) {
+      return;
     }
 
-    dispatchData(dispatch);
-  } catch (error: any) {
-    dispatch(reducer.productLoading(false));
-    toastNotification(error.message, "error");
-  }
+    dispatch(reducer.productLoading(true));
+    const colRef = collection(fireStore, "products");
+
+    const unsubscribe = onSnapshot(
+      colRef,
+      (querySnapshot) => {
+        // Reset state. Very important to avoid duplicating items incase onsnapshot is fired multiple times when the initial execution isnt complet yet.
+
+        initialData = {
+          ...initialState,
+        };
+
+        for (const doc of querySnapshot.docs) {
+          const product = doc.data() as ProductType;
+          initialData.products = [...initialData.products, product];
+
+          if (product.isFlashSales) {
+            groupProducts({
+              product,
+              label: "flashSales",
+              category: product.category,
+              uniqueLabel: "uniqueFlashSales",
+            });
+          }
+          if (product.isBestSelling) {
+            groupProducts({
+              product,
+              label: "bestSelling",
+              category: product.category,
+              uniqueLabel: "uniqueBestSelling",
+            });
+          }
+          if (product.isExplore) {
+            groupProducts({
+              product,
+              label: "explore",
+              category: product.category,
+              uniqueLabel: "uniqueExplore",
+            });
+          }
+          if (product.isNewArrival) {
+            groupProducts({
+              product,
+              label: "newArrival",
+              category: product.category,
+              uniqueLabel: "uniqueNewArrival",
+            });
+          }
+
+          if (!uniqueCategory.has(product.category.trim())) {
+            groupCategories({ label: "category", group: product.category });
+          }
+
+          if (!uniqueSubCategory.has(product.subCategory.trim())) {
+            groupCategories({
+              label: "subCategory",
+              group: product.subCategory,
+            });
+          }
+        }
+
+        dispatchData(dispatch);
+      },
+      (error) => {
+        dispatch(reducer.productLoading(false));
+        toastNotification(error.message, "error");
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
 };
 
 export const createProduct = async (data: CreateProductProps) => {

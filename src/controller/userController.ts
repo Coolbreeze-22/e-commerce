@@ -21,6 +21,7 @@ import { UserProps } from "../states/redux/reducerTypes";
 import { toastNotification } from "../components/utils/toastNotification";
 import { NavigateFunction } from "react-router-dom";
 import { initialState } from "../constants/user";
+import { useEffect } from "react";
 
 interface AuthProps {
   email: string;
@@ -31,6 +32,7 @@ interface AuthProps {
 interface GetUsersProps {
   id: string;
   dispatch: AppDispatch;
+  length: number;
 }
 interface ResetPasswordProps {
   email: string;
@@ -38,26 +40,35 @@ interface ResetPasswordProps {
   navigate: NavigateFunction;
 }
 
-export const getUsers = async (data: GetUsersProps) => {
-  const { id, dispatch } = data;
-  try {
-    // dispatch(reducer.userLoading(true));
-    if (id) {
-      const colRef = collection(fireStore, "users");
-      const querySnapshot = await getDocs(colRef);
-      const users: Array<UserProps> = [];
-      querySnapshot.forEach((doc) => {
-        users.push({ ...doc.data() } as UserProps);
-      });
-      dispatch(reducer.getUsers(users));
-    }
-    // the below isnt part of the redux infinte loop problem, but i still removed it
+export const useGetUsers = async (data: GetUsersProps) => {
+  const { id, dispatch, length } = data;
+  useEffect(() => {
+    async function getUsers() {
+      // to prevent infinite loop and unnecessary getquests
+      if (length) {
+        return;
+      }
+      try {
+        // dispatch(reducer.userLoading(true));
+        if (id) {
+          const colRef = collection(fireStore, "users");
+          const querySnapshot = await getDocs(colRef);
+          const users: Array<UserProps> = [];
+          querySnapshot.forEach((doc) => {
+            users.push({ ...doc.data() } as UserProps);
+          });
+          dispatch(reducer.getUsers(users));
+        }
+        // the below isnt part of the redux infinte loop problem, but i still removed it
 
-    dispatch(reducer.userLoading(false));
-  } catch (error: any) {
-    toastNotification(error.message, "error");
-    dispatch(reducer.userLoading(false));
-  }
+        dispatch(reducer.userLoading(false));
+      } catch (error: any) {
+        toastNotification(error.message, "error");
+        dispatch(reducer.userLoading(false));
+      }
+    }
+    getUsers();
+  }, []);
 };
 
 export const signUp = async (item: AuthProps) => {

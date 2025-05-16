@@ -5,8 +5,8 @@ import {
   updateDoc,
   getDocs,
   addDoc,
-  query,
-  where,
+  // query,
+  // where,
   doc,
   deleteDoc,
 } from "../config/firebase";
@@ -16,13 +16,17 @@ import { OrderProps } from "../states/redux/reducerTypes";
 import { clearCart } from "../states/redux/cartReducer";
 import { NavigateFunction } from "react-router-dom";
 import { toastNotification } from "../components/utils/toastNotification";
+import { useEffect } from "react";
 
 interface CreateOrderProps {
   order: OrderProps;
   dispatch: AppDispatch;
   navigate: NavigateFunction;
 }
-type GetOrdersProps = Pick<CreateOrderProps, "dispatch"> & { id: string };
+type GetOrdersProps = Pick<CreateOrderProps, "dispatch"> & {
+  id: string;
+  length: number;
+};
 
 interface UpdateOrderProps {
   id: string;
@@ -38,45 +42,33 @@ interface DeleteOrderProps {
   dispatch: AppDispatch;
 }
 
-export const getAllUsersOrders = async (data: GetOrdersProps) => {
-  const { id, dispatch } = data;
-  try {
-    dispatch(reducer.orderLoading(true));
-    if (id) {
-      const colRef = collection(fireStore, "orders");
-      const querySnapshot = await getDocs(colRef);
-      const orders: Array<OrderProps> = [];
-      querySnapshot.forEach((doc) => {
-        orders.push({ ...doc.data() } as OrderProps);
-      });
-      dispatch(reducer.getAllUsersOrders(orders));
-    }
-    dispatch(reducer.orderLoading(false));
-  } catch (error: any) {
-    dispatch(reducer.orderLoading(false));
-    toastNotification(error.message, "error");
-  }
-};
-
-export const getUserOrders = async (data: GetOrdersProps) => {
-  const { id, dispatch } = data;
-  try {
-    dispatch(reducer.orderLoading(true));
-    if (id) {
-      const colRef = collection(fireStore, "orders");
-      const perUserOrdersQuery = query(colRef, where("userId", "==", id));
-      const querySnapshot = await getDocs(perUserOrdersQuery);
-      const orders: Array<OrderProps> = [];
-      querySnapshot.forEach((doc) => {
-        orders.push({ ...doc.data() } as OrderProps);
-      });
-      dispatch(reducer.getUserOrders(orders));
-    }
-    dispatch(reducer.orderLoading(false));
-  } catch (error: any) {
-    dispatch(reducer.orderLoading(false));
-    toastNotification(error.message, "error");
-  }
+export const useFetchOrders = (data: GetOrdersProps) => {
+  const { id, dispatch, length } = data;
+  useEffect(() => {
+    const fetchOrders = async () => {
+      // to prevent infinite loop and unnecessary getquests
+      if (length) {
+        return;
+      }
+      try {
+        dispatch(reducer.orderLoading(true));
+        if (id) {
+          const colRef = collection(fireStore, "orders");
+          const querySnapshot = await getDocs(colRef);
+          const orders: Array<OrderProps> = [];
+          querySnapshot.forEach((doc) => {
+            orders.push({ ...doc.data(), id: doc.id } as OrderProps);
+          });
+          dispatch(reducer.fetchOrders(orders));
+        }
+        dispatch(reducer.orderLoading(false));
+      } catch (error: any) {
+        dispatch(reducer.orderLoading(false));
+        toastNotification(error.message, "error");
+      }
+    };
+    fetchOrders();
+  }, []);
 };
 
 export const createOrder = async (data: CreateOrderProps) => {
@@ -142,3 +134,24 @@ export const deleteOrder = async (data: DeleteOrderProps) => {
     toastNotification(error.message, "error");
   }
 };
+
+// export const getUserOrders = async (data: GetOrdersProps) => {
+//   const { id, dispatch } = data;
+//   try {
+//     dispatch(reducer.orderLoading(true));
+//     if (id) {
+//       const colRef = collection(fireStore, "orders");
+//       const perUserOrdersQuery = query(colRef, where("userId", "==", id));
+//       const querySnapshot = await getDocs(perUserOrdersQuery);
+//       const orders: Array<OrderProps> = [];
+//       querySnapshot.forEach((doc) => {
+//         orders.push({ ...doc.data() } as OrderProps);
+//       });
+//       dispatch(reducer.getUserOrders(orders));
+//     }
+//     dispatch(reducer.orderLoading(false));
+//   } catch (error: any) {
+//     dispatch(reducer.orderLoading(false));
+//     toastNotification(error.message, "error");
+//   }
+// };

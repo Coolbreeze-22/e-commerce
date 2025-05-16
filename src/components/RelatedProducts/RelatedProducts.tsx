@@ -1,4 +1,3 @@
-import React from "react";
 import "./RelatedProducts.css";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,14 +13,11 @@ import {
   computeRating,
 } from "../utils/utilityFunctions";
 import { ProductType } from "../../states/redux/reducerTypes";
-import MyIntersectionObserver from "../utils/IntersectionObserver";
 import Navbar from "../Navbar/Navbar";
 import { FiShoppingCart } from "react-icons/fi";
 
 const RelatedProducts = () => {
   const { products } = useSelector((state: RootState) => state.productReducer);
-  const imageRefs = React.useRef<HTMLImageElement[]>([]);
-
   const query = new URLSearchParams(useLocation().search);
 
   const categoryParam = query.get("category") || query.get("sub-category");
@@ -61,11 +57,6 @@ const RelatedProducts = () => {
       dispatch,
     });
   };
-
-  React.useEffect(() => {
-    const cleanUp = MyIntersectionObserver(imageRefs);
-    return cleanUp;
-  }, [products]);
 
   return (
     <Navbar>
@@ -107,10 +98,7 @@ const RelatedProducts = () => {
                 <div className="group-image-wrapper">
                   <img
                     loading="lazy"
-                    ref={(element) => {
-                      imageRefs.current[index] = element as HTMLImageElement;
-                    }}
-                    data-src={product.photo[0]}
+                    src={product.photo[0]}
                     alt="img"
                     className="group-image"
                   />

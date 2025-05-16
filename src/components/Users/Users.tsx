@@ -1,3 +1,4 @@
+
 import "./Users.css";
 import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
@@ -5,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../states/redux/store";
 import { GoKebabHorizontal } from "react-icons/go";
 import { MdAdminPanelSettings } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserProps } from "../../states/redux/reducerTypes";
 import { ClickAwayListener } from "@mui/material";
-import { getUsers } from "../../controller/userController";
+import { useGetUsers } from "../../controller/userController";
 import { initialState } from "../../constants/user";
 
 const Users = () => {
@@ -17,18 +18,15 @@ const Users = () => {
     index: number;
   }
   const { users, user } = useSelector((state: RootState) => state.userReducer);
+  const dispatch = useDispatch();
+  useGetUsers({ id: user.id, dispatch, length: users.length });
+
   const [modal, setModal] = useState<UserProps>(initialState);
   const [hover, setHover] = useState<Hover>({
     title: "",
     index: -1,
   });
-
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    getUsers({ id: user.id, dispatch });
-  }, [location]);
 
   const handleClickAway = () => {
     setModal(initialState);
