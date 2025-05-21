@@ -9,7 +9,11 @@ const config: Config = {
   collectCoverageFrom: ["src/**/*.{ts,tsx,js,jsx}", "!src/**/*.d.ts"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
   transform: {
-    "^.+\\.(ts|tsx|js|jsx)$": "babel-jest",
+    "^.+\\.(ts|tsx|js|jsx)$": [
+      "babel-jest",
+      { configFile: "./babel.config.test.js" },
+    ],
+    // "^.+\\.(ts|tsx|js|jsx)$": "babel-jest",
     // "^.+\\.(ts|tsx|js|jsx)$": ["ts-jest", { tsconfig: "tsconfig.test.json" }],
   },
   testMatch: ["<rootDir>/__tests__/**/*.test.{js,jsx,ts,tsx}"],
@@ -29,3 +33,9 @@ const config: Config = {
 };
 
 export default config;
+
+// because babel's file name is babel.config.test.js, thats why i used
+// "^.+\\.(ts|tsx|js|jsx)$": ["babel-jest", { configFile: "./babel.config.test.js" }]
+
+// if the name is babel.config.js as it should be, then transform will be
+// "^.+\\.(ts|tsx|js|jsx)$": "babel-jest". no need to add { configFile: "./babel.config.test.js" } bcos by default, babel-jest will look for a file named babel.config.js
