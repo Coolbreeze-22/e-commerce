@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Login from "../src/components/Authentication/Login/Login";
 import { useNavigate } from "react-router-dom";
