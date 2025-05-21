@@ -17,17 +17,22 @@ import { FiShoppingCart } from "react-icons/fi";
 import { MdOutlineEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { useState } from "react";
-import { deleteProductByAdmin } from "../../controller/productController";
+import {
+  deleteProductByAdmin,
+  useFetchProducts,
+} from "../../controller/productController";
 
 const SearchedProducts = () => {
   const allProducts: Array<ProductType> = useSelector(
     (state: RootState) => state.productReducer.products
   );
+  const dispatch = useDispatch();
+  useFetchProducts(allProducts.length, dispatch);
+
   const { user } = useSelector((state: RootState) => state.userReducer);
   const [warning, setWarning] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const query = new URLSearchParams(location.search);
   const searchedQuery = query.get("name");

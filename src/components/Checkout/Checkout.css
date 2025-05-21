@@ -39,6 +39,17 @@
   flex-basis: 45%;
   margin-top: 20px;
 }
+.checkout-cart-details2 {
+  flex-basis: 100%;
+  margin-top: 20px;
+}
+.checkout-name {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  width: 100%;
+  max-height: 60px;
+}
 .checkout-cart {
   display: flex;
   justify-content: space-between;
@@ -77,7 +88,7 @@
   font-size: 16px;
   line-height: 24px;
 }
-.checkout-bank-area  {
+.checkout-bank-area {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
@@ -89,7 +100,7 @@
   gap: 10px;
 }
 .checkout-bank-mode,
-.checkout-cash-mode{
+.checkout-cash-mode {
   width: 14px;
   height: 14px;
   border: 2px solid black;

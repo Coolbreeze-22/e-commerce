@@ -17,11 +17,22 @@ import { useState } from "react";
 
 const Checkout = () => {
   const cart = useSelector((state: RootState) => state.cartReducer);
+  const { user } = useSelector((state: RootState) => state.userReducer);
+
   const { paymentMode, setPaymentMode } = useStateContext();
   const [userFormData, setUserFormData] = useState<UserProps>({
     ...initialState,
   });
   // const { couponCode, setCouponCode } = useStateContext();
+
+  const showForm =
+    user.firstName &&
+    user.address &&
+    user.city &&
+    user.phoneNumber &&
+    user.email
+      ? false
+      : true;
 
   return (
     <Navbar>
@@ -40,23 +51,34 @@ const Checkout = () => {
         <header>Billing Details</header>
 
         <div className="checkout-form-cart">
-          <CheckoutForm
-            userFormData={userFormData}
-            setUserFormData={setUserFormData}
-          />
-          <section className="checkout-cart-details">
+          <>
+            {showForm ? (
+              <CheckoutForm
+                userFormData={userFormData}
+                setUserFormData={setUserFormData}
+              />
+            ) : null}
+          </>
+          <section
+            className={
+              showForm ? "checkout-cart-details" : "checkout-cart-details2"
+            }
+          >
             {cart.products.map((product, index) => (
-              <div key={index} className="checkout-cart">
-                <div>
-                  <img src={product.photo} alt="loading" loading="lazy" />
-                  <span>{product.name}</span>
+              <div key={index}>
+                <aside className="checkout-name">{product.name}</aside>
+
+                <div className="checkout-cart">
+                  <div>
+                    <img src={product.photo} alt="loading" loading="lazy" />
+                  </div>
+                  <p>
+                    ₦
+                    {product.discountedPrice
+                      ? product.discountedPrice
+                      : product.price}
+                  </p>
                 </div>
-                <p>
-                  ₦
-                  {product.discountedPrice
-                    ? product.discountedPrice
-                    : product.price}
-                </p>
               </div>
             ))}
             <aside className="checkout-cost">

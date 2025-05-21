@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import {getMessaging} from 'firebase/messaging';
+import { getMessaging } from "firebase/messaging";
 
 import {
   createUserWithEmailAndPassword,
@@ -27,15 +27,13 @@ import {
   where,
 } from "firebase/firestore";
 
-type keyType = string;
-
-const apiKey: keyType = import.meta.env.VITE_API_KEY;
-const authDomain: keyType = import.meta.env.VITE_AUTH_DOMAIN;
-const projectId: keyType = import.meta.env.VITE_PROJECT_ID;
-const storageBucket: keyType = import.meta.env.VITE_STORAGE_BUCKET;
-const messagingSenderId: keyType = import.meta.env.VITE_MESSAGING_SENDER_ID;
-const appId: keyType = import.meta.env.VITE_APP_ID;
-const measurementId: keyType = import.meta.env.VITE_MEASUREMENT_ID;
+const apiKey: string = import.meta.env.VITE_API_KEY;
+const authDomain: string = import.meta.env.VITE_AUTH_DOMAIN;
+const projectId: string = import.meta.env.VITE_PROJECT_ID;
+const storageBucket: string = import.meta.env.VITE_STORAGE_BUCKET;
+const messagingSenderId: string = import.meta.env.VITE_MESSAGING_SENDER_ID;
+const appId: string = import.meta.env.VITE_APP_ID;
+const measurementId: string = import.meta.env.VITE_MEASUREMENT_ID;
 
 const firebaseConfig = {
   apiKey,

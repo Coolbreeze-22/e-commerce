@@ -19,18 +19,21 @@ import {
   addItemToWishlist,
 } from "../utils/utilityFunctions";
 import Navbar from "../Navbar/Navbar";
+import { useFetchProducts } from "../../controller/productController";
 
 const ProductDetails = () => {
   const { products: allProducts } = useSelector(
     (state: RootState) => state.productReducer
   );
+  const dispatch = useDispatch();
+  useFetchProducts(allProducts.length, dispatch);
+
   const cart = useSelector((state: RootState) => state.cartReducer);
   const [selectedProduct, setSelectedProduct] =
     React.useState<ProductType | null>(null);
   const [quantity, setQuantity] = React.useState<number>(1);
   const [size, setSize] = React.useState<string>("");
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -122,7 +125,7 @@ const ProductDetails = () => {
                 </div>
               </section>
               <section className="prod-dtls-info-section">
-                <header>Havic HV G-92 Gamepad</header>
+                <header>{selectedProduct.name}</header>
                 <div className="prod-dtls-rate-rev">
                   <Rating
                     name="read-only"
