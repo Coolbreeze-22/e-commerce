@@ -25,6 +25,8 @@ import UpdateProduct from "./components/UpdateProduct/UpdateProduct";
 import Countdown from "./components/Countdown/Countdown";
 import ResetPassword from "./components/Authentication/ResetPassword/ResetPassword";
 import { useStateContext } from "./context/context";
+import React from "react";
+import ErrorBoundary from "./components/utils/ErrorBoundary";
 
 function App() {
   const { isDropdown, setIsDropdown } = useStateContext();
@@ -55,112 +57,114 @@ function App() {
   };
 
   return (
-    <div>
-      <ScrollRestoration />
-      <ToastContainer />
-      <main onClick={() => isDropdown && setIsDropdown(false)}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<AllProducts />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/categories" element={<RelatedProducts />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route
-            path="/login"
-            element={
-              <UserAuth>
-                <Login />
-              </UserAuth>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <UserAuth>
-                <Register />
-              </UserAuth>
-            }
-          />
-          <Route
-            path="/reset-password"
-            element={
-              <UserAuth>
-                <ResetPassword />
-              </UserAuth>
-            }
-          />
-          <Route
-            path="/account"
-            element={
-              <UserOnly>
-                <Account />
-              </UserOnly>
-            }
-          />
-          <Route path="/about" element={<About />} />
-          <Route
-            path="/admin"
-            element={
-              <AdminOnly>
-                <Admin />
-              </AdminOnly>
-            }
-          />
-          <Route
-            path="/admin/users"
-            element={
-              <AdminOnly>
-                <Users />
-              </AdminOnly>
-            }
-          />
-          <Route
-            path="/admin/orders"
-            element={
-              <AdminOnly>
-                <ManageOrders />
-              </AdminOnly>
-            }
-          />
-          <Route
-            path="/admin/create-product"
-            element={
-              <AdminOnly>
-                <CreateProduct />
-              </AdminOnly>
-            }
-          />
-          <Route
-            path="/admin/Countdown"
-            element={
-              <AdminOnly>
-                <Countdown />
-              </AdminOnly>
-            }
-          />
-          <Route
-            path="/admin/update-product/:id"
-            element={
-              <AdminOnly>
-                <UpdateProduct />
-              </AdminOnly>
-            }
-          />
-          <Route
-            path="/products/cart/checkout"
-            element={
-              <UserOnly>
-                <Checkout />
-              </UserOnly>
-            }
-          />
-          <Route path="/search" element={<SearchedProducts />} />
-          <Route path="/product-details/:id" element={<ProductDetails />} />
-          <Route path="/*" element={<Error404 />} />
-        </Routes>
-      </main>
-    </div>
+    <ErrorBoundary>
+      <div>
+        <ScrollRestoration />
+        <ToastContainer />
+        <main onClick={() => isDropdown && setIsDropdown(false)}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/categories" element={<RelatedProducts />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route
+              path="/login"
+              element={
+                <UserAuth>
+                  <Login />
+                </UserAuth>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <UserAuth>
+                  <Register />
+                </UserAuth>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <UserAuth>
+                  <ResetPassword />
+                </UserAuth>
+              }
+            />
+            <Route
+              path="/account"
+              element={
+                <UserOnly>
+                  <Account />
+                </UserOnly>
+              }
+            />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/admin"
+              element={
+                <AdminOnly>
+                  <Admin />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <AdminOnly>
+                  <Users />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/orders"
+              element={
+                <AdminOnly>
+                  <ManageOrders />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/create-product"
+              element={
+                <AdminOnly>
+                  <CreateProduct />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/Countdown"
+              element={
+                <AdminOnly>
+                  <Countdown />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/admin/update-product/:id"
+              element={
+                <AdminOnly>
+                  <UpdateProduct />
+                </AdminOnly>
+              }
+            />
+            <Route
+              path="/products/cart/checkout"
+              element={
+                <UserOnly>
+                  <Checkout />
+                </UserOnly>
+              }
+            />
+            <Route path="/search" element={<SearchedProducts />} />
+            <Route path="/product-details/:id" element={<ProductDetails />} />
+            <Route path="/*" element={<Error404 />} />
+          </Routes>
+        </main>
+      </div>
+    </ErrorBoundary>
   );
 }
 
