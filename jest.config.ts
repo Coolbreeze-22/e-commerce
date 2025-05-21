@@ -22,7 +22,6 @@ const config: Config = {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^react-router-dom$": "<rootDir>/__mocks__/react-router-dom.ts",
     "^react-redux$": "<rootDir>/__mocks__/react-redux.ts",
-    "^react/jsx-runtime$": "<rootDir>/__mocks__/react-jsx-runtime.ts",
   },
   transformIgnorePatterns: ["node_modules/(?!(jest-)?react|@?firebase)"],
   testPathIgnorePatterns: ["/node_modules/"],
