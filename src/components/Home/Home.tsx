@@ -13,6 +13,7 @@ import CustomButton from "../CustomButton/CustomButton";
 import { useFetchProducts } from "../../controller/productController";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../states/redux/store";
+// import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
 const Home = () => {
   const { products } = useSelector((state: RootState) => state.productReducer);
@@ -30,6 +31,7 @@ const Home = () => {
   return (
     <Navbar>
       <main className="home-container">
+        {/* <LanguageSelector /> */}
         <div ref={topRef}></div>
         <HeroSection />
         <FlashSales />

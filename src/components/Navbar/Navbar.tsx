@@ -1,31 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Navbar.css";
 import Footer from "../Footer/Footer";
 import NavSmallDevice from "./NavSmallDevice/NavSmallDevice";
 import NavBigDevice from "./NavBigDevice/NavBigDevice";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
 interface NavPropType {
   children: React.ReactElement;
 }
 
 const Navbar = ({ children }: NavPropType) => {
-  const [language, setLanguage] = useState<string>("");
-
-  const handleLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(e.target.value);
-  };
-
   return (
     <main>
       <nav className="nav-container">
         <section className="nav-description">
+          <LanguageSelector />
           <div>
-            Summer Sale For All suits And Free Express Delivery - OFF 50%!
+            Free Express Delivery - OFF 50%!
             <a href="/products" className="nav-shop-link">
               ShopNow
             </a>
           </div>
-          <select
+          {/* <select
             value={language}
             onChange={handleLanguage}
             className="nav-language-sm-device"
@@ -40,7 +36,7 @@ const Navbar = ({ children }: NavPropType) => {
           >
             <option value="english">English</option>
             <option value="option2">French</option>
-          </select>
+          </select> */}
         </section>
 
         <NavBigDevice />

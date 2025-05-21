@@ -15,15 +15,18 @@ import {
 import { ProductType } from "../../states/redux/reducerTypes";
 import Navbar from "../Navbar/Navbar";
 import { FiShoppingCart } from "react-icons/fi";
+import { useFetchProducts } from "../../controller/productController";
 
 const RelatedProducts = () => {
   const { products } = useSelector((state: RootState) => state.productReducer);
+  const dispatch = useDispatch();
+  useFetchProducts(products.length, dispatch);
+
   const query = new URLSearchParams(useLocation().search);
 
   const categoryParam = query.get("category") || query.get("sub-category");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const filteredProducts = products.filter((product) => {
     if (categoryParam === query.get("category")) {

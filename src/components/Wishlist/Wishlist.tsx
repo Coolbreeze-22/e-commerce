@@ -7,14 +7,16 @@ import { removeFromWishlist } from "../../controller/cartController";
 import CustomButton from "../CustomButton/CustomButton";
 import WishlistProducts from "./WishlistProducts/WishlistProducts";
 import { useNavigate } from "react-router-dom";
+import { useFetchProducts } from "../../controller/productController";
 
 const Wishlist = () => {
   const { wishlist } = useSelector((state: RootState) => state.cartReducer);
-  const { bestSelling } = useSelector(
+  const { bestSelling, products } = useSelector(
     (state: RootState) => state.productReducer
   );
-
   const dispatch = useDispatch();
+  useFetchProducts(products.length, dispatch);
+  
   const navigate = useNavigate();
 
   const handleRemoveFromWishlist = (id: string, label: string) => {
@@ -58,7 +60,7 @@ const Wishlist = () => {
               <CustomButton
                 text="See All"
                 className="wishlist-see-btn"
-                onClick={()=> navigate('/products')}
+                onClick={() => navigate("/products")}
               />
             </div>
             <WishlistProducts products={bestSelling} isWishlist={false} />

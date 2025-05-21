@@ -24,24 +24,7 @@ const EditProfile = ({
   useEffect(() => {
     if (user.id) {
       setUserFormData({
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        emailVerified: user.emailVerified,
-        phoneNumber: user.phoneNumber,
-        photoUrl: user.photoUrl,
-        address: user.address,
-        companyName: user.companyName,
-        apartment: user.apartment,
-        city: user.city,
-        isAdmin: user.isAdmin,
-        isOwner: user.isOwner,
-        isSignedIn: user.isSignedIn,
-        lastLoginAt: user.lastLoginAt,
-        lastLogoutAt: user.lastLogoutAt,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
+        ...user,
       });
     }
   }, []);

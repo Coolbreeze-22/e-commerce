@@ -18,26 +18,31 @@ import Navbar from "../Navbar/Navbar";
 import { FiShoppingCart } from "react-icons/fi";
 import { MdOutlineEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
-import { deleteProductByAdmin } from "../../controller/productController";
+import {
+  deleteProductByAdmin,
+  useFetchProducts,
+} from "../../controller/productController";
 
 const AllProducts = () => {
-  const allProducts: Array<ProductType> = useSelector(
+  const products: Array<ProductType> = useSelector(
     (state: RootState) => state.productReducer.products
   );
+  const dispatch = useDispatch();
+  useFetchProducts(products.length, dispatch);
+
   const { user } = useSelector((state: RootState) => state.userReducer);
   const [warning, setWarning] = useState("");
 
   const imageRefs = React.useRef<HTMLImageElement[]>([]);
 
   React.useEffect(() => {
-    imageRefs.current = imageRefs.current.slice(0, allProducts.length);
+    imageRefs.current = imageRefs.current.slice(0, products.length);
     // the above is to update the imageref with the correct number of image element in a case where admin deletes a product.
     const cleanUp = MyIntersectionObserver(imageRefs);
     return cleanUp;
-  }, [allProducts]);
+  }, [products]);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const navigateToUpdateProduct = (product: ProductType) => {
     navigate(`/admin/update-product/${product.id}`);
@@ -85,7 +90,7 @@ const AllProducts = () => {
         </section>
 
         <section className="all-grid">
-          {allProducts.map((product, index) => (
+          {products.map((product, index) => (
             <div key={index} onClick={() => viewProduct(product)}>
               <section className="all-image-sect">
                 {product.discountedPrice && (
@@ -110,7 +115,7 @@ const AllProducts = () => {
                   <MdOutlineRemoveRedEye className="all-icon" />
                 </div>
 
-                {user.isAdmin && (
+                {user.isAdmin ? (
                   <>
                     <div
                       className="all-edit"
@@ -121,15 +126,13 @@ const AllProducts = () => {
                     >
                       <MdOutlineEdit className="all-icon" />
                     </div>
-                    <div className="all-delete">
-                      <MdDeleteOutline className="all-icon" />
-                    </div>
                     <div
                       className="all-delete"
                       onClick={(e) => {
                         e.stopPropagation();
                         setWarning(product.id);
                       }}
+                       data-testid="dummy-delete"
                     >
                       <MdDeleteOutline className="all-icon" />
                     </div>
@@ -140,6 +143,7 @@ const AllProducts = () => {
                             e.stopPropagation();
                             handleDelete(product.id);
                           }}
+                            data-testid="main-delete"
                         >
                           Delete
                         </button>
@@ -154,7 +158,7 @@ const AllProducts = () => {
                       </div>
                     )}
                   </>
-                )}
+                ) : null}
                 <div className="all-image-wrapper">
                   <img
                     loading="lazy"
