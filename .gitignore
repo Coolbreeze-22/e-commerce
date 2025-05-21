@@ -13,6 +13,9 @@ dist-ssr
 *.local
 
 .env
+__mocks__/
+__tests__/
+
 
 # Editor directories and files
 .vscode/*
