@@ -11,6 +11,7 @@ const LanguageSelector = () => {
         className="lang"
       /> */}
       coOLBREeze
+      
     </div>
   );
 };

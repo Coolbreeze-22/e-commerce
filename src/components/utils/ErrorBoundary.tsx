@@ -25,7 +25,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <h1 style={{ textAlign: "center", marginTop: "400px" }}>
+        <h1 style={{ textAlign: "center", marginTop: "100px" }}>
           Something went wrong.
         </h1>
       );
