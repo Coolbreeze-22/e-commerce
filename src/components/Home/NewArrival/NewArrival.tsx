@@ -51,7 +51,7 @@ const NewArrival = () => {
               <p
                 className="new-item-shop"
                 onClick={() =>
-                  categoryNavigation("women's-fashion", "category")
+                  categoryNavigation("Women's wear", "sub-category")
                 }
               >
                 Shop Now
